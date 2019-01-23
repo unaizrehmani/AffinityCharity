@@ -1,1 +1,2 @@
-# blockchain-charity
+# SEG-Capstone Project
+##Blochain Charity
