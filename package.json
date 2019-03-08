@@ -1,0 +1,25 @@
+{
+  "name": "social-charity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.15",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unaizrehmani/social-charity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unaizrehmani/social-charity/issues"
+  },
+  "homepage": "https://github.com/unaizrehmani/social-charity#readme"
+}
