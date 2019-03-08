@@ -1,7 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // put the routes here
 app.use("/admin", require("./routes/admin"));
@@ -15,6 +20,7 @@ mongoose
     }
   )
   .then(() => {
+    console.log("MongoDB connected");
     app.listen(PORT, () => {
       console.log(`server listening on port: ${PORT}`);
     });
