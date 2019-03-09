@@ -24,6 +24,10 @@ exports.getUserByID = (req, res, next) => {
   let id = req.params.userID;
   User.findById(id)
     .then(result => {
+      result = Object.assign({}, result._doc);
+      delete result.password;
+      delete result._id;
+      delete result.__v;
       res.send(result);
     })
     .catch(err => {
