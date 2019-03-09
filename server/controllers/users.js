@@ -1,26 +1,22 @@
 const User = require("../models/user");
+const crypto = require("crypto");
 
 exports.insertUser = (req, res, next) => {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
-  let email = req.body.email;
-  let password = req.body.password;
-  let profileURL = req.body.profileURL;
-  const user = new User({
-    firstName,
-    lastName,
-    email,
-    password,
-    profileURL
-  });
-  user
+  let salt = crypto.randomBytes(16).toString("base64");
+  let hash = crypto
+    .createHmac("sha512", salt)
+    .update(req.body.password)
+    .digest("base64");
+  req.body.password = salt + "$" + hash;
+
+  new User(req.body)
     .save()
     .then(result => {
       res.send(result);
     })
     .catch(err => {
       console.log(err);
-      console.log("Could not add user to database");
+      console.log("Could not add user");
     });
 };
 
@@ -28,10 +24,10 @@ exports.getUserByID = (req, res, next) => {
   let id = req.params.userID;
   User.findById(id)
     .then(result => {
-      console.log(result);
       res.send(result);
     })
     .catch(err => {
       console.log(err);
+      console.log("Could not find user");
     });
 };
