@@ -6,6 +6,7 @@ const userController = require("../controllers/users");
 router.post("/", userController.insertUser);
 
 //GET routes
+router.get("/", userController.getAllUsers);
 router.get("/:userID", userController.getUserByID);
 
 //PATCH routes

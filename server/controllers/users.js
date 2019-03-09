@@ -2,6 +2,7 @@ const User = require("../models/user");
 const crypto = require("crypto");
 const _ = require("lodash");
 
+//POST routes
 exports.insertUser = (req, res, next) => {
   let salt = crypto.randomBytes(16).toString("base64");
   let hash = crypto
@@ -21,6 +22,7 @@ exports.insertUser = (req, res, next) => {
     });
 };
 
+//GET routes
 exports.getUserByID = (req, res, next) => {
   let id = req.params.userID;
   User.findById(id)
@@ -37,6 +39,20 @@ exports.getUserByID = (req, res, next) => {
     });
 };
 
+exports.getAllUsers = (req, res, next) => {
+  let limit =
+    req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
+  User.find({})
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
+
+//PATCH routes
 exports.patchUserByID = (req, res, next) => {
   if (req.body.password) {
     let salt = crypto.randomBytes(16).toString("base64");
@@ -57,6 +73,7 @@ exports.patchUserByID = (req, res, next) => {
     });
 };
 
+//DELETE routes
 exports.deleteUserByID = (req, res, next) => {
   User.findByIdAndDelete(req.params.userID)
     .then(result => {
