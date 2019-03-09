@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // put the routes here
-app.use("/admin", require("./routes/admin"));
+app.use("/users", require("./routes/users"));
 
 // put the db connection here
 mongoose
@@ -17,7 +17,8 @@ mongoose
     "mongodb+srv://unaizrehmani:Mcdonalds1!@cluster0-jgsmf.mongodb.net/test?retryWrites=true",
     {
       useNewUrlParser: true
-    }
+    },
+    () => {}
   )
   .then(() => {
     console.log("MongoDB connected");

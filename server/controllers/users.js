@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-exports.addUser = (req, res, next) => {
+exports.insertUser = (req, res, next) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let email = req.body.email;
@@ -16,7 +16,7 @@ exports.addUser = (req, res, next) => {
   user
     .save()
     .then(result => {
-      console.log("Added user");
+      res.send(result);
     })
     .catch(err => {
       console.log(err);
