@@ -40,8 +40,6 @@ exports.getUserByID = (req, res, next) => {
 };
 
 exports.getAllUsers = (req, res, next) => {
-  let limit =
-    req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
   User.find({})
     .then(result => {
       res.send(result);
