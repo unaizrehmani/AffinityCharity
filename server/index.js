@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // CONFIG
+console.log("process.env: ", process.env);
 const DB_NAME = process.env.DB_NAME || "test";
 const DB_USER = process.env.DB_USER || "unaizrehmani";
 const DB_PASSWORD = process.env.DB_PASSWORD || "iv5RL35QNJ3NHLRF";
