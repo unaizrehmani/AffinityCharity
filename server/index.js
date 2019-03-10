@@ -15,7 +15,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD || "iv5RL35QNJ3NHLRF";
 const PORT = process.env.PORT || 8000;
 
 // ROUTES
-app.get("/", (req, res, next) => res.send({ name: "" }));
+app.get("/", (req, res, next) => res.send(process.env));
 app.use("/users", require("./routes/users"));
 
 // DB
