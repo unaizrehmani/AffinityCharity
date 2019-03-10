@@ -1,21 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+let envVariables = require("./config/configVars");
+
 // CONFIG
-console.log("process.env: ", process.env);
-const DB_NAME = process.env.DB_NAME;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const PORT = process.env.PORT;
+const DB_NAME = process.env.DB_NAME || envVariables.DB_NAME;
+const DB_USER = process.env.DB_USER || envVariables.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD || envVariables.DB_PASSWORD;
+const PORT = process.env.PORT || envVariables.PORT;
 
 // ROUTES
-app.get("/", (req, res, next) => res.send(process.env));
 app.use("/users", require("./routes/users"));
 
 // DB
