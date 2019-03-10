@@ -6,11 +6,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+let configVars = require("./configVar.json");
+
 // CONFIG
-const DB_NAME = process.env.DB_NAME;
-const DB_USER = process.env.DB_USER;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const PORT = process.env.PORT;
+const DB_NAME = process.env.DB_NAME || configVars.DB_NAME;
+const DB_USER = process.env.DB_USER || configVars.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD || configVars.DB_PASSWORD;
+const PORT = process.env.PORT || configVars.PORT;
 
 // ROUTES
 app.use("/users", require("./routes/users"));
