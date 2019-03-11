@@ -6,7 +6,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-let configVars = require("./configVar.json");
+let configVars;
+try {
+  configVars = require("./config.json");
+} catch (err) {
+  console.log(err);
+}
 
 // CONFIG
 const DB_NAME = process.env.DB_NAME || configVars.DB_NAME;
