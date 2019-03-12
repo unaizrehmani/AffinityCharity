@@ -28,3 +28,10 @@ exports.insertPost = (req, res, next) => {
     }
   );
 };
+
+//GET routes
+exports.getAllPosts = (req, res, next) => {
+  Post.find({})
+    .then(result => res.send(result))
+    .catch(err => res.send(err));
+};
