@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const multiPartMiddleware = require("connect-multiparty")();
 const userController = require("../controllers/users");
 
 //POST routes
-router.post("/", userController.insertUser);
+router.post("/", multiPartMiddleware, userController.insertUser);
 
 //GET routes
 router.get("/", userController.getAllUsers);

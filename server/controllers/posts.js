@@ -3,7 +3,6 @@ const cloudinaryUtil = require("../util/cloudinary");
 
 //POST routes
 exports.insertPost = (req, res, next) => {
-  //TODO: make description mandatory
   cloudinaryUtil.v2.uploader.upload(
     req.files.image.path,
     { folder: "posts" },

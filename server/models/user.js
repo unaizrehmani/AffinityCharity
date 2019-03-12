@@ -18,9 +18,17 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  profileURL: {
+  mediaURL: {
     type: String,
     required: false
+  },
+  imageID: {
+    type: String,
+    require: false
+  },
+  createdDate: {
+    type: Date,
+    required: true
   }
 });
 
