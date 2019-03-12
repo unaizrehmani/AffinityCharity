@@ -17,8 +17,7 @@ exports.insertUser = (req, res, next) => {
       res.send(result);
     })
     .catch(err => {
-      console.log(err);
-      console.log("Could not add user");
+      res.send(err);
     });
 };
 
@@ -34,8 +33,7 @@ exports.getUserByID = (req, res, next) => {
       res.send(result);
     })
     .catch(err => {
-      console.log(err);
-      console.log("Could not find user");
+      res.send(err);
     });
 };
 
@@ -45,8 +43,7 @@ exports.getAllUsers = (req, res, next) => {
       res.send(result);
     })
     .catch(err => {
-      console.log(err);
-      throw err;
+      res.send(err);
     });
 };
 
@@ -66,8 +63,7 @@ exports.patchUserByID = (req, res, next) => {
       res.send(result);
     })
     .catch(err => {
-      console.log(err);
-      throw err;
+      res.send(err);
     });
 };
 
@@ -82,7 +78,6 @@ exports.deleteUserByID = (req, res, next) => {
       res.send(result);
     })
     .catch(err => {
-      console.log(err);
-      throw err;
+      res.send(err);
     });
 };

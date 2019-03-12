@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || configVars.PORT;
 
 // ROUTES
 app.use("/users", require("./routes/users"));
+app.use("/posts", require("./routes/posts"));
 
 // DB
 mongoose

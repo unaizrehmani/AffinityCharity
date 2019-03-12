@@ -2,9 +2,25 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-  image: {
-    data: Buffer,
-    contentType: String
+  mediaURL: {
+    type: String,
+    required: true
+  },
+  mediaID: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  profileArray: {
+    type: Array,
+    required: false
+  },
+  createdDate: {
+    type: String,
+    required: true
   }
 });
 
