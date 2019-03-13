@@ -9,4 +9,10 @@ router.post("/", multipartMiddleware, postController.insertPost);
 //GET routes
 router.get("/", postController.getAllPosts);
 
+//PATCH routes
+router.patch("/:postID", postController.patchPostByID);
+
+//DELETE routes
+router.delete("/:postID", postController.deletePostByID);
+
 module.exports = router;

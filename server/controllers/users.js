@@ -1,6 +1,4 @@
 const User = require("../models/user");
-const crypto = require("crypto");
-const _ = require("lodash");
 const cloudinaryUtil = require("../util/cloudinary");
 
 //POST routes

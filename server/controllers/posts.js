@@ -35,3 +35,25 @@ exports.getAllPosts = (req, res, next) => {
     .then(result => res.send(result))
     .catch(err => res.send(err));
 };
+
+//PATCH routes
+exports.patchPostByID = (req, res, next) => {
+  Post.findOneAndUpdate(req.params.postID, req.body, { new: true })
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+};
+
+//DELETE routes
+exports.deletePostByID = (req, res, next) => {
+  Post.findByIdAndDelete(req.params.postID)
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+};
