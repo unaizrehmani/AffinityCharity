@@ -4,8 +4,10 @@ const multiPartMiddleware = require("connect-multiparty")();
 const userController = require("../controllers/users");
 const sanitizeBody = require("../middleware/sanitizeBody");
 
+router.use(sanitizeBody);
+
 //POST routes
-router.post("/", multiPartMiddleware, sanitizeBody, userController.insertUser);
+router.post("/", multiPartMiddleware, userController.insertUser);
 
 //GET routes
 router.get("/", userController.getAllUsers);
