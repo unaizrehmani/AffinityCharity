@@ -2,11 +2,11 @@ const User = require("../models/user");
 
 exports.authToken = async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.authenticate(email, password);
-
-  if (!user) {
-    return res.status(401).send({ errors: "error generating token" });
+  console.log(email, password);
+  try {
+    const user = await User.authenticate(email, password);
+    res.send(user.generateAuthToken());
+  } catch (error) {
+    res.send(error);
   }
-
-  res.send(user.generateAuthToken());
 };

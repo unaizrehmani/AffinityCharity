@@ -58,13 +58,16 @@ userSchema.methods.generateAuthToken = () => {
 };
 
 userSchema.statics.authenticate = async function(email, password) {
-  const user = await this.findOne({ email: email });
-  const hashedPassword = user
-    ? user.password
-    : `$2b$${SALTROUNDS}$invalidusernameinvalidusernameinvalidusernameinvalidu`;
-  const passwordDidMatch = await bcrypt.compare(password, hashedPassword);
-
-  return passwordDidMatch ? user : null;
+  try {
+    const user = await this.findOne({ email: email });
+    const hashedPassword = user
+      ? user.password
+      : `$2b$${SALTROUNDS}$invalidusernameinvalidusernameinvalidusernameinvalidu`;
+    const passWordDidMatch = await bcrypt.compare(password, hashedPassword);
+    return passWordDidMatch ? user : null;
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = mongoose.model("User", userSchema);
