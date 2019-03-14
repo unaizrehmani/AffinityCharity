@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const sanitizeMongo = require("express-mongo-sanitize");
 
 const app = express();
 
+app.use(sanitizeMongo());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

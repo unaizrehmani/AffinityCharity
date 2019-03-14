@@ -36,7 +36,7 @@ exports.getUserByID = (req, res, next) => {
   let id = req.params.userID;
   User.findById(id)
     .then(result => {
-      res.send(result);
+      res.status(201).send(result);
     })
     .catch(err => {
       res.send(err);
@@ -57,7 +57,7 @@ exports.getAllUsers = (req, res, next) => {
 exports.patchUserByID = (req, res, next) => {
   User.findOneAndUpdate(req.params.userID, req.body, { new: true })
     .then(result => {
-      res.send(result);
+      res.status(201).send(result);
     })
     .catch(err => {
       res.send(err);
