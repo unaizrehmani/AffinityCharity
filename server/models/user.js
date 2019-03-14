@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const SALTROUNDS = 14;
+
+let configVars;
+try {
+  configVars = require("../config.json");
+} catch (err) {
+  console.log(err);
+}
 
 const userSchema = new Schema({
   firstName: {
@@ -33,4 +43,23 @@ const userSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("User", userSchema);
+userSchema.methods.generateAuthToken = () => {
+  return jwt.sign(
+    { _id: this._id },
+    process.env.auth_secret || configVars.auth_secret
+  );
+};
+
+userSchema.statics.authenticate = async function(email, password) {
+  const user = await this.findOne({ email: email });
+  const hashedPassword = user
+    ? user.password
+    : `$2b$${SALTROUNDS}$invalidusernameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`;
+  const passwordDidMatch = await bcrypt.compare(password, hashedPassword);
+
+  return passwordDidMatch ? user : null;
+};
+
+const UserModel = mongoose.model("User", userSchema);
+
+module.exports = UserModel;
