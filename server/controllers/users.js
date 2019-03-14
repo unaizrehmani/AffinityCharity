@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const cloudinaryUtil = require("../util/cloudinary");
+const bcrypt = require("bcrypt");
+const SALTROUNDS = 14;
 
 //POST routes
 exports.insertUser = (req, res, next) => {
@@ -10,22 +12,26 @@ exports.insertUser = (req, res, next) => {
       if (err) {
         res.send(err);
       } else {
-        new User({
-          firstName: req.body.firstName,
-          mediaURL: result.url,
-          imageID: result.public_id,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          password: req.body.password,
-          createdDate: new Date()
-        })
-          .save()
-          .then(result => {
-            res.send(result);
-          })
-          .catch(err => {
-            res.send(err);
+        bcrypt.hash(req.body.password, SALTROUNDS).then(password => {
+          const user = new User({
+            firstName: req.body.firstName,
+            mediaURL: result.url,
+            imageID: result.public_id,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password,
+            createdDate: new Date()
           });
+
+          user
+            .save()
+            .then(result => {
+              res.send(result);
+            })
+            .catch(err => {
+              res.send(err);
+            });
+        });
       }
     }
   );
