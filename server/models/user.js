@@ -43,6 +43,13 @@ const userSchema = new Schema({
   }
 });
 
+userSchema.methods.toJSON = function() {
+  var obj = this.toObject();
+  delete obj.password;
+  delete obj.__v;
+  return obj;
+};
+
 userSchema.methods.generateAuthToken = () => {
   return jwt.sign(
     { _id: this._id },
