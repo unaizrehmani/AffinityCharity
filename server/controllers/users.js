@@ -9,11 +9,8 @@ exports.insertUser = async (req, res, next) => {
     const user = await new User(req.body);
     user.createdDate = new Date();
     user.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    if (
-      req.files.image &&
-      req.files.image.path &&
-      User.findOne({ email: user.email }).count() == 0
-    ) {
+    let count = await User.findOne({ email: user.email }).countDocuments();
+    if (req.files.image && count == 0) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
         { folder: "users" },
