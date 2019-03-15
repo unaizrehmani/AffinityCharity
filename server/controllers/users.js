@@ -67,6 +67,9 @@ exports.patchUserByID = async (req, res, next) => {
 exports.deleteUserByID = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userID);
+    await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
+      if (error) console.log("Failed to delete: ", user.imageID);
+    });
     res.send(user);
   } catch (err) {
     res.send(err);
