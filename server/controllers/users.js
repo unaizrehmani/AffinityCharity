@@ -42,34 +42,33 @@ exports.getUserByID = async (req, res, next) => {
   }
 };
 
-exports.getAllUsers = (req, res, next) => {
-  User.find({})
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.send(err);
-    });
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //PATCH routes
-exports.patchUserByID = (req, res, next) => {
-  User.findOneAndUpdate(req.params.userID, req.body, { new: true })
-    .then(result => {
-      res.status(201).send(result);
-    })
-    .catch(err => {
-      res.send(err);
+exports.patchUserByID = async (req, res, next) => {
+  try {
+    const user = await User.findOneAndUpdate(req.params.userID, req.body, {
+      new: true
     });
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //DELETE routes
-exports.deleteUserByID = (req, res, next) => {
-  User.findByIdAndDelete(req.params.userID)
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.send(err);
-    });
+exports.deleteUserByID = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.userID);
+    res.send(user);
+  } catch (err) {
+    res.send(err);
+  }
 };
