@@ -10,6 +10,7 @@ router.use(sanitizeBody);
 router.post("/", multipartMiddleware, postController.insertPost);
 
 //GET routes
+router.get("/:postID", postController.getPostByID);
 router.get("/", postController.getAllPosts);
 
 //PATCH routes

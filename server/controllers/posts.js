@@ -2,58 +2,68 @@ const Post = require("../models/post");
 const cloudinaryUtil = require("../util/cloudinary");
 
 //POST routes
-exports.insertPost = (req, res, next) => {
-  cloudinaryUtil.v2.uploader.upload(
-    req.files.image.path,
-    { folder: "posts" },
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        new Post({
-          mediaURL: result.url,
-          description: req.body.description,
-          createdDate: new Date(),
-          profileArray: [],
-          mediaID: result.public_id
-        })
-          .save()
-          .then(result => {
-            res.send(result);
-          })
-          .catch(err => {
-            res.send(err);
-          });
+exports.insertPost = async (req, res, next) => {
+  try {
+    const post = new Post(req.body);
+    post.createdDate = new Date();
+    post.profileArray = [];
+    await cloudinaryUtil.v2.uploader.upload(
+      req.files.image.path,
+      { folder: "posts" },
+      (err, imageInfo) => {
+        if (err) res.send(err);
+        post.mediaURL = imageInfo.url;
+        post.mediaID = imageInfo.public_id;
       }
-    }
-  );
+    );
+    const result = await post.save();
+    res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //GET routes
-exports.getAllPosts = (req, res, next) => {
-  Post.find({})
-    .then(result => res.send(result))
-    .catch(err => res.send(err));
+exports.getPostByID = async (req, res, next) => {
+  try {
+    let id = req.params.postID;
+    const post = await Post.findById(id);
+    res.send(post);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+exports.getAllPosts = async (req, res, next) => {
+  try {
+    const posts = await Post.find({});
+    res.send(posts);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //PATCH routes
-exports.patchPostByID = (req, res, next) => {
-  Post.findOneAndUpdate(req.params.postID, req.body, { new: true })
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.send(err);
+exports.patchPostByID = async (req, res, next) => {
+  try {
+    const post = await Post.findOneAndUpdate(req.params.postID, req.body, {
+      new: true
     });
+    res.send(post);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //DELETE routes
-exports.deletePostByID = (req, res, next) => {
-  Post.findByIdAndDelete(req.params.postID)
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      res.send(err);
+exports.deletePostByID = async (req, res, next) => {
+  try {
+    const post = await Post.findByIdAndDelete(req.params.postID);
+    await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
+      if (error) console.log("Failed to delete post: ", post.mediaID);
     });
+    res.send(post);
+  } catch (err) {
+    res.send(err);
+  }
 };
