@@ -23,9 +23,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD || configVars.DB_PASSWORD;
 const PORT = process.env.PORT || configVars.PORT;
 
 // ROUTES
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/users", require("./routes/users"));
-app.use("/api/posts", require("./routes/posts"));
+app.use("/api", require("./routes/api"));
 
 // DB
 mongoose
