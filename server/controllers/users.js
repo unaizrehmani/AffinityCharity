@@ -35,15 +35,14 @@ exports.insertUser = async (req, res, next) => {
 };
 
 //GET routes
-exports.getUserByID = (req, res, next) => {
-  let id = req.params.userID;
-  User.findById(id)
-    .then(result => {
-      res.status(201).send(result);
-    })
-    .catch(err => {
-      res.send(err);
-    });
+exports.getUserByID = async (req, res, next) => {
+  try {
+    let id = req.params.userID;
+    const user = await User.findById(id);
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 exports.getAllUsers = (req, res, next) => {
