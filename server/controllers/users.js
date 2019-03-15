@@ -4,37 +4,34 @@ const bcrypt = require("bcrypt");
 const SALTROUNDS = 14;
 
 //POST routes
-exports.insertUser = (req, res, next) => {
-  cloudinaryUtil.v2.uploader.upload(
-    req.files.image.path,
-    { folder: "users" },
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        bcrypt.hash(req.body.password, SALTROUNDS).then(password => {
-          const user = new User({
-            firstName: req.body.firstName,
-            mediaURL: result.url,
-            imageID: result.public_id,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password,
-            createdDate: new Date()
-          });
-
-          user
-            .save()
-            .then(result => {
-              res.send(result);
-            })
-            .catch(err => {
-              res.send(err);
-            });
-        });
-      }
+exports.insertUser = async (req, res, next) => {
+  try {
+    const user = await new User(req.body);
+    user.createdDate = new Date();
+    user.password = await bcrypt.hash(req.body.password, SALTROUNDS);
+    if (
+      req.files.image &&
+      req.files.image.path &&
+      User.findOne({ email: user.email }).count() == 0
+    ) {
+      await cloudinaryUtil.v2.uploader.upload(
+        req.files.image.path,
+        { folder: "users" },
+        (err, imageInfo) => {
+          if (err) {
+            res.send(err);
+          } else {
+            user.imageID = imageInfo.public_id;
+            user.mediaURL = imageInfo.url;
+          }
+        }
+      );
     }
-  );
+    const result = await user.save();
+    res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 //GET routes
