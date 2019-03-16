@@ -7,10 +7,10 @@ const sanitizeBody = require("../middleware/sanitization/sanitizeBody");
 router.use(sanitizeBody);
 
 //POST routes
-router.post("/", multiPartMiddleware, agentsController.insertAgent);
+router.post("/", multiPartMiddleware, agentController.insertAgent);
 
 //GET routes
-router.get("/", agentController.getAllAgent);
+router.get("/", agentController.getAllAgents);
 router.get("/:agentID", agentController.getAgentByID);
 
 //PATCH routes
