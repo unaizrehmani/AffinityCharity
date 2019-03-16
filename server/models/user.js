@@ -60,9 +60,9 @@ userSchema.methods.generateAuthToken = () => {
 userSchema.statics.authenticate = async function(email, password) {
   try {
     const user = await this.findOne({ email: email });
-    const hashedPassword = user
-      ? user.password
-      : `$2b$${SALTROUNDS}$invalidusernameinvalidusernameinvalidusernameinvalidu`;
+    const hashedPassword;
+    if (user) hashedPassword = user.password;
+    else return null;
     const passWordDidMatch = await bcrypt.compare(password, hashedPassword);
     return passWordDidMatch ? user : null;
   } catch (error) {
