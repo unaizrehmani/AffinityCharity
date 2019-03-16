@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multipartMiddleware = require("connect-multiparty")();
 const postController = require("../controllers/posts");
-const sanitizeBody = require("../middleware/sanitizeBody");
+const sanitizeBody = require("../middleware/sanitization/sanitizeBody");
 
 router.use(sanitizeBody);
 

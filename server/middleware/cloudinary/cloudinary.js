@@ -2,7 +2,7 @@ const cloudinary = require("cloudinary");
 
 let configVars;
 try {
-  configVars = require("../config.json");
+  configVars = require("../../config.json");
 } catch (err) {
   console.log(err);
 }

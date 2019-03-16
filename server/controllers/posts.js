@@ -1,5 +1,5 @@
 const Post = require("../models/post");
-const cloudinaryUtil = require("../util/cloudinary");
+const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
 
 //POST routes
 exports.insertPost = async (req, res, next) => {

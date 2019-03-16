@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const cloudinaryUtil = require("../util/cloudinary");
+const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
 const bcrypt = require("bcrypt");
 const SALTROUNDS = 14;
 
