@@ -11,7 +11,7 @@ try {
   console.log(err);
 }
 
-const userSchema = new Schema({
+const agentSchema = new Schema({
   firstName: {
     type: String,
     required: true
@@ -37,37 +37,49 @@ const userSchema = new Schema({
     type: String,
     require: false
   },
+  charityID: {
+    type: String,
+    require: true
+  },
+  location: {
+    type: String,
+    require: true
+  },
+  posts: {
+    type: Array,
+    require: false
+  },
   createdDate: {
     type: Date,
     required: true
   }
 });
 
-userSchema.methods.toJSON = function() {
+agentSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.password;
   delete obj.__v;
   return obj;
 };
 
-userSchema.methods.generateAuthToken = () => {
+agentSchema.methods.generateAuthToken = () => {
   return jwt.sign(
     { _id: this._id },
     process.env.token_secret || configVars.token_secret
   );
 };
 
-userSchema.statics.authenticate = async function(email, password) {
+agentSchema.statics.authenticate = async function(email, password) {
   try {
-    const user = await this.findOne({ email: email });
+    const agent = await this.findOne({ email: email });
     let hashedPassword;
-    if (user) hashedPassword = user.password;
+    if (agent) hashedPassword = agent.password;
     else return null;
     const passWordDidMatch = await bcrypt.compare(password, hashedPassword);
-    return passWordDidMatch ? user : null;
+    return passWordDidMatch ? agent : null;
   } catch (error) {
     return error;
   }
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Agent", agentSchema);

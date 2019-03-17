@@ -35,6 +35,7 @@ mongoose
     () => {}
   )
   .then(() => {
+    mongoose.set('useCreateIndex', true)
     console.log("MongoDB connected");
     app.listen(PORT, () => {
       console.log(`Server listening on port: ${PORT}`);
