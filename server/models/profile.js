@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
+const profileSchema = new Schema({
   firstName: {
     type: String,
     required: true
@@ -35,10 +35,10 @@ const postSchema = new Schema({
   }
 });
 
-postSchema.methods.toJSON = function() {
+profileSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.__v;
   return obj;
 };
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model("Profile", profileSchema);

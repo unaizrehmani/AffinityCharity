@@ -1,4 +1,4 @@
-const Post = require("../models/profile");
+const Profile = require("../models/profile");
 const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
 
 //POST profiles
@@ -46,7 +46,7 @@ exports.getAllProfiles = async (req, res, next) => {
 //PATCH routes
 exports.patchProfileByID = async (req, res, next) => {
   try {
-    const profile = await Post.findOneAndUpdate(req.params.profileID, req.body, {
+    const profile = await Profile.findOneAndUpdate(req.params.profileID, req.body, {
       new: true
     });
     res.send(profile);
