@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+try {
+  let configVars = require("../config.json");
+} catch (err) {
+  console.log(err);
+}
+
 const profileSchema = new Schema({
   firstName: {
     type: String,
