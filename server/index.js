@@ -23,7 +23,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD || configVars.DB_PASSWORD;
 const PORT = process.env.PORT || configVars.PORT;
 
 // ROUTES
-app.use("/api", require("./routes/api"));
+app.use('/api', require('./routes/api'));
 
 // DB
 mongoose
@@ -35,8 +35,8 @@ mongoose
     () => {}
   )
   .then(() => {
-    mongoose.set('useCreateIndex', true)
-    console.log("MongoDB connected");
+    mongoose.set('useCreateIndex', true);
+    console.log('MongoDB connected');
     app.listen(PORT, () => {
       console.log(`Server listening on port: ${PORT}`);
     });
