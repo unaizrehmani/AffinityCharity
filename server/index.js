@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // CONFIG
-const DB_NAME = process.env.DB_NAME
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
+const MONGO_DB_NAME = process.env.MONGO_DB_NAME
+const MONGO_DB_USER = process.env.MONGO_DB_USER
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD
 const PORT = process.env.PORT
 
 // ROUTES
@@ -24,7 +24,7 @@ app.use('/api', require('./routes/api'));
 mongoose.set('useCreateIndex', true);
 mongoose
   .connect(
-    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0-jgsmf.mongodb.net/${DB_NAME}?retryWrites=true`, {
+    `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0-jgsmf.mongodb.net/${MONGO_DB_NAME}?retryWrites=true`, {
       useNewUrlParser: true
     },
     () => {}

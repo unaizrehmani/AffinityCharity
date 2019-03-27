@@ -46,7 +46,7 @@ userSchema.methods.generateAuthToken = () => {
   return jwt.sign({
       _id: this._id
     },
-    process.env.token_secret
+    process.env.JWT_TOKEN_SECRET
   );
 };
 
