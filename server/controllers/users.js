@@ -59,14 +59,34 @@ exports.getAllUsers = async (req, res, next) => {
 
 // PATCH routes
 exports.patchUserByID = async (req, res, next) => {
+  const body = {
+    ...req.body
+  }
   try {
-    const user = await User.findByIdAndUpdate(req.params.userID, req.body, {
+    if (req.files && req.files.image && req.files.image.path) {
+      const user = await User.findById(req.params.userID);
+      if (user.imageID) {
+        await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
+          if (error) res.send(error);
+        })
+      }
+      const uploadResult = await cloudinaryUtil.v2.uploader.upload(
+        req.files.image.path, {
+          folder: 'users'
+        }
+      );
+      body.imageID = uploadResult.public_id
+      body.mediaURL = uploadResult.url
+    }
+
+    const result = await User.findByIdAndUpdate(req.params.userID, body, {
       new: true
-    });
-    res.send(user);
+    })
+    res.send(result);
   } catch (error) {
     res.send(error);
   }
+
 };
 
 // DELETE routes

@@ -14,7 +14,7 @@ router.get('/', userController.getAllUsers);
 router.get('/:userID', userController.getUserByID);
 
 // PATCH routes
-router.patch('/:userID', userController.patchUserByID);
+router.patch('/:userID', multiPartMiddleware, userController.patchUserByID);
 
 // DELETE routes
 router.delete('/:userID', userController.deleteUserByID);
