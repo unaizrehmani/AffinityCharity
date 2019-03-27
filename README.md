@@ -5,8 +5,8 @@ Download or clone the repo
 
 Run 'npm install' inside cloned or downloaded directory
 
-Request a config.json from unaizrehmani@gmail.com to see the app running locally
+Request a .env from unaizrehmani@gmail.com to see the app running locally
 
-Drag config.json into the 'server' directory
+Drag .env file into the main directory
 
-Run 'npm start' inside cloned directory
+Run 'npm start' inside main directory
