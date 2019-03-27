@@ -3,13 +3,6 @@ const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-let configVars;
-try {
-  configVars = require('../config.json');
-} catch (err) {
-  console.log(err);
-}
-
 const userSchema = new Schema({
   firstName: {
     type: String,
@@ -50,15 +43,18 @@ userSchema.methods.toJSON = function () {
 };
 
 userSchema.methods.generateAuthToken = () => {
-  return jwt.sign(
-    { _id: this._id },
-    process.env.token_secret || configVars.token_secret
+  return jwt.sign({
+      _id: this._id
+    },
+    process.env.token_secret
   );
 };
 
 userSchema.statics.authenticate = async function (email, password) {
   try {
-    const user = await this.findOne({ email: email });
+    const user = await this.findOne({
+      email: email
+    });
     let hashedPassword;
     if (user) hashedPassword = user.password;
     else return null;
