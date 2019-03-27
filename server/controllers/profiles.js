@@ -1,7 +1,7 @@
 const Profile = require('../models/profile');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 
-//POST profiles
+// POST profiles
 exports.insertProfile = async (req, res, next) => {
   try {
     const profile = new Profile(req.body);
@@ -23,7 +23,7 @@ exports.insertProfile = async (req, res, next) => {
   }
 };
 
-//GET profiles
+// GET profiles
 exports.getProfileByID = async (req, res, next) => {
   try {
     let id = req.params.profileID;
@@ -43,7 +43,7 @@ exports.getAllProfiles = async (req, res, next) => {
   }
 };
 
-//PATCH routes
+// PATCH routes
 exports.patchProfileByID = async (req, res, next) => {
   try {
     const profile = await Profile.findOneAndUpdate(req.params.profileID, req.body, {
@@ -55,12 +55,12 @@ exports.patchProfileByID = async (req, res, next) => {
   }
 };
 
-//DELETE routes
+// DELETE routes
 exports.deleteProfileByID = async (req, res, next) => {
   try {
     const profile = await Profile.findByIdAndDelete(req.params.profileID);
     await cloudinaryUtil.v2.uploader.destroy(profile.imageID, (error, result) => {
-      if (error) console.log("Failed to delete profile: ", profile.imageID);
+      if (error) console.log('Failed to delete profile: ', profile.imageID);
     });
     res.send(profile);
   } catch (err) {

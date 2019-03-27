@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const sanitizeMongo = require("express-mongo-sanitize");
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const sanitizeMongo = require('express-mongo-sanitize');
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 let configVars;
 try {
-  configVars = require("./config.json");
+  configVars = require('./config.json');
 } catch (err) {
   console.log(err);
 }

@@ -1,12 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const SALTROUNDS = 14;
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 let configVars;
 try {
-  configVars = require("../config.json");
+  configVars = require('../config.json');
 } catch (err) {
   console.log(err);
 }
@@ -55,7 +54,7 @@ const agentSchema = new Schema({
   }
 });
 
-agentSchema.methods.toJSON = function() {
+agentSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.password;
   delete obj.__v;
@@ -69,7 +68,7 @@ agentSchema.methods.generateAuthToken = () => {
   );
 };
 
-agentSchema.statics.authenticate = async function(email, password) {
+agentSchema.statics.authenticate = async function (email, password) {
   try {
     const agent = await this.findOne({ email: email });
     let hashedPassword;
@@ -82,4 +81,4 @@ agentSchema.statics.authenticate = async function(email, password) {
   }
 };
 
-module.exports = mongoose.model("Agent", agentSchema);
+module.exports = mongoose.model('Agent', agentSchema);

@@ -1,19 +1,19 @@
-const Agent = require("../models/agent");
-const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
-const bcrypt = require("bcrypt");
+const Agent = require('../models/agent');
+const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
+const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
 
-//POST routes
+// POST routes
 exports.insertAgent = async (req, res, next) => {
   try {
     const agent = await new Agent(req.body);
     agent.createdDate = new Date();
     agent.password = await bcrypt.hash(req.body.password, SALTROUNDS);
     let count = await Agent.findOne({ email: agent.email }).countDocuments();
-    if (req.files.image && count == 0) {
+    if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
-        { folder: "agents" },
+        { folder: 'agents' },
         (err, imageInfo) => {
           if (err) {
             res.send(err);
@@ -31,7 +31,7 @@ exports.insertAgent = async (req, res, next) => {
   }
 };
 
-//GET routes
+// GET routes
 exports.getAgentByID = async (req, res, next) => {
   try {
     let id = req.params.agentID;
@@ -51,7 +51,7 @@ exports.getAllAgents = async (req, res, next) => {
   }
 };
 
-//PATCH routes
+// PATCH routes
 exports.patchAgentByID = async (req, res, next) => {
   try {
     const agent = await Agent.findOneAndUpdate(req.params.agentID, req.body, {
@@ -63,12 +63,12 @@ exports.patchAgentByID = async (req, res, next) => {
   }
 };
 
-//DELETE routes
+// DELETE routes
 exports.deleteAgentByID = async (req, res, next) => {
   try {
     const agent = await Agent.findByIdAndDelete(req.params.agentID);
     await cloudinaryUtil.v2.uploader.destroy(agent.imageID, (error, result) => {
-      if (error) console.log("Failed to delete agent: ", agent.imageID);
+      if (error) console.log('Failed to delete agent: ', agent.imageID);
     });
     res.send(agent);
   } catch (err) {

@@ -1,11 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-try {
-  let configVars = require("../config.json");
-} catch (err) {
-  console.log(err);
-}
 
 const profileSchema = new Schema({
   firstName: {
@@ -16,7 +10,7 @@ const profileSchema = new Schema({
     type: String,
     required: true
   },
-  location:{
+  location: {
     type: String
   },
   mediaURL: {
@@ -41,10 +35,10 @@ const profileSchema = new Schema({
   }
 });
 
-profileSchema.methods.toJSON = function() {
+profileSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.__v;
   return obj;
 };
 
-module.exports = mongoose.model("Profile", profileSchema);
+module.exports = mongoose.model('Profile', profileSchema);

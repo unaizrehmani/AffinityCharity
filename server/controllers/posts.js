@@ -1,7 +1,7 @@
-const Post = require("../models/post");
-const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
+const Post = require('../models/post');
+const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 
-//POST routes
+// POST routes
 exports.insertPost = async (req, res, next) => {
   try {
     const post = new Post(req.body);
@@ -9,7 +9,7 @@ exports.insertPost = async (req, res, next) => {
     post.profileArray = [];
     await cloudinaryUtil.v2.uploader.upload(
       req.files.image.path,
-      { folder: "posts" },
+      { folder: 'posts' },
       (err, imageInfo) => {
         if (err) res.send(err);
         post.mediaURL = imageInfo.url;
@@ -23,7 +23,7 @@ exports.insertPost = async (req, res, next) => {
   }
 };
 
-//GET routes
+// GET routes
 exports.getPostByID = async (req, res, next) => {
   try {
     let id = req.params.postID;
@@ -43,7 +43,7 @@ exports.getAllPosts = async (req, res, next) => {
   }
 };
 
-//PATCH routes
+// PATCH routes
 exports.patchPostByID = async (req, res, next) => {
   try {
     const post = await Post.findOneAndUpdate(req.params.postID, req.body, {
@@ -55,12 +55,12 @@ exports.patchPostByID = async (req, res, next) => {
   }
 };
 
-//DELETE routes
+// DELETE routes
 exports.deletePostByID = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.postID);
     await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
-      if (error) console.log("Failed to delete post: ", post.mediaID);
+      if (error) console.log('Failed to delete post: ', post.mediaID);
     });
     res.send(post);
   } catch (err) {

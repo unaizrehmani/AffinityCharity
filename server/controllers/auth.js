@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require('../models/user');
 
 exports.authToken = async (req, res, next) => {
   const { email, password } = req.body;

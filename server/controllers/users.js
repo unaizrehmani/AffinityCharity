@@ -1,19 +1,19 @@
-const User = require("../models/user");
-const cloudinaryUtil = require("../middleware/cloudinary/cloudinary");
-const bcrypt = require("bcrypt");
+const User = require('../models/user');
+const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
+const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
 
-//POST routes
+// POST routes
 exports.insertUser = async (req, res, next) => {
   try {
     const user = await new User(req.body);
     user.createdDate = new Date();
     user.password = await bcrypt.hash(req.body.password, SALTROUNDS);
     let count = await User.findOne({ email: user.email }).countDocuments();
-    if (req.files.image && count == 0) {
+    if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
-        { folder: "users" },
+        { folder: 'users' },
         (err, imageInfo) => {
           if (err) {
             res.send(err);
@@ -31,7 +31,7 @@ exports.insertUser = async (req, res, next) => {
   }
 };
 
-//GET routes
+// GET routes
 exports.getUserByID = async (req, res, next) => {
   try {
     let id = req.params.userID;
@@ -51,7 +51,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-//PATCH routes
+// PATCH routes
 exports.patchUserByID = async (req, res, next) => {
   try {
     const user = await User.findOneAndUpdate(req.params.userID, req.body, {
@@ -63,12 +63,12 @@ exports.patchUserByID = async (req, res, next) => {
   }
 };
 
-//DELETE routes
+// DELETE routes
 exports.deleteUserByID = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userID);
     await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
-      if (error) console.log("Failed to delete user: ", user.imageID);
+      if (error) console.log('Failed to delete user: ', user.imageID);
     });
     res.send(user);
   } catch (err) {

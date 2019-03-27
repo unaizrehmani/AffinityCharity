@@ -1,10 +1,10 @@
-const xss = require("xss");
+const xss = require('xss');
 
 const sanitize = sourceString => {
   return xss(sourceString, {
     whiteList: [],
     stripIgnoreTag: true,
-    stripIgnoreTagBody: ["script"]
+    stripIgnoreTagBody: ['script']
   });
 };
 
@@ -13,7 +13,7 @@ const stripTags = payload => {
   for (let key in attributes) {
     if (attributes[key] instanceof Array) {
       attributes[key] = attributes[key].map(element => {
-        return typeof element === "string"
+        return typeof element === 'string'
           ? sanitize(element)
           : stripTags(element);
       });
