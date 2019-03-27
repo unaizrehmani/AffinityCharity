@@ -60,7 +60,7 @@ exports.getAllUsers = async (req, res, next) => {
 // PATCH routes
 exports.patchUserByID = async (req, res, next) => {
   try {
-    const user = await User.findOneAndUpdate(req.params.userID, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.userID, req.body, {
       new: true
     });
     res.send(user);
