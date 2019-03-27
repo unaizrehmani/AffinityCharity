@@ -9,11 +9,14 @@ exports.insertUser = async (req, res, next) => {
     const user = await new User(req.body);
     user.createdDate = new Date();
     user.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    let count = await User.findOne({ email: user.email }).countDocuments();
+    let count = await User.findOne({
+      email: user.email
+    }).countDocuments();
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path,
-        { folder: 'users' },
+        req.files.image.path, {
+          folder: 'users'
+        },
         (err, imageInfo) => {
           if (err) {
             res.send(err);
@@ -23,6 +26,9 @@ exports.insertUser = async (req, res, next) => {
           }
         }
       );
+    } else {
+      user.imageID = "";
+      user.mediaURL = "";
     }
     const result = await user.save();
     res.send(result);
@@ -67,9 +73,11 @@ exports.patchUserByID = async (req, res, next) => {
 exports.deleteUserByID = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userID);
-    await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
-      if (error) console.log('Failed to delete user: ', user.imageID);
-    });
+    if (user.imageID) {
+      await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
+        if (error) console.log('Failed to delete user image with ID: ', user.imageID);
+      });
+    }
     res.send(user);
   } catch (err) {
     res.send(err);

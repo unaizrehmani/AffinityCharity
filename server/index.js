@@ -21,11 +21,12 @@ const PORT = process.env.PORT
 app.use('/api', require('./routes/api'));
 
 // DB
-mongoose.set('useCreateIndex', true);
 mongoose
   .connect(
     `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0-jgsmf.mongodb.net/${MONGO_DB_NAME}?retryWrites=true`, {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false
     },
     () => {}
   )
