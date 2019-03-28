@@ -7,15 +7,6 @@ exports.insertProfile = async (req, res, next) => {
     const profile = new Profile(req.body);
     profile.createdDate = new Date();
     profile.posts = [];
-    // await cloudinaryUtil.v2.uploader.upload(
-    //   req.files.image.path,
-    //   { folder: "profiles" },
-    //   (err, imageInfo) => {
-    //     if (err) res.send(err);
-    //     profile.mediaURL = imageInfo.url;
-    //     profile.mediaID = imageInfo.public_id;
-    //   }
-    // );
     const result = await profile.save();
     res.send(result);
   } catch (error) {
@@ -46,7 +37,7 @@ exports.getAllProfiles = async (req, res, next) => {
 // PATCH routes
 exports.patchProfileByID = async (req, res, next) => {
   try {
-    const profile = await Profile.findOneAndUpdate(req.params.profileID, req.body, {
+    const profile = await Profile.findByIdAndUpdate(req.params.profileID, req.body, {
       new: true
     });
     res.send(profile);
