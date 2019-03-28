@@ -19,15 +19,15 @@ const profileSchema = new Schema({
   },
   imageID: {
     type: String,
-    require: false
+    required: false
   },
   charityID: {
     type: String,
-    require: true
+    required: true
   },
   posts: {
     type: Array,
-    require: false
+    required: false
   },
   createdDate: {
     type: Date,

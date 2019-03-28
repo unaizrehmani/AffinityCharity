@@ -31,15 +31,15 @@ const agentSchema = new Schema({
   },
   charityID: {
     type: String,
-    require: true
+    required: true
   },
   location: {
     type: String,
-    require: true
+    required: true
   },
   posts: {
     type: Array,
-    require: false
+    required: false
   },
   createdDate: {
     type: Date,

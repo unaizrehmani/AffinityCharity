@@ -27,7 +27,7 @@ const userSchema = new Schema({
   },
   imageID: {
     type: String,
-    require: false
+    required: false
   },
   createdDate: {
     type: Date,
@@ -42,9 +42,14 @@ userSchema.methods.toJSON = function () {
   return obj;
 };
 
-userSchema.methods.generateAuthToken = () => {
+userSchema.methods.generateAuthToken = function () {
   return jwt.sign({
-      _id: this._id
+      _id: this._id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      imageID: this.imageID,
+      mediaURL: this.mediaURL
     },
     process.env.JWT_TOKEN_SECRET
   );
