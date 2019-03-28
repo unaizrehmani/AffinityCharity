@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const sanitizeMongo = require('express-mongo-sanitize');
+const cors = require('cors');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // CONFIG
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME
