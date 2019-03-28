@@ -2,6 +2,7 @@ const Agent = require('../models/agent');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
+const cloudinaryPath = process.env.CLOUDINARY_PATH;
 
 // POST routes
 exports.insertAgent = async (req, res, next) => {
@@ -15,7 +16,7 @@ exports.insertAgent = async (req, res, next) => {
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path, {
-          folder: 'agents'
+          folder: `${cloudinaryPath}/agents`
         },
         (err, imageInfo) => {
           if (err) {

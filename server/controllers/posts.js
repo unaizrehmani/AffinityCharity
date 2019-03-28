@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
+const cloudinaryPath = process.env.CLOUDINARY_PATH;
 
 // POST routes
 exports.insertPost = async (req, res, next) => {
@@ -8,8 +9,9 @@ exports.insertPost = async (req, res, next) => {
     post.createdDate = new Date();
     post.profileArray = [];
     await cloudinaryUtil.v2.uploader.upload(
-      req.files.image.path,
-      { folder: 'posts' },
+      req.files.image.path, {
+        folder: `${cloudinaryPath}/posts`
+      },
       (err, imageInfo) => {
         if (err) res.send(err);
         post.mediaURL = imageInfo.url;
