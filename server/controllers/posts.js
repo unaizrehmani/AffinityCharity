@@ -1,6 +1,6 @@
 const Post = require('../models/post');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
-const cloudinaryPath = process.env.CLOUDINARY_PATH;
+const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
 
 // POST routes
 exports.insertPost = async (req, res, next) => {
@@ -10,7 +10,7 @@ exports.insertPost = async (req, res, next) => {
     post.profileArray = [];
     await cloudinaryUtil.v2.uploader.upload(
       req.files.image.path, {
-        folder: `${cloudinaryPath}/posts`
+        folder: cloudinaryPath
       },
       (err, imageInfo) => {
         if (err) res.send(err);
@@ -47,11 +47,29 @@ exports.getAllPosts = async (req, res, next) => {
 
 // PATCH routes
 exports.patchPostByID = async (req, res, next) => {
+  const body = {
+    ...req.body
+  }
   try {
-    const post = await Post.findOneAndUpdate(req.params.postID, req.body, {
+    if (req.files && req.files.image && req.files.image.path) {
+      const post = await Post.findById(req.params.postID);
+      if (post.mediaID) {
+        await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
+          if (error) res.send(error);
+        })
+      }
+      const uploadResult = await cloudinaryUtil.v2.uploader.upload(
+        req.files.image.path, {
+          folder: cloudinaryPath
+        }
+      );
+      body.mediaID = uploadResult.public_id
+      body.mediaURL = uploadResult.url
+    }
+    const result = await Post.findByIdAndUpdate(req.params.postID, body, {
       new: true
     });
-    res.send(post);
+    res.send(result);
   } catch (error) {
     res.send(error);
   }
@@ -61,9 +79,11 @@ exports.patchPostByID = async (req, res, next) => {
 exports.deletePostByID = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.postID);
-    await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
-      if (error) console.log('Failed to delete post: ', post.mediaID);
-    });
+    if (post.mediaID) {
+      await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
+        if (error) console.log('Failed to delete post: ', post.mediaID);
+      });
+    }
     res.send(post);
   } catch (err) {
     res.send(err);
