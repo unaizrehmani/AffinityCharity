@@ -16,7 +16,7 @@ router.get('/:postID', postController.getPostByID);
 router.get('/', postController.getAllPosts);
 
 // PATCH routes
-router.patch('/:postID', postController.patchPostByID);
+router.patch('/:postID', multipartMiddleware, postController.patchPostByID);
 
 // DELETE routes
 router.delete('/:postID', postController.deletePostByID);

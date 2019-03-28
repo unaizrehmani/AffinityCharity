@@ -16,7 +16,7 @@ router.get('/', profileController.getAllProfiles);
 router.get('/:profileID', profileController.getProfileByID);
 
 // PATCH routes
-router.patch('/:profileID', profileController.patchProfileByID);
+router.patch('/:profileID', multiPartMiddleware, profileController.patchProfileByID);
 
 // DELETE routes
 router.delete('/:profileID', profileController.deleteProfileByID);
