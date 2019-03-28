@@ -15,7 +15,7 @@ router.get('/', authorize, agentController.getAllAgents);
 router.get('/:agentID', authorize, agentController.getAgentByID);
 
 // PATCH routes
-router.patch('/:agentID', authorize, agentController.patchAgentByID);
+router.patch('/:agentID', authorize, multiPartMiddleware, agentController.patchAgentByID);
 
 // DELETE routes
 router.delete('/:agentID', authorize, agentController.deleteAgentByID);
