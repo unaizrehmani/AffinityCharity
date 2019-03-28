@@ -9,11 +9,14 @@ exports.insertAgent = async (req, res, next) => {
     const agent = await new Agent(req.body);
     agent.createdDate = new Date();
     agent.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    let count = await Agent.findOne({ email: agent.email }).countDocuments();
+    let count = await Agent.findOne({
+      email: agent.email
+    }).countDocuments();
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path,
-        { folder: 'agents' },
+        req.files.image.path, {
+          folder: 'agents'
+        },
         (err, imageInfo) => {
           if (err) {
             res.send(err);
@@ -54,7 +57,7 @@ exports.getAllAgents = async (req, res, next) => {
 // PATCH routes
 exports.patchAgentByID = async (req, res, next) => {
   try {
-    const agent = await Agent.findOneAndUpdate(req.params.agentID, req.body, {
+    const agent = await Agent.findByIdAndUpdate(req.params.agentID, req.body, {
       new: true
     });
     res.send(agent);
