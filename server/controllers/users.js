@@ -2,7 +2,7 @@ const User = require('../models/user');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
-const cloudinaryPath = process.env.CLOUDINARY_PATH;
+const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`
 
 // POST routes
 exports.insertUser = async (req, res, next) => {
@@ -16,7 +16,7 @@ exports.insertUser = async (req, res, next) => {
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path, {
-          folder: `${cloudinaryPath}/users`
+          folder: cloudinaryPath
         },
         (err, imageInfo) => {
           if (err) {
@@ -73,7 +73,7 @@ exports.patchUserByID = async (req, res, next) => {
       }
       const uploadResult = await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path, {
-          folder: `${cloudinaryPath}/users`
+          folder: cloudinaryPath
         }
       );
       body.imageID = uploadResult.public_id
