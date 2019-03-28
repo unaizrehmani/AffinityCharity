@@ -3,7 +3,9 @@ const router = express.Router();
 const multiPartMiddleware = require('connect-multiparty')();
 const profileController = require('../controllers/profiles');
 const sanitizeBody = require('../middleware/sanitization/sanitizeBody');
+const authorize = require("../middleware/auth/verifyToken");
 
+router.use(authorize);
 router.use(sanitizeBody);
 
 // POST routes
