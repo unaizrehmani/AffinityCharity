@@ -7,17 +7,25 @@ const authorize = require("../middleware/auth/verifyToken");
 
 router.use(sanitizeBody);
 
-// POST routes
+/*
+ * POST /api/users/
+ */
 router.post('/', multiPartMiddleware, userController.insertUser);
 
-// GET routes
+/*
+ * GET /api/users/
+ */
 router.get('/', authorize, userController.getAllUsers);
 router.get('/:userID', authorize, userController.getUserByID);
 
-// PATCH routes
+/*
+ * PATCH /api/users/
+ */
 router.patch('/:userID', authorize, multiPartMiddleware, userController.patchUserByID);
 
-// DELETE routes
+/*
+ * DELETE /api/users/
+ */
 router.delete('/:userID', authorize, userController.deleteUserByID);
 
 module.exports = router;

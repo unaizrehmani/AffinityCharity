@@ -2,7 +2,18 @@ const Profile = require('../models/profile');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/profiles`;
 
-// POST profiles
+/*
+ * POST /api/profiles route to save a new profile.
+ * 
+ * REQ.BODY:
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} location
+ * @param {string} charityID
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.insertProfile = async (req, res, next) => {
   try {
     const profile = new Profile(req.body);
@@ -33,7 +44,12 @@ exports.insertProfile = async (req, res, next) => {
   }
 };
 
-// GET profiles
+/*
+ * GET /api/profiles/:profileID route to get a profile by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} profileID
+ */
 exports.getProfileByID = async (req, res, next) => {
   try {
     let id = req.params.profileID;
@@ -44,6 +60,9 @@ exports.getProfileByID = async (req, res, next) => {
   }
 };
 
+/*
+ * GET /api/profiles route to get all profiles.
+ */
 exports.getAllProfiles = async (req, res, next) => {
   try {
     const profiles = await Profile.find({});
@@ -53,7 +72,21 @@ exports.getAllProfiles = async (req, res, next) => {
   }
 };
 
-// PATCH routes
+/*
+ * PATCH /api/profiles/:profileID route to patch a profile by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} profileID
+ * 
+ * REQ.BODY:
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} location
+ * @param {string} charityID
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.patchProfileByID = async (req, res, next) => {
   const body = {
     ...req.body
@@ -83,7 +116,12 @@ exports.patchProfileByID = async (req, res, next) => {
   }
 };
 
-// DELETE routes
+/*
+ * DELETE /api/profiles/:profileID route to delete a profile by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} profileID
+ */
 exports.deleteProfileByID = async (req, res, next) => {
   try {
     const profile = await Profile.findByIdAndDelete(req.params.profileID);

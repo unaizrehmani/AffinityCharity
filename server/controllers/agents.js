@@ -4,7 +4,20 @@ const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/agents`;
 
-// POST routes
+/*
+ * POST /api/agents route to add a new agent.
+ * 
+ * REQ.BODY:
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} password
+ * @param {string} charityID
+ * @param {string} location
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.insertAgent = async (req, res, next) => {
   try {
     const agent = await new Agent(req.body);
@@ -35,7 +48,12 @@ exports.insertAgent = async (req, res, next) => {
   }
 };
 
-// GET routes
+/*
+ * GET /api/agents/:agentID route to get an agent by ID.
+ *
+ * REQ.PARAMS:
+ * @param {number} agentID
+ */
 exports.getAgentByID = async (req, res, next) => {
   try {
     let id = req.params.agentID;
@@ -46,6 +64,9 @@ exports.getAgentByID = async (req, res, next) => {
   }
 };
 
+/*
+ * GET /api/agents route to get all agents.
+ */
 exports.getAllAgents = async (req, res, next) => {
   try {
     const agents = await Agent.find({});
@@ -55,7 +76,23 @@ exports.getAllAgents = async (req, res, next) => {
   }
 };
 
-// PATCH routes
+/*
+ * PATCH /api/agents/:agentID route to patch an agent by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} agentID
+ * 
+ * REQ.BODY:
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} password
+ * @param {string} charityID
+ * @param {string} location
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.patchAgentByID = async (req, res, next) => {
   const body = {
     ...req.body
@@ -85,7 +122,12 @@ exports.patchAgentByID = async (req, res, next) => {
   }
 };
 
-// DELETE routes
+/*
+ * DELETE /api/agents/:agentID route to delete an agent by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} agentID
+ */
 exports.deleteAgentByID = async (req, res, next) => {
   try {
     const agent = await Agent.findByIdAndDelete(req.params.agentID);

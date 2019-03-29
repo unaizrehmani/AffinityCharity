@@ -2,7 +2,15 @@ const Post = require('../models/post');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
 
-// POST routes
+/*
+ * POST /api/posts route to create a new post.
+ * 
+ * REQ.BODY:
+ * @param {string} description
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.insertPost = async (req, res, next) => {
   try {
     const post = new Post(req.body);
@@ -25,7 +33,12 @@ exports.insertPost = async (req, res, next) => {
   }
 };
 
-// GET routes
+/*
+ * GET /api/posts/:postID route to get a post by ID.
+ *
+ * REQ.PARAMS
+ * @param {number} postID
+ */
 exports.getPostByID = async (req, res, next) => {
   try {
     let id = req.params.postID;
@@ -36,6 +49,9 @@ exports.getPostByID = async (req, res, next) => {
   }
 };
 
+/*
+ * GET /api/posts route to get all posts.
+ */
 exports.getAllPosts = async (req, res, next) => {
   try {
     const posts = await Post.find({});
@@ -45,7 +61,18 @@ exports.getAllPosts = async (req, res, next) => {
   }
 };
 
-// PATCH routes
+/*
+ * PATCH /api/posts route to patch a post by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} postID
+ * 
+ * REQ.BODY:
+ * @param {string} description
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.patchPostByID = async (req, res, next) => {
   const body = {
     ...req.body
@@ -75,7 +102,12 @@ exports.patchPostByID = async (req, res, next) => {
   }
 };
 
-// DELETE routes
+/*
+ * DELETE /api/posts/:postID route to delete a post by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} postID
+ */
 exports.deletePostByID = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.postID);

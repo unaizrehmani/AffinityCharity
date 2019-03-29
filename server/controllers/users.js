@@ -4,7 +4,19 @@ const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`
 
-// POST routes
+/*
+ * POST /api/users route to save a new user.
+ * 
+ * REQ.BODY:
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} password
+ * @param {string} createdDate
+ * 
+ * REQ.FILES
+ * @param {file} image
+ */
 exports.insertUser = async (req, res, next) => {
   try {
     const user = await new User(req.body);
@@ -38,7 +50,12 @@ exports.insertUser = async (req, res, next) => {
   }
 };
 
-// GET routes
+/*
+ * GET /api/users/:userID route to get a user by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} userID
+ */
 exports.getUserByID = async (req, res, next) => {
   try {
     let id = req.params.userID;
@@ -49,6 +66,9 @@ exports.getUserByID = async (req, res, next) => {
   }
 };
 
+/*
+ * GET /api/users/ route to return all users.
+ */
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
@@ -58,7 +78,21 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-// PATCH routes
+/*
+ * PATCH /api/users/:userID route to patch a user by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} userID
+ * 
+ * REQ.BODY
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} email
+ * @param {string} password
+ * 
+ * REQ.FILES:
+ * @param {file} image
+ */
 exports.patchUserByID = async (req, res, next) => {
   const body = {
     ...req.body
@@ -90,7 +124,12 @@ exports.patchUserByID = async (req, res, next) => {
 
 };
 
-// DELETE routes
+/*
+ * DELETE /api/users/:userID route to delete a user by ID.
+ * 
+ * REQ.PARAMS:
+ * @param {number} userID
+ */
 exports.deleteUserByID = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userID);
