@@ -13,3 +13,6 @@ Request a .env from unaizrehmani@gmail.com to see the application running locall
 Now drag this .env file into the main directory.
 
 Finally, run `npm start` inside main directory.
+
+## API Documentation
+All of our documentation for using the API can be found [here.](https://github.com/unaizrehmani/social-charity/wiki/API-Documentation)
