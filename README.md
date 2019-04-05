@@ -1,12 +1,15 @@
-# SEG-Capstone Project
-## Social Charity App
+# Affinity ✋
 
-Download or clone the repo
+## Getting Started
+Before we go ahead and clone the repo made sure you have Node installed on your machine.
+[Node download](https://nodejs.org/en/)
 
-Run 'npm install' inside cloned or downloaded directory
+Now navigate to a clean directory and clone or download the repo.
 
-Request a .env from unaizrehmani@gmail.com to see the app running locally
+Run `npm install` inside cloned or downloaded directory to install all the node packages.
 
-Drag .env file into the main directory
+Request a .env from unaizrehmani@gmail.com to see the application running locally.
 
-Run 'npm start' inside main directory
+Now drag this .env file into the main directory.
+
+Finally, run `npm start` inside main directory.
