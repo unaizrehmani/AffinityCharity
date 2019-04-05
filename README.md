@@ -14,5 +14,11 @@ Now drag this .env file into the main directory.
 
 Finally, run `npm start` inside main directory.
 
+## Wiki
+Our wiki for this project can be found [here.](https://github.com/unaizrehmani/social-charity/wiki) You'll find everything you need in regards to documentation for this project.
+
 ## API Documentation
 All of our documentation for using the API can be found [here.](https://github.com/unaizrehmani/social-charity/wiki/API-Documentation)
+
+## Style Guide
+//Todo: add style guide link
