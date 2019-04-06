@@ -44,9 +44,9 @@ exports.insertUser = async (req, res, next) => {
       user.mediaURL = "";
     }
     const result = await user.save();
-    res.send(result);
+    res.status(200).send(result);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 };
 
@@ -60,9 +60,9 @@ exports.getUserByID = async (req, res, next) => {
   try {
     let id = req.params.userID;
     const user = await User.findById(id);
-    res.send(user);
+    res.status(200).send(user);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 };
 
@@ -72,9 +72,9 @@ exports.getUserByID = async (req, res, next) => {
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
-    res.send(users);
+    res.status(200).send(users);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 };
 
@@ -117,9 +117,9 @@ exports.patchUserByID = async (req, res, next) => {
     const result = await User.findByIdAndUpdate(req.params.userID, body, {
       new: true
     })
-    res.send(result);
+    res.status(200).send(result);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 
 };
@@ -138,8 +138,8 @@ exports.deleteUserByID = async (req, res, next) => {
         if (error) console.log('Failed to delete user image with ID: ', user.imageID);
       });
     }
-    res.send(user);
+    res.status(200).send(user);
   } catch (err) {
-    res.send(err);
+    res.status(400).send(err);
   }
 };

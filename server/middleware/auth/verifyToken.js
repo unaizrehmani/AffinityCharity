@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         }
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
-                return res.json({
+                return res.status(500).send({
                     success: false,
                     message: "Token is not valid"
                 });
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
             }
         });
     } else {
-        return res.json({
+        return res.status(500).send({
             success: false,
             message: "Auth token is not supplied"
         });
