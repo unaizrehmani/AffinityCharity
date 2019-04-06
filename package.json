@@ -32,7 +32,8 @@
   },
   "scripts": {
     "test": "mocha --exit --timeout 10000",
-    "start": "nodemon bin/dev"
+    "start": "nodemon bin/dev",
+    "eslint": "eslint.js"
   },
   "repository": {
     "type": "git",
