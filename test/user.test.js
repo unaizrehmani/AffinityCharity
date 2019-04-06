@@ -9,7 +9,7 @@ describe("Test Users API", () => {
     let token = "";
 
     before(async () => {
-        await require("../server/util/db")(process.env.MONGO_DB_USER, process.env.MONGO_DB_PASSWORD, process.env.MONGO_DB_NAME);
+        await require("../server/util/db");
         const response = await request(app).post("/api/auth/token").send({
             email: "unaizrehmani@gmail.com",
             password: "password"
