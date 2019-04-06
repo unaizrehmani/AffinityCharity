@@ -8,6 +8,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 //MIDDLEWARE
+app.use(express.static('public'))
 app.use(sanitizeMongo());
 app.use(bodyParser.urlencoded({
     extended: true
