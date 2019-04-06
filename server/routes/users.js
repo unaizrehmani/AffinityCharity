@@ -15,7 +15,7 @@ router.post('/', multiPartMiddleware, userController.insertUser);
 /*
  * GET /api/users/
  */
-router.get('/', userController.getAllUsers);
+router.get('/', authorize, userController.getAllUsers);
 router.get('/:userID', authorize, userController.getUserByID);
 
 /*
