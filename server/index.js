@@ -1,6 +1,6 @@
 const connect = async () => {
-  await require("./util/db")();
-  require("./util/server");
+  await require("./util/db")(process.env.MONGO_DB_USER, process.env.MONGO_DB_PASSWORD, process.env.MONGO_DB_NAME);
+  require("./util/app")
 }
-connect();
-module.exports = connect;
+
+module.exports = connect();
