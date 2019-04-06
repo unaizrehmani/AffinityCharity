@@ -18,7 +18,7 @@ app.use(cors());
 // ROUTES
 app.use('/api', require('../routes/api'));
 app.listen(PORT, () => {
-    console.log(`Server listening on port: ${PORT}`);
+
 });
 
 module.exports = app

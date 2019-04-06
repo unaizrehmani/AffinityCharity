@@ -2,7 +2,7 @@ require("dotenv/config");
 const app = require("../server/util/app");
 const request = require("supertest");
 
-describe("GET /api/users", () => {
+describe("Test Users API", () => {
     let token = "";
 
     before(async () => {
@@ -14,7 +14,7 @@ describe("GET /api/users", () => {
         token = response.text;
     })
 
-    it("GET ALL USERS", async () => {
+    it("GET /api/users", async () => {
         await request(app).get("/api/users").set("Authorization", "Bearer " + token).expect(200)
     })
 

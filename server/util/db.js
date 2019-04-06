@@ -11,7 +11,6 @@ const connectDB = async (MONGO_DB_USER, MONGO_DB_PASSWORD, MONGO_DB_NAME) => {
                 },
                 () => {}
             )
-        console.log('MongoDB connected');
         return connection;
     } catch (err) {
         console.log(err);
