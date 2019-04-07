@@ -5,6 +5,7 @@ const { expect } = require('chai');
 
 describe('Test Users API', () => {
   let token = '';
+  let userID = '';
 
   before(async () => {
     await require('../server/util/db');
@@ -42,6 +43,9 @@ describe('Test Users API', () => {
       body._id,
       'created user does not have property _id'
     );
+
+    userID = body._id;
+
     expect(body).to.have.own.property(
       'firstName',
       body.firstName,
@@ -88,14 +92,18 @@ describe('Test Users API', () => {
   // TODO: implement GET /api/users/:userID test
   it('GET /api/users/:userID', async () => {});
 
-  // TODO: implement GET /api/users/:userID test
-  it('GET /api/users/:userID', async () => {});
-
   // TODO: implement PATCH /api/users test
   it('PATCH /api/users/:userID', async () => {});
 
   // TODO: implement DELETE /api/users/:userID test
-  it('DELETE /api/users/:userID', async () => {});
+  it('DELETE /api/users/:userID', async () => {
+    if (userID) {
+      const { body } = await request(app)
+        .delete('/api/users/' + userID)
+        .expect(200);
+      console.log(body);
+    }
+  });
 
   after(() => {});
 });
