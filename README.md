@@ -38,6 +38,7 @@ All of our documentation for using the API can be found [here.](https://github.c
 ## Testing
 To execute the set of tests run `npm test` inside the main directory.
 To ensure code written adheres to code style standards run `npm run lint` inside the main directory.
+To fix code written to `npm run lint` standards, run `npm run lint:fix` inside the main directory.
 
 ## UI and UX
 Our documentation regarding the user interface/experience can be [here.](https://github.com/unaizrehmani/Affinity/wiki/User-Interface-and-Experience-Design)
