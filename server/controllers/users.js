@@ -141,7 +141,9 @@ exports.deleteUserByID = async (req, res, next) => {
       await cloudinaryUtil.v2.uploader.destroy(
         user.imageID,
         (error, result) => {
-          if (error) { console.log('Failed to delete user image with ID: ', user.imageID); }
+          if (error) {
+            console.log('Failed to delete user image with ID: ', user.imageID);
+          }
         }
       );
     }
