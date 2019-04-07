@@ -20,5 +20,8 @@ Our wiki for this project can be found [here.](https://github.com/unaizrehmani/s
 ## API Documentation
 All of our documentation for using the API can be found [here.](https://github.com/unaizrehmani/social-charity/wiki/API-Documentation)
 
+## Testing
+// TODO
+
 ## UI & UX
 Our documentation regarding the user interface/experience can be [here.](https://github.com/unaizrehmani/Affinity/wiki/User-Interface-and-Experience-Design)
