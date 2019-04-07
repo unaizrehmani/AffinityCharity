@@ -1,8 +1,10 @@
 # Affinity ✋
 [![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)
 
+//TODO: Project/Product description
+
 ## Getting Started
-Before we go ahead and clone the repo made sure you have Node installed on your machine.
+Before we go ahead and clone the repo make sure you have Node installed on your machine.
 [Node download](https://nodejs.org/en/)
 
 Now navigate to a clean directory and clone or download the repo.
@@ -22,7 +24,7 @@ Our wiki for this project can be found [here.](https://github.com/unaizrehmani/s
 All of our documentation for using the API can be found [here.](https://github.com/unaizrehmani/social-charity/wiki/API-Documentation)
 
 ## Testing
-// TODO
+To execute the set of tests run `npm test` inside the main directory.
 
 ## UI & UX
 Our documentation regarding the user interface/experience can be [here.](https://github.com/unaizrehmani/Affinity/wiki/User-Interface-and-Experience-Design)
