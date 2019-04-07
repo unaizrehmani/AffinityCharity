@@ -3,7 +3,7 @@ const router = express.Router();
 const multiPartMiddleware = require('connect-multiparty')();
 const agentController = require('../controllers/agents');
 const sanitizeBody = require('../middleware/sanitization/sanitizeBody');
-const authorize = require("../middleware/auth/verifyToken");
+const authorize = require('../middleware/auth/verifyToken');
 
 router.use(sanitizeBody);
 
@@ -21,7 +21,12 @@ router.get('/:agentID', authorize, agentController.getAgentByID);
 /*
  * PATCH /api/agents/
  */
-router.patch('/:agentID', authorize, multiPartMiddleware, agentController.patchAgentByID);
+router.patch(
+  '/:agentID',
+  authorize,
+  multiPartMiddleware,
+  agentController.patchAgentByID
+);
 
 /*
  * DELETE /api/agents/

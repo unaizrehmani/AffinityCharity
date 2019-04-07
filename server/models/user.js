@@ -43,7 +43,8 @@ userSchema.methods.toJSON = function () {
 };
 
 userSchema.methods.generateAuthToken = function () {
-  return jwt.sign({
+  return jwt.sign(
+    {
       _id: this._id,
       firstName: this.firstName,
       lastName: this.lastName,

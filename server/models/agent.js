@@ -55,7 +55,8 @@ agentSchema.methods.toJSON = function () {
 };
 
 agentSchema.methods.generateAuthToken = () => {
-  return jwt.sign({
+  return jwt.sign(
+    {
       _id: this._id
     },
     process.env.JWT_TOKEN_SECRET

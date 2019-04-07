@@ -6,7 +6,7 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/agents`;
 
 /*
  * POST /api/agents route to add a new agent.
- * 
+ *
  * REQ.BODY:
  * @param {string} firstName
  * @param {string} lastName
@@ -14,7 +14,7 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/agents`;
  * @param {string} password
  * @param {string} charityID
  * @param {string} location
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
@@ -28,7 +28,8 @@ exports.insertAgent = async (req, res, next) => {
     }).countDocuments();
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         },
         (err, imageInfo) => {
@@ -78,10 +79,10 @@ exports.getAllAgents = async (req, res, next) => {
 
 /*
  * PATCH /api/agents/:agentID route to patch an agent by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} agentID
- * 
+ *
  * REQ.BODY:
  * @param {string} firstName
  * @param {string} lastName
@@ -89,29 +90,33 @@ exports.getAllAgents = async (req, res, next) => {
  * @param {string} password
  * @param {string} charityID
  * @param {string} location
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
 exports.patchAgentByID = async (req, res, next) => {
   const body = {
     ...req.body
-  }
+  };
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const agent = await Agent.findById(req.params.agentID);
       if (agent.imageID) {
-        await cloudinaryUtil.v2.uploader.destroy(agent.imageID, (error, result) => {
-          if (error) res.send(error);
-        })
+        await cloudinaryUtil.v2.uploader.destroy(
+          agent.imageID,
+          (error, result) => {
+            if (error) res.send(error);
+          }
+        );
       }
       const uploadResult = await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         }
       );
-      body.imageID = uploadResult.public_id
-      body.mediaURL = uploadResult.url
+      body.imageID = uploadResult.public_id;
+      body.mediaURL = uploadResult.url;
     }
     const result = await Agent.findByIdAndUpdate(req.params.agentID, body, {
       new: true
@@ -124,7 +129,7 @@ exports.patchAgentByID = async (req, res, next) => {
 
 /*
  * DELETE /api/agents/:agentID route to delete an agent by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} agentID
  */
@@ -132,9 +137,12 @@ exports.deleteAgentByID = async (req, res, next) => {
   try {
     const agent = await Agent.findByIdAndDelete(req.params.agentID);
     if (agent.imageID) {
-      await cloudinaryUtil.v2.uploader.destroy(agent.imageID, (error, result) => {
-        if (error) console.log('Failed to delete agent: ', agent.imageID);
-      });
+      await cloudinaryUtil.v2.uploader.destroy(
+        agent.imageID,
+        (error, result) => {
+          if (error) console.log('Failed to delete agent: ', agent.imageID);
+        }
+      );
     }
     res.send(agent);
   } catch (err) {

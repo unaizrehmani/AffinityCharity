@@ -9,7 +9,9 @@ const sanitize = sourceString => {
 };
 
 const stripTags = payload => {
-  let attributes = { ...payload };
+  let attributes = {
+    ...payload
+  };
   for (let key in attributes) {
     if (attributes[key] instanceof Array) {
       attributes[key] = attributes[key].map(element => {
@@ -27,7 +29,11 @@ const stripTags = payload => {
 };
 
 module.exports = (req, res, next) => {
-  const { id, _id, ...attributes } = req.body;
+  const {
+    id,
+    _id,
+    ...attributes
+  } = req.body;
   const sanitizedBody = stripTags(attributes);
   req.sanitizedBody = sanitizedBody;
   next();

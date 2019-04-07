@@ -4,10 +4,10 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
 
 /*
  * POST /api/posts route to create a new post.
- * 
+ *
  * REQ.BODY:
  * @param {string} description
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
@@ -17,7 +17,8 @@ exports.insertPost = async (req, res, next) => {
     post.createdDate = new Date();
     post.profileArray = [];
     await cloudinaryUtil.v2.uploader.upload(
-      req.files.image.path, {
+      req.files.image.path,
+      {
         folder: cloudinaryPath
       },
       (err, imageInfo) => {
@@ -63,35 +64,39 @@ exports.getAllPosts = async (req, res, next) => {
 
 /*
  * PATCH /api/posts route to patch a post by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} postID
- * 
+ *
  * REQ.BODY:
  * @param {string} description
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
 exports.patchPostByID = async (req, res, next) => {
   const body = {
     ...req.body
-  }
+  };
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const post = await Post.findById(req.params.postID);
       if (post.mediaID) {
-        await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
-          if (error) res.send(error);
-        })
+        await cloudinaryUtil.v2.uploader.destroy(
+          post.mediaID,
+          (error, result) => {
+            if (error) res.send(error);
+          }
+        );
       }
       const uploadResult = await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         }
       );
-      body.mediaID = uploadResult.public_id
-      body.mediaURL = uploadResult.url
+      body.mediaID = uploadResult.public_id;
+      body.mediaURL = uploadResult.url;
     }
     const result = await Post.findByIdAndUpdate(req.params.postID, body, {
       new: true
@@ -104,7 +109,7 @@ exports.patchPostByID = async (req, res, next) => {
 
 /*
  * DELETE /api/posts/:postID route to delete a post by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} postID
  */
@@ -112,9 +117,12 @@ exports.deletePostByID = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.postID);
     if (post.mediaID) {
-      await cloudinaryUtil.v2.uploader.destroy(post.mediaID, (error, result) => {
-        if (error) console.log('Failed to delete post: ', post.mediaID);
-      });
+      await cloudinaryUtil.v2.uploader.destroy(
+        post.mediaID,
+        (error, result) => {
+          if (error) console.log('Failed to delete post: ', post.mediaID);
+        }
+      );
     }
     res.send(post);
   } catch (err) {

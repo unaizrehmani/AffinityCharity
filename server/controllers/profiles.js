@@ -4,13 +4,13 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/profiles`;
 
 /*
  * POST /api/profiles route to save a new profile.
- * 
+ *
  * REQ.BODY:
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} location
  * @param {string} charityID
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
@@ -21,7 +21,8 @@ exports.insertProfile = async (req, res, next) => {
     profile.posts = [];
     if (req.files.image && req.files.image.path) {
       await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         },
         (err, imageInfo) => {
@@ -34,8 +35,8 @@ exports.insertProfile = async (req, res, next) => {
         }
       );
     } else {
-      profile.imageID = "";
-      profile.mediaURL = "";
+      profile.imageID = '';
+      profile.mediaURL = '';
     }
     const result = await profile.save();
     res.send(result);
@@ -46,7 +47,7 @@ exports.insertProfile = async (req, res, next) => {
 
 /*
  * GET /api/profiles/:profileID route to get a profile by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} profileID
  */
@@ -74,38 +75,42 @@ exports.getAllProfiles = async (req, res, next) => {
 
 /*
  * PATCH /api/profiles/:profileID route to patch a profile by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} profileID
- * 
+ *
  * REQ.BODY:
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} location
  * @param {string} charityID
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
 exports.patchProfileByID = async (req, res, next) => {
   const body = {
     ...req.body
-  }
+  };
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const profile = await Profile.findById(req.params.profileID);
       if (profile.imageID) {
-        await cloudinaryUtil.v2.uploader.destroy(profile.imageID, (error, result) => {
-          if (error) res.send(error);
-        })
+        await cloudinaryUtil.v2.uploader.destroy(
+          profile.imageID,
+          (error, result) => {
+            if (error) res.send(error);
+          }
+        );
       }
       const uploadResult = await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         }
       );
-      body.imageID = uploadResult.public_id
-      body.mediaURL = uploadResult.url
+      body.imageID = uploadResult.public_id;
+      body.mediaURL = uploadResult.url;
     }
     const result = await Profile.findByIdAndUpdate(req.params.profileID, body, {
       new: true
@@ -118,7 +123,7 @@ exports.patchProfileByID = async (req, res, next) => {
 
 /*
  * DELETE /api/profiles/:profileID route to delete a profile by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} profileID
  */
@@ -126,9 +131,12 @@ exports.deleteProfileByID = async (req, res, next) => {
   try {
     const profile = await Profile.findByIdAndDelete(req.params.profileID);
     if (profile.imageID) {
-      await cloudinaryUtil.v2.uploader.destroy(profile.imageID, (error, result) => {
-        if (error) console.log('Failed to delete profile: ', profile.imageID);
-      });
+      await cloudinaryUtil.v2.uploader.destroy(
+        profile.imageID,
+        (error, result) => {
+          if (error) console.log('Failed to delete profile: ', profile.imageID);
+        }
+      );
     }
     res.send(profile);
   } catch (err) {

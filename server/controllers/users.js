@@ -2,18 +2,18 @@ const User = require('../models/user');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const bcrypt = require('bcrypt');
 const SALTROUNDS = 14;
-const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`
+const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`;
 
 /*
  * POST /api/users route to save a new user.
- * 
+ *
  * REQ.BODY:
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} email
  * @param {string} password
  * @param {string} createdDate
- * 
+ *
  * REQ.FILES
  * @param {file} image
  */
@@ -27,7 +27,8 @@ exports.insertUser = async (req, res, next) => {
     }).countDocuments();
     if (req.files.image && count === 0) {
       await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         },
         (err, imageInfo) => {
@@ -40,8 +41,8 @@ exports.insertUser = async (req, res, next) => {
         }
       );
     } else {
-      user.imageID = "";
-      user.mediaURL = "";
+      user.imageID = '';
+      user.mediaURL = '';
     }
     const result = await user.save();
     res.status(200).send(result);
@@ -52,7 +53,7 @@ exports.insertUser = async (req, res, next) => {
 
 /*
  * GET /api/users/:userID route to get a user by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} userID
  */
@@ -80,53 +81,56 @@ exports.getAllUsers = async (req, res, next) => {
 
 /*
  * PATCH /api/users/:userID route to patch a user by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} userID
- * 
+ *
  * REQ.BODY
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} email
  * @param {string} password
- * 
+ *
  * REQ.FILES:
  * @param {file} image
  */
 exports.patchUserByID = async (req, res, next) => {
   const body = {
     ...req.body
-  }
+  };
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const user = await User.findById(req.params.userID);
       if (user.imageID) {
-        await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
-          if (error) res.send(error);
-        })
+        await cloudinaryUtil.v2.uploader.destroy(
+          user.imageID,
+          (error, result) => {
+            if (error) res.send(error);
+          }
+        );
       }
       const uploadResult = await cloudinaryUtil.v2.uploader.upload(
-        req.files.image.path, {
+        req.files.image.path,
+        {
           folder: cloudinaryPath
         }
       );
-      body.imageID = uploadResult.public_id
-      body.mediaURL = uploadResult.url
+      body.imageID = uploadResult.public_id;
+      body.mediaURL = uploadResult.url;
     }
 
     const result = await User.findByIdAndUpdate(req.params.userID, body, {
       new: true
-    })
+    });
     res.status(200).send(result);
   } catch (error) {
     res.status(400).send(error);
   }
-
 };
 
 /*
  * DELETE /api/users/:userID route to delete a user by ID.
- * 
+ *
  * REQ.PARAMS:
  * @param {number} userID
  */
@@ -134,9 +138,12 @@ exports.deleteUserByID = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userID);
     if (user.imageID) {
-      await cloudinaryUtil.v2.uploader.destroy(user.imageID, (error, result) => {
-        if (error) console.log('Failed to delete user image with ID: ', user.imageID);
-      });
+      await cloudinaryUtil.v2.uploader.destroy(
+        user.imageID,
+        (error, result) => {
+          if (error) { console.log('Failed to delete user image with ID: ', user.imageID); }
+        }
+      );
     }
     res.status(200).send(user);
   } catch (err) {

@@ -8,10 +8,7 @@ const User = require('../models/user');
  * @param {string} password
  */
 exports.authToken = async (req, res, next) => {
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
   try {
     const user = await User.authenticate(email, password);
     res.send(user.generateAuthToken());
