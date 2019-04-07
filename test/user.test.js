@@ -6,6 +6,12 @@ const { expect } = require('chai');
 describe('Test Users API', () => {
   let token = '';
   let userID = '';
+  const form = {
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'test@email.com',
+    password: 'password'
+  };
 
   before(async () => {
     await require('../server/util/db');
@@ -20,13 +26,6 @@ describe('Test Users API', () => {
   });
 
   it('POST /api/users without image', async () => {
-    const form = {
-      firstName: 'firstName',
-      lastName: 'lastName',
-      email: 'test@email.com',
-      password: 'password'
-    };
-
     const { body } = await request(app)
       .post('/api/users')
       .field('firstName', form.firstName)
@@ -100,8 +99,50 @@ describe('Test Users API', () => {
     if (userID) {
       const { body } = await request(app)
         .delete('/api/users/' + userID)
+        .set('Authorization', 'Bearer ' + token)
         .expect(200);
-      console.log(body);
+
+      expect(body).to.not.have.own.property('password');
+      expect(body).to.not.have.own.property('__v');
+
+      expect(body).to.have.own.property(
+        '_id',
+        body._id,
+        'created user does not have property _id'
+      );
+      expect(body).to.have.own.property(
+        'firstName',
+        body.firstName,
+        'created user does not have property _id'
+      );
+      expect(body).to.have.own.property(
+        'lastName',
+        body.lastName,
+        'created user does not have property _id'
+      );
+      expect(body).to.have.own.property(
+        'email',
+        body.email,
+        'new user does not have an email property'
+      );
+      expect(body).to.have.own.property(
+        'createdDate',
+        body.createdDate,
+        'new user does not have a createdDate property'
+      );
+      expect(body).to.have.own.property(
+        'imageID',
+        body.imageID,
+        'new user does not have an imageID property'
+      );
+      expect(body).to.have.own.property(
+        'mediaURL',
+        body.mediaURL,
+        'new user does not have a mediaURL property'
+      );
+
+      delete form.password;
+      expect(body).to.include(form);
     }
   });
 
