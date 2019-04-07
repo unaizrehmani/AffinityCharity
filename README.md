@@ -1,4 +1,5 @@
 # Affinity ✋
+[![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)
 
 ## Getting Started
 Before we go ahead and clone the repo made sure you have Node installed on your machine.
