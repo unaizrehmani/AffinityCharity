@@ -65,15 +65,12 @@ exports.getProfileByID = async (req, res, next) => {
  * GET /api/profiles route to get all profiles.
  */
 exports.getAllProfiles = async (req, res, next) => {
-  Profile.find({})
-    .populate('profileArray')
-    .exec()
-    .then(result => {
-      res.status(200).send(result);
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
+  try {
+    const profiles = await Profile.find({});
+    res.send(profiles);
+  } catch (error) {
+    res.send(error);
+  }
 };
 
 /*
