@@ -37,10 +37,12 @@ const agentSchema = new Schema({
     type: String,
     required: true
   },
-  posts: {
-    type: Array,
-    required: false
-  },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
   createdDate: {
     type: Date,
     required: true

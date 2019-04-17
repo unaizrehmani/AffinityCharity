@@ -25,10 +25,6 @@ const profileSchema = new Schema({
     type: String,
     required: true
   },
-  posts: {
-    type: Array,
-    required: false
-  },
   createdDate: {
     type: Date,
     required: true

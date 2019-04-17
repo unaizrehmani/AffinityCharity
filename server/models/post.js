@@ -14,10 +14,12 @@ const postSchema = new Schema({
     type: String,
     required: false
   },
-  profileArray: {
-    type: Array,
-    required: false
-  },
+  profileArray: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile'
+    }
+  ],
   createdDate: {
     type: String,
     required: true
