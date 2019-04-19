@@ -1,3 +1,4 @@
+require('dotenv/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const sanitizeMongo = require('express-mongo-sanitize');
@@ -20,6 +21,8 @@ app.use(cors());
 
 // ROUTES
 app.use('/api', require('../routes/api'));
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  console.log(`server listening on port: ${PORT}`);
+});
 
 module.exports = app;
