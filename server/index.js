@@ -1,3 +1,4 @@
+require('dotenv/config');
 const connect = async () => {
   await require('./util/db');
   require('./util/app');

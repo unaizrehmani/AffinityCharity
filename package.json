@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "mocha --exit --timeout 10000",
-    "start": "nodemon bin/dev",
+    "start": "nodemon server/index.js",
     "lint": "eslint '**/*.js'",
     "lint:fix": "prettier-eslint '**/*.js' --write"
   },
