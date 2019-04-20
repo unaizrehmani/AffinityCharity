@@ -1,0 +1,17 @@
+sudo: false
+language: node_js
+node_js:
+  - node
+
+install:
+  - npm ci
+
+before_script:
+  - npm install
+
+script:
+  - npm run lint
+  - npm test
+
+notifications:
+  email: false
