@@ -13,24 +13,28 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
  */
 exports.insertPost = async (req, res, next) => {
   try {
+    console.log(req.body);
     const post = new Post(req.body);
     post.createdDate = new Date();
-    post.profileArray = [];
-    await cloudinaryUtil.v2.uploader.upload(
-      req.files.image.path,
-      {
-        folder: cloudinaryPath
-      },
-      (err, imageInfo) => {
-        if (err) res.send(err);
-        post.mediaURL = imageInfo.url;
-        post.mediaID = imageInfo.public_id;
-      }
-    );
+    console.log(post);
+    if (req.files.image && req.files.image.path) {
+      await cloudinaryUtil.v2.uploader.upload(
+        req.files.image.path,
+        {
+          folder: cloudinaryPath
+        },
+        (err, imageInfo) => {
+          if (err) res.send(err);
+          post.mediaURL = imageInfo.url;
+          post.mediaID = imageInfo.public_id;
+        }
+      );
+    }
     const result = await post.save();
+    console.log(result);
     res.send(result);
   } catch (error) {
-    res.send(error);
+    res.status(400).send(error);
   }
 };
 
@@ -55,7 +59,7 @@ exports.getPostByID = async (req, res, next) => {
  */
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).populate('tagged').populate('author');
     res.send(posts);
   } catch (error) {
     res.send(error);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const postSchema = new Schema({
   mediaURL: {
@@ -14,7 +14,7 @@ const postSchema = new Schema({
     type: String,
     required: false
   },
-  tags: [{
+  tagged: [{
     type: Schema.Types.ObjectId,
     ref: 'Profile',
     required: true
