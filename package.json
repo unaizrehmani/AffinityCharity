@@ -1,0 +1,27 @@
+{
+  "name": "affinity",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)",
+  "main": "index.js",
+  "scripts": {
+    "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "cd server && npm start",
+    "start:client": "cd client && npm start",
+    "test:server": "cd server && npm test",
+    "test:client": "cd client && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unaizrehmani/Affinity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unaizrehmani/Affinity/issues"
+  },
+  "homepage": "https://github.com/unaizrehmani/Affinity#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
