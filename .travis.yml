@@ -10,8 +10,8 @@ before_script:
   - npm install
 
 script:
-  - npm run lint
-  - npm test
+  - npm run lint:server
+  - npm run test:server
 
 notifications:
   email: false

@@ -4,12 +4,13 @@
   "description": "[![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "start:server": "cd server && npm start",
     "start:client": "cd client && npm start",
+    "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
+    "test:client": "cd client && npm test",
     "test:server": "cd server && npm test",
-    "test:client": "cd client && npm test"
+    "lint:server": "cd server && npm run lint"
   },
   "repository": {
     "type": "git",
