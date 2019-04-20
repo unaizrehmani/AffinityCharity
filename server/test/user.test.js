@@ -1,5 +1,5 @@
 require('dotenv/config');
-const app = require('../server/util/app');
+const app = require('../api/util/app');
 const request = require('supertest');
 const { expect } = require('chai');
 
@@ -14,7 +14,7 @@ describe('Test Users API', () => {
   };
 
   before(async () => {
-    await require('../server/util/db');
+    await require('../api/util/db');
     const response = await request(app)
       .post('/api/auth/token')
       .send({
