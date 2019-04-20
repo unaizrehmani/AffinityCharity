@@ -30,17 +30,19 @@ const agentSchema = new Schema({
     require: false
   },
   charityID: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Charity',
     required: true
   },
   location: {
     type: String,
     required: true
   },
-  posts: {
-    type: Array,
-    required: false
-  },
+  posts: [{
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Post'
+  }],
   createdDate: {
     type: Date,
     required: true

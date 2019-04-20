@@ -14,9 +14,15 @@ const postSchema = new Schema({
     type: String,
     required: false
   },
-  profileArray: {
-    type: Array,
-    required: false
+  tags: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Profile',
+    required: true
+  }],
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'Agent',
+    required: true
   },
   createdDate: {
     type: String,
