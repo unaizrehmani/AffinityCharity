@@ -14,11 +14,13 @@ const postSchema = new Schema({
     type: String,
     required: false
   },
-  tagged: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Profile',
-    required: true
-  }],
+  tagged: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile',
+      required: true
+    }
+  ],
   author: {
     type: Schema.Types.ObjectId,
     ref: 'Agent',

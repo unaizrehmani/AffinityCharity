@@ -22,7 +22,11 @@ router.get('/', charityController.getAllCharities);
 /*
  * PATCH /api/charity/
  */
-router.patch('/:charityID', multipartMiddleware, charityController.patchCharityByID);
+router.patch(
+  '/:charityID',
+  multipartMiddleware,
+  charityController.patchCharityByID
+);
 
 /*
  * DELETE /api/charity/
