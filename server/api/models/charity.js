@@ -9,7 +9,13 @@ const charitySchema = new Schema({
   location: {
     type: String,
     required: true
-  }
+  },
+  agents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Agent'
+    }
+  ]
 });
 
 module.exports = mongoose.model('Charity', charitySchema);

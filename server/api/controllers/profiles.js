@@ -54,7 +54,7 @@ exports.insertProfile = async (req, res, next) => {
 exports.getProfileByID = async (req, res, next) => {
   try {
     let id = req.params.profileID;
-    const profile = await Profile.findById(id);
+    const profile = await Profile.findById(id).populate('taggedPosts');
     res.send(profile);
   } catch (error) {
     res.send(error);
@@ -66,7 +66,7 @@ exports.getProfileByID = async (req, res, next) => {
  */
 exports.getAllProfiles = async (req, res, next) => {
   try {
-    const profiles = await Profile.find({});
+    const profiles = await Profile.find({}).populate('taggedPosts');
     res.send(profiles);
   } catch (error) {
     res.send(error);

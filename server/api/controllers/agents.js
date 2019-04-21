@@ -58,7 +58,15 @@ exports.insertAgent = async (req, res, next) => {
 exports.getAgentByID = async (req, res, next) => {
   try {
     let id = req.params.agentID;
-    const agent = await Agent.findById(id);
+    const agent = await Agent.findById(id)
+      .populate({
+        path: 'posts',
+        populate: {
+          path: 'tagged',
+          model: 'Profile'
+        }
+      })
+      .populate('charityID');
     res.send(agent);
   } catch (error) {
     res.send(error);
@@ -70,7 +78,15 @@ exports.getAgentByID = async (req, res, next) => {
  */
 exports.getAllAgents = async (req, res, next) => {
   try {
-    const agents = await Agent.find({});
+    const agents = await Agent.find({})
+      .populate({
+        path: 'posts',
+        populate: {
+          path: 'tagged',
+          model: 'Profile'
+        }
+      })
+      .populate('charityID');
     res.send(agents);
   } catch (error) {
     res.send(error);

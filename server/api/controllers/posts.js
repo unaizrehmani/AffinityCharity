@@ -1,4 +1,6 @@
 const Post = require('../models/post');
+const Profile = require('../models/profile');
+const Agent = require('../models/agent');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
 
@@ -13,10 +15,9 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
  */
 exports.insertPost = async (req, res, next) => {
   try {
-    console.log(req.body);
     const post = new Post(req.body);
     post.createdDate = new Date();
-    console.log(post);
+
     if (req.files.image && req.files.image.path) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
@@ -31,7 +32,24 @@ exports.insertPost = async (req, res, next) => {
       );
     }
     const result = await post.save();
-    console.log(result);
+
+    // update relevant Profiles
+    for (let i = 0; i < post.tagged.length; i++) {
+      let profileID = post.tagged[i];
+      await Profile.findByIdAndUpdate(
+        profileID,
+        { $push: { taggedPosts: result._id } },
+        { safe: true, upsert: true, new: true }
+      );
+    }
+
+    // update relevant Agent
+    await Agent.findByIdAndUpdate(
+      result.author,
+      { $push: { posts: result._id } },
+      { safe: true, upsert: true, new: true }
+    );
+
     res.send(result);
   } catch (error) {
     res.status(400).send(error);
@@ -47,7 +65,9 @@ exports.insertPost = async (req, res, next) => {
 exports.getPostByID = async (req, res, next) => {
   try {
     let id = req.params.postID;
-    const post = await Post.findById(id);
+    const post = await Post.findById(id)
+      .populate('tagged')
+      .populate('author');
     res.send(post);
   } catch (error) {
     res.send(error);
@@ -59,7 +79,9 @@ exports.getPostByID = async (req, res, next) => {
  */
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find({}).populate('tagged').populate('author');
+    const posts = await Post.find({})
+      .populate('tagged')
+      .populate('author');
     res.send(posts);
   } catch (error) {
     res.send(error);

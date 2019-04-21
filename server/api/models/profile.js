@@ -25,10 +25,13 @@ const profileSchema = new Schema({
     type: String,
     required: true
   },
-  taggedPosts: [{
-    type: Schema.Types.ObjectId,
-    required: false
-  }],
+  taggedPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+      required: false
+    }
+  ],
   createdDate: {
     type: Date,
     required: true

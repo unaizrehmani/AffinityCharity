@@ -1,4 +1,5 @@
 const Charity = require('../models/charity');
+// const Agent = require('../models/Agent');
 // const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 // const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/charity`;
 
@@ -13,6 +14,7 @@ const Charity = require('../models/charity');
 exports.insertCharity = async (req, res, next) => {
   try {
     const charity = new Charity(req.body);
+    console.log(charity);
     const result = await charity.save();
     res.status(200).send(result);
   } catch (error) {
@@ -28,7 +30,9 @@ exports.insertCharity = async (req, res, next) => {
  */
 exports.getCharityByID = async (req, res, next) => {
   try {
-    const charity = await Charity.findById(req.params.charityID);
+    const charity = await Charity.findById(req.params.charityID).populate(
+      'agents'
+    );
     res.status(200).send(charity);
   } catch (error) {
     res.status(400).send(error);
@@ -37,7 +41,7 @@ exports.getCharityByID = async (req, res, next) => {
 
 exports.getAllCharities = async (req, res, next) => {
   try {
-    const charities = await Charity.find({});
+    const charities = await Charity.find({}).populate('agents');
     res.status(200).send(charities);
   } catch (error) {
     res.status(400).send(error);
@@ -46,7 +50,11 @@ exports.getAllCharities = async (req, res, next) => {
 
 exports.patchCharityByID = async (req, res, next) => {
   try {
-    const charity = await Charity.findByIdAndUpdate(req.params.charityID, req.body, { new: true });
+    const charity = await Charity.findByIdAndUpdate(
+      req.params.charityID,
+      req.body,
+      { new: true }
+    );
     res.status(200).send(charity);
   } catch (error) {
     res.status(400).send(error);
