@@ -1,7 +1,5 @@
 # Project
 .env
-config.json
-.vscode/
 
 # OSX
 .DS_Store
