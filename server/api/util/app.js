@@ -10,7 +10,9 @@ const PORT = process.env.PORT;
 const app = express();
 
 // MIDDLEWARE
-app.use(express.static(path.join(__dirname, '/../../../public')));
+const pathName = path.join(__dirname, '/../../../public');
+console.log(pathName);
+app.use(express.static(pathName));
 app.use(sanitizeMongo());
 app.use(
   bodyParser.urlencoded({
