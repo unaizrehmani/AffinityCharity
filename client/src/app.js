@@ -17,7 +17,26 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Input placeholder="Email" />
+        <View
+          style={{
+            height: 170,
+            backgroundColor: '#E35268',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 3 },
+            shadowOpacity: 0.12,
+            shadowRadius: 6,
+            elevation: 1,
+            marginBottom: 20
+          }}
+        />
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Input placeholder="Email" />
+        </View>
       </View>
     )
   }
@@ -26,8 +45,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#FFF'
   }
 })
