@@ -5,15 +5,13 @@ export default class Input extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      password: '',
-      placeholder: this.props.placeholder
+      field: ''
     }
   }
 
-  usernameChangHandler = val => {
+  inputChangHandler = val => {
     this.setState({
-      username: val
+      field: val
     })
   }
 
@@ -21,9 +19,9 @@ export default class Input extends Component {
     return (
       <View style={styles.inputBox}>
         <TextInput
-          onChangeText={this.usernameChangHandler}
-          placeholder={this.state.placeholder}
-          value={this.state.username}
+          onChangeText={this.inputChangHandler}
+          placeholder={this.props.placeholder}
+          value={this.state.field}
           style={styles.text}
         />
       </View>
@@ -44,10 +42,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 6,
     elevation: 1,
-    backgroundColor: '#ffff'
+    backgroundColor: '#ffff',
+    marginBottom: 10,
+    marginTop: 10
   },
   text: {
-    marginLeft: 20,
+    marginLeft: 25,
     color: '#474B53',
     fontSize: 14
   }
