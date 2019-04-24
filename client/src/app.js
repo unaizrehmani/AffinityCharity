@@ -1,13 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, View } from 'react-native'
+import Input from './components/input'
+import Banner from './components/banner'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,16 +10,19 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu'
 })
 
-type Props = {}
-export default class App extends Component<Props> {
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js! This is a test.
-        </Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Banner title="Affinity" />
+        <View style={styles.inputForm}>
+          <Input placeholder="Email" />
+          <Input placeholder="Password" />
+        </View>
       </View>
     )
   }
@@ -34,18 +31,10 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
+  },
+  inputForm: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+    alignItems: 'center'
   }
 })

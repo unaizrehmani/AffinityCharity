@@ -1,7 +1,9 @@
 # Affinity ✋
 [![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)
 
-//TODO: Project/Product description
+The project will build a system which will allow charities to sign on to the application and allow them to post media such as photos, videos and texts to increase social engagement with applicants. The purpose of this system is to increase social engagement, increase tracking of spending, and increase reporting from parties acting on behalf of charities. Our major tester is Human Concern International.
+
+We are building a proof of concept to determine whether this kind of application would be useful for charities to increase their marketing efforts (particularly for small-medium size charities who are not well known), to provide a platform for increasing trust between charities and donors, and to provide a platform which allows donors to easily connect to people.
 
 ## Table of Contents
 
