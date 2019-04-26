@@ -24,7 +24,7 @@ const styles = (props) => StyleSheet.create({
     display: 'flex',
     height: 48,
     width: props.size,
-    backgroundColor: props.type == 'primary' ? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
+    backgroundColor: props.isPrimary? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.12,
@@ -37,7 +37,7 @@ const styles = (props) => StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    color: props.type == 'primary' ? BACKGROUND_COLOR : PRIMARY_COLOR,
+    color: props.isPrimary?  BACKGROUND_COLOR : PRIMARY_COLOR,
     textTransform: 'uppercase',
     fontWeight: 'bold',
     fontSize: BODY_FONT_SIZE,
@@ -45,13 +45,13 @@ const styles = (props) => StyleSheet.create({
 })
 
 Button.defaultProps = {
-  type: 'primary',
+  isPrimary: true,
   size: 155,
 };
 
 Button.propTypes = {
   text: PropTypes.string,
-  type: PropTypes.string,
+  isPrimary: PropTypes.bool,
   size: PropTypes.number,
   onPress: PropTypes.func
 }
