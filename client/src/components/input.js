@@ -5,25 +5,19 @@ import {PRIMARY_COLOR, BACKGROUND_COLOR, BODY_FONT_SIZE} from '../../constants.j
 export default class Input extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      field: ''
-    }
-  }
-
-  inputChangHandler = val => {
-    this.setState({
-      field: val
-    })
   }
 
   render() {
     return (
       <View style={styles.inputBox}>
         <TextInput
-          onChangeText={this.inputChangHandler}
+          onChangeText={text =>
+            this.props.inputChangeHandler(text, this.props.name)
+          }
           placeholder={this.props.placeholder}
-          value={this.state.field}
+          value={this.props.value}
           style={styles.text}
+          secureTextEntry={this.props.secureTextEntry}
         />
       </View>
     )
@@ -38,10 +32,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 24,
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 6,
     elevation: 1,
     backgroundColor: BACKGROUND_COLOR,
     marginBottom: 10,
