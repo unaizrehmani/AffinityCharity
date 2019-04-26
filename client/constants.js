@@ -1,5 +1,5 @@
 // COLOR SCHEMES
-export const BACKGROUND_COLOR = '#FFFFF';
+export const BACKGROUND_COLOR = '#FFFFFF';
 export const PRIMARY_COLOR = '#474B53';
 export const SECONDARY_COLOR = '#F2F2F2';
 export const PRIMARY_ACCENT_COLOR = '#E35268';

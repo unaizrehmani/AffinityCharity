@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import {BACKGROUND_COLOR, SECONDARY_COLOR, HEADING} from '../../constants.js';
 
 export default class Banner extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class Banner extends Component {
 const styles = StyleSheet.create({
   banner: {
     height: 170,
-    backgroundColor: '#E35268',
+    backgroundColor: BACKGROUND_COLOR,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.12,
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   text: {
-    color: '#F2F2F2',
-    fontSize: 30,
+    color: SECONDARY_COLOR,
+    fontSize: HEADING.fontSize,
     textTransform: 'uppercase',
     marginTop: 112
   }
