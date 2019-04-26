@@ -14,13 +14,13 @@ export default class Banner extends Component {
 const styles = StyleSheet.create({
   banner: {
     height: 170,
+    width: '100%',
     backgroundColor: '#E35268',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.12,
     shadowRadius: 6,
     elevation: 1,
-    marginBottom: 20,
     alignItems: 'center'
   },
   text: {
