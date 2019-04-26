@@ -1,40 +1,57 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types';
 import {PRIMARY_ACCENT_COLOR, SECONDARY_COLOR, PRIMARY_COLOR, BACKGROUND_COLOR, BODY_FONT_SIZE} from '../../constants.js';
 
 export default class CustomButton extends Component {
-
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     return (
-      <Button style={styles.button} title={this.props.text}>
-      </Button>
+      <TouchableOpacity style={styles(this.props).button} onPress={this.props.onPress}>
+        <Text style={styles(this.props).text}>{this.props.text}</Text>
+      </TouchableOpacity>
     )
   }
 }
 
 
 
-const styles = StyleSheet.create({
+const styles = (props) => StyleSheet.create({
   button: {
+    display: 'flex',
     height: 48,
-    width: 155,
-    backgroundColor: this.props.type == 'primary' ? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
-    color: this.props.type == 'primary' ? BACKGROUND_COLOR : PRIMARY_COLOR,
+    width: props.size,
+    backgroundColor: props.type == 'primary' ? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.12,
     shadowRadius: 6,
+    borderRadius: 24,
     elevation: 1,
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    fontSize: BODY_FONT_SIZE
   },
+  text: {
+    color: props.type == 'primary' ? BACKGROUND_COLOR : PRIMARY_COLOR,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    fontSize: BODY_FONT_SIZE,
+  }
 })
+
+CustomButton.defaultProps = {
+  type: 'primary',
+  size: 155,
+};
 
 CustomButton.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
-  onClick: PropTypes.func
+  size: PropTypes.string,
+  onPress: PropTypes.func
 }

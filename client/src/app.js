@@ -23,7 +23,7 @@ export default class App extends Component {
         <View style={styles.inputForm}>
           <Input placeholder="Email" />
           <Input placeholder="Password" />
-          <CustomButton/>
+          <CustomButton text="Sign In" type="primary"/>
         </View>
       </View>
     )
