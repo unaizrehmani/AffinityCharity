@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
+import {PRIMARY_COLOR, BACKGROUND_COLOR, BODY_FONT_SIZE} from '../../constants.js';
 
 export default class Input extends Component {
   constructor(props) {
@@ -27,18 +28,18 @@ const styles = StyleSheet.create({
   inputBox: {
     width: 295,
     height: 48,
-    borderColor: '#474B53',
+    borderColor: PRIMARY_COLOR,
     borderWidth: 2,
     borderRadius: 24,
     justifyContent: 'center',
     elevation: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: BACKGROUND_COLOR,
     marginBottom: 10,
     marginTop: 10
   },
   text: {
     marginLeft: 25,
-    color: '#474B53',
-    fontSize: 14
+    color: PRIMARY_COLOR,
+    fontSize: BODY_FONT_SIZE
   }
 })
