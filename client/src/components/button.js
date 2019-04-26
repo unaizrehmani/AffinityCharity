@@ -37,7 +37,7 @@ const styles = (props) => StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    color: props.isPrimary?  BACKGROUND_COLOR : PRIMARY_COLOR,
+    color: props.isPrimary?  SECONDARY_COLOR : PRIMARY_COLOR,
     textTransform: 'uppercase',
     fontWeight: 'bold',
     fontSize: BODY_FONT_SIZE,
