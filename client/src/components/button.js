@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types';
 import {PRIMARY_ACCENT_COLOR, SECONDARY_COLOR, PRIMARY_COLOR, BACKGROUND_COLOR, BODY_FONT_SIZE} from '../../constants.js';
 
-export default class CustomButton extends Component {
+export default class Button extends Component {
   constructor(props) {
     super(props)
   }
@@ -44,14 +44,14 @@ const styles = (props) => StyleSheet.create({
   }
 })
 
-CustomButton.defaultProps = {
+Button.defaultProps = {
   type: 'primary',
   size: 155,
 };
 
-CustomButton.propTypes = {
+Button.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.number,
   onPress: PropTypes.func
 }
