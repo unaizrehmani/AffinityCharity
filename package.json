@@ -8,7 +8,7 @@
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
     "lint:server": "cd server && npm run lint",
-    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start": "concurrently \"npm run start:server\"",
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start",
     "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
@@ -25,7 +25,8 @@
     "url": "https://github.com/unaizrehmani/Affinity/issues"
   },
   "homepage": "https://github.com/unaizrehmani/Affinity#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "concurrently": "^4.1.0"
   }
 }
