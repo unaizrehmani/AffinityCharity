@@ -17,7 +17,7 @@ export default class Button extends Component {
     return (
       <TouchableOpacity
         style={styles(this.props).button}
-        onPress={this.props.onPress}
+        onPress={event => this.props.onPress(event, this.props.name)}
       >
         <Text style={styles(this.props).text}>{this.props.text}</Text>
       </TouchableOpacity>
@@ -57,6 +57,7 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
+  name: PropTypes.string,
   text: PropTypes.string,
   isPrimary: PropTypes.bool,
   isLarge: PropTypes.bool,
