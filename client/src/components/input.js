@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
-import {PRIMARY_COLOR, BACKGROUND_COLOR, BODY_FONT_SIZE} from '../../constants.js';
+import PropTypes from 'prop-types'
+import {
+  PRIMARY_COLOR,
+  BACKGROUND_COLOR,
+  BODY_FONT_SIZE
+} from '../../constants.js'
 
 export default class Input extends Component {
   constructor(props) {
@@ -43,3 +48,10 @@ const styles = StyleSheet.create({
     fontSize: BODY_FONT_SIZE
   }
 })
+
+Input.propTypes = {
+  inputChangeHandler: PropTypes.func,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  secureTextEntry: PropTypes.bool
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, StatusBar } from 'react-native'
 import Input from './components/input'
 import Banner from './components/banner'
 import Button from './components/button'
+import Seperator from './components/seperator'
 
 import logo from './assets/logo.png'
 
@@ -20,6 +21,7 @@ export default class App extends Component {
   }
 
   render() {
+    StatusBar.setBarStyle('light-content', true)
     return (
       <View style={styles.container}>
         <Banner title="Affinity" />
@@ -38,7 +40,9 @@ export default class App extends Component {
             inputChangeHandler={this.handleInputChange}
             secureTextEntry={true}
           />
-          <Button text="Sign In" isLarge={true} />
+          <Button text="Continue" isLarge={true} isPrimary={false} />
+          <Seperator />
+          <Button text="Sign Up" isLarge={true} isPrimary={true} />
         </View>
       </View>
     )
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 60,
     width: 60,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20
   }
 })

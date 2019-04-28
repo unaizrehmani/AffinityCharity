@@ -34,7 +34,7 @@ const styles = props =>
       backgroundColor: props.isPrimary ? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 3 },
-      shadowOpacity: 0.12,
+      shadowOpacity: 0.2,
       shadowRadius: 6,
       borderRadius: 24,
       elevation: 1,
