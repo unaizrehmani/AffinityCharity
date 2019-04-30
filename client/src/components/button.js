@@ -6,7 +6,7 @@ import {
   SECONDARY_COLOR,
   PRIMARY_COLOR,
   BODY_FONT_SIZE
-} from '../../constants.js'
+} from '../styles/constants'
 
 export default class Button extends Component {
   constructor(props) {

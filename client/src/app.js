@@ -21,7 +21,9 @@ export default class App extends Component {
   }
 
   handleButtonPress = (event, name) => {
-    alert(name)
+    if (name === 'login') {
+      alert('Logged In')
+    } else alert('Sign Up')
   }
 
   render() {
