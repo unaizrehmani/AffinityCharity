@@ -4,7 +4,7 @@ import {
   PRIMARY_ACCENT_COLOR,
   SECONDARY_COLOR,
   HEADING_FONT_SIZE
-} from '../../constants.js'
+} from '../styles/constants'
 
 export default class Banner extends Component {
   render() {
