@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const SALTROUNDS = 14;
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`;
 
