@@ -5,7 +5,7 @@ import {
   PRIMARY_COLOR,
   BACKGROUND_COLOR,
   BODY_FONT_SIZE
-} from '../../constants.js'
+} from '../styles/constants'
 
 export default class Input extends Component {
   constructor(props) {

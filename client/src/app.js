@@ -20,6 +20,12 @@ export default class App extends Component {
     this.setState({ [name]: text })
   }
 
+  handleButtonPress = (event, name) => {
+    if (name === 'login') {
+      alert('Logged In')
+    } else alert('Sign Up')
+  }
+
   render() {
     StatusBar.setBarStyle('light-content', true)
     return (
@@ -40,9 +46,21 @@ export default class App extends Component {
             inputChangeHandler={this.handleInputChange}
             secureTextEntry={true}
           />
-          <Button text="Continue" isLarge={true} isPrimary={false} />
+          <Button
+            name="login"
+            text="Continue"
+            isLarge={true}
+            isPrimary={false}
+            onPress={this.handleButtonPress}
+          />
           <Seperator />
-          <Button text="Sign Up" isLarge={true} isPrimary={true} />
+          <Button
+            name="signup"
+            text="Sign Up"
+            isLarge={true}
+            isPrimary={true}
+            onPress={this.handleButtonPress}
+          />
         </View>
       </View>
     )

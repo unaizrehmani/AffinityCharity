@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { PRIMARY_ACCENT_COLOR, PRIMARY_COLOR } from '../../constants.js'
+import { PRIMARY_ACCENT_COLOR, PRIMARY_COLOR } from '../styles/constants'
 import PropTypes from 'prop-types'
 
 export default class Seperator extends Component {
