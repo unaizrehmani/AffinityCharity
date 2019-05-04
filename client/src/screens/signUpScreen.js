@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import Input from '../components/input'
 import Button from '../components/button'
+import Cause from '../components/cause'
 
 export default class SignUpScreen extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export default class SignUpScreen extends Component {
           Policy.
         </Text>
         <Button text="Sign Up" isLarge={true} />
+        <Cause/>
       </View>
     )
   }
