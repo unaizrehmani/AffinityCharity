@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
+import { SECONDARY_COLOR } from '../styles/constants';
 
 
 export default class Cause extends Component {
@@ -19,17 +20,17 @@ const styles = props =>
   StyleSheet.create({
     button: {
       display: 'flex',
-      height: 48,
-      width: props.isLarge ? 295 : 155,
-      backgroundColor: props.isPrimary ? PRIMARY_ACCENT_COLOR : SECONDARY_COLOR,
+      flexDirection: 'row',
+      height: 170,
+      width: '95%',
+      backgroundColor: SECONDARY_COLOR,
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 3 },
-      shadowOpacity: 0.2,
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 1,
       shadowRadius: 6,
       borderRadius: 24,
       elevation: 1,
-      marginBottom: 10,
-      marginTop: 10,
+      marginBottom: 5,
       justifyContent: 'center',
       alignItems: 'center'
     },
