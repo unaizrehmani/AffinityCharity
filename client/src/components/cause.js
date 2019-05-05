@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-import { SECONDARY_COLOR } from '../styles/constants';
+import { SECONDARY_COLOR, PRIMARY_COLOR, PRIMARY_ACCENT_COLOR, SUB_HEADING_FONT_SIZE } from '../styles/constants';
 
 
 export default class Cause extends Component {
@@ -14,9 +14,12 @@ export default class Cause extends Component {
       <TouchableOpacity style={styles.card}>
           <Image 
             style={styles.image}
-            source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}/>
+            source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}/>
         <View style={styles.textWrapper}>
-            <Text>HELLO</Text>
+            <Text style={styles.title}>Jane Doe</Text>
+            <View style={styles.circleButton}>
+
+            </View>
         </View>
       </TouchableOpacity>
     )
@@ -42,14 +45,21 @@ const styles = StyleSheet.create({
     },
     textWrapper:{
         display: 'flex',
-        width: '35%',
+        width: '40%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
-    text: {
-      textTransform: 'uppercase',
-      fontWeight: 'bold',
+    title: {
+      color: PRIMARY_COLOR,
+      fontSize: SUB_HEADING_FONT_SIZE,
+    },
+    circleButton: {
+        height: 40,
+        width: 40,
+        marginTop: 10,
+        borderRadius: 20,
+        backgroundColor: PRIMARY_ACCENT_COLOR,
     }
   })
 
