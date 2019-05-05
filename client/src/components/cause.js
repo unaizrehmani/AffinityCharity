@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { SECONDARY_COLOR, PRIMARY_COLOR, PRIMARY_ACCENT_COLOR, SUB_HEADING_FONT_SIZE } from '../styles/constants';
+import { Icon } from 'react-native-elements';
 
 
 export default class Cause extends Component {
@@ -18,7 +19,7 @@ export default class Cause extends Component {
         <View style={styles.textWrapper}>
             <Text style={styles.title}>Jane Doe</Text>
             <View style={styles.circleButton}>
-
+                
             </View>
         </View>
       </TouchableOpacity>
