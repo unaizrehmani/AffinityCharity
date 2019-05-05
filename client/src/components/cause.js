@@ -19,7 +19,12 @@ export default class Cause extends Component {
         <View style={styles.textWrapper}>
             <Text style={styles.title}>Jane Doe</Text>
             <View style={styles.circleButton}>
-                
+                <Icon
+                    name='ios-arrow-round-forward'
+                    type='ionicon'
+                    size={20}
+                    color={SECONDARY_COLOR}
+                    />
             </View>
         </View>
       </TouchableOpacity>
@@ -56,6 +61,9 @@ const styles = StyleSheet.create({
       fontSize: SUB_HEADING_FONT_SIZE,
     },
     circleButton: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: 40,
         width: 40,
         marginTop: 10,
