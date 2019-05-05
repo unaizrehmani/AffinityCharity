@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { SECONDARY_COLOR } from '../styles/constants';
 
@@ -15,7 +15,9 @@ export default class Cause extends Component {
           <Image 
             style={styles.image}
             source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}/>
-          <Text>HELLO</Text>
+        <View style={styles.textWrapper}>
+            <Text>HELLO</Text>
+        </View>
       </TouchableOpacity>
     )
   }
@@ -33,12 +35,17 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.2,
       elevation: 1,
       marginBottom: 5,
-      justifyContent: 'center',
-      alignItems: 'center'
     },
     image:{
         height: '100%',
         width: '60%',
+    },
+    textWrapper:{
+        display: 'flex',
+        width: '35%',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     text: {
       textTransform: 'uppercase',
