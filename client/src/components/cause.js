@@ -15,14 +15,14 @@ export default class Cause extends Component {
       <TouchableOpacity style={styles.card}>
           <Image 
             style={styles.image}
-            source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}/>
+            source={{uri: this.props.image}}/>
         <View style={styles.textWrapper}>
-            <Text style={styles.title}>Jane Doe</Text>
+            <Text style={styles.title}>{this.props.title}</Text>
             <View style={styles.circleButton}>
                 <Icon
                     name='ios-arrow-round-forward'
                     type='ionicon'
-                    size={20}
+                    size={30}
                     color={SECONDARY_COLOR}
                     />
             </View>
@@ -72,15 +72,9 @@ const styles = StyleSheet.create({
     }
   })
 
-Cause.defaultProps = {
-  isPrimary: true,
-  isLarge: false
-}
 
 Cause.propTypes = {
-  name: PropTypes.string,
-  text: PropTypes.string,
-  isPrimary: PropTypes.bool,
-  isLarge: PropTypes.bool,
-  onPress: PropTypes.func
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
 }

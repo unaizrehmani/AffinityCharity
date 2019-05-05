@@ -27,7 +27,7 @@ export default class SignUpScreen extends Component {
           Policy.
         </Text>
         <Button text="Sign Up" isLarge={true} />
-        <Cause/>
+        <Cause title="Jane Doe" image="https://facebook.github.io/react-native/docs/assets/favicon.png"/>
       </View>
     )
   }
