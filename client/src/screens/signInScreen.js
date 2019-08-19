@@ -4,6 +4,7 @@ import Input from '../components/input'
 import Banner from '../components/banner'
 import Button from '../components/button'
 import Seperator from '../components/seperator'
+import Cause from '../components/cause'
 
 import logo from '../assets/logo.png'
 
