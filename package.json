@@ -27,6 +27,6 @@
   "homepage": "https://github.com/unaizrehmani/Affinity#readme",
   "devDependencies": {},
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.2"
   }
 }
