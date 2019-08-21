@@ -3,8 +3,7 @@ import { StyleSheet, View, Image, StatusBar } from 'react-native'
 import Input from '../components/input'
 import Banner from '../components/banner'
 import Button from '../components/button'
-import Seperator from '../components/seperator'
-import Cause from '../components/cause'
+import Separator from '../components/separator'
 
 import logo from '../assets/logo.png'
 
@@ -60,7 +59,7 @@ export default class SignInScreen extends Component {
             isPrimary={false}
             onPress={this.handleButtonPress}
           />
-          <Seperator />
+          <Separator />
           <Button
             name="signup"
             text="Sign Up"
