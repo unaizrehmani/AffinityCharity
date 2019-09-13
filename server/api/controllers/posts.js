@@ -35,7 +35,7 @@ exports.insertPost = async (req, res, next) => {
 
     // update relevant Profiles
     for (let i = 0; i < post.tagged.length; i++) {
-      let profileID = post.tagged[i];
+      const profileID = post.tagged[i];
       await Profile.findByIdAndUpdate(
         profileID,
         { $push: { taggedPosts: result._id } },
@@ -64,7 +64,7 @@ exports.insertPost = async (req, res, next) => {
  */
 exports.getPostByID = async (req, res, next) => {
   try {
-    let id = req.params.postID;
+    const id = req.params.postID;
     const post = await Post.findById(id)
       .populate('tagged')
       .populate('author');

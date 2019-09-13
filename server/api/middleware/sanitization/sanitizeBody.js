@@ -9,10 +9,10 @@ const sanitize = sourceString => {
 };
 
 const stripTags = payload => {
-  let attributes = {
+  const attributes = {
     ...payload
   };
-  for (let key in attributes) {
+  for (const key in attributes) {
     if (attributes[key] instanceof Array) {
       attributes[key] = attributes[key].map(element => {
         return typeof element === 'string'

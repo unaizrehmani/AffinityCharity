@@ -23,7 +23,7 @@ exports.insertAgent = async (req, res, next) => {
     const agent = await new Agent(req.body);
     agent.createdDate = new Date();
     agent.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    let count = await Agent.findOne({
+    const count = await Agent.findOne({
       email: agent.email
     }).countDocuments();
     if (req.files.image && count === 0) {
@@ -57,7 +57,7 @@ exports.insertAgent = async (req, res, next) => {
  */
 exports.getAgentByID = async (req, res, next) => {
   try {
-    let id = req.params.agentID;
+    const id = req.params.agentID;
     const agent = await Agent.findById(id)
       .populate({
         path: 'posts',

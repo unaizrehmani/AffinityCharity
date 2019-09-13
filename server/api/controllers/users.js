@@ -22,7 +22,7 @@ exports.insertUser = async (req, res, next) => {
     const user = await new User(req.body);
     user.createdDate = new Date();
     user.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    let count = await User.findOne({
+    const count = await User.findOne({
       email: user.email
     }).countDocuments();
     if (req.files.image && count === 0) {
@@ -59,7 +59,7 @@ exports.insertUser = async (req, res, next) => {
  */
 exports.getUserByID = async (req, res, next) => {
   try {
-    let id = req.params.userID;
+    const id = req.params.userID;
     const user = await User.findById(id);
     res.status(200).send(user);
   } catch (error) {
