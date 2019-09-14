@@ -1,43 +1,26 @@
-import React, { Component } from 'react'
-import { createAppContainer, createStackNavigator } from 'react-navigation'
-import SignInScreen from './screens/signInScreen'
-import SignUpScreen from './screens/signUpScreen'
-import {
-  SECONDARY_COLOR,
-  PRIMARY_ACCENT_COLOR,
-  PRIMARY_COLOR,
-  SUB_HEADING_FONT_SIZE
-} from './styles/constants'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-const AppNavigator = createStackNavigator(
-  {
-    SignIn: {
-      screen: SignInScreen
-    },
-    SignUp: {
-      screen: SignUpScreen
-    }
-  },
-  {
-    initialRouteName: 'SignIn',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: SECONDARY_COLOR
-      },
-      headerTintColor: PRIMARY_ACCENT_COLOR,
-      headerTitleStyle: {
-        fontSize: SUB_HEADING_FONT_SIZE,
-        color: PRIMARY_COLOR
-      },
-      headerBackTitle: null
-    }
-  }
-)
-
-const AppContainer = createAppContainer(AppNavigator)
-
-export default class App extends Component {
-  render() {
-    return <AppContainer />
-  }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
+
+export default App;
