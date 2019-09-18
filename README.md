@@ -37,7 +37,12 @@ Our wiki for this project can be found [here.](https://github.com/unaizrehmani/s
 ## API Documentation
 All of our documentation for using the API can be found [here.](https://github.com/unaizrehmani/social-charity/wiki/API-Documentation)
 
-## Testing
+## QA
+### Technologies
+#### SonarQube
+We decided to use SonarQube to help us with the quality of our project. We are using it locally as it costs money to have it hosted. SonarQube allows us to view a variety of metrics for the quality of our code such as code coverage, code smells and more. You can find an example of the dashboard of SonarQube [here.](https://github.com/unaizrehmani/Affinity/wiki/Quality-Assurance)
+
+### Testing
 To execute the set of tests run `npm test` inside the main directory.
 To ensure code written adheres to code style standards run `npm run lint` inside the main directory.
 To fix code written to `npm run lint` standards, run `npm run lint:fix` inside the main directory.
