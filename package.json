@@ -27,6 +27,7 @@
   "homepage": "https://github.com/unaizrehmani/Affinity#readme",
   "devDependencies": {},
   "dependencies": {
-    "concurrently": "^4.1.2"
+    "concurrently": "^4.1.2",
+    "react-router-dom": "^5.0.1"
   }
 }
