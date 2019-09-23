@@ -8,7 +8,7 @@ import {
 	BrowserRouter as Router,
 	Switch
 } from 'react-router-dom';
-import './index.css';
+import './stylesheets/index.css';
 import App from './App';
 import Login from './containers/login';
 import NotFound from './components/notfound';
