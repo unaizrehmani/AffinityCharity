@@ -99,7 +99,7 @@ class Login extends React.Component {
 						onChange={this.handleUserInput}
 					/>
 				</div>
-				<button onClick={this.onSubmit}>Sign In</button>
+				<button onClick={this.onSubmit}>Login</button>
 			</form>
 		);
 	}
