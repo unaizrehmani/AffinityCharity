@@ -6,12 +6,8 @@ node_js:
 install:
   - npm ci
 
-before_script:
-  - npm install
-
 script:
   - npm run lint
-  - npm run test:server
 
 notifications:
   email: false
