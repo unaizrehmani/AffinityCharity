@@ -8,6 +8,7 @@
     "eslint-plugin-react": "^7.14.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-email-editor": "^1.0.0",
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "prettier-eslint '**/*.js' --write"
   },
   "eslintConfig": {
     "extends": "react-app"
