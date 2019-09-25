@@ -3,13 +3,12 @@ import styled from 'styled-components';
 
 const CauseCardContainer = styled.div`
     display: flex;
-    flex-direction: row;
+    margin: 0 10px;
+    flex-direction: column;
     align-items: center;
-    text-align: center;
-    justify-content: center
-
-    height: 400px;
-    width: 300px;
+    border-radius: 10px;
+    height: 300px;
+    width: 200px;
     -webkit-box-shadow: 0px 0px 3px 0px rgba(173,173,173,1);
     -moz-box-shadow: 0px 0px 3px 0px rgba(173,173,173,1);
     box-shadow: 0px 0px 3px 0px rgba(173,173,173,1); 
@@ -19,14 +18,28 @@ const CauseCardContainer = styled.div`
     -webkit-transition: box-shadow 0.2s linear;
     -moz-transition: box-shadow 0.2s linear;
     &:hover{
-      -webkit-box-shadow: -5px 10px 35px 0px rgba(173,173,173,1);
-      -moz-box-shadow: -5px 10px 35px 0px rgba(173,173,173,1);
-      box-shadow: -5px 10px 35px 0px rgba(173,173,173,1);
+      -webkit-box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
+      -moz-box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
+      box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
     }
 `;
 
+const CauseImageContainer = styled.div`
+    display: flex;
+    height: 225px;
+    width: 200px;
+    justify-content: center;
+    border: 1px solid black;
+    overflow: hidden;
+`;
 
+const CauseImage = styled.img`
+    object-fit: cover;
+`;
 
+const CauseTitle = styled.p`
+
+`;
 
 class CauseCard extends React.Component {
 	constructor(props) {
@@ -38,7 +51,10 @@ class CauseCard extends React.Component {
 	render() {
 		return (
 			<CauseCardContainer>
-                
+                <CauseImageContainer>
+                    <CauseImage/>
+                </CauseImageContainer>
+                <CauseTitle>Jane Doe</CauseTitle>
             </CauseCardContainer>
 		);
 	}

@@ -28,7 +28,7 @@ class HomePage extends React.Component {
     componentDidMount() {
         setInterval( () => {
           this.setState({
-            curTime : new Date().toLocaleString()
+            curTime : new Date().toLocaleTimeString()
           })
         },1000)
       }
@@ -39,6 +39,7 @@ class HomePage extends React.Component {
                 <h1>{this.state.curTime}</h1>
                 <h2>Good Afternoon, Pasoon Azimi</h2> 
                 <CausesContainer>
+                    <CauseCard/>
                     <CauseCard/>
                     <CauseCard/>
                     <CauseCard/>
