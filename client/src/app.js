@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import HomePage from './containers/homePage';
 
 function App() {
 	return (
 		<div className='App'>
-			<h1>Home</h1>
+			<HomePage/>
 		</div>
 	);
 }

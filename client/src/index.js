@@ -9,7 +9,7 @@ import {
 	Switch
 } from 'react-router-dom';
 import './stylesheets/index.css';
-import App from './App';
+import App from './app';
 import Login from './containers/login';
 import NotFound from './components/notfound';
 
