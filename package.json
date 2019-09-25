@@ -4,11 +4,11 @@
   "description": "[![Build Status](https://travis-ci.com/unaizrehmani/Affinity.svg?token=Q7Wd6fhF4oB36AqRbyxc&branch=master)](https://travis-ci.com/unaizrehmani/Affinity)",
   "main": "index.js",
   "scripts": {
-    "install": "concurrently \"npm run install:server\" \"npm run install:client\" ",
+    "install": "concurrently \"npm run install:server\" \"npm run install:client\"",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
     "lint:server": "cd server && npm run lint",
-    "start": "concurrently \"npm run start:server\"",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start",
     "test": "concurrently \"npm run test:server\" \"npm run test:client\"",
