@@ -1,10 +1,6 @@
 import React from 'react'
 import { FormErrors } from '../components/formErrors'
 class LoginPage extends React.Component {
-  onSubmit = () => {
-    // this.props.history.push('/home')
-    alert('Submitted Successfully!')
-  }
   constructor(props) {
     super(props)
     this.state = {
