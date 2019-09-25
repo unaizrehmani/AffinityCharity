@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-class EmailEditor extends Component {
+import EmailEditor from 'react-email-editor';
+class Emailer extends Component {
     render = () => {
 		return (
 		<div>
@@ -23,4 +23,4 @@ class EmailEditor extends Component {
     }
 }
 
-export default EmailEditor;
+export default Emailer;

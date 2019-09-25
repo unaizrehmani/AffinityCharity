@@ -3,17 +3,17 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoginPage from './containers/loginPage'
 import NotFound from './containers/notFoundPage'
-import EmailEditor from './containers/emailEditor'
+import Emailer from './containers/emailEditor'
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
+	  	<Switch>
           <Route exact path='/' component={LoginPage} />
-		  <Route expact path='/emailEditor' component={EmailEditor} />
+		  <Route exact path='/emailEditor' component={Emailer} />
           <Route component={NotFound} />
-        </Switch>
+		</Switch>
       </Router>
     )
   }
