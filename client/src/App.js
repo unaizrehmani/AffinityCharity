@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import EmailEditor from 'react-email-editor';
+import React, { Component } from 'react'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import LoginPage from './containers/loginPage'
+import NotFound from './containers/notFoundPage'
+import EmailEditor from './containers/emailEditor'
 
 class App extends Component {
-	render = () => {
-		return (
-		<div>
-			<h1>hello world</h1>
-			<div>
-				<button onClick={this.exportHtml}>Export HTML</button>
-			</div>
-
-			<EmailEditor
-				ref={editor => this.editor = editor}
-			/>
-		</div>);
-	}
-
-	exportHtml = () => {
-		this.editor.exportHtml(data => {
-		  const { design, html } = data
-		  console.log('exportHtml', html)
-		})
-	  }
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path='/' component={LoginPage} />
+		  <Route expact path='/emailEditor' component={EmailEditor} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    )
+  }
 }
 const mapStateToProps = state => {
-	return {
-		isLoggedIn: state.authentication.isLoggedIn
-	};
-};
+  return {
+    isLoggedIn: state.authentication.isLoggedIn
+  }
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)
