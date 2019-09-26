@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import LoginPage from "./containers/loginPage";
 import NotFound from "./containers/notFoundPage";
 import Emailer from "./containers/emailEditor";
-import HomePage from './containers/homePage';
+import HomePage from "./containers/homePage";
 
 class App extends Component {
   render() {
