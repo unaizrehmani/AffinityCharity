@@ -1,5 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
 import { FormErrors } from '../components/formErrors'
+import colors from '../styles/colors'
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props)
@@ -60,45 +63,62 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <form className='loginForm'>
-        <h2>Sign In</h2>
-        <div className='panel panel-default'>
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
-        <div
-          className={`form-group ${this.errorClass(
-            this.state.formErrors.email
-          )}`}
-        >
-          <label htmlFor='email'>Email address</label>
-          <input
-            type='email'
-            required
-            className='form-control'
-            name='email'
-            placeholder='Email'
-            value={this.state.email}
-            onChange={this.handleUserInput}
-          />
-        </div>
-        <div
-          className={`form-group ${this.errorClass(
-            this.state.formErrors.password
-          )}`}
-        >
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            className='form-control'
-            name='password'
-            placeholder='Password'
-            value={this.state.password}
-            onChange={this.handleUserInput}
-          />
-        </div>
-        <button onClick={this.onSubmit}>Login</button>
-      </form>
+      <StyledLoginPage>
+        <LoginForm>
+          <h1>Sign In</h1>
+          <div className='panel panel-default'>
+            <FormErrors formErrors={this.state.formErrors} />
+          </div>
+          <div
+            className={`form-group ${this.errorClass(
+              this.state.formErrors.email
+            )}`}
+          >
+            <label htmlFor='email'>Email address</label>
+            <input
+              type='email'
+              required
+              className='form-control'
+              name='email'
+              placeholder='Email'
+              value={this.state.email}
+              onChange={this.handleUserInput}
+            />
+          </div>
+          <div
+            className={`form-group ${this.errorClass(
+              this.state.formErrors.password
+            )}`}
+          >
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              className='form-control'
+              name='password'
+              placeholder='Password'
+              value={this.state.password}
+              onChange={this.handleUserInput}
+            />
+          </div>
+          <button onClick={this.onSubmit}>Login</button>
+        </LoginForm>
+      </StyledLoginPage>
     )
   }
 }
+
+const LoginForm = styled.form`
+  padding: 50px;
+  width: 300px;
+  border: 1px solid primary;
+  background-color: ${colors.secondary};
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+`
+
+const StyledLoginPage = styled.div`
+  display: flex;
+`
+
 export default LoginPage
