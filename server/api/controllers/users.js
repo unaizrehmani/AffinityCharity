@@ -8,6 +8,7 @@ const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/users`;
  * POST /api/users route to save a new user.
  *
  * REQ.BODY:
+ * @param {boolean} isAdmin
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} email
@@ -86,6 +87,7 @@ exports.getAllUsers = async (req, res, next) => {
  * @param {number} userID
  *
  * REQ.BODY
+ * @param {boolean} isAdmin
  * @param {string} firstName
  * @param {string} lastName
  * @param {string} email
