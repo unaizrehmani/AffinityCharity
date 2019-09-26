@@ -11,7 +11,14 @@ exports.authToken = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.authenticate(email, password);
-    res.send(user.generateAuthToken());
+    const userResult = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: user.generateAuthToken()
+    };
+    res.send(userResult);
   } catch (error) {
     res.send(error);
   }
