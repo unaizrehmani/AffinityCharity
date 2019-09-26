@@ -17,7 +17,7 @@ exports.authToken = async (req, res, next) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: user.generateAuthToken()
-    }
+    };
     res.send(userResult);
   } catch (error) {
     res.send(error);
