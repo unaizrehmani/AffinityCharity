@@ -4,14 +4,10 @@ node_js:
   - node
 
 install:
-  - npm ci
-
-before_script:
   - npm install
 
 script:
-  - npm run lint:server
-  - npm run test:server
+  - npm run lint
 
 notifications:
   email: false

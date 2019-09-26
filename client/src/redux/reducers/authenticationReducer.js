@@ -1,7 +1,7 @@
-import { LOGIN_USER } from '../actions/authentication'
+import { LOGIN_USER } from "../actions/authentication";
 
-const authenticationReducer = function(
-  state = { isLoggedIn: false, username: undefined },
+const authenticationReducer = function (
+  state = { isLoggedIn: false, user: undefined },
   { type, payload }
 ) {
   switch (type) {
@@ -10,12 +10,13 @@ const authenticationReducer = function(
         ...state,
         ...{
           isLoggedIn: true,
-          user: payload.username
+          user: payload.username,
+          userToken: payload.token
         }
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default authenticationReducer
+export default authenticationReducer;

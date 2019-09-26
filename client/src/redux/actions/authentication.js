@@ -1,13 +1,13 @@
 // Types
-export const LOGIN_USER = 'LOGIN_USER';
+export const LOGIN_USER = "LOGIN_USER";
 
 // Action Creators
-export function loginUser(username, password) {
-    return {
-      type: LOGIN_USER,
-      payload: {
-        username: username,
-        password: password
-      }
+export function loginUser(username, token) {
+  return {
+    type: LOGIN_USER,
+    payload: {
+      username: username,
+      token
     }
-  }
+  };
+}
