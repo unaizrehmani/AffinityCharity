@@ -17,19 +17,23 @@ class Emailer extends Component {
   exportHtml = () => {
     this.editor.exportHtml(data => {
       const html = `${String(data.html)}`;
-      axios.post('https://social-charity-server.herokuapp.com/api/email/send-email', 
-      html, 
-      {
-        headers: {
-          "Content-Type": "text/plain"
-        }
-      }).then(
-        res => {
+      const email = "unaizrehmani@gmail.com";
+      const subject = "Shefali Jain";
+      axios
+        .post(
+          "https://social-charity-server.herokuapp.com/api/email/send-email",
+          {
+            email,
+            html,
+            subject
+          }
+        )
+        .then(res => {
           console.log(res);
-        }
-      ).catch(err => {
-        console.log(err);
-      });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
   };
 }
