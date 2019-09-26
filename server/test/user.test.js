@@ -7,6 +7,7 @@ describe('Test Users API', () => {
   let token = '';
   let userID = '';
   const form = {
+    isAdmin: true,
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'test@email.com',
@@ -28,6 +29,7 @@ describe('Test Users API', () => {
   it('POST /api/users without image', async () => {
     const { body } = await request(app)
       .post('/api/users')
+      .field('isAdmin', form.isAdmin)
       .field('firstName', form.firstName)
       .field('lastName', form.lastName)
       .field('email', form.email)
@@ -46,14 +48,20 @@ describe('Test Users API', () => {
     userID = body._id;
 
     expect(body).to.have.own.property(
+      true,
+      body.isAdmin,
+      'created user does not have property isAdmin'
+    );
+
+    expect(body).to.have.own.property(
       'firstName',
       body.firstName,
-      'created user does not have property _id'
+      'created user does not have property firstName'
     );
     expect(body).to.have.own.property(
       'lastName',
       body.lastName,
-      'created user does not have property _id'
+      'created user does not have property lastName'
     );
     expect(body).to.have.own.property(
       'email',
@@ -89,10 +97,10 @@ describe('Test Users API', () => {
   });
 
   // TODO: implement GET /api/users/:userID test
-  it('GET /api/users/:userID', async () => {});
+  it('GET /api/users/:userID', async () => { });
 
   // TODO: implement PATCH /api/users test
-  it('PATCH /api/users/:userID', async () => {});
+  it('PATCH /api/users/:userID', async () => { });
 
   // TODO: implement DELETE /api/users/:userID test
   it('DELETE /api/users/:userID', async () => {
@@ -111,14 +119,19 @@ describe('Test Users API', () => {
         'created user does not have property _id'
       );
       expect(body).to.have.own.property(
+        true,
+        body.isAdmin,
+        'created user does not have property isAdmin'
+      );
+      expect(body).to.have.own.property(
         'firstName',
         body.firstName,
-        'created user does not have property _id'
+        'created user does not have property firstName'
       );
       expect(body).to.have.own.property(
         'lastName',
         body.lastName,
-        'created user does not have property _id'
+        'created user does not have property lastName'
       );
       expect(body).to.have.own.property(
         'email',
@@ -146,5 +159,5 @@ describe('Test Users API', () => {
     }
   });
 
-  after(() => {});
+  after(() => { });
 });
