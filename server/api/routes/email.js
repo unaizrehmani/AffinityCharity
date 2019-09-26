@@ -14,8 +14,8 @@ router.post('/send-email', (req, res, next) => {
   });
   const mailOptions = {
     to: 'unaizrehmani@gmail.com',
-    subject: 'Hello ',
-    text: 'Hello world ',
+    subject: 'Test',
+    text: 'Default text',
     html: `${req.body}`
   };
   transporter.sendMail(mailOptions, (error, info) => {
