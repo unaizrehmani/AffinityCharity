@@ -1,62 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const CauseCardContainer = styled.div`
-    display: flex;
-    margin: 0 10px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    height: 300px;
-    width: 200px;
-    -webkit-box-shadow: 0px 0px 3px 0px rgba(173,173,173,1);
-    -moz-box-shadow: 0px 0px 3px 0px rgba(173,173,173,1);
-    box-shadow: 0px 0px 3px 0px rgba(173,173,173,1); 
-    position: relative;
-    cursor: pointer;
-    transition: box-shadow 0.2s linear;
-    -webkit-transition: box-shadow 0.2s linear;
-    -moz-transition: box-shadow 0.2s linear;
-    &:hover{
-      -webkit-box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
-      -moz-box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
-      box-shadow: 0px 5px 25px 0px rgba(173,173,173,1);
-    }
-`;
-
-const CauseImageContainer = styled.div`
-    display: flex;
-    height: 225px;
-    width: 200px;
-    justify-content: center;
-    border: 1px solid black;
-    overflow: hidden;
-`;
-
-const CauseImage = styled.img`
-    object-fit: cover;
-`;
-
-const CauseTitle = styled.p`
-
-`;
+import React from "react";
+import styled from "styled-components";
+import { Card, Icon, Image } from "semantic-ui-react";
 
 class CauseCard extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-		};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-	render() {
-		return (
-			<CauseCardContainer>
-                <CauseImageContainer>
-                    <CauseImage/>
-                </CauseImageContainer>
-                <CauseTitle>Jane Doe</CauseTitle>
-            </CauseCardContainer>
-		);
-	}
+  render() {
+    return (
+      <Card>
+        <Image src="/images/avatar/large/matthew.png" wrapped ui={false} />
+        <Card.Content>
+          <Card.Header>Matthew</Card.Header>
+          <Card.Meta>
+            <span className="date">Joined in 2015</span>
+          </Card.Meta>
+          <Card.Description>
+            Matthew is a musician living in Nashville.
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <a>
+            <Icon name="user" />
+            22 Friends
+          </a>
+        </Card.Content>
+      </Card>
+    );
+  }
 }
 export default CauseCard;
