@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(bodyParser.text());
+app.use(bodyParser.text({ type: 'text/html' }));
 app.use(cors());
 
 // ROUTES
