@@ -1,4 +1,4 @@
-import { LOGIN_USER } from '../actions/authentication'
+import { LOGIN_USER } from "../actions/authentication";
 
 const authenticationReducer = function(
   state = { isLoggedIn: false, username: undefined },
@@ -12,10 +12,10 @@ const authenticationReducer = function(
           isLoggedIn: true,
           user: payload.username
         }
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default authenticationReducer
+export default authenticationReducer;
