@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import LoginPage from "./containers/loginPage";
 import NotFound from "./containers/notFoundPage";
 import Emailer from "./containers/emailEditor";
+import HomePage from './containers/homePage';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/emailEditor" component={Emailer} />
+          <Route exact path="/home" component={HomePage} />
           <Route component={NotFound} />
         </Switch>
       </Router>
