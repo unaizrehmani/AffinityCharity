@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import EmailEditor from "react-email-editor";
-import axios from 'axios';
+import axios from "axios";
 class Emailer extends Component {
   render = () => {
     return (
