@@ -10,7 +10,8 @@ const authenticationReducer = function(
         ...state,
         ...{
           isLoggedIn: true,
-          user: payload.username
+          user: payload.username,
+          userToken: payload.token
         }
       };
     default:

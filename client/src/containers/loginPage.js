@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/authentication";
 import { FormErrors } from "../components/formErrors";
+const axios = require("axios").default;
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +15,25 @@ class LoginPage extends React.Component {
       formValid: false
     };
   }
+
+  onSubmit = e => {
+    e.preventDefault();
+    axios
+      .post(
+        "https://social-charity-server.herokuapp.com/api/auth/token",
+        {
+          email: this.state.email,
+          password: this.state.password
+        },
+        { "Content-Type": "application/json" }
+      )
+      .then(response => {
+        this.props.dispatch(loginUser(this.state.email, response.data));
+      })
+      .catch(error => {
+        console.log("error " + error);
+      });
+  };
 
   handleUserInput = e => {
     const name = e.target.name;
@@ -101,4 +123,9 @@ class LoginPage extends React.Component {
     );
   }
 }
-export default LoginPage;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.authentication.isLoggedIn
+  };
+};
+export default connect(mapStateToProps)(LoginPage);
