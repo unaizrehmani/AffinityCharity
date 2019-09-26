@@ -4,6 +4,8 @@ import { FormErrors } from "../components/formErrors";
 import colors from "../styles/colors";
 import { loginUser } from "../redux/actions/authentication";
 import axios from "axios";
+import { connect } from "react-redux";
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ class LoginPage extends React.Component {
         { "Content-Type": "application/json" }
       )
       .then(response => {
-        this.props.dispatch(loginUser(this.state.email, response.data));
+        this.props.dispatch(loginUser(response.data));
       })
       .catch(error => {
         console.log("error " + error);
@@ -141,4 +143,4 @@ const StyledLoginPage = styled.div`
   display: flex;
 `;
 
-export default LoginPage;
+export default connect()(LoginPage);
