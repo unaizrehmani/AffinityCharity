@@ -17,8 +17,13 @@ class Emailer extends Component {
   exportHtml = () => {
     this.editor.exportHtml(data => {
       const { html } = data;
-      console.log("exportHtml", html);
-      
+      axios.post('https://social-charity-server.herokuapp.com/api/email/send-email', html).then(
+        res => {
+          console.log(res);
+        }
+      ).catch(err => {
+        console.log(err);
+      });
     });
   };
 }
