@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { FormErrors } from '../components/formErrors'
 import colors from '../styles/colors'
-
+import { loginUser } from '../redux/actions/authentication'
+import axios from 'axios'
 class LoginPage extends React.Component {
   constructor(props) {
     super(props)
@@ -14,6 +15,25 @@ class LoginPage extends React.Component {
       passwordValid: false,
       formValid: false
     }
+  }
+
+  onSubmit = e => {
+    e.preventDefault()
+    axios
+      .post(
+        'https://social-charity-server.herokuapp.com/api/auth/token',
+        {
+          email: this.state.email,
+          password: this.state.password
+        },
+        { 'Content-Type': 'application/json' }
+      )
+      .then(response => {
+        this.props.dispatch(loginUser(this.state.email, response.data))
+      })
+      .catch(error => {
+        console.log('error ' + error)
+      })
   }
 
   handleUserInput = e => {
