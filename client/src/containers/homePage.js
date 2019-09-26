@@ -39,8 +39,6 @@ class HomePage extends React.Component {
         <CausesContainer>
           <CauseCard />
           <CauseCard />
-          <CauseCard />
-          <CauseCard />
         </CausesContainer>
       </HomePageContainer>
     );
