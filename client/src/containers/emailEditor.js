@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import EmailEditor from "react-email-editor";
+import axios from 'axios';
 class Emailer extends Component {
   render = () => {
     return (
       <div>
-        <h1>hello world</h1>
         <div>
           <button onClick={this.exportHtml}>Export HTML</button>
         </div>
@@ -18,6 +18,7 @@ class Emailer extends Component {
     this.editor.exportHtml(data => {
       const { html } = data;
       console.log("exportHtml", html);
+      
     });
   };
 }
