@@ -139,6 +139,7 @@ const LoginForm = styled.form`
 
 const StyledLoginPage = styled.div`
   display: flex;
+  justify-content: center;
 `
 
 export default LoginPage
