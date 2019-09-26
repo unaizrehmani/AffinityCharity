@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 exports.sendEmail = (req, res, next) => {
   const user = process.env.CLIENT_EMAIL;
   const pass = process.env.CLIENT_PASSWORD;
+  const { email, subject, html } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
@@ -11,10 +12,10 @@ exports.sendEmail = (req, res, next) => {
     }
   });
   const mailOptions = {
-    to: 'unaizrehmani@gmail.com',
-    subject: 'Test',
-    text: 'Default text',
-    html: `${req.body}`
+    to: email,
+    subject: subject,
+    text: 'Trouble viewing this email?',
+    html: `${html}`
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
