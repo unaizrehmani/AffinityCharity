@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FormErrors } from '../components/formErrors'
-import colors from '../styles/colors'
-import { loginUser } from '../redux/actions/authentication'
+import { Input } from 'semantic-ui-react'
 import axios from 'axios'
+import Button from '../components/button'
+import AffinityLogo from '../images/logo.svg'
+import colors from '../styles/colors'
+import { FormErrors } from '../components/formErrors'
+import { loginUser } from '../redux/actions/authentication'
 class LoginPage extends React.Component {
   constructor(props) {
     super(props)
@@ -44,7 +47,7 @@ class LoginPage extends React.Component {
     })
   }
 
-  validateField(fieldName, value) {
+  validateField = (fieldName, value) => {
     let fieldValidationErrors = this.state.formErrors
     let emailValid = this.state.emailValid
     let passwordValid = this.state.passwordValid
@@ -71,75 +74,102 @@ class LoginPage extends React.Component {
     )
   }
 
-  validateForm() {
+  validateForm = () => {
     this.setState({
       formValid: this.state.emailValid && this.state.passwordValid
     })
   }
 
-  errorClass(error) {
+  errorClass = error => {
     return error.length === 0 ? '' : 'has-error'
   }
 
   render() {
     return (
       <StyledLoginPage>
+        <Banner>
+          <img width={300} src={AffinityLogo} />
+          <h1>Welcome to Affinity</h1>
+        </Banner>
         <LoginForm>
-          <h1>Sign In</h1>
-          <div className='panel panel-default'>
-            <FormErrors formErrors={this.state.formErrors} />
-          </div>
-          <div
-            className={`form-group ${this.errorClass(
-              this.state.formErrors.email
-            )}`}
-          >
-            <label htmlFor='email'>Email address</label>
-            <input
+          {/* <FormErrors formErrors={this.state.formErrors} /> */}
+          <Form>
+            <FormInput
               type='email'
               required
-              className='form-control'
               name='email'
-              placeholder='Email'
               value={this.state.email}
               onChange={this.handleUserInput}
+              label='Email'
+              placeholder='john.doe@email.com'
             />
-          </div>
-          <div
-            className={`form-group ${this.errorClass(
-              this.state.formErrors.password
-            )}`}
-          >
-            <label htmlFor='password'>Password</label>
-            <input
+            <FormInput
               type='password'
               className='form-control'
               name='password'
               placeholder='Password'
               value={this.state.password}
               onChange={this.handleUserInput}
+              label='Password'
             />
-          </div>
-          <button onClick={this.onSubmit}>Login</button>
+          </Form>
+          <ButtonPrompts>
+            <Button title='Sign In' primary />
+            <Button title='Forgot Password' primary={false} />
+          </ButtonPrompts>
         </LoginForm>
       </StyledLoginPage>
     )
   }
 }
 
-const LoginForm = styled.form`
-  padding: 50px;
-  width: 300px;
-  border: 1px solid primary;
-  background-color: ${colors.secondary};
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-`
-
 const StyledLoginPage = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`
+
+const Banner = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10vh;
+  margin-bottom: 20px;
+`
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  background: ${colors.secondary};
+`
+
+const ButtonPrompts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`
+
+const Form = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`
+const FormInput = styled(Input)`
+  input {
+    width: 220px;
+  }
+  .label {
+    width: 100px;
+  }
+  margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `
 
 export default LoginPage
