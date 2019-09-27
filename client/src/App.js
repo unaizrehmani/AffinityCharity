@@ -10,6 +10,7 @@ import LoginPage from "./containers/loginPage";
 import NotFound from "./containers/notFoundPage";
 import Emailer from "./containers/emailEditor";
 import HomePage from "./containers/homePage";
+import { PrivateRoute } from "./components/privateRoute";
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
           </ul>
           <hr />
           <Switch>
+            {/* Change routes to "PrivateRoute" where needed when auth is finished */}
             <Route exact path="/" component={HomePage} />
             <Route exact path="/emailEditor" component={Emailer} />
             <Route exact path="/login" component={LoginPage} />
