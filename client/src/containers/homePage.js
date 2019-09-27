@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CauseCard from "../components/causeCard";
+import { connect } from "react-redux";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -18,24 +19,12 @@ const CausesContainer = styled.div`
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      curTime: null
-    };
-  }
-
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        curTime: new Date().toLocaleTimeString()
-      });
-    }, 1000);
   }
 
   render() {
     return (
       <HomePageContainer>
-        <h1>{this.state.curTime}</h1>
-        <h2>Good Afternoon, User</h2>
+        <h2>Good Afternoon, {this.props.session.firstName + ' ' + this.props.session.lastName}</h2>
         <CausesContainer>
           <CauseCard />
           <CauseCard />
@@ -46,4 +35,10 @@ class HomePage extends React.Component {
     );
   }
 }
-export default HomePage;
+// export default HomePage;
+const mapStateToProps = state => {
+  return {
+    session: state.authentication
+  };
+};
+export default connect(mapStateToProps)(HomePage);
