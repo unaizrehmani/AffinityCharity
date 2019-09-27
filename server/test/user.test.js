@@ -97,10 +97,10 @@ describe('Test Users API', () => {
   });
 
   // TODO: implement GET /api/users/:userID test
-  it('GET /api/users/:userID', async () => { });
+  it('GET /api/users/:userID', async () => {});
 
   // TODO: implement PATCH /api/users test
-  it('PATCH /api/users/:userID', async () => { });
+  it('PATCH /api/users/:userID', async () => {});
 
   // TODO: implement DELETE /api/users/:userID test
   it('DELETE /api/users/:userID', async () => {
@@ -159,5 +159,5 @@ describe('Test Users API', () => {
     }
   });
 
-  after(() => { });
+  after(() => {});
 });
