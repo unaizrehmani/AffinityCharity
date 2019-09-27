@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Route,
+  NavLink,
+  BrowserRouter as Router,
+  Switch
+} from "react-router-dom";
 import { connect } from "react-redux";
 import LoginPage from "./containers/loginPage";
 import NotFound from "./containers/notFoundPage";
@@ -10,12 +15,32 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" component={LoginPage} />
-          <Route exact path="/emailEditor" component={Emailer} />
-          <Route exact path="/home" component={HomePage} />
-          <Route component={NotFound} />
-        </Switch>
+        <div>
+          <ul>
+            <li>
+              <NavLink exact activeClassName='active' to='/'>
+                HomePage
+						  </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName='active' to='/login'>
+                Login Page
+						  </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName='active' to='/emailEditor'>
+                Emailer Page
+						  </NavLink>
+            </li>
+          </ul>
+          <hr />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/emailEditor" component={Emailer} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
       </Router>
     );
   }
