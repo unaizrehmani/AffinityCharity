@@ -2,15 +2,15 @@
 export const LOGIN_USER = "LOGIN_USER";
 
 // Action Creators
-export function loginUser(data) {
+export function loginUser(firstName, lastName, isAdmin, email, token) {
   return {
     type: LOGIN_USER,
     payload: {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      isAdmin: data.isAdmin,
-      email: data.email,
-      token: data.token
+      firstName: firstName,
+      lastName: lastName,
+      isAdmin: isAdmin,
+      email: email,
+      token: token
     }
   };
 }

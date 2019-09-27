@@ -31,7 +31,14 @@ class LoginPage extends React.Component {
         { "Content-Type": "application/json" }
       )
       .then(response => {
-        this.props.dispatch(loginUser(response.data));
+        const {
+          firstName,
+          lastName,
+          isAdmin,
+          email,
+          token
+        } = response.data;
+        this.props.dispatch(loginUser(firstName, lastName, isAdmin, email, token));
       })
       .catch(error => {
         console.log("error " + error);
