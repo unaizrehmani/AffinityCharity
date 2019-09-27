@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Input } from 'semantic-ui-react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { Input } from 'semantic-ui-react'
 import Button from '../components/button'
 import AffinityLogo from '../images/logo.svg'
 import colors from '../styles/colors'
@@ -31,7 +32,10 @@ class LoginPage extends React.Component {
         { 'Content-Type': 'application/json' }
       )
       .then(response => {
-        this.props.dispatch(loginUser(this.state.email, response.data))
+        const { firstName, lastName, isAdmin, email, token } = response.data
+        this.props.dispatch(
+          loginUser(firstName, lastName, isAdmin, email, token)
+        )
       })
       .catch(error => {
         console.log('error ' + error)
@@ -91,7 +95,6 @@ class LoginPage extends React.Component {
           <h1>Welcome to Affinity</h1>
         </Banner>
         <LoginForm>
-          {/* <FormErrors formErrors={this.state.formErrors} /> */}
           <Form>
             <FormInput
               type='email'
@@ -171,4 +174,4 @@ const FormInput = styled(Input)`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `
 
-export default LoginPage
+export default connect()(LoginPage)

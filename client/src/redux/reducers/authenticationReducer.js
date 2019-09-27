@@ -1,6 +1,6 @@
 import { LOGIN_USER } from "../actions/authentication";
 
-const authenticationReducer = function(
+const authenticationReducer = function (
   state = { isLoggedIn: false, user: undefined },
   { type, payload }
 ) {
@@ -10,7 +10,10 @@ const authenticationReducer = function(
         ...state,
         ...{
           isLoggedIn: true,
-          user: payload.username,
+          email: payload.email,
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          isAdmin: payload.isAdmin,
           userToken: payload.token
         }
       };
