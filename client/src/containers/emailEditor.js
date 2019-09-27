@@ -5,11 +5,10 @@ class Emailer extends Component {
   render = () => {
     return (
       <div>
-        <div>
-          <button onClick={this.exportHtml}>Export HTML</button>
-        </div>
-
         <EmailEditor ref={editor => (this.editor = editor)} />
+        <div style={{ paddingLeft: '20px', paddingTop: '5px' }}>
+          <button onClick={this.exportHtml}>Send Email</button>
+        </div>
       </div>
     );
   };
