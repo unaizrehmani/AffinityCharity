@@ -20,8 +20,8 @@ class LoginPage extends React.Component {
     }
   }
 
-  onSubmit = e => {
-    e.preventDefault()
+  onLoginSubmit = () => {
+    alert('Logging In.')
     axios
       .post(
         'https://social-charity-server.herokuapp.com/api/auth/token',
@@ -116,7 +116,7 @@ class LoginPage extends React.Component {
             />
           </Form>
           <ButtonPrompts>
-            <Button title='Sign In' primary />
+            <Button title='Sign In' primary handleClick={this.onLoginSubmit} />
             <Button title='Forgot Password' primary={false} />
           </ButtonPrompts>
         </LoginForm>
