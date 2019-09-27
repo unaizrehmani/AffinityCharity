@@ -24,7 +24,10 @@ class HomePage extends React.Component {
   render() {
     return (
       <HomePageContainer>
-        <h2>Good Afternoon, {this.props.session.firstName + ' ' + this.props.session.lastName}</h2>
+        <h2>
+          Good Afternoon,{" "}
+          {this.props.session.firstName + " " + this.props.session.lastName}
+        </h2>
         <CausesContainer>
           <CauseCard />
           <CauseCard />
