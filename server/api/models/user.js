@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
+  isAdmin: {
+    type: Boolean,
+    required: true
+  },
   firstName: {
     type: String,
     required: true
@@ -46,6 +50,7 @@ userSchema.methods.generateAuthToken = function () {
   return jwt.sign(
     {
       _id: this._id,
+      isAdmin: this.isAdmin,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
