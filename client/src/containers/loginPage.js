@@ -5,7 +5,6 @@ import axios from 'axios'
 import Button from '../components/button'
 import AffinityLogo from '../images/logo.svg'
 import colors from '../styles/colors'
-import { FormErrors } from '../components/formErrors'
 import { loginUser } from '../redux/actions/authentication'
 class LoginPage extends React.Component {
   constructor(props) {
