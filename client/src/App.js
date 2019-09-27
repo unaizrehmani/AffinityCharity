@@ -36,7 +36,7 @@ class App extends Component {
           </ul>
           <hr />
           <Switch>
-            {/* Change routes to "PrivateRoute" when auth is finished */}
+            {/* Change routes to "PrivateRoute" where needed when auth is finished */}
             <Route exact path="/" component={HomePage} />
             <Route exact path="/emailEditor" component={Emailer} />
             <Route exact path="/login" component={LoginPage} />
