@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { ReactMultiEmail, isEmail } from 'react-multi-email';
 import 'react-multi-email/style.css';
- 
+
 class MultipleEmail extends Component {
   removeEmail = (email, index) => {
     return (
@@ -11,12 +11,12 @@ class MultipleEmail extends Component {
           ×
         </span>
       </div>
-    )
-  }
+    );
+  };
 
   render = () => {
     const emails = this.props.emails;
- 
+
     return (
       <div>
         <h3>Send to:</h3>
@@ -26,7 +26,9 @@ class MultipleEmail extends Component {
           onChange={_emails => {
             this.props.updateEmails(_emails);
           }}
-          validateEmail= {email => {return isEmail(email);}} 
+          validateEmail={email => {
+            return isEmail(email);
+          }}
           getLabel={(email, index, func) => {
             return (
               <div data-tag key={index}>
@@ -35,13 +37,13 @@ class MultipleEmail extends Component {
                   ×
                 </span>
               </div>
-            )
+            );
           }}
         />
-        <br/>
+        <br />
       </div>
     );
-  }
+  };
 }
- 
+
 export default MultipleEmail;
