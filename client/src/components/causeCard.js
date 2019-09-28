@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CauseCardContainer = styled.div`
   display: flex;
@@ -93,7 +93,7 @@ CauseCard.propTypes = {
   date: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  subscribers: PropTypes.number
+  subscribers: PropTypes.number,
 };
 
 export default CauseCard;

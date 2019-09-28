@@ -1,48 +1,46 @@
-import React from "react";
-import styled from "styled-components";
-import axios from "axios";
-import { connect } from "react-redux";
-import { Input } from "semantic-ui-react";
-import Button from "../components/button";
-import AffinityLogo from "../images/logo.svg";
-import colors from "../styles/colors";
-import { loginUser } from "../redux/actions/authentication";
+import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { Input } from 'semantic-ui-react';
+import Button from '../components/button';
+import AffinityLogo from '../images/logo.svg';
+import colors from '../styles/colors';
+import { loginUser } from '../redux/actions/authentication';
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      formErrors: { email: "", password: "" },
+      email: '',
+      password: '',
+      formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
-      formValid: false
+      formValid: false,
     };
   }
 
   onLoginSubmit = () => {
-    alert("Logging In.");
+    alert('Logging In.');
     axios
       .post(
-        "https://social-charity-server.herokuapp.com/api/auth/token",
+        'https://social-charity-server.herokuapp.com/api/auth/token',
         {
           email: this.state.email,
-          password: this.state.password
+          password: this.state.password,
         },
-        { "Content-Type": "application/json" }
+        { 'Content-Type': 'application/json' },
       )
-      .then(response => {
+      .then((response) => {
         const { firstName, lastName, isAdmin, email, token } = response.data;
-        this.props.dispatch(
-          loginUser(firstName, lastName, isAdmin, email, token)
-        );
+        this.props.dispatch(loginUser(firstName, lastName, isAdmin, email, token));
       })
-      .catch(error => {
-        console.log("error " + error);
+      .catch((error) => {
+        console.log('error ' + error);
       });
   };
 
-  handleUserInput = e => {
+  handleUserInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value }, () => {
@@ -56,13 +54,13 @@ class LoginPage extends React.Component {
     let passwordValid = this.state.passwordValid;
 
     switch (fieldName) {
-      case "email":
+      case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? "" : " is invalid";
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
-      case "password":
+      case 'password':
         passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? "" : " is too short";
+        fieldValidationErrors.password = passwordValid ? '' : ' is too short';
         break;
       default:
         break;
@@ -71,20 +69,20 @@ class LoginPage extends React.Component {
       {
         formErrors: fieldValidationErrors,
         emailValid: emailValid,
-        passwordValid: passwordValid
+        passwordValid: passwordValid,
       },
-      this.validateForm
+      this.validateForm,
     );
   };
 
   validateForm = () => {
     this.setState({
-      formValid: this.state.emailValid && this.state.passwordValid
+      formValid: this.state.emailValid && this.state.passwordValid,
     });
   };
 
-  errorClass = error => {
-    return error.length === 0 ? "" : "has-error";
+  errorClass = (error) => {
+    return error.length === 0 ? '' : 'has-error';
   };
 
   render() {

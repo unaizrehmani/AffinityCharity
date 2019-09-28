@@ -1,15 +1,15 @@
-import { LOGIN_USER } from "../actions/authentication";
+import { LOGIN_USER } from '../actions/authentication';
 
-const authenticationReducer = function(
+const authenticationReducer = function (
   state = {
     isLoggedIn: false,
     email: undefined,
     firstName: undefined,
     lastName: undefined,
     isAdmin: undefined,
-    userToken: undefined
+    userToken: undefined,
   },
-  { type, payload }
+  { type, payload },
 ) {
   switch (type) {
     case LOGIN_USER:
@@ -21,8 +21,8 @@ const authenticationReducer = function(
           firstName: payload.firstName,
           lastName: payload.lastName,
           isAdmin: payload.isAdmin,
-          userToken: payload.token
-        }
+          userToken: payload.token,
+        },
       };
     default:
       return state;

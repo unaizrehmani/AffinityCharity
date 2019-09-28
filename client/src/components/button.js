@@ -1,14 +1,11 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import colors from "../styles/colors";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import colors from '../styles/colors';
 
 export default class Button extends Component {
   render() {
     return (
-      <StyledButton
-        primary={this.props.primary}
-        onClick={this.props.handleClick}
-      >
+      <StyledButton primary={this.props.primary} onClick={this.props.handleClick}>
         <h4>{this.props.title}</h4>
       </StyledButton>
     );
@@ -16,10 +13,8 @@ export default class Button extends Component {
 }
 
 const StyledButton = styled.div`
-  background: ${props =>
-    props.primary ? `${colors.primaryAccent}` : `${colors.secondary}`};
-  color: ${props =>
-    props.primary ? `${colors.background}` : `${colors.primary}`};
+  background: ${(props) => (props.primary ? `${colors.primaryAccent}` : `${colors.secondary}`)};
+  color: ${(props) => (props.primary ? `${colors.background}` : `${colors.primary}`)};
   padding: 10px;
   width: 150px;
   border-radius: 200px;

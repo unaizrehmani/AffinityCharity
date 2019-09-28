@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 export const FormErrors = ({ formErrors }) => (
   <StyledFormErrors>
@@ -7,12 +7,13 @@ export const FormErrors = ({ formErrors }) => (
       if (formErrors[fieldName].length > 0) {
         return (
           <p key={i}>
-            {fieldName} {formErrors[fieldName]}
+            {fieldName}
+            {' '}
+            {formErrors[fieldName]}
           </p>
         );
-      } else {
-        return "";
       }
+      return '';
     })}
   </StyledFormErrors>
 );
