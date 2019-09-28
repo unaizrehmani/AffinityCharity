@@ -41,7 +41,6 @@ class Emailer extends Component {
               label="Subject"
               placeholder="Enter email subject"
             />
-          <br/><br/>
           <ButtonStyle>
             <Button title="Send Email" primary handleClick={this.exportHtml} />
           </ButtonStyle>
