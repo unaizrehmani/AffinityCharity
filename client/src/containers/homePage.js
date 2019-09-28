@@ -76,7 +76,7 @@ class HomePage extends React.Component {
   }
 }
 // export default HomePage;
-const mapStateToProps = (state) => ({
-  session: state.authentication,
+const mapStateToProps = state => ({
+  session: state.authentication
 });
 export default connect(mapStateToProps)(HomePage);

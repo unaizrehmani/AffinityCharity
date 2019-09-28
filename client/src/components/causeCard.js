@@ -93,7 +93,7 @@ CauseCard.propTypes = {
   date: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  subscribers: PropTypes.number,
+  subscribers: PropTypes.number
 };
 
 export default CauseCard;

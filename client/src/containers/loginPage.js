@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
       formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
-      formValid: false,
+      formValid: false
     };
   }
 
@@ -27,20 +27,22 @@ class LoginPage extends React.Component {
         'https://social-charity-server.herokuapp.com/api/auth/token',
         {
           email: this.state.email,
-          password: this.state.password,
+          password: this.state.password
         },
-        { 'Content-Type': 'application/json' },
+        { 'Content-Type': 'application/json' }
       )
-      .then((response) => {
+      .then(response => {
         const { firstName, lastName, isAdmin, email, token } = response.data;
-        this.props.dispatch(loginUser(firstName, lastName, isAdmin, email, token));
+        this.props.dispatch(
+          loginUser(firstName, lastName, isAdmin, email, token)
+        );
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('error ' + error);
       });
   };
 
-  handleUserInput = (e) => {
+  handleUserInput = e => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value }, () => {
@@ -69,19 +71,19 @@ class LoginPage extends React.Component {
       {
         formErrors: fieldValidationErrors,
         emailValid: emailValid,
-        passwordValid: passwordValid,
+        passwordValid: passwordValid
       },
-      this.validateForm,
+      this.validateForm
     );
   };
 
   validateForm = () => {
     this.setState({
-      formValid: this.state.emailValid && this.state.passwordValid,
+      formValid: this.state.emailValid && this.state.passwordValid
     });
   };
 
-  errorClass = (error) => {
+  errorClass = error => {
     return error.length === 0 ? '' : 'has-error';
   };
 

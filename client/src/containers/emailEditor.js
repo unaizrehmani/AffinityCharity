@@ -9,26 +9,29 @@ class Emailer extends Component {
           <button onClick={this.exportHtml}>Export HTML</button>
         </div>
 
-        <EmailEditor ref={(editor) => (this.editor = editor)} />
+        <EmailEditor ref={editor => (this.editor = editor)} />
       </div>
     );
   };
 
   exportHtml = () => {
-    this.editor.exportHtml((data) => {
+    this.editor.exportHtml(data => {
       const html = `${String(data.html)}`;
       const email = 'unaizrehmani@gmail.com';
       const subject = 'Shefali Jain';
       axios
-        .post('https://social-charity-server.herokuapp.com/api/email/send-email', {
-          email,
-          html,
-          subject,
-        })
-        .then((res) => {
+        .post(
+          'https://social-charity-server.herokuapp.com/api/email/send-email',
+          {
+            email,
+            html,
+            subject
+          }
+        )
+        .then(res => {
           console.log(res);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     });

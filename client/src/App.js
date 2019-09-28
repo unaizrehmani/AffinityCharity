@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Route, NavLink, BrowserRouter as Router, Switch,
+  Route,
+  NavLink,
+  BrowserRouter as Router,
+  Switch
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginPage from './containers/loginPage';
 import NotFound from './containers/notFoundPage';
 import Emailer from './containers/emailEditor';
 import HomePage from './containers/homePage';
-import { PrivateRoute } from './components/privateRoute';
+// import { PrivateRoute } from './components/privateRoute';
 
 class App extends Component {
   render() {
@@ -44,8 +47,8 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.authentication.isLoggedIn,
+const mapStateToProps = state => ({
+  isLoggedIn: state.authentication.isLoggedIn
 });
 
 export default connect(mapStateToProps)(App);

@@ -10,7 +10,7 @@ export function loginUser(firstName, lastName, isAdmin, email, token) {
       lastName,
       isAdmin,
       email,
-      token,
-    },
+      token
+    }
   };
 }

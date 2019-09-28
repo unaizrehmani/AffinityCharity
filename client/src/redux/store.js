@@ -10,7 +10,7 @@ import rootReducer from './reducers'; // the value from combineReducers
 const persistConfig = {
   key: 'root',
   storage,
-  stateReconciler: autoMergeLevel2,
+  stateReconciler: autoMergeLevel2
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);

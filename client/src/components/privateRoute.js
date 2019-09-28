@@ -7,6 +7,8 @@ const authHere = false;
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => (authHere === true ? <Component {...props} /> : <Redirect to="login" />)}
+    render={props =>
+      authHere === true ? <Component {...props} /> : <Redirect to="login" />
+    }
   />
 );
