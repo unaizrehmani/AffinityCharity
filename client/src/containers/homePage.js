@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import CauseCard from "../components/causeCard";
-import { connect } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import CauseCard from '../components/causeCard';
 
 const HomePageContainer = styled.div`
   margin: 50px;
@@ -31,9 +31,9 @@ const MyImage = styled.img`
   object: cover;
 `;
 
-const UserHomeText = styled.h1`
-  font-weight: 400;
-`;
+// const UserHomeText = styled.h1`
+//   font-weight: 400;
+// `;
 
 const CausesContainer = styled.div`
   display: flex;
@@ -49,33 +49,25 @@ class HomePage extends React.Component {
     return (
       <HomePageContainer>
         <ImageContainer>
-          <MyImage
-            src={
-              "https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"
-            }
-          />
+          <MyImage src="https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png" />
         </ImageContainer>
         <h2>
-          Good Afternoon,{" "}
-          {this.props.session.firstName + " " + this.props.session.lastName}
+          Good Afternoon,
+          {`${this.props.session.firstName} ${this.props.session.lastName}`}
         </h2>
         <CausesContainer>
           <CauseCard
-            title={"Jane Doe"}
-            image={
-              "https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            }
-            date={"June 30th, 2008"}
-            description={"Absolute legend right here"}
+            title="Jane Doe"
+            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
+            date="June 30th, 2008"
+            description="Absolute legend right here"
             subscribers={23}
           />
           <CauseCard
-            title={"Ahmad Ramadan"}
-            image={
-              "https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            }
-            date={"March 3rd, 2015"}
-            description={"This nasty guy"}
+            title="Ahmad Ramadan"
+            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
+            date="March 3rd, 2015"
+            description="This nasty guy"
             subscribers={23}
           />
         </CausesContainer>
@@ -84,9 +76,7 @@ class HomePage extends React.Component {
   }
 }
 // export default HomePage;
-const mapStateToProps = state => {
-  return {
-    session: state.authentication
-  };
-};
+const mapStateToProps = state => ({
+  session: state.authentication
+});
 export default connect(mapStateToProps)(HomePage);

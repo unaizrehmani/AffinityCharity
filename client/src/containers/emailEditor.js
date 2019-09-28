@@ -57,7 +57,7 @@ class Emailer extends Component {
       const subject = this.state.subject;
       axios
         .post(
-          "https://social-charity-server.herokuapp.com/api/email/send-email",
+          'https://social-charity-server.herokuapp.com/api/email/send-email',
           {
             email,
             html,
