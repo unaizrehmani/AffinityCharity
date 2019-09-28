@@ -31,9 +31,9 @@ const MyImage = styled.img`
   object: cover;
 `;
 
-const UserHomeText = styled.h1`
-  font-weight: 400;
-`;
+// const UserHomeText = styled.h1`
+//   font-weight: 400;
+// `;
 
 const CausesContainer = styled.div`
   display: flex;
