@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import colors from "../styles/colors";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import colors from '../styles/colors';
 
 export default class Button extends Component {
   render() {

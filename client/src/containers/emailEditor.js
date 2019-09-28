@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import EmailEditor from "react-email-editor";
-import axios from "axios";
+import React, { Component } from 'react';
+import EmailEditor from 'react-email-editor';
+import axios from 'axios';
 class Emailer extends Component {
   render = () => {
     return (
@@ -17,11 +17,11 @@ class Emailer extends Component {
   exportHtml = () => {
     this.editor.exportHtml(data => {
       const html = `${String(data.html)}`;
-      const email = "unaizrehmani@gmail.com";
-      const subject = "Shefali Jain";
+      const email = 'unaizrehmani@gmail.com';
+      const subject = 'Shefali Jain';
       axios
         .post(
-          "https://social-charity-server.herokuapp.com/api/email/send-email",
+          'https://social-charity-server.herokuapp.com/api/email/send-email',
           {
             email,
             html,

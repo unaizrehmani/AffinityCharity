@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "../actions/authentication";
+import { LOGIN_USER } from '../actions/authentication';
 
 const authenticationReducer = function(
   state = {
