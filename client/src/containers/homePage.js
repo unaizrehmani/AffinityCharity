@@ -52,7 +52,7 @@ class HomePage extends React.Component {
           <MyImage src="https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png" />
         </ImageContainer>
         <h2>
-Good Afternoon,
+          Good Afternoon,
           {`${this.props.session.firstName} ${this.props.session.lastName}`}
         </h2>
         <CausesContainer>
