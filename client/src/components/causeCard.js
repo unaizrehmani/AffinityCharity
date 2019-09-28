@@ -66,8 +66,8 @@ const CauseSubscribers = styled.p``;
 
 class CauseCard extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
 
   render() {

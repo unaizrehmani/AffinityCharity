@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CauseCard from "../components/causeCard";
+import { connect } from "react-redux";
 
 const HomePageContainer = styled.div`
   margin: 50px;
@@ -54,7 +55,10 @@ class HomePage extends React.Component {
             }
           />
         </ImageContainer>
-        <h2>Good Afternoon, User</h2>
+        <h2>
+          Good Afternoon,{" "}
+          {this.props.session.firstName + " " + this.props.session.lastName}
+        </h2>
         <CausesContainer>
           <CauseCard
             title={"Jane Doe"}
@@ -79,4 +83,10 @@ class HomePage extends React.Component {
     );
   }
 }
-export default HomePage;
+// export default HomePage;
+const mapStateToProps = state => {
+  return {
+    session: state.authentication
+  };
+};
+export default connect(mapStateToProps)(HomePage);
