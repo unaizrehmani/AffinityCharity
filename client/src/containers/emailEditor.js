@@ -38,7 +38,7 @@ class Emailer extends Component {
               name="subject"
               value={this.state.subject}
               onChange={this.handleUserInput}
-              label="subject"
+              label="Subject"
               placeholder="Enter email subject"
             />
           <br/><br/>
