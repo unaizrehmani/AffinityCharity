@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Card, Icon, Image } from "semantic-ui-react";
 
 class CauseCard extends React.Component {

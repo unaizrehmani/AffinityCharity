@@ -1,14 +1,32 @@
 import React, { Component } from "react";
 import EmailEditor from "react-email-editor";
+import styled from 'styled-components';
 import axios from "axios";
+import MultipleEmail from '../components/multipleEmail';
+
 class Emailer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      emails: ['unaizrehmani@gmail.com']
+    }
+  }
+
+  updateEmails = emails => {
+    this.setState({ emails });
+  }
+
   render = () => {
     return (
       <div>
-        <EmailEditor ref={editor => (this.editor = editor)} />
-        <div style={{ paddingLeft: '20px', paddingTop: '5px' }}>
+        <EmailEditorStyle>
+          <EmailEditor ref={editor => (this.editor = editor)} />
+        </EmailEditorStyle>
+          
+        <MultipleEmailStyle>
+          <MultipleEmail emails={this.state.emails} updateEmails={this.updateEmails} />
           <button onClick={this.exportHtml}>Send Email</button>
-        </div>
+        </MultipleEmailStyle>
       </div>
     );
   };
@@ -16,7 +34,7 @@ class Emailer extends Component {
   exportHtml = () => {
     this.editor.exportHtml(data => {
       const html = `${String(data.html)}`;
-      const email = "unaizrehmani@gmail.com";
+      const email = this.state.emails;
       const subject = "Shefali Jain";
       axios
         .post(
@@ -37,4 +55,12 @@ class Emailer extends Component {
   };
 }
 
+const EmailEditorStyle = styled.div`
+  padding-right: 20px;
+`
+const MultipleEmailStyle = styled.div`
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+`
 export default Emailer;
