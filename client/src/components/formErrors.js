@@ -1,7 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 
 export const FormErrors = ({ formErrors }) => (
-  <div className="formErrors">
+  <StyledFormErrors>
     {Object.keys(formErrors).map((fieldName, i) => {
       if (formErrors[fieldName].length > 0) {
         return (
@@ -13,5 +14,10 @@ export const FormErrors = ({ formErrors }) => (
         return "";
       }
     })}
-  </div>
+  </StyledFormErrors>
 );
+
+// Will style later
+const StyledFormErrors = styled.div`
+  color: red;
+`;

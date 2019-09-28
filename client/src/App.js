@@ -18,19 +18,19 @@ class App extends Component {
         <div>
           <ul>
             <li>
-              <NavLink exact activeClassName='active' to='/'>
-                HomePage
-						  </NavLink>
+              <NavLink exact activeClassName="active" to="/">
+                Home Page
+              </NavLink>
             </li>
             <li>
-              <NavLink activeClassName='active' to='/login'>
+              <NavLink activeClassName="active" to="/login">
                 Login Page
-						  </NavLink>
+              </NavLink>
             </li>
             <li>
-              <NavLink activeClassName='active' to='/emailEditor'>
+              <NavLink activeClassName="active" to="/emailEditor">
                 Emailer Page
-						  </NavLink>
+              </NavLink>
             </li>
           </ul>
           <hr />
