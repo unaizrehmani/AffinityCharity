@@ -20,7 +20,7 @@ class App extends Component {
           <ul>
             <li>
               <NavLink exact activeClassName="active" to="/">
-                HomePage
+                Home Page
               </NavLink>
             </li>
             <li>
