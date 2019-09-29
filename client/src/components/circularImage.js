@@ -10,12 +10,33 @@ class CircularImage extends React.Component {
 
   render() {
     return (
-      <div/>
+      <ImageContainer {...this.props}>
+          <Image src={this.props.image}/>
+      </ImageContainer>
     );
   }
 }
 
-circularImage.propTypes = {
+CircularImage.propTypes = {
+    image: PropTypes.string
 };
 
-export default circularImage;
+const ImageContainer = styled.div`
+    margin: 10px;
+    display: flex;
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    border-radius: 500px
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    -ms-border-radius: 500px;
+    -o-border-radius: 500px;
+    overflow: hidden;
+`;
+
+const Image = styled.img`
+  object-fit: contain;
+`;
+
+export default CircularImage;

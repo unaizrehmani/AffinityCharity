@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CauseCard from '../components/causeCard';
+import CircularImage from '../components/circularImage';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -11,9 +12,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <HomePageContainer>
-        <CharityImageContainer>
-          <CharityImage src="https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png" />
-        </CharityImageContainer>
+        <CircularImage image={"https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"}/>
         <h2>
           Good Afternoon,
           {`${this.props.session.firstName} ${this.props.session.lastName}`}
@@ -50,25 +49,6 @@ const HomePageContainer = styled.div`
   align-items: center;
   text-align: center;
   justify-content: space-between;
-`;
-
-const CharityImageContainer = styled.div`
-    display: flex;
-    height: 100px;
-    width: 100px;
-    justify-content: center;
-    border-radius: 500px
-    -webkit-border-radius: 500px;
-    -moz-border-radius: 500px;
-    -ms-border-radius: 500px;
-    -o-border-radius: 500px;
-    overflow: hidden;
-`;
-
-const CharityImage = styled.img`
-  height: 100px;
-  width: 100px;
-  object: cover;
 `;
 
 const CausesContainer = styled.div`
