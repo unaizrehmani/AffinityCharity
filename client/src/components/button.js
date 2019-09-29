@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import colors from '../styles/colors'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import colors from '../styles/colors';
 
 export default class Button extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class Button extends Component {
       >
         <h4>{this.props.title}</h4>
       </StyledButton>
-    )
+    );
   }
 }
 
@@ -27,4 +27,4 @@ const StyledButton = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 10px;
   cursor: pointer;
-`
+`;

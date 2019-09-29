@@ -31,9 +31,7 @@ class LoginPage extends React.Component {
       )
       .then(response => {
         const { firstName, lastName, isAdmin, email, token } = response.data
-        this.props.dispatch(
-          loginUser(firstName, lastName, isAdmin, email, token)
-        )
+        this.props.dispatch(loginUser(firstName, lastName, isAdmin, email, token))
       })
       .catch(error => {
         console.log('error ' + error)
@@ -95,27 +93,27 @@ class LoginPage extends React.Component {
         <LoginForm>
           <Form>
             <FormInput
-              type='email'
+              type="email"
               required
-              name='email'
+              name="email"
               value={this.state.email}
               onChange={this.handleUserInput}
-              label='Email'
-              placeholder='john.doe@email.com'
+              label="Email"
+              placeholder="john.doe@email.com"
             />
             <FormInput
-              type='password'
-              className='form-control'
-              name='password'
-              placeholder='Password'
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleUserInput}
-              label='Password'
+              label="Password"
             />
           </Form>
           <ButtonPrompts>
-            <Button title='Sign In' primary handleClick={this.onLoginSubmit} />
-            <Button title='Forgot Password' primary={false} />
+            <Button title="Sign In" primary handleClick={this.onLoginSubmit} />
+            <Button title="Forgot Password" primary={false} />
           </ButtonPrompts>
         </LoginForm>
       </StyledLoginPage>

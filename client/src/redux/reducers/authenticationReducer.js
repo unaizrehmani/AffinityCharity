@@ -1,7 +1,14 @@
-import { LOGIN_USER } from "../actions/authentication";
+import { LOGIN_USER } from '../actions/authentication';
 
-const authenticationReducer = function (
-  state = { isLoggedIn: false, user: undefined },
+const authenticationReducer = function(
+  state = {
+    isLoggedIn: false,
+    email: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    isAdmin: undefined,
+    userToken: undefined
+  },
   { type, payload }
 ) {
   switch (type) {

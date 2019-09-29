@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 export const FormErrors = ({ formErrors }) => (
   <StyledFormErrors>
@@ -9,15 +9,14 @@ export const FormErrors = ({ formErrors }) => (
           <p key={i}>
             {fieldName} {formErrors[fieldName]}
           </p>
-        )
-      } else {
-        return ''
+        );
       }
+      return '';
     })}
   </StyledFormErrors>
-)
+);
 
 // Will style later
 const StyledFormErrors = styled.div`
   color: red;
-`
+`;
