@@ -17,8 +17,15 @@ class CausePage extends React.Component {
             <CircularImage 
               image={"https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038" } 
               style={{border: '2px solid #E35268', height: '200px', width: '200px'}}/>
-              <h1>Jane Doe</h1>
-              <h4>Dhaka, Bangladesh</h4>
+              <CauseTitle>Jane Doe</CauseTitle>
+              <CauseLocation>Dhaka, Bangladesh</CauseLocation>
+            <CircularImage
+              image={"https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"}
+              style={{height: '50px', width: '50px'}}/> 
+            <ButtonWrapper>
+              <Button title="Story" primary></Button>
+              <Button title="Reports" primary></Button>
+            </ButtonWrapper>             
         </CauseBanner>
       </CausePageWrapper>
     );
@@ -42,6 +49,18 @@ const CauseBanner = styled.div`
   color: ${colors.background}
   align-items: center;
   text-align: center;
+`;
+
+const CauseTitle = styled.h1`
+  margin: 0px;
+`;
+const CauseLocation = styled.h5`
+  margin: 0px;
+  font-weight: 100;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
 `;
 
 
