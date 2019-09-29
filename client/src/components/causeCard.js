@@ -44,7 +44,6 @@ const CauseCardContainer = styled.div`
   width: 200px;
   position: relative;
   cursor: pointer;
-
   -webkit-box-shadow: 0px 0px 3px 0px rgba(173, 173, 173, 1);
   -moz-box-shadow: 0px 0px 3px 0px rgba(173, 173, 173, 1);
   box-shadow: 0px 0px 3px 0px rgba(173, 173, 173, 1);

@@ -31,6 +31,8 @@ class CausePage extends React.Component {
         </CauseBanner>
         <CauseContent>
           <PostCard/>
+          <Seperator/>
+          <PostCard/>
         </CauseContent>
       </CausePageWrapper>
     );
@@ -79,5 +81,12 @@ const CauseContent = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
 `;
+
+const Seperator = styled.div`
+  margin: 10px 0px;
+  height: 50px;
+  width: 3px;
+  background-color: ${colors.primaryAccent}
+`
 
 export default connect(mapStateToProps)(CausePage);
