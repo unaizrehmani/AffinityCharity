@@ -60,10 +60,10 @@ const PostDate = styled.h3`
 `;
 
 const PostImageContainer = styled.div`
-display: flex;
-width: inherit;
-justify-content: center;
-overflow: hidden;
+    display: flex;
+    width: inherit;
+    justify-content: center;
+    overflow: hidden;
 `;
 
 const PostImage = styled.img`
