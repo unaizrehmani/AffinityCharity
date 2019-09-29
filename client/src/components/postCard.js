@@ -12,31 +12,34 @@ class PostCard extends React.Component {
   render() {
     return (
       <PostWrapper>
-          <PostDate>March 1st, 2019</PostDate>
-          <PostContentContainer>
-            <PostText>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, 
-                sed do eiusmod tempor #incididunt ero labore et dolore magna aliqua…
-            </PostText>
-            <PostImageContainer>
-                <PostImage src={"https://secureservercdn.net/104.238.71.140/9kn.2fe.myftpupload.com/wp-content/uploads/2014/10/kids_web-768x532.jpg"}/>
-            </PostImageContainer>
-          </PostContentContainer>
+        <PostDate>March 1st, 2019</PostDate>
+        <PostContentContainer>
+          <PostText>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor #incididunt ero labore et dolore magna aliqua…
+          </PostText>
+          <PostImageContainer>
+            <PostImage
+              src={
+                'https://secureservercdn.net/104.238.71.140/9kn.2fe.myftpupload.com/wp-content/uploads/2014/10/kids_web-768x532.jpg'
+              }
+            />
+          </PostImageContainer>
+        </PostContentContainer>
       </PostWrapper>
     );
   }
 }
 
 PostCard.propTypes = {
-    post: PropTypes.object,
-    text: PropTypes.string,
-    image: PropTypes.string,
+  post: PropTypes.object,
+  text: PropTypes.string,
+  image: PropTypes.string
 };
 
 const PostWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const PostContentContainer = styled.div`
@@ -59,19 +62,19 @@ const PostDate = styled.h3`
 `;
 
 const PostImageContainer = styled.div`
-    display: flex;
-    width: inherit;
-    height: 300px;
-    justify-content: center;
-    overflow: hidden;
+  display: flex;
+  width: inherit;
+  height: 300px;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 const PostImage = styled.img`
-    object-fit: contain;
+  object-fit: contain;
 `;
 
-const PostText =  styled.h3`
-    font-weight: 100;
+const PostText = styled.h3`
+  font-weight: 100;
 `;
 
 export default PostCard;

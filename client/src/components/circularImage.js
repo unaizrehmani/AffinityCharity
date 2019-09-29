@@ -11,14 +11,14 @@ class CircularImage extends React.Component {
   render() {
     return (
       <ImageContainer {...this.props}>
-          <Image src={this.props.image}/>
+        <Image src={this.props.image} />
       </ImageContainer>
     );
   }
 }
 
 CircularImage.propTypes = {
-    image: PropTypes.string
+  image: PropTypes.string
 };
 
 const ImageContainer = styled.div`

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import colors from '../styles/colors';
 
-
 class CauseCard extends React.Component {
   constructor(props) {
     super(props);
@@ -104,7 +103,7 @@ const Seperator = styled.hr`
 const CauseSubscribers = styled.p`
   font-size: 15px;
   font-weight: 600;
-  color: ${colors.primaryAccent}
+  color: ${colors.primaryAccent};
 `;
 
 export default CauseCard;

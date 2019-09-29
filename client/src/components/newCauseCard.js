@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
-
 class newCauseCard extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +11,8 @@ class newCauseCard extends React.Component {
   render() {
     return (
       <CauseCardContainer>
-          <Plus>+</Plus>
-          <Text>Create Cause</Text>
+        <Plus>+</Plus>
+        <Text>Create Cause</Text>
       </CauseCardContainer>
     );
   }
@@ -47,11 +46,11 @@ const CauseCardContainer = styled.div`
 const Plus = styled.h1`
   font-size: 100px;
   margin: 0px;
-  color: ${colors.primaryAccent}
+  color: ${colors.primaryAccent};
 `;
 
 const Text = styled.h3`
-  color: ${colors.primaryAccent}
-`
+  color: ${colors.primaryAccent};
+`;
 
 export default newCauseCard;

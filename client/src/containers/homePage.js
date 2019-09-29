@@ -13,14 +13,18 @@ class HomePage extends React.Component {
   render() {
     return (
       <HomePageContainer>
-        <CircularImage image={"https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"}/>
+        <CircularImage
+          image={
+            'https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png'
+          }
+        />
         <h1>
           Welcome,
           {` ${this.props.session.firstName} ${this.props.session.lastName}`}
         </h1>
         <Heading>Causes</Heading>
         <CausesContainer>
-          <NewCauseCard/>
+          <NewCauseCard />
           <CauseCard
             title="Jane Doe"
             image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
