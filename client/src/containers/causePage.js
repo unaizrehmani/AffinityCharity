@@ -25,7 +25,7 @@ class CausePage extends React.Component {
               image={"https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"}
               style={{height: '50px', width: '50px'}}/> 
             <ButtonWrapper>
-              {/* <Button title="Story" primary></Button> */}
+              <Button title="Create Post" primary></Button>
               <Button title="Reports" primary></Button>
             </ButtonWrapper>             
         </CauseBanner>

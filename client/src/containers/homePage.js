@@ -13,10 +13,10 @@ class HomePage extends React.Component {
     return (
       <HomePageContainer>
         <CircularImage image={"https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png"}/>
-        <h2>
-          Good Afternoon,
-          {`${this.props.session.firstName} ${this.props.session.lastName}`}
-        </h2>
+        <h1>
+          Welcome,
+          {` ${this.props.session.firstName} ${this.props.session.lastName}`}
+        </h1>
         <CausesContainer>
           <CauseCard
             title="Jane Doe"

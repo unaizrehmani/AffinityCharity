@@ -46,7 +46,6 @@ const PostContentContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 700px;
-    height: 300px;
     background-color: ${colors.secondary}
     -webkit-box-shadow: 3px 4px 6px 0px rgba(0,0,0,0.19);
     -moz-box-shadow: 3px 4px 6px 0px rgba(0,0,0,0.19);
@@ -62,6 +61,7 @@ const PostDate = styled.h3`
 const PostImageContainer = styled.div`
     display: flex;
     width: inherit;
+    height: 300px;
     justify-content: center;
     overflow: hidden;
 `;

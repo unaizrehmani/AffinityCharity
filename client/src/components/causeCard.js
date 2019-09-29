@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import colors from '../styles/colors';
 
 
 class CauseCard extends React.Component {
@@ -39,6 +40,7 @@ const CauseCardContainer = styled.div`
   display: flex;
   margin: 0 10px;
   flex-direction: column;
+  background-color: ${colors.secondary}
   border-radius: 10px;
   height: 300px;
   width: 200px;
@@ -74,26 +76,33 @@ const CauseCardContent = styled.div`
 `;
 
 const CauseImage = styled.img`
-  object-fit: cover;
+  object-fit: contain;
 `;
 
-const CauseTitle = styled.p`
+const CauseTitle = styled.h3`
+  margin: 0px;
+`;
+
+const CauseDate = styled.h5`
   font-size: 12px;
+  margin: 0px;
+  font-weight: 100;
 `;
 
-const CauseDate = styled.p`
-  font-size: 6px;
-`;
-
-const CauseDescription = styled.p`
-  font-size: 8px;
+const CauseDescription = styled.h5`
+  margin: 10px 0 0 0;
+  font-weight: 100;
 `;
 
 const Seperator = styled.hr`
   width: 100%;
-  border: 1px solid #f2f2f2;
+  border: 1px solid #e0e0e0;
 `;
 
-const CauseSubscribers = styled.p``;
+const CauseSubscribers = styled.p`
+  font-size: 15px;
+  font-weight: 600;
+  color: ${colors.primaryAccent}
+`;
 
 export default CauseCard;
