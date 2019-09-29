@@ -21,6 +21,7 @@ class CauseCard extends React.Component {
           <CauseDate>{this.props.date}</CauseDate>
           <CauseDescription>{this.props.description}</CauseDescription>
           <Seperator />
+          {/* Insert User Icon Here */}
           <CauseSubscribers>{this.props.subscribers}</CauseSubscribers>
         </CauseCardContent>
       </CauseCardContainer>
@@ -86,7 +87,8 @@ const CauseTitle = styled.h3`
 const CauseDate = styled.h5`
   font-size: 12px;
   margin: 0px;
-  font-weight: 100;
+  font-weight: 700;
+  color: gray;
 `;
 
 const CauseDescription = styled.h5`
