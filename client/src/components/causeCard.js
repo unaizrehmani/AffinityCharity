@@ -2,6 +2,39 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+
+class CauseCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <CauseCardContainer>
+        <CauseImageContainer>
+          <CauseImage src={this.props.image} />
+        </CauseImageContainer>
+        <CauseCardContent>
+          <CauseTitle>{this.props.title}</CauseTitle>
+          <CauseDate>{this.props.date}</CauseDate>
+          <CauseDescription>{this.props.description}</CauseDescription>
+          <Seperator />
+          <CauseSubscribers>{this.props.subscribers}</CauseSubscribers>
+        </CauseCardContent>
+      </CauseCardContainer>
+    );
+  }
+}
+
+CauseCard.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  subscribers: PropTypes.number
+};
+
 const CauseCardContainer = styled.div`
   display: flex;
   margin: 0 10px;
@@ -63,37 +96,5 @@ const Seperator = styled.hr`
 `;
 
 const CauseSubscribers = styled.p``;
-
-class CauseCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <CauseCardContainer>
-        <CauseImageContainer>
-          <CauseImage src={this.props.image} />
-        </CauseImageContainer>
-        <CauseCardContent>
-          <CauseTitle>{this.props.title}</CauseTitle>
-          <CauseDate>{this.props.date}</CauseDate>
-          <CauseDescription>{this.props.description}</CauseDescription>
-          <Seperator />
-          <CauseSubscribers>{this.props.subscribers}</CauseSubscribers>
-        </CauseCardContent>
-      </CauseCardContainer>
-    );
-  }
-}
-
-CauseCard.propTypes = {
-  title: PropTypes.string,
-  date: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  subscribers: PropTypes.number
-};
 
 export default CauseCard;

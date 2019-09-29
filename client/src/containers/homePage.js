@@ -3,43 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CauseCard from '../components/causeCard';
 
-const HomePageContainer = styled.div`
-  margin: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: space-between;
-`;
-
-const ImageContainer = styled.div`
-    display: flex;
-    height: 100px;
-    width: 100px;
-    justify-content: center;
-    border-radius: 500px
-    -webkit-border-radius: 500px;
-    -moz-border-radius: 500px;
-    -ms-border-radius: 500px;
-    -o-border-radius: 500px;
-    overflow: hidden;
-`;
-
-const MyImage = styled.img`
-  height: 100px;
-  width: 100px;
-  object: cover;
-`;
-
-// const UserHomeText = styled.h1`
-//   font-weight: 400;
-// `;
-
-const CausesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -48,9 +11,9 @@ class HomePage extends React.Component {
   render() {
     return (
       <HomePageContainer>
-        <ImageContainer>
-          <MyImage src="https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png" />
-        </ImageContainer>
+        <CharityImageContainer>
+          <CharityImage src="https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png" />
+        </CharityImageContainer>
         <h2>
           Good Afternoon,
           {`${this.props.session.firstName} ${this.props.session.lastName}`}
@@ -79,4 +42,38 @@ class HomePage extends React.Component {
 const mapStateToProps = state => ({
   session: state.authentication
 });
+
+const HomePageContainer = styled.div`
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+`;
+
+const CharityImageContainer = styled.div`
+    display: flex;
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    border-radius: 500px
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    -ms-border-radius: 500px;
+    -o-border-radius: 500px;
+    overflow: hidden;
+`;
+
+const CharityImage = styled.img`
+  height: 100px;
+  width: 100px;
+  object: cover;
+`;
+
+const CausesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export default connect(mapStateToProps)(HomePage);
