@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 import { connect } from 'react-redux';
-import CircularImage from '../components/circularImage'
+import CircularImage from '../components/circularImage';
 import Button from '../components/button';
+import PostCard from '../components/postCard';
+import PropTypes from 'prop-types';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -27,6 +29,9 @@ class CausePage extends React.Component {
               <Button title="Reports" primary></Button>
             </ButtonWrapper>             
         </CauseBanner>
+        <CauseContent>
+          <PostCard/>
+        </CauseContent>
       </CausePageWrapper>
     );
   }
@@ -35,6 +40,10 @@ class CausePage extends React.Component {
 const mapStateToProps = state => ({
   session: state.authentication
 });
+
+CircularImage.propTypes = {
+  cause: PropTypes.object
+};
 
 const CausePageWrapper = styled.div`
   display: flex;
@@ -59,11 +68,16 @@ const CauseLocation = styled.h5`
   font-weight: 100;
 `;
 
+const CauseContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
 `;
-
-
-
 
 export default connect(mapStateToProps)(CausePage);
