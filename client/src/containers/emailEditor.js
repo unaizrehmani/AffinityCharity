@@ -27,6 +27,14 @@ class Emailer extends Component {
   render = () => {
     return (
       <div>
+        <FormInputStyle
+          type="text"
+          name="subject"
+          value={this.state.subject}
+          onChange={this.handleUserInput}
+          label="Subject"
+          placeholder="Enter email subject"
+        />
         <EmailEditorStyle>
           <EmailEditor ref={editor => (this.editor = editor)} />
         </EmailEditorStyle>
@@ -35,14 +43,6 @@ class Emailer extends Component {
           <MultipleEmail
             emails={this.state.emails}
             updateEmails={this.updateEmails}
-          />
-          <FormInputStyle
-            type="text"
-            name="subject"
-            value={this.state.subject}
-            onChange={this.handleUserInput}
-            label="Subject"
-            placeholder="Enter email subject"
           />
           <ButtonStyle>
             <Button title="Send Email" primary handleClick={this.exportHtml} />
@@ -85,6 +85,7 @@ const MultipleEmailStyle = styled.div`
   padding-top: 5px;
 `;
 const FormInputStyle = styled(Input)`
+  padding-left: 20px;
   input {
     width: 220px;
   }
