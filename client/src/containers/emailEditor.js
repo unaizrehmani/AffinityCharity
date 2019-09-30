@@ -10,8 +10,17 @@ class Emailer extends Component {
     super(props);
     this.state = {
       emails: ['unaizrehmani@gmail.com'],
-      subject: ''
+      subject: '',
+      design: {}
     };
+  }
+
+  componentDidMount = () => {
+    axios.get('https://social-charity-server.herokuapp.com/api/email/emailDesign').then(res => {
+      this.setState({design: res});
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   updateEmails = emails => {
@@ -24,25 +33,42 @@ class Emailer extends Component {
     this.setState({ [name]: value });
   };
 
+  saveDesign = () => {
+    this.editor.saveDesign(design => {
+      // TODO: Implement save design functionality
+    });
+  }
+
+  onLoad = () => {
+    this.editor.loadDesign(this.state.design);
+  }
+
   render = () => {
     return (
       <div>
+        <FormInputStyle
+          type="text"
+          name="subject"
+          value={this.state.subject}
+          onChange={this.handleUserInput}
+          label="Subject"
+          placeholder="Enter email subject"
+        />
         <EmailEditorStyle>
-          <EmailEditor ref={editor => (this.editor = editor)} />
+          <EmailEditor 
+            ref={editor => (this.editor = editor)} 
+            onLoad={this.onLoad}
+            minHeight={'600px'}
+            appearance={{
+              theme: 'light'
+            }}
+          />
         </EmailEditorStyle>
 
         <MultipleEmailStyle>
           <MultipleEmail
             emails={this.state.emails}
             updateEmails={this.updateEmails}
-          />
-          <FormInputStyle
-            type="text"
-            name="subject"
-            value={this.state.subject}
-            onChange={this.handleUserInput}
-            label="Subject"
-            placeholder="Enter email subject"
           />
           <ButtonStyle>
             <Button title="Send Email" primary handleClick={this.exportHtml} />
@@ -85,6 +111,7 @@ const MultipleEmailStyle = styled.div`
   padding-top: 5px;
 `;
 const FormInputStyle = styled(Input)`
+  padding-left: 20px;
   input {
     width: 220px;
   }

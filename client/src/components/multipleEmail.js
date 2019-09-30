@@ -21,7 +21,7 @@ class MultipleEmail extends Component {
       <div>
         <h3>Send to:</h3>
         <ReactMultiEmail
-          placeholder="placeholder"
+          placeholder="Enter e-mails here"
           emails={emails}
           onChange={_emails => {
             this.props.updateEmails(_emails);
