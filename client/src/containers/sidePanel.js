@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import colors from '../styles/colors';
 
 export default class SidePanel extends Component {
   constructor(props) {
@@ -19,16 +20,16 @@ export default class SidePanel extends Component {
       <StyledSidePanel>
         <ContentNavigation>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to="/story">My Story</Link>
+            <Link to='/story'>My Story</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to="/works">Works</Link>
+            <Link to='/works'>Works</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to="/services">Services</Link>
+            <Link to='/services'>Services</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to="/contact">Contact</Link>
+            <Link to='/contact'>Contact</Link>
           </NavItem>
         </ContentNavigation>
       </StyledSidePanel>
@@ -44,12 +45,10 @@ const StyledSidePanel = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fadein 2s;
-  background-color: red;
-  position: relative;
-  @media screen and (max-width: 991px) {
-    position: relative;
-  }
+  background-color: ${colors.secondary};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
 `;
 const ContentNavigation = styled.div`
   position: relative;
@@ -60,4 +59,5 @@ const NavItem = styled.div`
   padding-bottom: 10px;
   cursor: pointer;
   font-size: 25px;
+  color: ${colors.primary};
 `;

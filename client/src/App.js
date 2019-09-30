@@ -32,22 +32,14 @@ class App extends Component {
 }
 
 const StyledApp = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-height: 100%;
-  align-items: stretch;
-  a:link {
-    text-decoration: none;
-    color: inherit;
-  }
-  a:visited {
-    text-decoration: none;
-  }
+  /* Add responsive stuff here later */
 `;
 
 const ContentArea = styled.div`
   display: flex;
+  margin-left: 20vw;
 `;
+
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.authentication.isLoggedIn
