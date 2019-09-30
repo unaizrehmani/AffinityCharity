@@ -12,6 +12,7 @@ import NotFound from './containers/notFoundPage'
 import Emailer from './containers/emailEditor'
 import HomePage from './containers/homePage'
 import SidePanel from './containers/sidePanel'
+import CausePage from './containers/causePage'
 import { PrivateRoute } from './components/privateRoute'
 
 class App extends Component {
@@ -24,8 +25,9 @@ class App extends Component {
             <Switch>
               {/* Change routes to "PrivateRoute" where needed when auth is finished */}
               <Route exact path='/' component={HomePage} />
-              <Route exact path='/emailEditor' component={Emailer} />
-              <Route exact path='/login' component={LoginPage} />
+              <Route exact path="/emailEditor" component={Emailer} />
+            <Route exact path="/cause" component={CausePage} />
+            <Route exact path='/login' component={LoginPage} />
               <Route component={NotFound} />
             </Switch>
           </ContentArea>
