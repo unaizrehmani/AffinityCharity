@@ -8,10 +8,6 @@ import PostCard from '../components/postCard';
 import PropTypes from 'prop-types';
 
 class CausePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <CausePageWrapper>

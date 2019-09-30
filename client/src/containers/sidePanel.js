@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default class SidePanel extends Component {
   constructor(props) {
-    super(props)
-    this.state = {}
-    this.onNavBarElementClick = this.onNavBarElementClick.bind(this)
+    super(props);
+    this.state = {};
+    this.onNavBarElementClick = this.onNavBarElementClick.bind(this);
   }
   onNavBarElementClick() {
     if (this.props.closerMenu !== undefined) {
-      this.props.closerMenu()
+      this.props.closerMenu();
     }
   }
 
@@ -19,20 +19,20 @@ export default class SidePanel extends Component {
       <StyledSidePanel>
         <ContentNavigation>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to='/story'>My Story</Link>
+            <Link to="/story">My Story</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to='/works'>Works</Link>
+            <Link to="/works">Works</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to='/services'>Services</Link>
+            <Link to="/services">Services</Link>
           </NavItem>
           <NavItem onClick={() => this.onNavBarElementClick()}>
-            <Link to='/contact'>Contact</Link>
+            <Link to="/contact">Contact</Link>
           </NavItem>
         </ContentNavigation>
       </StyledSidePanel>
-    )
+    );
   }
 }
 
@@ -50,14 +50,14 @@ const StyledSidePanel = styled.div`
   @media screen and (max-width: 991px) {
     position: relative;
   }
-`
+`;
 const ContentNavigation = styled.div`
   position: relative;
   margin-top: 45px;
-`
+`;
 const NavItem = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
   font-size: 25px;
-`
+`;

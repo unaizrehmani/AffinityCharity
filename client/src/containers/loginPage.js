@@ -1,14 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import { Input } from 'semantic-ui-react'
-import Button from '../components/button'
-import AffinityLogo from '../images/logo.svg'
-import { loginUser } from '../redux/actions/authentication'
+import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { Input } from 'semantic-ui-react';
+import Button from '../components/button';
+import AffinityLogo from '../images/logo.svg';
+import { loginUser } from '../redux/actions/authentication';
 class LoginPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
       emailValid: false,
       passwordValid: false,
       formValid: false
-    }
+    };
   }
 
   onLoginSubmit = () => {
@@ -30,38 +30,40 @@ class LoginPage extends React.Component {
         { 'Content-Type': 'application/json' }
       )
       .then(response => {
-        const { firstName, lastName, isAdmin, email, token } = response.data
-        this.props.dispatch(loginUser(firstName, lastName, isAdmin, email, token))
+        const { firstName, lastName, isAdmin, email, token } = response.data;
+        this.props.dispatch(
+          loginUser(firstName, lastName, isAdmin, email, token)
+        );
       })
       .catch(error => {
-        console.log('error ' + error)
-      })
-  }
+        console.log('error ' + error);
+      });
+  };
 
   handleUserInput = e => {
-    const name = e.target.name
-    const value = e.target.value
+    const name = e.target.name;
+    const value = e.target.value;
     this.setState({ [name]: value }, () => {
-      this.validateField(name, value)
-    })
-  }
+      this.validateField(name, value);
+    });
+  };
 
   validateField = (fieldName, value) => {
-    let fieldValidationErrors = this.state.formErrors
-    let emailValid = this.state.emailValid
-    let passwordValid = this.state.passwordValid
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
 
     switch (fieldName) {
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid'
-        break
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        break;
       case 'password':
-        passwordValid = value.length >= 6
-        fieldValidationErrors.password = passwordValid ? '' : ' is too short'
-        break
+        passwordValid = value.length >= 6;
+        fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+        break;
       default:
-        break
+        break;
     }
     this.setState(
       {
@@ -70,18 +72,18 @@ class LoginPage extends React.Component {
         passwordValid: passwordValid
       },
       this.validateForm
-    )
-  }
+    );
+  };
 
   validateForm = () => {
     this.setState({
       formValid: this.state.emailValid && this.state.passwordValid
-    })
-  }
+    });
+  };
 
   errorClass = error => {
-    return error.length === 0 ? '' : 'has-error'
-  }
+    return error.length === 0 ? '' : 'has-error';
+  };
 
   render() {
     return (
@@ -117,7 +119,7 @@ class LoginPage extends React.Component {
           </ButtonPrompts>
         </LoginForm>
       </StyledLoginPage>
-    )
+    );
   }
 }
 
@@ -127,7 +129,7 @@ const StyledLoginPage = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-`
+`;
 
 const Banner = styled.div`
   display: flex;
@@ -135,27 +137,27 @@ const Banner = styled.div`
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 20px;
-`
+`;
 
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
-`
+`;
 
 const ButtonPrompts = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Form = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`
+`;
 const FormInput = styled(Input)`
   input {
     width: 220px;
@@ -165,6 +167,6 @@ const FormInput = styled(Input)`
   }
   margin: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-`
+`;
 
-export default connect()(LoginPage)
+export default connect()(LoginPage);
