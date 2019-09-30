@@ -10,8 +10,17 @@ class Emailer extends Component {
     super(props);
     this.state = {
       emails: ['unaizrehmani@gmail.com'],
-      subject: ''
+      subject: '',
+      design: {}
     };
+  }
+
+  componentDidMount = () => {
+    axios.get('https://social-charity-server.herokuapp.com/api/email/emailDesign').then(res => {
+      this.setState({design: res});
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   updateEmails = emails => {
@@ -23,6 +32,16 @@ class Emailer extends Component {
     const value = e.target.value;
     this.setState({ [name]: value });
   };
+
+  saveDesign = () => {
+    this.editor.saveDesign(design => {
+      // TODO: Implement save design functionality
+    });
+  }
+
+  onLoad = () => {
+    this.editor.loadDesign(this.state.design);
+  }
 
   render = () => {
     return (
@@ -36,7 +55,14 @@ class Emailer extends Component {
           placeholder="Enter email subject"
         />
         <EmailEditorStyle>
-          <EmailEditor ref={editor => (this.editor = editor)} />
+          <EmailEditor 
+            ref={editor => (this.editor = editor)} 
+            onLoad={this.onLoad}
+            minHeight={'600px'}
+            appearance={{
+              theme: 'light'
+            }}
+          />
         </EmailEditorStyle>
 
         <MultipleEmailStyle>
