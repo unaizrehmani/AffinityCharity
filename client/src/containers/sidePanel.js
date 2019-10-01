@@ -40,6 +40,14 @@ const StyledSidePanel = styled.div`
   @media screen and (max-width: 991px) {
     position: relative;
   }
+  a:link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
 `;
 const ContentNavigation = styled.div`
   position: relative;
