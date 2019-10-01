@@ -6,10 +6,6 @@ import NewCauseCard from '../components/newCauseCard';
 import CircularImage from '../components/circularImage';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <HomePageContainer>

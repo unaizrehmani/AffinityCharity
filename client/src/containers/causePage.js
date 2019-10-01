@@ -8,10 +8,6 @@ import PostCard from '../components/postCard';
 import PropTypes from 'prop-types';
 
 class CausePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <CausePageWrapper>
@@ -41,7 +37,7 @@ class CausePage extends React.Component {
         </CauseBanner>
         <CauseContent>
           <PostCard />
-          <Seperator />
+          <Separator />
           <PostCard />
         </CauseContent>
       </CausePageWrapper>
@@ -66,8 +62,8 @@ const CauseBanner = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
-  background-color: ${colors.primary}
-  color: ${colors.background}
+  background-color: ${colors.primary};
+  color: ${colors.background};
   align-items: center;
   text-align: center;
 `;
@@ -92,7 +88,7 @@ const ButtonWrapper = styled.div`
   display: flex;
 `;
 
-const Seperator = styled.div`
+const Separator = styled.div`
   margin: 10px 0px;
   height: 50px;
   width: 3px;
