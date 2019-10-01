@@ -7,7 +7,7 @@ export default class SidePanel extends Component {
   render() {
     return (
       <StyledSidePanel>
-        <ContentNavigation>
+        <ContentNavigation onClick={this.props.toggle}>
           <NavItem>
             <Link to='/'>Link1</Link>
           </NavItem>

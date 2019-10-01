@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Responsive from 'react-responsive';
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import { Icon } from 'semantic-ui-react';
-import LoginPage from './containers/loginPage';
-import NotFound from './containers/notFoundPage';
-import Emailer from './containers/emailEditor';
+import NotFoundPage from './containers/notFoundPage';
 import HomePage from './containers/homePage';
-import SidePanel from './containers/sidePanel';
 import CausePage from './containers/causePage';
+import Emailer from './containers/emailEditor';
+import SidePanel from './containers/sidePanel';
+import MenuButton from './components/menuButton';
 
-const Desktop = props => <Responsive {...props} minWidth={992} />;
-const Tablet = props => <Responsive {...props} maxWidth={991} />;
-
+// To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,50 +24,38 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <StyledApp>
-          <Desktop>
+        <Desktop>
+          <SidePanel toggle={this.handleDrawerToggle} />
+        </Desktop>
+        <Tablet>
+          <MenuButton toggle={this.handleDrawerToggle} />
+          <Drawer
+            open={this.state.menuOpen}
+            onClose={this.handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
             <SidePanel toggle={this.handleDrawerToggle} />
-          </Desktop>
-          <Tablet>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              style={{
-                position: 'fixed'
-              }}
-              onClick={this.handleDrawerToggle}
-            >
-              <Icon name='bars' />
-            </IconButton>
-            <Drawer
-              open={this.state.menuOpen}
-              onClose={this.handleDrawerToggle}
-              ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-              }}
-            >
-              <SidePanel toggle={this.handleDrawerToggle} />
-            </Drawer>
-          </Tablet>
-          <ContentArea>
-            <Switch>
-              {/* Change routes to "PrivateRoute" where needed when auth is finished */}
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/emailEditor' component={Emailer} />
-              <Route exact path='/cause' component={CausePage} />
-              <Route exact path='/login' component={LoginPage} />
-              <Route component={NotFound} />
-            </Switch>
-          </ContentArea>
-        </StyledApp>
+          </Drawer>
+        </Tablet>
+        <ContentArea>
+          <Switch>
+            {/* Change routes to "PrivateRoute" where needed when auth is finished */}
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/emailEditor' component={Emailer} />
+            <Route exact path='/cause' component={CausePage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </ContentArea>
       </Router>
     );
   }
 }
 
-const StyledApp = styled.div`
-  /* Add responsive stuff here later */
-`;
+const Desktop = props => <Responsive {...props} minWidth={992} />;
+
+const Tablet = props => <Responsive {...props} maxWidth={991} />;
 
 const ContentArea = styled.div`
   display: flex;
@@ -82,10 +65,4 @@ const ContentArea = styled.div`
   }
 `;
 
-const mapStateToProps = state => {
-  return {
-    isLoggedIn: state.authentication.isLoggedIn
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;
