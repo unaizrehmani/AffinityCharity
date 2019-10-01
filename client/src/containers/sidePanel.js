@@ -47,6 +47,7 @@ const StyledSidePanel = styled.div`
 
   a:visited {
     text-decoration: none;
+    color: inherit;
   }
 `;
 const ContentNavigation = styled.div`
