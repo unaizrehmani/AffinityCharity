@@ -10,10 +10,10 @@ class Emailer extends Component {
     super(props);
     this.state = {
       emails: ['unaizrehmani@gmail.com'],
-      subject: ''
+      subject: '',
+      design: undefined
     };
   }
-
   updateEmails = emails => {
     this.setState({ emails });
   };
@@ -24,36 +24,8 @@ class Emailer extends Component {
     this.setState({ [name]: value });
   };
 
-  render = () => {
-    return (
-      <div>
-        <EmailEditorStyle>
-          <EmailEditor ref={editor => (this.editor = editor)} />
-        </EmailEditorStyle>
-
-        <MultipleEmailStyle>
-          <MultipleEmail
-            emails={this.state.emails}
-            updateEmails={this.updateEmails}
-          />
-          <FormInputStyle
-            type="text"
-            name="subject"
-            value={this.state.subject}
-            onChange={this.handleUserInput}
-            label="Subject"
-            placeholder="Enter email subject"
-          />
-          <ButtonStyle>
-            <Button title="Send Email" primary handleClick={this.exportHtml} />
-          </ButtonStyle>
-        </MultipleEmailStyle>
-      </div>
-    );
-  };
-
   exportHtml = () => {
-    this.editor.exportHtml(data => {
+    window.unlayer.exportHtml(data => {
       const html = `${String(data.html)}`;
       const email = this.state.emails;
       const subject = this.state.subject;
@@ -74,6 +46,58 @@ class Emailer extends Component {
         });
     });
   };
+
+  saveDesign = () => {
+    // TODO: Implement save design functionality
+    // window.unlayer.saveDesign(design => console.log(design));
+  };
+
+  onLoad = () => {
+    axios
+      .get('https://social-charity-server.herokuapp.com/api/email/emailDesign')
+      .then(res => {
+        this.setState({ design: res.data }, () => {
+          window.unlayer.loadDesign(this.state.design);
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  render = () => {
+    return (
+      <div>
+        <FormInputStyle
+          type="text"
+          name="subject"
+          value={this.state.subject}
+          onChange={this.handleUserInput}
+          label="Subject"
+          placeholder="Enter email subject"
+        />
+        <EmailEditorStyle>
+          <EmailEditor
+            onLoad={this.onLoad}
+            minHeight={'600px'}
+            appearance={{
+              theme: 'light'
+            }}
+          />
+        </EmailEditorStyle>
+
+        <MultipleEmailStyle>
+          <MultipleEmail
+            emails={this.state.emails}
+            updateEmails={this.updateEmails}
+          />
+          <ButtonStyle>
+            <Button title="Send Email" primary handleClick={this.exportHtml} />
+          </ButtonStyle>
+        </MultipleEmailStyle>
+      </div>
+    );
+  };
 }
 
 const EmailEditorStyle = styled.div`
@@ -85,6 +109,7 @@ const MultipleEmailStyle = styled.div`
   padding-top: 5px;
 `;
 const FormInputStyle = styled(Input)`
+  padding-left: 20px;
   input {
     width: 220px;
   }
