@@ -1,5 +1,5 @@
 const Post = require('../models/post');
-const Profile = require('../models/profile');
+const Cause = require('../models/cause');
 const Agent = require('../models/agent');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/posts`;
@@ -33,11 +33,11 @@ exports.insertPost = async (req, res, next) => {
     }
     const result = await post.save();
 
-    // update relevant Profiles
+    // update relevant Causes
     for (let i = 0; i < post.tagged.length; i++) {
-      const profileID = post.tagged[i];
-      await Profile.findByIdAndUpdate(
-        profileID,
+      const causeID = post.tagged[i];
+      await Cause.findByIdAndUpdate(
+        causeID,
         { $push: { taggedPosts: result._id } },
         { safe: true, upsert: true, new: true }
       );
