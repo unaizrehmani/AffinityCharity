@@ -7,7 +7,7 @@ export default class SidePanel extends Component {
   render() {
     return (
       <StyledSidePanel>
-        <ContentNavigation onClick={this.props.toggle}>
+        <div onClick={this.props.toggle}>
           <NavItem>
             <Link to='/'>Link1</Link>
           </NavItem>
@@ -20,7 +20,7 @@ export default class SidePanel extends Component {
           <NavItem>
             <Link to='/'>Link4</Link>
           </NavItem>
-        </ContentNavigation>
+        </div>
       </StyledSidePanel>
     );
   }
@@ -50,10 +50,7 @@ const StyledSidePanel = styled.div`
     color: inherit;
   }
 `;
-const ContentNavigation = styled.div`
-  position: relative;
-  margin-top: 45px;
-`;
+
 const NavItem = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
