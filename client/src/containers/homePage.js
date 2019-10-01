@@ -6,10 +6,6 @@ import NewCauseCard from '../components/newCauseCard';
 import CircularImage from '../components/circularImage';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <HomePageContainer>
@@ -26,31 +22,31 @@ class HomePage extends React.Component {
         <CausesContainer>
           <NewCauseCard />
           <CauseCard
-            title="Jane Doe"
-            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            date="June 30th, 2008"
-            description="Absolute legend right here"
+            title='Jane Doe'
+            image='https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038'
+            date='June 30th, 2008'
+            description='Absolute legend right here'
             subscribers={23}
           />
           <CauseCard
-            title="Ahmad Ramadan"
-            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            date="March 3rd, 2015"
-            description="This guy here"
+            title='Ahmad Ramadan'
+            image='https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038'
+            date='March 3rd, 2015'
+            description='This guy here'
             subscribers={23}
           />
           <CauseCard
-            title="Ahmad Ramadan"
-            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            date="March 3rd, 2015"
-            description="This guy here"
+            title='Ahmad Ramadan'
+            image='https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038'
+            date='March 3rd, 2015'
+            description='This guy here'
             subscribers={23}
           />
           <CauseCard
-            title="Ahmad Ramadan"
-            image="https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038"
-            date="March 3rd, 2015"
-            description="This guy here"
+            title='Ahmad Ramadan'
+            image='https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038'
+            date='March 3rd, 2015'
+            description='This guy here'
             subscribers={23}
           />
         </CausesContainer>
