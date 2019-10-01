@@ -6,14 +6,14 @@ export default class MenuButton extends Component {
   render() {
     return (
       <IconButton
-        color='inherit'
-        aria-label='open drawer'
+        color="inherit"
+        aria-label="open drawer"
         style={{
           position: 'fixed'
         }}
         onClick={this.props.toggle}
       >
-        <Icon name='bars' />
+        <Icon name="bars" />
       </IconButton>
     );
   }
