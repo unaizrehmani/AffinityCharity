@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const profileSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true
-  },
-  lastName: {
+const causeSchema = new Schema({
+  name: {
     type: String,
     required: true
   },
@@ -21,14 +17,18 @@ const profileSchema = new Schema({
     type: String,
     required: false
   },
+  defaultDesign: {
+    type: JSON,
+    required: true
+  },
   charityID: {
     type: String,
     required: true
   },
-  taggedPosts: [
+  users: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Post',
+      ref: 'User',
       required: false
     }
   ],
@@ -38,10 +38,10 @@ const profileSchema = new Schema({
   }
 });
 
-profileSchema.methods.toJSON = function () {
+causeSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.__v;
   return obj;
 };
 
-module.exports = mongoose.model('Profile', profileSchema);
+module.exports = mongoose.model('Cause', causeSchema);

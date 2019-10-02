@@ -19,7 +19,7 @@ class MultipleEmail extends Component {
 
     return (
       <div>
-        <h3>Send to:</h3>
+        <span>{this.props.label}</span>
         <ReactMultiEmail
           placeholder="Enter e-mails here"
           emails={emails}
