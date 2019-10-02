@@ -9,8 +9,8 @@ class ManageAgentsPage extends React.Component {
   render() {
     return (
       <ManageAgentsPageWrapper>
-          <PageTitle>Manage your Agents</PageTitle>
-          <Table/>
+        <PageTitle>Manage your Agents</PageTitle>
+        <Table />
       </ManageAgentsPageWrapper>
     );
   }
@@ -20,18 +20,16 @@ const mapStateToProps = state => ({
   session: state.authentication
 });
 
-ManageAgentsPage.propTypes = {
-};
+ManageAgentsPage.propTypes = {};
 
 const ManageAgentsPageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+`;
 
-const PageTitle = styled.h1`
-`
+const PageTitle = styled.h1``;
 
 export default connect(mapStateToProps)(ManageAgentsPage);

@@ -45,7 +45,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/emailEditor" component={Emailer} />
             <Route exact path="/cause" component={CausePage} />
-            <Route exact path='/manageAgents' component={ManageAgentsPage} />
+            <Route exact path="/manageAgents" component={ManageAgentsPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentArea>
