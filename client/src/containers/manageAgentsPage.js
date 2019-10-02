@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import colors from '../styles/colors';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Table from '../components/table';
 
 class ManageAgentsPage extends React.Component {
   render() {
     return (
       <ManageAgentsPageWrapper>
           <PageTitle>Manage your Agents</PageTitle>
+          <Table/>
       </ManageAgentsPageWrapper>
     );
   }
