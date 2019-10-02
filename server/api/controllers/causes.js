@@ -2,6 +2,7 @@ const Cause = require('../models/cause');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/causes`;
 const sample = require('../util/sample.json');
+const nodemailer = require('nodemailer');
 
 /*
  * POST /api/causes route to save a new cause.
@@ -146,6 +147,14 @@ exports.deleteCauseByID = async (req, res, next) => {
   }
 };
 
+/*
+ * POST /api/causes/send-email route to send email to all cause recepients
+ *
+ * REQ.BODY:
+ * @param {string} email
+ * @param {string} html
+ * @param {string} subject
+ */
 exports.sendEmail = (req, res, next) => {
   const user = process.env.CLIENT_EMAIL;
   const pass = process.env.CLIENT_PASSWORD;
