@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { logoutUser } from '../redux/actions/authentication';
+import Button from '../components/button';
 import colors from '../styles/colors';
 
-export default class SidePanel extends Component {
+class SidePanel extends Component {
+  onLogout = () => {
+    this.props.dispatch(logoutUser());
+  };
   render() {
     return (
       <StyledSidePanel>
         <div onClick={this.props.toggle}>
           <NavItem>
-            <Link to="/">Link1</Link>
+            <Link to='/'>Link1</Link>
           </NavItem>
           <NavItem>
-            <Link to="/">Link2</Link>
+            <Link to='/'>Link2</Link>
           </NavItem>
           <NavItem>
-            <Link to="/">Link3</Link>
+            <Link to='/'>Link3</Link>
           </NavItem>
           <NavItem>
-            <Link to="/">Link4</Link>
+            <Link to='/'>Link4</Link>
           </NavItem>
         </div>
+        <Button title='Log Out' primary handleClick={this.onLogout} />
       </StyledSidePanel>
     );
   }
@@ -58,3 +65,5 @@ const NavItem = styled.div`
   font-size: 25px;
   color: ${colors.primary};
 `;
+
+export default connect()(SidePanel);
