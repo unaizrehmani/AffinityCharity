@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import GlobalStyles from './styles/globalStyles';
-// import App from './App.js';
 import Authenticate from './Authenticate';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css';
