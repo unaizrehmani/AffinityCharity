@@ -2,15 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 import { connect } from 'react-redux';
-import CircularImage from '../components/circularImage';
-import Button from '../components/button';
-import PostCard from '../components/postCard';
 import PropTypes from 'prop-types';
 
 class ManageAgentsPage extends React.Component {
   render() {
     return (
-      <div></div>
+      <ManageAgentsPageWrapper>
+          <PageTitle>Manage your Agents</PageTitle>
+      </ManageAgentsPageWrapper>
     );
   }
 }
@@ -21,5 +20,16 @@ const mapStateToProps = state => ({
 
 ManageAgentsPage.propTypes = {
 };
+
+const ManageAgentsPageWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+`
+
+const PageTitle = styled.h1`
+`
 
 export default connect(mapStateToProps)(ManageAgentsPage);
