@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import colors from '../styles/colors';
 import MaterialTable from 'material-table';
 
@@ -52,6 +51,7 @@ class Table extends Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
+                    console.log(reject);
                     const data = this.state.data;
                     data.push(newData);
                     this.setState({ data }, () => resolve());
@@ -63,6 +63,7 @@ class Table extends Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
+                    console.log(reject);
                     const data = this.state.data;
                     const index = data.indexOf(oldData);
                     data[index] = newData;
@@ -75,6 +76,7 @@ class Table extends Component {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
+                    console.log(reject);
                     let data = this.state.data;
                     const index = data.indexOf(oldData);
                     data.splice(index, 1);
