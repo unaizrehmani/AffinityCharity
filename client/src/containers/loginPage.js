@@ -35,6 +35,7 @@ class LoginPage extends React.Component {
         this.props.dispatch(
           loginUser(firstName, lastName, isAdmin, email, token)
         );
+        this.props.history.push('/');
       })
       .catch(error => {
         console.log('error ' + error);
