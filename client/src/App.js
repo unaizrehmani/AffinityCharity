@@ -41,7 +41,6 @@ class App extends Component {
         </Tablet>
         <ContentArea>
           <Switch>
-            {/* Change routes to "PrivateRoute" where needed when auth is finished */}
             <Route exact path="/" component={HomePage} />
             <Route exact path="/emailEditor" component={Emailer} />
             <Route exact path="/cause" component={CausePage} />

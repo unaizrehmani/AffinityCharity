@@ -6,6 +6,7 @@ import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
 import { loginUser } from '../redux/actions/authentication';
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +39,14 @@ class LoginPage extends React.Component {
       .catch(error => {
         console.log('error ' + error);
       });
+  };
+
+  onFakeLogin = () => {
+    console.log('Faking Logging In.');
+    this.props.dispatch(
+      loginUser('Zarif', 'Shahriar', false, 'zshah011@uottawa.ca', 'token')
+    );
+    this.props.history.push('/');
   };
 
   handleUserInput = e => {
@@ -118,7 +127,12 @@ class LoginPage extends React.Component {
             />
           </Form>
           <ButtonPrompts>
-            <Button title="Sign In" primary handleClick={this.onLoginSubmit} />
+            {/* <Button title='Sign In' primary handleClick={this.onLoginSubmit} /> */}
+            <Button
+              title="Fake Sign In"
+              primary
+              handleClick={this.onFakeLogin}
+            />
             <Button title="Forgot Password" primary={false} />
           </ButtonPrompts>
         </LoginForm>
