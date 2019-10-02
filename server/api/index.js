@@ -1,7 +1,7 @@
 require('dotenv/config');
 const connect = async () => {
-  await require('./util/db');
-  require('./util/app');
+  await require('./main/db');
+  require('./main/app');
   console.log('Database and app set');
 };
 

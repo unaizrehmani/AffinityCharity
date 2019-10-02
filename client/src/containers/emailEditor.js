@@ -31,7 +31,7 @@ class Emailer extends Component {
       const subject = this.state.subject;
       axios
         .post(
-          'https://social-charity-server.herokuapp.com/api/email/send-email',
+          'https://social-charity-server.herokuapp.com/api/causes/send-email',
           {
             email,
             html,
@@ -54,10 +54,12 @@ class Emailer extends Component {
 
   onLoad = () => {
     axios
-      .get('https://social-charity-server.herokuapp.com/api/email/emailDesign')
+      .get(
+        'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
+      )
       .then(res => {
         this.setState({ design: res.data }, () => {
-          window.unlayer.loadDesign(this.state.design);
+            window.unlayer.loadDesign(this.state.design);
         });
       })
       .catch(err => {
@@ -67,7 +69,7 @@ class Emailer extends Component {
 
   render = () => {
     return (
-      <div>
+      <EmailerStyle>
         <FormInputStyle
           type="text"
           name="subject"
@@ -76,6 +78,14 @@ class Emailer extends Component {
           label="Subject"
           placeholder="Enter email subject"
         />
+        <MultipleEmailStyle>
+          <MultipleEmail
+            label="Bcc:"
+            emails={this.state.emails}
+            updateEmails={this.updateEmails}
+          />
+        </MultipleEmailStyle>
+
         <EmailEditorStyle>
           <EmailEditor
             onLoad={this.onLoad}
@@ -86,35 +96,30 @@ class Emailer extends Component {
           />
         </EmailEditorStyle>
 
-        <MultipleEmailStyle>
-          <MultipleEmail
-            emails={this.state.emails}
-            updateEmails={this.updateEmails}
-          />
-          <ButtonStyle>
-            <Button title="Send Email" primary handleClick={this.exportHtml} />
-          </ButtonStyle>
-        </MultipleEmailStyle>
-      </div>
+        <ButtonStyle>
+          <Button title="Send Email" primary handleClick={this.exportHtml} />
+        </ButtonStyle>
+      </EmailerStyle>
     );
   };
 }
-
-const EmailEditorStyle = styled.div`
+const EmailerStyle = styled.div`
+  width: 100%;
   padding-right: 20px;
 `;
+const EmailEditorStyle = styled.div``;
 const MultipleEmailStyle = styled.div`
-  padding-right: 20px;
   padding-left: 20px;
   padding-top: 5px;
 `;
 const FormInputStyle = styled(Input)`
   padding-left: 20px;
-  input {
-    width: 220px;
-  }
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
   .label {
     width: 100px;
+    text-align: center;
   }
 `;
 
