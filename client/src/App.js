@@ -1,61 +1,68 @@
 import React, { Component } from 'react';
-import {
-  Route,
-  NavLink,
-  BrowserRouter as Router,
-  Switch
-} from 'react-router-dom';
-import { connect } from 'react-redux';
-import LoginPage from './containers/loginPage';
-import NotFound from './containers/notFoundPage';
-import Emailer from './containers/emailEditor';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import Responsive from 'react-responsive';
+import Drawer from '@material-ui/core/Drawer';
+import NotFoundPage from './containers/notFoundPage';
 import HomePage from './containers/homePage';
 import CausePage from './containers/causePage';
-// import { PrivateRoute } from './components/privateRoute';
+import Emailer from './containers/emailEditor';
+import SidePanel from './containers/sidePanel';
+import MenuButton from './components/menuButton';
 
+// To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false
+    };
+  }
+  handleDrawerToggle = () => {
+    this.setState({ menuOpen: !this.state.menuOpen });
+  };
   render() {
     return (
       <Router>
-        <div>
-          <ul>
-            <li>
-              <NavLink exact activeClassName="active" to="/">
-                Home Page
-              </NavLink>
-            </li>
-            <li>
-              <NavLink activeClassName="active" to="/login">
-                Login Page
-              </NavLink>
-            </li>
-            <li>
-              <NavLink activeClassName="active" to="/emailEditor">
-                Emailer Page
-              </NavLink>
-            </li>
-            <li>
-              <NavLink activeClassName="active" to="/cause">
-                Cause Page
-              </NavLink>
-            </li>
-          </ul>
-          <hr />
+        <Desktop>
+          <SidePanel toggle={this.handleDrawerToggle} />
+        </Desktop>
+        <Tablet>
+          <MenuButton toggle={this.handleDrawerToggle} />
+          <Drawer
+            open={this.state.menuOpen}
+            onClose={this.handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            <SidePanel toggle={this.handleDrawerToggle} />
+          </Drawer>
+        </Tablet>
+        <ContentArea>
           <Switch>
             {/* Change routes to "PrivateRoute" where needed when auth is finished */}
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/emailEditor" component={Emailer} />
             <Route exact path="/cause" component={CausePage} />
-            <Route component={NotFound} />
+            <Route component={NotFoundPage} />
           </Switch>
-        </div>
+        </ContentArea>
       </Router>
     );
   }
 }
-const mapStateToProps = state => ({
-  isLoggedIn: state.authentication.isLoggedIn
-});
 
-export default connect(mapStateToProps)(App);
+const Desktop = props => <Responsive {...props} minWidth={992} />;
+
+const Tablet = props => <Responsive {...props} maxWidth={991} />;
+
+const ContentArea = styled.div`
+  display: flex;
+  justify-content: center;
+  @media screen and (min-width: 992px) {
+    margin-left: 250px;
+  }
+`;
+
+export default App;

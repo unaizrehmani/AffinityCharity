@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
-import colors from '../styles/colors';
 import { loginUser } from '../redux/actions/authentication';
 class LoginPage extends React.Component {
   constructor(props) {
@@ -21,7 +20,6 @@ class LoginPage extends React.Component {
   }
 
   onLoginSubmit = () => {
-    alert('Logging In.');
     axios
       .post(
         'https://social-charity-server.herokuapp.com/api/auth/token',
@@ -91,7 +89,11 @@ class LoginPage extends React.Component {
     return (
       <StyledLoginPage>
         <Banner>
-          <img width={300} src={AffinityLogo} />
+          <img
+            width={300}
+            src={AffinityLogo}
+            alt={'Affinity Logo - Holding Hands'}
+          />
           <h1>Welcome to Affinity</h1>
         </Banner>
         <LoginForm>
@@ -146,9 +148,6 @@ const LoginForm = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
-  background: ${colors.secondary};
 `;
 
 const ButtonPrompts = styled.div`
