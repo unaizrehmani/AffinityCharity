@@ -15,19 +15,19 @@ class SidePanel extends Component {
       <StyledSidePanel>
         <div onClick={this.props.toggle}>
           <NavItem>
-            <Link to='/'>Link1</Link>
+            <Link to="/">Link1</Link>
           </NavItem>
           <NavItem>
-            <Link to='/'>Link2</Link>
+            <Link to="/">Link2</Link>
           </NavItem>
           <NavItem>
-            <Link to='/'>Link3</Link>
+            <Link to="/">Link3</Link>
           </NavItem>
           <NavItem>
-            <Link to='/'>Link4</Link>
+            <Link to="/">Link4</Link>
           </NavItem>
         </div>
-        <Button title='Log Out' primary handleClick={this.onLogout} />
+        <Button title="Log Out" primary handleClick={this.onLogout} />
       </StyledSidePanel>
     );
   }

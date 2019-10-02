@@ -31,7 +31,7 @@ class Emailer extends Component {
       const subject = this.state.subject;
       axios
         .post(
-          'https://social-charity-server.herokuapp.com/api/email/send-email',
+          'https://social-charity-server.herokuapp.com/api/causes/send-email',
           {
             email,
             html,
@@ -54,10 +54,13 @@ class Emailer extends Component {
 
   onLoad = () => {
     axios
-      .get('https://social-charity-server.herokuapp.com/api/email/emailDesign')
+      .get(
+        'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
+      )
       .then(res => {
         this.setState({ design: res.data }, () => {
-          window.unlayer.loadDesign(this.state.design);
+          if (this.state.design.rows && this.state.design.location)
+            window.unlayer.loadDesign(this.state.design);
         });
       })
       .catch(err => {

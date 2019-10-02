@@ -14,17 +14,12 @@ router.use(sanitizeBody);
  */
 router.post('/', multiPartMiddleware, causeController.insertCause);
 router.post('/send-email', multiPartMiddleware, causeController.sendEmail);
-
+router.get('/defaultDesign', causeController.defaultDesign);
 /*
  * GET /api/causes/
  */
 router.get('/', causeController.getAllCauses);
 router.get('/:causeID', causeController.getCauseByID);
-router.get(
-  '/default-design',
-  multiPartMiddleware,
-  causeController.defaultDesign
-);
 
 /*
  * PATCH /api/causes/
