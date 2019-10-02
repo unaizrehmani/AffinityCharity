@@ -37,9 +37,10 @@ class Table extends Component {
     return (
         <div style={{ width: "95%" }}>
         <MaterialTable
-           title="Editable Preview"
+           title="Agents"
            columns={this.state.columns}
            data={this.state.data}
+           style={{ color: colors.primaryAccent }}
            editable={{
              onRowAdd: newData =>
                new Promise((resolve, reject) => {
