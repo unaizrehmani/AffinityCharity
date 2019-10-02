@@ -59,7 +59,7 @@ class Emailer extends Component {
       )
       .then(res => {
         this.setState({ design: res.data }, () => {
-            window.unlayer.loadDesign(this.state.design);
+          window.unlayer.loadDesign(this.state.design);
         });
       })
       .catch(err => {

@@ -71,13 +71,12 @@ const HomePageContainer = styled.div`
 const CausesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 50%;
   flex-wrap: wrap;
 `;
 
 const Heading = styled.h5`
   display: flex;
-  width: 50%;
+  width: 100%;
   margin-left: 25px;
 `;
 
