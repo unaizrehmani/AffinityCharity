@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-// This needs to be changed to use redux store
-const authHere = false;
-
-export default class PrivateRoute extends Component {
-  constructor(props) {
-    super(props);
-  }
+class PrivateRoute extends Component {
   render() {
-    let render = authHere ? (
+    let render = this.props.isLoggedIn ? (
       this.props.component
     ) : (
       <Redirect
@@ -22,3 +17,9 @@ export default class PrivateRoute extends Component {
     return <Route>{render}</Route>;
   }
 }
+
+const mapStateToProps = state => ({
+  isLoggedIn: state.authentication.isLoggedIn
+});
+
+export default connect(mapStateToProps)(PrivateRoute);

@@ -1,4 +1,4 @@
-import { LOGIN_USER } from '../actions/authentication';
+import { LOGIN_USER, LOGOUT_USER } from '../actions/authentication';
 
 const authenticationReducer = function(
   state = {
@@ -22,6 +22,18 @@ const authenticationReducer = function(
           lastName: payload.lastName,
           isAdmin: payload.isAdmin,
           userToken: payload.token
+        }
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        ...{
+          isLoggedIn: false,
+          email: undefined,
+          firstName: undefined,
+          lastName: undefined,
+          isAdmin: undefined,
+          userToken: undefined
         }
       };
     default:
