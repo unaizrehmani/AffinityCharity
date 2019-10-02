@@ -3,7 +3,7 @@ const router = express.Router();
 const multiPartMiddleware = require('connect-multiparty')();
 const causeController = require('../controllers/causes');
 const sanitizeBody = require('../middleware/sanitization/sanitizeBody');
-const authorize = require('../middleware/auth/verifyToken');
+// const authorize = require('../middleware/auth/verifyToken');
 
 // router.use(authorize);
 // TODO: uncomment authorize later

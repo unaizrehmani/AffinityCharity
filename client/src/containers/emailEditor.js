@@ -77,13 +77,13 @@ class Emailer extends Component {
           placeholder="Enter email subject"
         />
         <MultipleEmailStyle>
-        <MultipleEmail
+          <MultipleEmail
             label="Bcc:"
             emails={this.state.emails}
             updateEmails={this.updateEmails}
           />
         </MultipleEmailStyle>
-        
+
         <EmailEditorStyle>
           <EmailEditor
             onLoad={this.onLoad}
@@ -104,9 +104,8 @@ class Emailer extends Component {
 const EmailerStyle = styled.div`
   width: 100%;
   padding-right: 20px;
-`
-const EmailEditorStyle = styled.div`
 `;
+const EmailEditorStyle = styled.div``;
 const MultipleEmailStyle = styled.div`
   padding-left: 20px;
   padding-top: 5px;
