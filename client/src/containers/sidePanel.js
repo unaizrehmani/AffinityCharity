@@ -29,16 +29,22 @@ class SidePanel extends Component {
               <h3>Home</h3>
             </NavItem>
           </Link>
-          <Link to='/admin'>
+          <Link to='/subscribers'>
             <NavItem>
               <StyledIcon name='users' />
               <h3>Subscribers</h3>
             </NavItem>
           </Link>
-          <Link to='/causes'>
+          <Link to='/editor'>
             <NavItem>
-              <StyledIcon name='building' />
-              <h3>Causes</h3>
+              <StyledIcon name='mail' />
+              <h3>Email Editor</h3>
+            </NavItem>
+          </Link>
+          <Link to='/admin'>
+            <NavItem>
+              <StyledIcon name='chess king' />
+              <h3>Admin</h3>
             </NavItem>
           </Link>
           <Link to='/profile'>
