@@ -45,6 +45,13 @@ const agentSchema = new Schema({
       ref: 'Post'
     }
   ],
+  causes: [
+    {
+      type: Schema.Types.ObjectId,
+      required: false,
+      ref: 'Cause'
+    }
+  ],
   createdDate: {
     type: Date,
     required: true
