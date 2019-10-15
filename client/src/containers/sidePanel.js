@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
-import ProfilePic from '../images/profilePic.jpeg';
-import CircularImage from '../components/circularImage';
 import { logoutUser } from '../redux/actions/authentication';
 import Button from '../components/button';
 import colors from '../styles/colors';
@@ -17,29 +15,41 @@ class SidePanel extends Component {
     return (
       <StyledSidePanel>
         <Banner>
-          <CircularImage image='https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.realsimple.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Frs_medium_image%2Fpublic%2Fwoman-no-makeup.jpg%3Fitok%3Drqo_zfOM&q=85' />
-          <StyledBannerInfo>
-            <h3>Jane Doe</h3>
-            <h3>Charity </h3>
-          </StyledBannerInfo>
+          <Avatar
+            url={
+              'https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png'
+            }
+          />
+          <h3>Jane Doe</h3>
         </Banner>
         <Navigation onClick={this.props.toggle}>
-          <NavItem>
-            <Icon name='home' />
-            <Link to='/'>Link1</Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/'>Link2</Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/'>Link3</Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/'>Link4</Link>
-          </NavItem>
+          <Link to="/">
+            <NavItem>
+              <StyledIcon name="home" />
+              <h3>Home</h3>
+            </NavItem>
+          </Link>
+          <Link to="/admin">
+            <NavItem>
+              <StyledIcon name="users" />
+              <h3>Subscribers</h3>
+            </NavItem>
+          </Link>
+          <Link to="/causes">
+            <NavItem>
+              <StyledIcon name="building" />
+              <h3>Causes</h3>
+            </NavItem>
+          </Link>
+          <Link to="/profile">
+            <NavItem>
+              <StyledIcon name="user" />
+              <h3>Profile</h3>
+            </NavItem>
+          </Link>
         </Navigation>
         <BottomBanner>
-          <Button title='Log Out' primary={false} handleClick={this.onLogout} />
+          <Button title="Log Out" primary={false} handleClick={this.onLogout} />
         </BottomBanner>
       </StyledSidePanel>
     );
@@ -52,7 +62,7 @@ const StyledSidePanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${colors.secondary};
+  background-color: ${colors.primary};
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 0;
@@ -70,20 +80,22 @@ const StyledSidePanel = styled.div`
   }
 `;
 
+const StyledIcon = styled(Icon)`
+  font-size: 1.3em !important;
+  padding-right: 30px;
+`;
+
 const Banner = styled.div`
-  height: 200px;
+  height: 150px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: ${colors.primary};
+  background-color: ${colors.secondary};
   justify-content: center;
   align-items: center;
-`;
-
-const StyledBannerInfo = styled.div`
-  text-align: center;
   h3 {
-    margin: 0;
+    padding-top: 10px;
+    color: ${colors.primary};
   }
 `;
 
@@ -92,26 +104,38 @@ const BottomBanner = styled.div`
   width: 100%;
   display: flex;
   margin-top: auto;
+  margin-bottom: 20px;
   align-items: center;
+  justify-content: center;
 `;
 
-const Navigation = styled.div``;
+const Navigation = styled.div`
+  width: 100%;
+`;
 
 const NavItem = styled.div`
-  background: ${colors.primaryAccent};
   color: ${colors.secondary};
   padding: 20px;
-  width: 250px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: inherit;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   cursor: pointer;
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: ${colors.primaryAccent};
+    transition: background-color 100ms linear;
+  }
 `;
 
-const Avatar = styled.img`
-  height: 100px;
-  width: 100px;
+const Avatar = styled.div`
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
+  border: 1px solid red;
+  background-image: ${props => `url(${props.url})`};
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 export default connect()(SidePanel);

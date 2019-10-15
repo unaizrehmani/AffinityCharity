@@ -14,19 +14,19 @@ export default createGlobalStyle`
   }
   
   h1 {
-    font-size: 30px;
+    font-size: 30px !important;
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 20px !important;;
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 16px !important;;
   }
 
   p {
-    font-size: 10px;
+    font-size: 14px !important;;
   }
 
   body,
@@ -35,10 +35,10 @@ export default createGlobalStyle`
   h3,
   h4,
   p {
-      margin: 0;
+      margin: 0 !important;
       padding: 0;
-      border: 0;
-      font-weight: normal;
+      border: 0 !important;
+      font-weight: normal !important;
   }
 
   /* Global <a> links */
