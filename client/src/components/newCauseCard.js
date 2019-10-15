@@ -20,9 +20,9 @@ class newCauseCard extends React.Component {
 
 const CauseCardContainer = styled.div`
   display: flex;
-  margin: 0 10px 20px 10px
+  margin: 0 10px 20px 10px;
   flex-direction: column;
-  background-color: ${colors.secondary}
+  background-color: ${colors.secondary};
   border-radius: 10px;
   justify-content: center;
   align-items: center;

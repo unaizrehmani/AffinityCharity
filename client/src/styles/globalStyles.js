@@ -14,11 +14,11 @@ export default createGlobalStyle`
   }
   
   h1 {
-    font-size: 30px !important;
+    font-size: 35px !important;
   }
 
   h2 {
-    font-size: 20px !important;;
+    font-size: 25px !important;;
   }
 
   h3 {
