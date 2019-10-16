@@ -56,12 +56,12 @@ const StyledLabel = styled.div`
   align-content: center;
   width: 65px;
   height: 35px;
-  background-color: ${colors.secondary};
+  background-color: ${colors.primaryAccent};
   border-radius: 20px 0 0 20px;
 `;
 
 const StyledIcon = styled(Icon)`
   font-size: 1.3em !important;
-  color: ${colors.primary};
+  color: ${colors.background};
   margin: 0 !important;
 `;
