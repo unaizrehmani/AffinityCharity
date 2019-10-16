@@ -3,6 +3,7 @@ import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
+// To-Do Add prop styles to allow for smaller input box
 export default class Input extends Component {
   render() {
     return (
@@ -11,10 +12,11 @@ export default class Input extends Component {
           <StyledIcon name={this.props.icon} />
         </StyledLabel>
         <StyledInput
-          type='text'
+          name={this.props.name}
+          type={this.props.type}
           placeholder={this.props.placeholder}
-          onChange={event => this.props.onChange(event.target.value)}
-        ></StyledInput>
+          onChange={event => this.props.onChange(event)}
+        />
       </StyledContainer>
     );
   }
@@ -36,8 +38,7 @@ const StyledInput = styled.input`
   border-radius: 0 20px 20px 0;
   border-width: 1px;
   border-style: solid;
-  border-color: lightgray;
-  background-color: ${colors.secondary};
+  border-color: ${colors.secondary};
   padding-left: 10px;
   font-size: 16px;
   :focus {
@@ -55,12 +56,12 @@ const StyledLabel = styled.div`
   align-content: center;
   width: 65px;
   height: 35px;
-  background-color: ${colors.primaryAccent};
+  background-color: ${colors.secondary};
   border-radius: 20px 0 0 20px;
 `;
 
 const StyledIcon = styled(Icon)`
   font-size: 1.3em !important;
-  color: ${colors.background};
+  color: ${colors.primary};
   margin: 0 !important;
 `;
