@@ -38,8 +38,7 @@ const CauseCardContainer = styled.div`
   align-items: center;
   background-color: ${colors.secondary};
   border-radius: 5px;
-  height: 280px;
-  width: 300px;
+  width: 260px;
   position: relative;
   cursor: pointer;
   box-shadow: 0px 0px 3px 0px rgba(173, 173, 173, 1);
@@ -50,7 +49,7 @@ const CauseCardContainer = styled.div`
 `;
 
 const CauseImageContainer = styled.div`
-  height: 200px;
+  height: 150px;
   width: 100%;
   background-image: ${props => `url(${props.url})`};
   background-size: cover;
@@ -59,6 +58,7 @@ const CauseImageContainer = styled.div`
 
 const CauseCardContent = styled.div`
   display: flex;
+  height: 80px;
   width: 100%;
   flex-direction: column;
   align-items: center;
