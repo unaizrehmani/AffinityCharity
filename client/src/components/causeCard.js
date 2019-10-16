@@ -82,15 +82,4 @@ const CauseDescription = styled.h5`
   font-weight: 100;
 `;
 
-const Separator = styled.hr`
-  width: 100%;
-  border: 1px solid #e0e0e0;
-`;
-
-const CauseSubscribers = styled.p`
-  font-size: 15px;
-  font-weight: 600;
-  color: ${colors.primaryAccent};
-`;
-
 export default CauseCard;
