@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
+import Input from '../components/input';
 import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
 
@@ -63,14 +64,7 @@ class HomePage extends React.Component {
           <h1>Dashboard</h1>
           <hr />
         </Header>
-        <SearchContainer>
-          <StyledSearch>
-            <StyledLabel>
-              <StyledIcon name='search' />
-            </StyledLabel>
-            <StyledInput></StyledInput>
-          </StyledSearch>
-        </SearchContainer>
+        <Input icon='search' />
         <CausesContainer>
           {this.state.fakeCauses.map(cause => {
             return this.renderCauseCard(cause);
@@ -110,10 +104,6 @@ const Header = styled.div`
     margin-right: auto;
     margin-top: 0.2rem;
   }
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
 `;
 
 const StyledSearch = styled.div`
