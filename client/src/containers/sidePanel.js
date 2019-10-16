@@ -23,39 +23,39 @@ class SidePanel extends Component {
           <h3>Jane Doe</h3>
         </Banner>
         <Navigation onClick={this.props.toggle}>
-          <Link to='/'>
+          <Link to="/">
             <NavItem>
-              <StyledIcon name='home' />
+              <StyledIcon name="home" />
               <h3>Home</h3>
             </NavItem>
           </Link>
-          <Link to='/subscribers'>
+          <Link to="/subscribers">
             <NavItem>
-              <StyledIcon name='users' />
+              <StyledIcon name="users" />
               <h3>Subscribers</h3>
             </NavItem>
           </Link>
-          <Link to='/editor'>
+          <Link to="/editor">
             <NavItem>
-              <StyledIcon name='mail' />
+              <StyledIcon name="mail" />
               <h3>Email Editor</h3>
             </NavItem>
           </Link>
-          <Link to='/admin'>
+          <Link to="/admin">
             <NavItem>
-              <StyledIcon name='chess king' />
+              <StyledIcon name="chess king" />
               <h3>Admin</h3>
             </NavItem>
           </Link>
-          <Link to='/profile'>
+          <Link to="/profile">
             <NavItem>
-              <StyledIcon name='user' />
+              <StyledIcon name="user" />
               <h3>Profile</h3>
             </NavItem>
           </Link>
         </Navigation>
         <BottomBanner>
-          <Button title='Log Out' primary={false} handleClick={this.onLogout} />
+          <Button title="Log Out" primary={false} handleClick={this.onLogout} />
         </BottomBanner>
       </StyledSidePanel>
     );
