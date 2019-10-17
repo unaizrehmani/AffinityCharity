@@ -6,12 +6,13 @@ import { Icon as SemanticIcon } from 'semantic-ui-react';
 export default class Icon extends Component {
   render() {
     return (
-        <StyledIcon name={this.props.name} />
+        <StyledIcon {...this.props}/>
     );
   }
 }
 
 const StyledIcon = styled(SemanticIcon)`
-  font-size: 1.3em !important;
+  font-size: ${props => props.size === undefined ? '1.3em !important' : props.size}
   padding-right: 30px;
+  color: ${props => props.color};
 `;
