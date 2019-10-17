@@ -21,7 +21,7 @@ const StyledButton = styled.div`
   color: ${props =>
     props.primary ? `${colors.background}` : `${colors.primary}`};
   padding: 10px;
-  width: 150px;
+  width: 140px;
   border-radius: 200px;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

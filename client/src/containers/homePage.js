@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Input from '../components/input';
+import Button from '../components/button';
 import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
 
@@ -104,12 +105,16 @@ class HomePage extends React.Component {
             type={'text'}
             onChange={this.onQueryChange}
           />
+          <Button title='Add Cause' primary />
         </SearchContainer>
-        <CausesContainer>
-          {this.state.fakeCauses.map(cause => {
-            return this.renderCauseCard(cause);
-          })}
-        </CausesContainer>
+        <PinnedCauses>
+          <h3>Pinned Causes</h3>
+          <CausesContainer>
+            {this.state.fakeCauses.map(cause => {
+              return this.renderCauseCard(cause);
+            })}
+          </CausesContainer>
+        </PinnedCauses>
       </HomePageContainer>
     );
   }
@@ -128,7 +133,6 @@ const CausesContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1250px;
   margin-top: 20px;
   margin-bottom: 10px;
 `;
@@ -158,6 +162,17 @@ const Header = styled.div`
 
 const SearchContainer = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PinnedCauses = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
 `;
 
 // export default HomePage;
