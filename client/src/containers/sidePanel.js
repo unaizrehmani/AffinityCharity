@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
 import { logoutUser } from '../redux/actions/authentication';
 import Button from '../components/button';
+import Icon from '../components/Icon';
 import colors from '../styles/colors';
 
 class SidePanel extends Component {
@@ -25,31 +25,31 @@ class SidePanel extends Component {
         <Navigation onClick={this.props.toggle}>
           <Link to="/">
             <NavItem>
-              <StyledIcon name="home" />
+              <Icon name="home" />
               <h3>Home</h3>
             </NavItem>
           </Link>
           <Link to="/subscribers">
             <NavItem>
-              <StyledIcon name="users" />
+              <Icon name="users" />
               <h3>Subscribers</h3>
             </NavItem>
           </Link>
           <Link to="/editor">
             <NavItem>
-              <StyledIcon name="mail" />
+              <Icon name="mail" />
               <h3>Email Editor</h3>
             </NavItem>
           </Link>
           <Link to="/admin">
             <NavItem>
-              <StyledIcon name="chess king" />
+              <Icon name="chess king" />
               <h3>Admin</h3>
             </NavItem>
           </Link>
           <Link to="/profile">
             <NavItem>
-              <StyledIcon name="user" />
+              <Icon name="user" />
               <h3>Profile</h3>
             </NavItem>
           </Link>
@@ -84,11 +84,6 @@ const StyledSidePanel = styled.div`
     text-decoration: none;
     color: inherit;
   }
-`;
-
-const StyledIcon = styled(Icon)`
-  font-size: 1.3em !important;
-  padding-right: 30px;
 `;
 
 const Banner = styled.div`
