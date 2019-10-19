@@ -1,7 +1,6 @@
 const Cause = require('../models/cause');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/causes`;
-const sample = require('../util/sample.json');
 const nodemailer = require('nodemailer');
 
 /*
@@ -19,7 +18,6 @@ exports.insertCause = async (req, res, next) => {
   try {
     const cause = new Cause(req.body);
     cause.createdDate = new Date();
-    cause.defaultDesign = { ...sample };
     cause.users = [];
     if (req.files.image && req.files.image.path) {
       await cloudinaryUtil.v2.uploader.upload(
@@ -56,7 +54,7 @@ exports.insertCause = async (req, res, next) => {
 exports.getCauseByID = async (req, res, next) => {
   try {
     const id = req.params.causeID;
-    const cause = await Cause.findById(id).populate('users');
+    const cause = await Cause.findById(id).populate('donors', '-password -__v');
     res.send(cause);
   } catch (error) {
     res.send(error);
@@ -68,7 +66,7 @@ exports.getCauseByID = async (req, res, next) => {
  */
 exports.getAllCauses = async (req, res, next) => {
   try {
-    const causes = await Cause.find({}).populate('users');
+    const causes = await Cause.find({}).populate('donors', '-password -__v');
     res.send(causes);
   } catch (error) {
     res.send(error);
@@ -94,7 +92,6 @@ exports.patchCauseByID = async (req, res, next) => {
   const body = {
     ...req.body
   };
-  console.log(body);
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const cause = await Cause.findById(req.params.causeID);
@@ -180,8 +177,4 @@ exports.sendEmail = (req, res, next) => {
     console.log('Message %s sent: %s', info.messageId, info.response);
     res.status(200).send('Email sent');
   });
-};
-
-exports.defaultDesign = (req, res, next) => {
-  res.status(200).send(sample);
 };

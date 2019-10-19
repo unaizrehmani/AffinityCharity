@@ -17,18 +17,14 @@ const causeSchema = new Schema({
     type: String,
     required: false
   },
-  defaultDesign: {
-    type: JSON,
+  deleteable: {
+    type: Boolean,
     required: true
   },
-  charityID: {
-    type: String,
-    required: true
-  },
-  users: [
+  donors: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Donor',
       required: false
     }
   ],
