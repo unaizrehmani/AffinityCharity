@@ -100,12 +100,12 @@ class HomePage extends React.Component {
         </Header>
         <SearchContainer>
           <Input
-            icon='search'
-            placeholder='Search for a cause..'
+            icon="search"
+            placeholder="Search for a cause.."
             type={'text'}
             onChange={this.onQueryChange}
           />
-          <Button title='Add Cause' primary />
+          <Button title="Add Cause" primary />
         </SearchContainer>
         <PinnedCauses>
           <h3>Pinned Causes</h3>
