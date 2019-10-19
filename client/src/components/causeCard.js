@@ -15,7 +15,7 @@ class CauseCard extends React.Component {
         <CauseImageContainer url={this.props.image} />
         <CauseCardContent>
           <CauseTitle>{this.props.title}</CauseTitle>
-          <CauseDate>{this.props.date}</CauseDate>
+          <CauseLocation>{this.props.location}</CauseLocation>
           <CauseDescription>{this.props.description}</CauseDescription>
         </CauseCardContent>
       </CauseCardContainer>
@@ -70,7 +70,7 @@ const CauseTitle = styled.h3`
   margin: 0px;
 `;
 
-const CauseDate = styled.h5`
+const CauseLocation = styled.h5`
   font-size: 12px;
   margin: 0px;
   font-weight: 700;
