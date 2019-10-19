@@ -60,14 +60,14 @@ donorSchema.methods.generateAuthToken = () => {
 
 donorSchema.statics.authenticate = async function (email, password) {
   try {
-    const agent = await this.findOne({
+    const donor = await this.findOne({
       email: email
-    });
+    }).populate('causes');
     let hashedPassword;
-    if (agent) hashedPassword = agent.password;
+    if (donor) hashedPassword = donor.password;
     else return null;
     const passWordDidMatch = await bcrypt.compare(password, hashedPassword);
-    return passWordDidMatch ? agent : null;
+    return passWordDidMatch ? donor : null;
   } catch (error) {
     return error;
   }

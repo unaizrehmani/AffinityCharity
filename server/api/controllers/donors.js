@@ -10,11 +10,10 @@ const SALTROUNDS = 14;
  * @param {string} lastName
  * @param {string} email
  * @param {string} password
- * @param {string} charityID
- * @param {string} location
+ * @param {string} phone
+ * @param {string} address
+ * @param {array} causes
  *
- * REQ.FILES
- * @param {file} image
  */
 exports.insertDonor = async (req, res, next) => {
   try {
@@ -32,12 +31,12 @@ exports.insertDonor = async (req, res, next) => {
  * GET /api/donors/:donorID route to get an donor by ID.
  *
  * REQ.PARAMS:
- * @param {number} donortID
+ * @param {number} donorID
  */
 exports.getDonorByID = async (req, res, next) => {
   try {
     const id = req.params.donorID;
-    const donor = await Donor.findById(id).populate('causes');
+    const donor = await Donor.findById(id).populate('causes', '-__v');
     res.send(donor);
   } catch (error) {
     res.send(error);
@@ -49,7 +48,7 @@ exports.getDonorByID = async (req, res, next) => {
  */
 exports.getAllDonors = async (req, res, next) => {
   try {
-    const donors = await Donor.find({}).populate('causes');
+    const donors = await Donor.find({}).populate('causes', '-__v');
     res.send(donors);
   } catch (error) {
     res.send(error);
@@ -67,11 +66,9 @@ exports.getAllDonors = async (req, res, next) => {
  * @param {string} lastName
  * @param {string} email
  * @param {string} password
- * @param {string} charityID
- * @param {string} location
- *
- * REQ.FILES
- * @param {file} image
+ * @param {string} phone
+ * @param {string} address
+ * @param {array} causes
  */
 exports.patchDonorByID = async (req, res, next) => {
   const body = {
