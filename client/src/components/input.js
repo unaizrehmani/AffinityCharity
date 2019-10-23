@@ -7,11 +7,16 @@ import colors from '../styles/colors';
 export default class Input extends Component {
   render() {
     return (
-      <StyledContainer>
-        <StyledLabel>
-          <StyledIcon name={this.props.icon} />
-        </StyledLabel>
+      <StyledContainer {...this.props}>
+        {this.props.noLabel ? (
+          ''
+        ) : (
+          <StyledLabel>
+            <StyledIcon name={this.props.icon} />
+          </StyledLabel>
+        )}
         <StyledInput
+          {...this.props}
           name={this.props.name}
           type={this.props.type}
           placeholder={this.props.placeholder}

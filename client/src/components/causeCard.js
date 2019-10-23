@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import colors from '../styles/colors';
+import Icon from '../components/Icon';
 
 class CauseCard extends React.Component {
   constructor(props) {
@@ -17,6 +18,15 @@ class CauseCard extends React.Component {
           <CauseTitle>{this.props.title}</CauseTitle>
           <CauseLocation>{this.props.location}</CauseLocation>
           <CauseDescription>{this.props.description}</CauseDescription>
+          <CauseSubscriberCount>
+            <Icon
+              style={{ paddingRight: '0px' }}
+              name="user"
+              size="1.0em"
+              color={colors.primaryAccent}
+            />
+            {this.props.subscribers}
+          </CauseSubscriberCount>
         </CauseCardContent>
       </CauseCardContainer>
     );
@@ -78,6 +88,11 @@ const CauseLocation = styled.h5`
 `;
 
 const CauseDescription = styled.h5`
+  margin: 10px 0 0 0;
+  font-weight: 100;
+`;
+
+const CauseSubscriberCount = styled.h5`
   margin: 10px 0 0 0;
   font-weight: 100;
 `;
