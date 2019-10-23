@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Input from '../components/input';
 import Button from '../components/button';
 import colors from '../styles/colors';
@@ -72,7 +73,9 @@ class HomePage extends React.Component {
             type={'text'}
             onChange={this.onQueryChange}
           />
-          <Button title="Add Cause" primary />
+          <Link to="/createcause">
+            <Button title="Create Cause" primary />
+          </Link>
         </SearchContainer>
         <PinnedCauses>
           <h3>Pinned Causes</h3>

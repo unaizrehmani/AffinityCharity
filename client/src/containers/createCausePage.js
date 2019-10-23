@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Input from '../components/input';
 import TextArea from '../components/textArea';
+import Button from '../components/button';
 import colors from '../styles/colors';
 
 class CreateCausePage extends React.Component {
@@ -45,6 +46,16 @@ class CreateCausePage extends React.Component {
                 <InputTitle>Description</InputTitle>
                 <TextArea style={{width: '600px'}}/>
               </InputContainer>
+              <InputContainer>
+                <InputTitle>Upload Image</InputTitle>
+                <input
+                    type='file'
+                    style={{marginBottom: '10px', borderRadius: '0px', height: '30px', width: '600px'}} 
+                    onChange={() => {
+
+                    }}/>
+              </InputContainer>
+              <Button title="Create Cause" primary />
           </FormContainer>
       </CreateCausePageContainer>
     );
@@ -100,6 +111,7 @@ const InputContainer = styled.div`
     align-items: center;
     text-align: left;
     width: 600px;
+    margin: 5px;
 `
 
 const InputTitle = styled.h5`
