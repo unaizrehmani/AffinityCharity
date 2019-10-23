@@ -22,8 +22,8 @@ class CauseCard extends React.Component {
             <Icon
               style={{ paddingRight: '0px' }}
               name="user"
-              size="small"
-              color="red"
+              size="1.0em"
+              color={colors.primaryAccent}
             />
             {this.props.subscribers}
           </CauseSubscriberCount>
