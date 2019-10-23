@@ -12,6 +12,8 @@ class SidePanel extends Component {
     this.props.dispatch(logoutUser());
   };
   render() {
+    const name =
+      this.props.session.firstName + ' ' + this.props.session.lastName;
     return (
       <StyledSidePanel>
         <Banner>
@@ -20,7 +22,7 @@ class SidePanel extends Component {
               'https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png'
             }
           />
-          <h3>Jane Doe</h3>
+          <h3>{name}</h3>
         </Banner>
         <Navigation onClick={this.props.toggle}>
           <Link to="/">
@@ -144,4 +146,9 @@ const Avatar = styled.div`
   background-repeat: no-repeat;
 `;
 
-export default connect()(SidePanel);
+const mapStateToProps = state => {
+  return {
+    session: state.authentication
+  };
+};
+export default connect(mapStateToProps)(SidePanel);
