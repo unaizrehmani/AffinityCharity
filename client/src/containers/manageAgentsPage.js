@@ -40,7 +40,6 @@ class ManageAgentsPage extends React.Component {
       })
       .then(response => {
         this.setState({ data: response.data });
-        console.log('Got Data.');
       })
       .catch(error => {
         console.log('error ' + error);
