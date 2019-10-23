@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import colors from '../styles/colors';
 import { Icon as SemanticIcon } from 'semantic-ui-react';
 
 export default class Icon extends Component {
