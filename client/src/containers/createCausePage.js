@@ -10,53 +10,69 @@ class CreateCausePage extends React.Component {
   render() {
     return (
       <CreateCausePageContainer>
-          <Header>
-            <h1>Create a Cause</h1>
-            <hr />
-          </Header>
-          <FormContainer>
-              <InputContainer>
-                <InputTitle>Title</InputTitle>
-                <Input 
-                    style={{marginBottom: '10px', borderRadius: '0px', height: '30px', width: '600px'}} 
-                    noLabel={true}
-                    onChange={() => {
-
-                    }}/>
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>Type</InputTitle>
-                <Input 
-                    style={{marginBottom: '10px', borderRadius: '0px', height: '30px', width: '600px'}}
-                    noLabel={true}
-                    onChange={() => {
-
-                    }}/>
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>Location</InputTitle>
-                <Input 
-                    style={{marginBottom: '10px', borderRadius: '0px', height: '30px', width: '600px'}} 
-                    noLabel={true}
-                    onChange={() => {
-
-                    }}/>
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>Description</InputTitle>
-                <TextArea style={{width: '600px'}}/>
-              </InputContainer>
-              <InputContainer>
-                <InputTitle>Upload Image</InputTitle>
-                <input
-                    type='file'
-                    style={{marginBottom: '10px', borderRadius: '0px', height: '30px', width: '600px'}} 
-                    onChange={() => {
-
-                    }}/>
-              </InputContainer>
-              <Button title="Create Cause" primary />
-          </FormContainer>
+        <Header>
+          <h1>Create a Cause</h1>
+          <hr />
+        </Header>
+        <FormContainer>
+          <InputContainer>
+            <InputTitle>Title</InputTitle>
+            <Input
+              style={{
+                marginBottom: '10px',
+                borderRadius: '0px',
+                height: '30px',
+                width: '600px'
+              }}
+              noLabel={true}
+              onChange={() => {}}
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Type</InputTitle>
+            <Input
+              style={{
+                marginBottom: '10px',
+                borderRadius: '0px',
+                height: '30px',
+                width: '600px'
+              }}
+              noLabel={true}
+              onChange={() => {}}
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Location</InputTitle>
+            <Input
+              style={{
+                marginBottom: '10px',
+                borderRadius: '0px',
+                height: '30px',
+                width: '600px'
+              }}
+              noLabel={true}
+              onChange={() => {}}
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Description</InputTitle>
+            <TextArea style={{ width: '600px' }} />
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Upload Image</InputTitle>
+            <input
+              type="file"
+              style={{
+                marginBottom: '10px',
+                borderRadius: '0px',
+                height: '30px',
+                width: '600px'
+              }}
+              onChange={() => {}}
+            />
+          </InputContainer>
+          <Button title="Create Cause" primary />
+        </FormContainer>
       </CreateCausePageContainer>
     );
   }
@@ -99,26 +115,25 @@ const Header = styled.div`
 `;
 
 const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 `;
 
 const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-    width: 600px;
-    margin: 5px;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 600px;
+  margin: 5px;
+`;
 
 const InputTitle = styled.h5`
-    text-align: left;
-    width: 100%;
-    margin: 0px;
-`
-
+  text-align: left;
+  width: 100%;
+  margin: 0px;
+`;
 
 export default connect(mapStateToProps)(CreateCausePage);

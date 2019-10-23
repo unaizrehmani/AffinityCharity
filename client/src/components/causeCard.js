@@ -18,8 +18,15 @@ class CauseCard extends React.Component {
           <CauseTitle>{this.props.title}</CauseTitle>
           <CauseLocation>{this.props.location}</CauseLocation>
           <CauseDescription>{this.props.description}</CauseDescription>
-          <CauseSubscriberCount><Icon style={{paddingRight: '0px' }}name='user' size='1.0em' color={colors.primaryAccent}/>
-            {this.props.subscribers}</CauseSubscriberCount>
+          <CauseSubscriberCount>
+            <Icon
+              style={{ paddingRight: '0px' }}
+              name="user"
+              size="1.0em"
+              color={colors.primaryAccent}
+            />
+            {this.props.subscribers}
+          </CauseSubscriberCount>
         </CauseCardContent>
       </CauseCardContainer>
     );
@@ -89,7 +96,7 @@ const SubscriberContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const CauseSubscriberCount = styled.h5`
   margin: 10px 0 0 0;

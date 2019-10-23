@@ -8,7 +8,7 @@ export default class TextArea extends Component {
   render() {
     return (
       <TextAreaContainer {...this.props}>
-        <StyledTextArea/>
+        <StyledTextArea />
       </TextAreaContainer>
     );
   }
@@ -38,4 +38,3 @@ const StyledTextArea = styled(SemanticTextArea)`
     opacity: 0.5; /* Firefox */
   }
 `;
-
