@@ -69,7 +69,7 @@ class HomePage extends React.Component {
         <SearchContainer>
           <Input
             icon="search"
-            placeholder="Search for a cause.."
+            placeholder="Search for a cause..."
             type={'text'}
             onChange={this.onQueryChange}
           />
