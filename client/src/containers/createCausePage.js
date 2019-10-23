@@ -71,7 +71,7 @@ class CreateCausePage extends React.Component {
               onChange={() => {}}
             />
           </InputContainer>
-          <Button title="Create Cause" primary />
+          <Button title="Create Cause" primary handleClick={} />
         </FormContainer>
       </CreateCausePageContainer>
     );

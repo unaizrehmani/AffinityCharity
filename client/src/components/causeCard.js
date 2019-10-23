@@ -92,12 +92,6 @@ const CauseDescription = styled.h5`
   font-weight: 100;
 `;
 
-const SubscriberContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const CauseSubscriberCount = styled.h5`
   margin: 10px 0 0 0;
   font-weight: 100;
