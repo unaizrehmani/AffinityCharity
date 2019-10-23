@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const agentSchema = new Schema({
+const donorSchema = new Schema({
   firstName: {
     type: String,
     required: true
@@ -21,30 +21,14 @@ const agentSchema = new Schema({
     type: String,
     required: true
   },
-  mediaURL: {
-    type: String,
-    required: false
-  },
-  imageID: {
-    type: String,
-    require: false
-  },
-  charityID: {
-    type: Schema.Types.ObjectId,
-    ref: 'Charity',
-    required: true
-  },
-  location: {
+  address: {
     type: String,
     required: true
   },
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'Post'
-    }
-  ],
+  phone: {
+    type: String,
+    required: true
+  },
   causes: [
     {
       type: Schema.Types.ObjectId,
@@ -58,14 +42,14 @@ const agentSchema = new Schema({
   }
 });
 
-agentSchema.methods.toJSON = function () {
+donorSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.password;
   delete obj.__v;
   return obj;
 };
 
-agentSchema.methods.generateAuthToken = () => {
+donorSchema.methods.generateAuthToken = () => {
   return jwt.sign(
     {
       _id: this._id
@@ -74,19 +58,19 @@ agentSchema.methods.generateAuthToken = () => {
   );
 };
 
-agentSchema.statics.authenticate = async function (email, password) {
+donorSchema.statics.authenticate = async function (email, password) {
   try {
-    const agent = await this.findOne({
+    const donor = await this.findOne({
       email: email
-    });
+    }).populate('causes');
     let hashedPassword;
-    if (agent) hashedPassword = agent.password;
+    if (donor) hashedPassword = donor.password;
     else return null;
     const passWordDidMatch = await bcrypt.compare(password, hashedPassword);
-    return passWordDidMatch ? agent : null;
+    return passWordDidMatch ? donor : null;
   } catch (error) {
     return error;
   }
 };
 
-module.exports = mongoose.model('Agent', agentSchema);
+module.exports = mongoose.model('Donor', donorSchema);

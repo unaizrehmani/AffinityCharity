@@ -3,32 +3,36 @@ const router = express.Router();
 const multiPartMiddleware = require('connect-multiparty')();
 const causeController = require('../controllers/causes');
 const sanitizeBody = require('../middleware/sanitization/sanitizeBody');
-// const authorize = require('../middleware/auth/verifyToken');
+const authorize = require('../middleware/auth/verifyToken');
 
-// router.use(authorize);
-// TODO: uncomment authorize later
 router.use(sanitizeBody);
-
+router.use(multiPartMiddleware);
 /*
  * POST /api/causes/
  */
-router.post('/', multiPartMiddleware, causeController.insertCause);
-router.post('/send-email', multiPartMiddleware, causeController.sendEmail);
-router.get('/defaultDesign', causeController.defaultDesign);
+router.post('/', authorize, causeController.insertCause);
+/*
+ * POST /api/causes/send-email
+ */
+router.post('/send-email', authorize, causeController.sendEmail);
+
 /*
  * GET /api/causes/
  */
 router.get('/', causeController.getAllCauses);
-router.get('/:causeID', causeController.getCauseByID);
+/*
+ * GET /api/causes/:causeID
+ */
+router.get('/:causeID', authorize, causeController.getCauseByID);
 
 /*
- * PATCH /api/causes/
+ * PATCH /api/causes/:causeID
  */
-router.patch('/:causeID', multiPartMiddleware, causeController.patchCauseByID);
+router.patch('/:causeID', authorize, causeController.patchCauseByID);
 
 /*
  * DELETE /api/causes/
  */
-router.delete('/:causeID', causeController.deleteCauseByID);
+router.delete('/:causeID', authorize, causeController.deleteCauseByID);
 
 module.exports = router;

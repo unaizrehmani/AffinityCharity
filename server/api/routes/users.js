@@ -6,27 +6,26 @@ const sanitizeBody = require('../middleware/sanitization/sanitizeBody');
 const authorize = require('../middleware/auth/verifyToken');
 
 router.use(sanitizeBody);
+router.use(multiPartMiddleware);
 
 /*
  * POST /api/users/
  */
-router.post('/', multiPartMiddleware, userController.insertUser);
+router.post('/', userController.insertUser);
 
 /*
  * GET /api/users/
  */
 router.get('/', authorize, userController.getAllUsers);
+/*
+ * GET /api/users/:userID
+ */
 router.get('/:userID', authorize, userController.getUserByID);
 
 /*
  * PATCH /api/users/
  */
-router.patch(
-  '/:userID',
-  authorize,
-  multiPartMiddleware,
-  userController.patchUserByID
-);
+router.patch('/:userID', authorize, userController.patchUserByID);
 
 /*
  * DELETE /api/users/
