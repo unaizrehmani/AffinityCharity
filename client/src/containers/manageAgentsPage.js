@@ -1,22 +1,56 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Table from '../components/table';
 
 class ManageAgentsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      columns: undefined,
+      data: undefined
+    };
+  }
+
+  componentDidMount = async () => {
+    const AuthStr = 'Bearer '.concat(this.props.session.userToken);
+    axios
+      .get('https://social-charity-server.herokuapp.com/api/users', {
+        params: {},
+        headers: { Authorization: AuthStr }
+      })
+      .then(response => {
+        this.setState({
+          data: response.data.data,
+          columns: response.data.columns
+        });
+        console.log('Got Data.');
+      })
+      .catch(error => {
+        console.log('error ' + error);
+      });
+  };
+
   render() {
+    const renderTable =
+      this.state.data === undefined ? (
+        ''
+      ) : (
+        <Table
+          title={'Admin'}
+          columns={this.state.columns}
+          data={this.state.data}
+        />
+      );
     return (
       <ManageAgentsPageWrapper>
         <PageTitle>Manage your Agents</PageTitle>
-        <Table />
+        {renderTable}
       </ManageAgentsPageWrapper>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  session: state.authentication
-});
 
 ManageAgentsPage.propTypes = {};
 
@@ -29,5 +63,9 @@ const ManageAgentsPageWrapper = styled.div`
 `;
 
 const PageTitle = styled.h1``;
+
+const mapStateToProps = state => ({
+  session: state.authentication
+});
 
 export default connect(mapStateToProps)(ManageAgentsPage);
