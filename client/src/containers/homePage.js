@@ -47,7 +47,7 @@ class HomePage extends React.Component {
         date={cause.createdDate}
         location={cause.location}
         description={cause.description}
-        subscribers={cause.subscribers}
+        subscribers={cause.donors.length}
       />
     );
   };
@@ -69,7 +69,7 @@ class HomePage extends React.Component {
         <SearchContainer>
           <Input
             icon="search"
-            placeholder="Search for a cause.."
+            placeholder="Search for a cause..."
             type={'text'}
             onChange={this.onQueryChange}
           />
