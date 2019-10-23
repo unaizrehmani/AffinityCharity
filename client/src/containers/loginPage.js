@@ -35,19 +35,13 @@ class LoginPage extends React.Component {
         this.props.dispatch(
           loginUser(firstName, lastName, isAdmin, email, token)
         );
-        this.props.history.push('/');
+        if (token) {
+          this.props.history.push('/');
+        }
       })
       .catch(error => {
         console.log('error ' + error);
       });
-  };
-
-  onFakeLogin = () => {
-    console.log('Faking Logging In.');
-    this.props.dispatch(
-      loginUser('Zarif', 'Shahriar', false, 'zshah011@uottawa.ca', 'token')
-    );
-    this.props.history.push('/');
   };
 
   handleUserInput = e => {
@@ -128,12 +122,7 @@ class LoginPage extends React.Component {
             />
           </Form>
           <ButtonPrompts>
-            {/* <Button title='Sign In' primary handleClick={this.onLoginSubmit} /> */}
-            <Button
-              title="Fake Sign In"
-              primary
-              handleClick={this.onFakeLogin}
-            />
+            <Button title="Sign In" primary handleClick={this.onLoginSubmit} />
             <Button title="Forgot Password" primary={false} />
           </ButtonPrompts>
         </LoginForm>
