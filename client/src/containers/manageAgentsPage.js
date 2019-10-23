@@ -8,7 +8,25 @@ class ManageAgentsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      columns: undefined,
+      columns: [
+        {
+          title: 'Name',
+          field: 'firstName'
+        },
+        {
+          title: 'Surname',
+          field: 'lastName'
+        },
+        {
+          title: 'Email',
+          field: 'email'
+        },
+        {
+          title: 'Causes',
+          field: 'causes',
+          type: 'numeric'
+        }
+      ],
       data: undefined
     };
   }
@@ -21,10 +39,7 @@ class ManageAgentsPage extends React.Component {
         headers: { Authorization: AuthStr }
       })
       .then(response => {
-        this.setState({
-          data: response.data.data,
-          columns: response.data.columns
-        });
+        this.setState({ data: response.data });
         console.log('Got Data.');
       })
       .catch(error => {
