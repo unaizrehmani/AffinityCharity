@@ -7,7 +7,6 @@ import Button from '../components/button';
 import colors from '../styles/colors';
 
 class CreateCausePage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,14 +19,14 @@ class CreateCausePage extends React.Component {
     };
   }
 
-  handleCreateCauseButton = () =>{
-    console.log("create cause");
-  }
+  handleCreateCauseButton = () => {
+    console.log('create cause');
+  };
 
   handleUserInput = e => {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [name]: value })
+    this.setState({ [name]: value });
   };
 
   handleImageChange = e => {
@@ -35,15 +34,15 @@ class CreateCausePage extends React.Component {
 
     let reader = new FileReader();
     let image = e.target.files[0];
-    console.log(image)
+    console.log(image);
     reader.onloadend = () => {
       this.setState({
         image: image,
         imagePreviewUrl: reader.result
       });
-    }
-    reader.readAsDataURL(image)
-  }
+    };
+    reader.readAsDataURL(image);
+  };
 
   render() {
     const inputContainerStyleOverride = {
@@ -51,15 +50,17 @@ class CreateCausePage extends React.Component {
       borderRadius: '0px',
       height: '30px',
       width: '600px'
-    }
+    };
 
-    let {imagePreviewUrl} = this.state;
-    let $imagePreview = null
+    let { imagePreviewUrl } = this.state;
+    let $imagePreview = null;
 
     if (imagePreviewUrl) {
-      $imagePreview = (<ImagePreview src={imagePreviewUrl} />);
+      $imagePreview = <ImagePreview src={imagePreviewUrl} />;
     } else {
-      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+      $imagePreview = (
+        <div className="previewText">Please select an Image for Preview</div>
+      );
     }
 
     return (
@@ -105,21 +106,24 @@ class CreateCausePage extends React.Component {
               name="description"
               value={this.state.description}
               onChange={this.handleUserInput}
-              style={{ width: '600px' }} />
+              style={{ width: '600px' }}
+            />
           </InputContainer>
           <InputContainer>
             <InputTitle>Upload Image</InputTitle>
             <input
               type="file"
               name="image"
-              onChange={(e) => this.handleImageChange(e)}
+              onChange={e => this.handleImageChange(e)}
               style={inputContainerStyleOverride}
             />
           </InputContainer>
-            <div className="imgPreview">
-            {$imagePreview}
-          </div>
-          <Button title="Create Cause" primary handleClick={this.handleCreateCauseButton} />
+          <div className="imgPreview">{$imagePreview}</div>
+          <Button
+            title="Create Cause"
+            primary
+            handleClick={this.handleCreateCauseButton}
+          />
         </FormContainer>
       </CreateCausePageContainer>
     );
