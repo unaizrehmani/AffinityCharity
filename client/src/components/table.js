@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
 import colors from '../styles/colors';
 import MaterialTable from 'material-table';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Table extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       columns: [
-        { title: 'Name', field: 'name' },
+        {
+          title: 'Name',
+          field: 'firstName'
+        },
         {
           title: 'Surname',
-          field: 'surname',
-          initialEditValue: 'initial edit value'
-        },
-        { title: 'Email', field: 'email' },
-        { title: 'Causes', field: 'causes', type: 'numeric' }
-      ],
-      data: [
-        {
-          name: 'Tanner',
-          surname: 'Linsley',
-          email: 'Tanner.linsley@gmail.com',
-          causes: 20
+          field: 'lastName'
         },
         {
-          name: 'Jane',
-          surname: 'Doe',
-          email: 'Jane.Doe@gmail.com',
-          causes: 2
+          title: 'Email',
+          field: 'email'
         },
         {
-          name: 'Jon',
-          surname: 'Snow',
-          email: 'Jon.snow@gmail.com',
-          causes: 5
+          title: 'Causes',
+          field: 'causes',
+          type: 'numeric'
         }
       ]
     };
   }
+
+  componentDidMount = async () => {
+    const AuthStr = 'Bearer '.concat(this.props.session.userToken);
+
+    axios
+      .get('https://social-charity-server.herokuapp.com/api/users', {
+        params: {},
+        headers: { Authorization: AuthStr }
+      })
+      .then(response => {
+        this.setState({ data: response.data });
+      })
+      .catch(error => {
+        console.log('error ' + error);
+      });
+  };
+
   render() {
     return (
       <div style={{ width: '95%' }}>
@@ -92,4 +101,9 @@ class Table extends Component {
   }
 }
 
-export default Table;
+const mapStateToProps = state => {
+  return {
+    session: state.authentication
+  };
+};
+export default connect(mapStateToProps)(Table);
