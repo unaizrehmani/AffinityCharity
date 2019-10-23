@@ -47,7 +47,7 @@ class HomePage extends React.Component {
         date={cause.createdDate}
         location={cause.location}
         description={cause.description}
-        subscribers={cause.subscribers}
+        subscribers={cause.donors.length}
       />
     );
   };
