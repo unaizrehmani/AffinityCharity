@@ -5,6 +5,7 @@ import MultipleEmail from '../components/multipleEmail';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import { connect } from 'react-redux';
+import NewsLetterTemplate from '../constants/templates/newsletter';
 class Emailer extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +30,7 @@ class Emailer extends Component {
       headers: {'Authorization': `Bearer ${this.props.session.userToken}`}
     };
     const bodyParameters = {
-      html: `<div>hello</div>`,
+      html: `${require('../constants/templates/newsletter').newsletter}`,
       email: this.state.emails,
       subject: this.state.subject
     }
@@ -46,6 +47,8 @@ class Emailer extends Component {
   };
 
   render = () => {
+    const emailHTML = `${require('../constants/templates/newsletter').newsletterTemplate}`;
+    console.log('emailHTML', emailHTML);
     return (
       <EmailerStyle>
         <FormInputStyle
@@ -63,7 +66,7 @@ class Emailer extends Component {
             updateEmails={this.updateEmails}
           />
         </MultipleEmailStyle>
-
+        <div dangerouslySetInnerHTML={{__html: emailHTML}}></div>
         <ButtonStyle>
           <Button title="Send Email" primary handleClick={this.sendEmail} />
         </ButtonStyle>
