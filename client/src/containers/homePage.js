@@ -6,7 +6,7 @@ import Input from '../components/input';
 import Button from '../components/button';
 import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
-import axios from '../../node_modules/axios/index';
+import axios from 'axios';
 
 class HomePage extends React.Component {
   constructor(props) {

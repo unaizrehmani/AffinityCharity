@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import EmailEditor from 'react-email-editor';
 import styled from 'styled-components';
 import axios from 'axios';
 import MultipleEmail from '../components/multipleEmail';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
+import { connect } from 'react-redux';
 class Emailer extends Component {
   constructor(props) {
     super(props);
@@ -24,47 +24,25 @@ class Emailer extends Component {
     this.setState({ [name]: value });
   };
 
-  exportHtml = () => {
-    window.unlayer.exportHtml(data => {
-      const html = `${String(data.html)}`;
-      const email = this.state.emails;
-      const subject = this.state.subject;
-      axios
-        .post(
-          'https://social-charity-server.herokuapp.com/api/causes/send-email',
-          {
-            email,
-            html,
-            subject
-          }
-        )
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+  sendEmail = () => {
+    const config = {
+      headers: {'Authorization': `Bearer ${this.props.session.userToken}`}
+    };
+    const bodyParameters = {
+      html: `<div>hello</div>`,
+      email: this.state.emails,
+      subject: this.state.subject
+    }
+    
+    axios.post( 
+      'https://social-charity-server.herokuapp.com/api/causes/send-email',
+      bodyParameters,
+      config
+    ).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
     });
-  };
-
-  saveDesign = () => {
-    // TODO: Implement save design functionality
-    // window.unlayer.saveDesign(design => console.log(design));
-  };
-
-  onLoad = () => {
-    axios
-      .get(
-        'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
-      )
-      .then(res => {
-        this.setState({ design: res.data }, () => {
-          window.unlayer.loadDesign(this.state.design);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
   };
 
   render = () => {
@@ -86,18 +64,8 @@ class Emailer extends Component {
           />
         </MultipleEmailStyle>
 
-        <EmailEditorStyle>
-          <EmailEditor
-            onLoad={this.onLoad}
-            minHeight={'600px'}
-            appearance={{
-              theme: 'light'
-            }}
-          />
-        </EmailEditorStyle>
-
         <ButtonStyle>
-          <Button title="Send Email" primary handleClick={this.exportHtml} />
+          <Button title="Send Email" primary handleClick={this.sendEmail} />
         </ButtonStyle>
       </EmailerStyle>
     );
@@ -107,7 +75,6 @@ const EmailerStyle = styled.div`
   width: 100%;
   padding-right: 20px;
 `;
-const EmailEditorStyle = styled.div``;
 const MultipleEmailStyle = styled.div`
   padding-left: 20px;
   padding-top: 5px;
@@ -129,4 +96,9 @@ const ButtonStyle = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export default Emailer;
+
+const mapStateToProps = state => ({
+  session: state.authentication
+});
+
+export default connect(mapStateToProps)(Emailer);
