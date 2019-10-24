@@ -29,7 +29,7 @@ class Emailer extends Component {
       headers: {'Authorization': `Bearer ${this.props.session.userToken}`}
     };
     const bodyParameters = {
-      html: `${require('../constants/templates/newsletter').newsletter}`,
+      html: `${require('../constants/templates/newsletter').newsletterTemplate}`,
       email: this.state.emails,
       subject: this.state.subject
     }
@@ -47,7 +47,6 @@ class Emailer extends Component {
 
   render = () => {
     const emailHTML = `${require('../constants/templates/newsletter').newsletterTemplate}`;
-    console.log('emailHTML', emailHTML);
     return (
       <EmailerStyle>
         <FormInputStyle
@@ -75,7 +74,7 @@ class Emailer extends Component {
 }
 const EmailerStyle = styled.div`
   width: 100%;
-  padding-right: 20px;
+  padding: 20px;
 `;
 const MultipleEmailStyle = styled.div`
   padding-left: 20px;
