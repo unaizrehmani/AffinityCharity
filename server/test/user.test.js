@@ -3,7 +3,7 @@ const app = require('../api/main/app');
 const request = require('supertest');
 const { expect } = require('chai');
 
-describe('Admin Users API', () => {
+describe('Agent Users API', () => {
   let user = {
     id: '5daa663ad5a1a22fdb968a8a',
     firstName: 'Unaiz',
