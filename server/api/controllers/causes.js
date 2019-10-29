@@ -1,6 +1,7 @@
 const Cause = require('../models/cause');
 const cloudinaryUtil = require('../middleware/cloudinary/cloudinary');
 const cloudinaryPath = `${process.env.CLOUDINARY_PATH}/causes`;
+const defaultJSON = require('../util/default.json');
 const nodemailer = require('nodemailer');
 
 /*
@@ -19,6 +20,7 @@ exports.insertCause = async (req, res, next) => {
     const cause = new Cause(req.body);
     cause.createdDate = new Date();
     cause.users = [];
+    cause.defaultDesign = defaultJSON;
     if (req.files.image && req.files.image.path) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
