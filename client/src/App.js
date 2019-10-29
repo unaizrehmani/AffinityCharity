@@ -43,11 +43,11 @@ class App extends Component {
         </Tablet>
         <ContentArea>
           <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/editor/:id' component={Emailer} />
-            <Route exact path='/cause' component={CausePage} />
-            <Route exact path='/admin' component={ManageAgentsPage} />
-            <Route exact path='/createcause' component={CreateCausePage} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/editor/:id" component={Emailer} />
+            <Route exact path="/cause" component={CausePage} />
+            <Route exact path="/admin" component={ManageAgentsPage} />
+            <Route exact path="/createcause" component={CreateCausePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentArea>

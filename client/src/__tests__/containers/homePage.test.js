@@ -1072,7 +1072,7 @@ describe('Testing HomePage UI', () => {
             contentWidth: '600px',
             fontFamily: {
               label: 'Montserrat',
-              value: "'Montserrat',sans-serif",
+              value: '\'Montserrat\',sans-serif',
               type: 'google',
               weights: '400,700'
             },
