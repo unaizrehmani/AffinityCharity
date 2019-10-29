@@ -1,57 +1,23 @@
 import React, { Component } from 'react';
 import colors from '../styles/colors';
 import MaterialTable from 'material-table';
-import axios from 'axios';
-import { connect } from 'react-redux';
 
 class Table extends Component {
   constructor(props) {
     super(props);
-
+    let data = this.props.data;
+    let columns = this.props.columns;
     this.state = {
-      columns: [
-        {
-          title: 'Name',
-          field: 'firstName'
-        },
-        {
-          title: 'Surname',
-          field: 'lastName'
-        },
-        {
-          title: 'Email',
-          field: 'email'
-        },
-        {
-          title: 'Causes',
-          field: 'causes',
-          type: 'numeric'
-        }
-      ]
+      data: data,
+      columns: columns
     };
   }
 
-  componentDidMount = async () => {
-    const AuthStr = 'Bearer '.concat(this.props.session.userToken);
-
-    axios
-      .get('https://social-charity-server.herokuapp.com/api/users', {
-        params: {},
-        headers: { Authorization: AuthStr }
-      })
-      .then(response => {
-        this.setState({ data: response.data });
-      })
-      .catch(error => {
-        console.log('error ' + error);
-      });
-  };
-
   render() {
     return (
-      <div style={{ width: '95%' }}>
+      <div style={{ width: '90%' }}>
         <MaterialTable
-          title="Agents"
+          title={this.props.title}
           columns={this.state.columns}
           data={this.state.data}
           style={{ color: colors.primaryAccent }}
@@ -101,9 +67,4 @@ class Table extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    session: state.authentication
-  };
-};
-export default connect(mapStateToProps)(Table);
+export default Table;
