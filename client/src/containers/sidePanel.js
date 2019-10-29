@@ -37,12 +37,6 @@ class SidePanel extends Component {
               <h3>Subscribers</h3>
             </NavItem>
           </Link>
-          <Link to="/editor">
-            <NavItem>
-              <Icon name="mail" />
-              <h3>Email Editor</h3>
-            </NavItem>
-          </Link>
           <Link to="/admin">
             <NavItem>
               <Icon name="chess king" />
