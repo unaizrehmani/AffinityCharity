@@ -5,11 +5,12 @@ import axios from 'axios';
 import MultipleEmail from '../components/multipleEmail';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
+import { connect } from 'react-redux';
 class Emailer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emails: ['unaizrehmani@gmail.com'],
+      emails: [],
       subject: '',
       design: undefined
     };
@@ -24,26 +25,42 @@ class Emailer extends Component {
     this.setState({ [name]: value });
   };
 
+  componentDidMount = () => {
+    const { id } = this.props.match.params;
+    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`
+    axios.get(URL, { headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+    }).then(result => {
+      const cause = result.data;
+      const emails = cause.donors.map(x => x.email);
+      this.setState({ cause, emails, subject: cause.name })
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
   exportHtml = () => {
     window.unlayer.exportHtml(data => {
+      const config = {
+        headers: {'Authorization': `Bearer ${this.props.session.userToken}`}
+      };
       const html = `${String(data.html)}`;
       const email = this.state.emails;
       const subject = this.state.subject;
-      axios
-        .post(
-          'https://social-charity-server.herokuapp.com/api/causes/send-email',
-          {
-            email,
-            html,
-            subject
-          }
-        )
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const bodyParameters = {
+        html,
+        email,
+        subject
+      }
+      
+      axios.post( 
+        'https://social-charity-server.herokuapp.com/api/causes/send-email',
+        bodyParameters,
+        config
+      ).then((response) => {
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      });
     });
   };
 
@@ -52,20 +69,20 @@ class Emailer extends Component {
     // window.unlayer.saveDesign(design => console.log(design));
   };
 
-  onLoad = () => {
-    axios
-      .get(
-        'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
-      )
-      .then(res => {
-        this.setState({ design: res.data }, () => {
-          window.unlayer.loadDesign(this.state.design);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // onLoad = () => {
+  //   axios
+  //     .get(
+  //       'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
+  //     )
+  //     .then(res => {
+  //       this.setState({ design: res.data }, () => {
+  //         window.unlayer.loadDesign(this.state.design);
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   render = () => {
     return (
@@ -88,7 +105,6 @@ class Emailer extends Component {
 
         <EmailEditorStyle>
           <EmailEditor
-            onLoad={this.onLoad}
             minHeight={'600px'}
             appearance={{
               theme: 'light'
@@ -129,4 +145,9 @@ const ButtonStyle = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export default Emailer;
+
+const mapStateToProps = state => ({
+  session: state.authentication
+});
+
+export default connect(mapStateToProps)(Emailer);
