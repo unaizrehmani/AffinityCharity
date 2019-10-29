@@ -5,7 +5,6 @@ import MaterialTable from 'material-table';
 class Table extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     let data = this.props.data;
     let columns = this.props.columns;
     this.state = {
