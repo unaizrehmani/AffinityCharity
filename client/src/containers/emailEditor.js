@@ -51,24 +51,30 @@ class Emailer extends Component {
       const html = `${String(data.html)}`;
       const email = this.state.emails;
       const subject = this.state.subject;
-      const bodyParameters = {
-        html,
-        email,
-        subject
-      };
 
-      axios
-        .post(
-          'https://social-charity-server.herokuapp.com/api/causes/send-email',
-          bodyParameters,
-          config
-        )
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      if(email != null && email.length > 0) {
+        const bodyParameters = {
+          html,
+          email,
+          subject
+        };
+        
+        // TODO: add a spinner or some indication of sending an email
+        axios
+          .post(
+            'https://social-charity-server.herokuapp.com/api/causes/send-email',
+            bodyParameters,
+            config
+          )
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        // TODO: handle empty emails message
+      }
     });
   };
 
