@@ -35,7 +35,7 @@ class Emailer extends Component {
       .then(result => {
         const cause = result.data;
         const emails = cause.donors.map(x => x.email);
-        const subject = `${cause.name} - ${cause.location}`
+        const subject = `${cause.name} - ${cause.location}`;
         this.setState({ cause, emails, subject });
       })
       .catch(err => {
