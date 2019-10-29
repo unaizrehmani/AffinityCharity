@@ -25,6 +25,10 @@ const causeSchema = new Schema({
     type: Boolean,
     required: true
   },
+  defaultDesign: {
+    type: Object,
+    required: true
+  },
   donors: [
     {
       type: Schema.Types.ObjectId,
