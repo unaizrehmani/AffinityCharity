@@ -53,42 +53,52 @@ describe('Test Causes API', () => {
 		fakeCause.mediaURL = body.mediaURL;
 		fakeCause.donors = body.donors;
 
-		expect(body).to.have.own.property('_id',
+		expect(body).to.have.own.property(
+			'_id',
 			fakeCause._id,
 			'id is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('donors',
+		expect(body).to.have.own.property(
+			'donors',
 			fakeCause.donors,
 			'donors is incorrect'
 			).to.be.an('array').that.is.empty;
-		expect(body).to.have.own.property('name',
+		expect(body).to.have.own.property(
+			'name',
 			fakeCause.name,
 			'name is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('location',
+		expect(body).to.have.own.property(
+			'location',
 			fakeCause.location,
 			'location is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('deleteable',
+		expect(body).to.have.own.property(
+			'deleteable',
 			fakeCause.deleteable,
 			'deleteable is incorrect');
-		expect(body).to.have.own.property('description',
+		expect(body).to.have.own.property(
+			'description',
 			fakeCause.description,
 			'description is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('createdDate',
+		expect(body).to.have.own.property(
+			'createdDate',
 			fakeCause.createdDate,
 			'createdDate is incorrect'
 			).that.is.not.empty.that.is.an.instanceof(Date);
-		expect(body).to.have.own.property('defaultDesign',
+		expect(body).to.have.own.property(
+			'defaultDesign',
 			fakeCause.defaultDesign,
 			'defaultDesign is incorrect'
 			).to.be.an('object').that.is.not.empty;
-		expect(body).to.have.own.property('imageID',
+		expect(body).to.have.own.property(
+			'imageID',
 			fakeCause.imageID,
 			'imageID is incorrect'
 			).that.is.empty.that.is.a.string;
-		expect(body).to.have.own.property('mediaURL',
+		expect(body).to.have.own.property(
+			'mediaURL',
 			fakeCause.mediaURL,
 			'mediaURL is incorrect'
 			).that.is.empty.that.is.a.string;
@@ -103,7 +113,8 @@ describe('Test Causes API', () => {
 
 		expect(body).to.be.an('object').that.is.not.empty;
 
-		expect(body).to.have.own.property('_id',
+		expect(body).to.have.own.property(
+			'_id',
 			fakeCause._id,
 			'id is incorrect'
 			).that.is.not.empty.that.is.a.string;
@@ -111,22 +122,27 @@ describe('Test Causes API', () => {
 			'donors'
 			).to.deep.equal(fakeCause.donors
 			).to.be.an('array').that.is.empty;
-		expect(body).to.have.own.property('name',
+		expect(body).to.have.own.property(
+			'name',
 			fakeCause.name,
 			'name is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('location',
+		expect(body).to.have.own.property(
+			'location',
 			fakeCause.location,
 			'location is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('deleteable',
+		expect(body).to.have.own.property(
+			'deleteable',
 			fakeCause.deleteable,
 			'deleteable is incorrect');
-		expect(body).to.have.own.property('description',
+		expect(body).to.have.own.property(
+			'description',
 			fakeCause.description,
 			'description is incorrect'
 			).that.is.not.empty.that.is.a.string;
-		expect(body).to.have.own.property('createdDate',
+		expect(body).to.have.own.property(
+			'createdDate',
 			fakeCause.createdDate,
 			'createdDate is incorrect'
 			).that.is.not.empty.that.is.an.instanceof(Date);
@@ -134,11 +150,13 @@ describe('Test Causes API', () => {
 			'defaultDesign'
 			).to.deep.equal(fakeCause.defaultDesign
 			).to.be.an('object').that.is.not.empty;
-		expect(body).to.have.own.property('imageID',
+		expect(body).to.have.own.property(
+			'imageID',
 			fakeCause.imageID,
 			'imageID is incorrect'
 			).that.is.empty.that.is.a.string;
-		expect(body).to.have.own.property('mediaURL',
+		expect(body).to.have.own.property(
+			'mediaURL',
 			fakeCause.mediaURL,
 			'mediaURL is incorrect'
 			).that.is.empty.that.is.a.string;
@@ -149,16 +167,57 @@ describe('Test Causes API', () => {
       .delete('/api/causes/' + fakeCause._id)
       .set('Authorization', 'Bearer ' + user.token)
 			.expect(200);
-			
-		console.log(body);
+		
+		expect(body).to.be.an('object').that.is.not.empty;
 
-    expect(body).to.have.own.property(
-      '_id',
-      fakeCause._id,
-      'created cause does not have property _id'
-    ).that.is.not.empty.that.is.a.string;
-
-      });
+		expect(body).to.have.own.property(
+			'_id',
+			fakeCause._id,
+			'id is incorrect'
+			).that.is.not.empty.that.is.a.string;
+		expect(body).to.have.property(
+			'donors'
+			).to.deep.equal(fakeCause.donors
+			).to.be.an('array').that.is.empty;
+		expect(body).to.have.own.property(
+			'name',
+			fakeCause.name,
+			'name is incorrect'
+			).that.is.not.empty.that.is.a.string;
+		expect(body).to.have.own.property(
+			'location',
+			fakeCause.location,
+			'location is incorrect'
+			).that.is.not.empty.that.is.a.string;
+		expect(body).to.have.own.property(
+			'deleteable',
+			fakeCause.deleteable,
+			'deleteable is incorrect');
+		expect(body).to.have.own.property(
+			'description',
+			fakeCause.description,
+			'description is incorrect'
+			).that.is.not.empty.that.is.a.string;
+		expect(body).to.have.own.property(
+			'createdDate',
+			fakeCause.createdDate,
+			'createdDate is incorrect'
+			).that.is.not.empty.that.is.an.instanceof(Date);
+		expect(body).to.have.property(
+			'defaultDesign'
+			).to.deep.equal(fakeCause.defaultDesign
+			).to.be.an('object').that.is.not.empty;
+		expect(body).to.have.own.property(
+			'imageID',
+			fakeCause.imageID,
+			'imageID is incorrect'
+			).that.is.empty.that.is.a.string;
+		expect(body).to.have.own.property(
+			'mediaURL',
+			fakeCause.mediaURL,
+			'mediaURL is incorrect'
+			).that.is.empty.that.is.a.string;
+  });
 
   after(() => {});
 });
