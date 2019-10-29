@@ -59,7 +59,6 @@ describe('Admin Users API', () => {
   });
 
   it('Insert a New Agent Without Image', async () => {
-    console.log('user', user);
     const { body } = await request(app)
       .post('/api/users')
       .set('Authorization', 'Bearer ' + user.token)
