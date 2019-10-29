@@ -26,6 +26,13 @@ describe('Test Causes API', () => {
       });
     user = response.body;
 	});
+
+	it('GET all causes', async () => {
+		await require('../api/main/db');
+    const response = await request(app)
+			.get('/api/causes');
+		expect(response.body).to.be.an('array').that.is.not.empty;
+	});
 	
 
   after(() => {});
