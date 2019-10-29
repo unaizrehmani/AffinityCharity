@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Responsive from 'react-responsive';
 import Drawer from '@material-ui/core/Drawer';
 import NotFoundPage from './containers/notFoundPage';
-import HomePage from './containers/homePage';
+import { HomePage } from './containers/homePage';
 import CausePage from './containers/causePage';
 import Emailer from './containers/emailEditor';
 import SidePanel from './containers/sidePanel';
@@ -43,11 +43,11 @@ class App extends Component {
         </Tablet>
         <ContentArea>
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/editor/:id" component={Emailer} />
-            <Route exact path="/cause" component={CausePage} />
-            <Route exact path="/admin" component={ManageAgentsPage} />
-            <Route exact path="/createcause" component={CreateCausePage} />
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/editor/:id' component={Emailer} />
+            <Route exact path='/cause' component={CausePage} />
+            <Route exact path='/admin' component={ManageAgentsPage} />
+            <Route exact path='/createcause' component={CreateCausePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentArea>
