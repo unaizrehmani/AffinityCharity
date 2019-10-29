@@ -16,7 +16,7 @@ class Table extends Component {
 
   render() {
     return (
-      <div style={{ width: '95%' }}>
+      <div style={{ width: '90%' }}>
         <MaterialTable
           title={this.props.title}
           columns={this.state.columns}

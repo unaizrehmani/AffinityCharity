@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import colors from '../styles/colors';
 import Table from '../components/table';
 
 class ManageAgentsPage extends React.Component {
@@ -58,17 +59,41 @@ class ManageAgentsPage extends React.Component {
         />
       );
     return (
-      <ManageAgentsPageWrapper>
-        <PageTitle>Manage your Agents</PageTitle>
+      <Container>
+        <Header>
+          <h1>Manage Agents</h1>
+          <hr />
+        </Header>
         {renderTable}
-      </ManageAgentsPageWrapper>
+      </Container>
     );
   }
 }
 
-ManageAgentsPage.propTypes = {};
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.primary};
+  margin-bottom: 20px;
+  margin-top: 50px;
+  h1 {
+    font-size: 40px !important;
+  }
+  hr {
+    height: 0.2rem;
+    width: 80%;
+    background: ${colors.primary};
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.2rem;
+  }
+`;
 
-const ManageAgentsPageWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
