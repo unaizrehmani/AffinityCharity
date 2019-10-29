@@ -144,7 +144,7 @@ class Emailer extends Component {
         <ButtonStyle>
           <Button title="Send Email" primary handleClick={this.exportHtml} />
           {/* TODO: add a confirmation to overwrite previous design*/}
-          <Button title="Save Design" primary handleClick={this.saveDesign} />
+          <Button title="Save Email" primary handleClick={this.saveDesign} />
         </ButtonStyle>
       </EmailerStyle>
     );
