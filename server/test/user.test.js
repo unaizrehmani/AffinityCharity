@@ -12,7 +12,7 @@ describe('Admin Users API', () => {
     email: 'unaizrehmani@gmail.com',
     isAdmin: true
   };
-  const fakeUser = {
+  let fakeUser = {
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email@email.com',
@@ -58,7 +58,7 @@ describe('Admin Users API', () => {
       .string;
   });
 
-  it('Insert a New Agent Without Image', async () => {
+  it('Create New Fake User Agent', async () => {
     const { body } = await request(app)
       .post('/api/users')
       .set('Authorization', 'Bearer ' + user.token)
@@ -128,14 +128,16 @@ describe('Admin Users API', () => {
     );
   });
 
-  it('GET All Users', async () => {
-    await request(app)
+  it('Get New Fake User Agent', async () => {
+    const { body } = await request(app)
       .get('/api/users')
       .set('Authorization', 'Bearer ' + user.token)
       .expect(200);
+
+    expect(body).to.be.an('array');
   });
 
-  it('GET Newly Created Fake User', async () => {
+  it('Read New Fake User Agent', async () => {
     const { body } = await request(app)
       .get('/api/users/' + fakeUser._id)
       .set('Authorization', 'Bearer ' + user.token)
@@ -193,16 +195,87 @@ describe('Admin Users API', () => {
     ).that.is.not.empty.that.is.a.string;
   });
 
-  // TODO: implement PATCH /api/users test
-  it('PATCH /api/users/:userID', async () => {});
+  it('Update Fake User Agent', async () => {
+    const fakeUserChanges = {
+      firstName: 'changedFirst',
+      lastName: 'changedLast',
+      email: 'changedEmail',
+      imageID: 'newImageID',
+      mediaURL: 'newMediaURL',
+      isAdmin: true
+    };
+    const { body } = await request(app)
+      .patch('/api/users/' + fakeUser._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .send(fakeUserChanges)
+      .expect(200);
 
-  it('DELETE /api/users/:userID', async () => {
+    // Response data should not have 'password' and '__v' properties
+    expect(body).to.not.have.own.property('password');
+    expect(body).to.not.have.own.property('__v');
+
+    // Response data should have changed '_id' and 'createdDate'
+    expect(body).to.have.own.property(
+      '_id',
+      fakeUser._id,
+      'created user does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        fakeUser.createdDate,
+        'new user does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
+
+    // Response data should have changed 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.have.own.property(
+      'imageID',
+      fakeUserChanges.imageID,
+      'fake user does not have an imageID property'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'mediaURL',
+      fakeUserChanges.mediaURL,
+      'new user does not have a mediaURL property'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'isAdmin',
+      fakeUserChanges.isAdmin,
+      'created user does not have property isAdmin'
+    ).that.is.true;
+
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeUserChanges.firstName,
+      'created user does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeUserChanges.lastName,
+      'created user does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'email',
+      fakeUserChanges.email,
+      'new user does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
+
+    fakeUser = body;
+  });
+
+  it('Delete New Fake User Agent', async () => {
     const { body } = await request(app)
       .delete('/api/users/' + fakeUser._id)
       .set('Authorization', 'Bearer ' + user.token)
       .expect(200);
 
-    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    // Response data should not have 'password' and '__v' properties
     expect(body).to.not.have.own.property('password');
     expect(body).to.not.have.own.property('__v');
 
@@ -225,13 +298,13 @@ describe('Admin Users API', () => {
       'imageID',
       fakeUser.imageID,
       'fake user does not have an imageID property'
-    ).that.is.empty.that.is.a.string;
+    ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'mediaURL',
       fakeUser.mediaURL,
       'new user does not have a mediaURL property'
-    ).that.is.empty.that.is.a.string;
+    ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'isAdmin',
