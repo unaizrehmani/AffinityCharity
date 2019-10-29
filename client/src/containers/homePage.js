@@ -42,6 +42,7 @@ class HomePage extends React.Component {
     return (
       <CauseCard
         key={cause._id}
+        id={cause._id}
         title={cause.name}
         image={cause.mediaURL}
         date={cause.createdDate}
