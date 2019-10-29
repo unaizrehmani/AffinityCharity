@@ -52,13 +52,13 @@ class Emailer extends Component {
       const email = this.state.emails;
       const subject = this.state.subject;
 
-      if(email != null && email.length > 0) {
+      if (email != null && email.length > 0) {
         const bodyParameters = {
           html,
           email,
           subject
         };
-        
+
         // TODO: add a spinner or some indication of sending an email
         axios
           .post(
@@ -79,8 +79,9 @@ class Emailer extends Component {
   };
 
   saveDesign = () => {
-    // TODO: Implement save design functionality
-    // window.unlayer.saveDesign(design => console.log(design));
+    window.unlayer.saveDesign(design => {
+      console.log(design);
+    });
   };
 
   // onLoad = () => {
@@ -128,6 +129,9 @@ class Emailer extends Component {
 
         <ButtonStyle>
           <Button title="Send Email" primary handleClick={this.exportHtml} />
+        </ButtonStyle>
+        <ButtonStyle>
+          <Button title="Save Design" primary handleClick={this.saveDesign} />
         </ButtonStyle>
       </EmailerStyle>
     );
