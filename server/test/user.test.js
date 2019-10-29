@@ -69,120 +69,193 @@ describe('Admin Users API', () => {
       .field('isAdmin', fakeUser.isAdmin)
       .expect(200);
 
+    // Response data should not have 'password' and '__v' properties
     expect(body).to.not.have.own.property('password');
     expect(body).to.not.have.own.property('__v');
 
+    // Response data should generate an '_id', 'createdDate', 'imageID' and 'mediaURL' properties
     expect(body).to.have.own.property(
       '_id',
       body._id,
       'created user does not have property _id'
-    );
-    expect(body).to.have.own.property(
-      'isAdmin',
-      body.isAdmin,
-      'created user does not have property isAdmin'
-    );
-    expect(body).to.have.own.property(
-      'firstName',
-      body.firstName,
-      'created user does not have property firstName'
-    );
-    expect(body).to.have.own.property(
-      'lastName',
-      body.lastName,
-      'created user does not have property lastName'
-    );
-    expect(body).to.have.own.property(
-      'email',
-      body.email,
-      'new user does not have an email property'
-    );
-    expect(body).to.have.own.property(
-      'createdDate',
-      body.createdDate,
-      'new user does not have a createdDate property'
-    );
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        body.createdDate,
+        'new user does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
+
     expect(body).to.have.own.property(
       'imageID',
       body.imageID,
       'new user does not have an imageID property'
     ).that.is.empty.that.is.a.string;
+
     expect(body).to.have.own.property(
       'mediaURL',
       body.mediaURL,
       'new user does not have a mediaURL property'
     ).that.is.empty.that.is.a.string;
+
+    fakeUser._id = body._id;
+    fakeUser.createdDate = body.createdDate;
+    fakeUser.imageID = body.imageID;
+    fakeUser.mediaURL = body.mediaURL;
+
+    // Response data should have 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.have.own.property(
+      'isAdmin',
+      fakeUser.isAdmin,
+      'created user does not have property isAdmin'
+    );
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeUser.firstName,
+      'created user does not have property firstName'
+    );
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeUser.lastName,
+      'created user does not have property lastName'
+    );
+    expect(body).to.have.own.property(
+      'email',
+      fakeUser.email,
+      'new user does not have an email property'
+    );
   });
 
-  // TODO: implement GET /api/users test
-  it('GET /api/users', async () => {
+  it('GET All Users', async () => {
     await request(app)
       .get('/api/users')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + user.token)
       .expect(200);
   });
 
-  // TODO: implement GET /api/users/:userID test
-  it('GET /api/users/:userID', async () => {});
+  it('GET Newly Created Fake User', async () => {
+    const { body } = await request(app)
+      .get('/api/users/' + fakeUser._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .expect(200);
+
+    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.have.own.property(
+      '_id',
+      fakeUser._id,
+      'created user does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        fakeUser.createdDate,
+        'new user does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
+
+    expect(body).to.have.own.property(
+      'imageID',
+      fakeUser.imageID,
+      'fake user does not have an imageID property'
+    ).that.is.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'mediaURL',
+      fakeUser.mediaURL,
+      'new user does not have a mediaURL property'
+    ).that.is.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'isAdmin',
+      fakeUser.isAdmin,
+      'created user does not have property isAdmin'
+    ).that.is.true;
+
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeUser.firstName,
+      'created user does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeUser.lastName,
+      'created user does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'email',
+      fakeUser.email,
+      'new user does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
+  });
 
   // TODO: implement PATCH /api/users test
   it('PATCH /api/users/:userID', async () => {});
 
-  // TODO: implement DELETE /api/users/:userID test
   it('DELETE /api/users/:userID', async () => {
-    if (userID) {
-      const { body } = await request(app)
-        .delete('/api/users/' + userID)
-        .set('Authorization', 'Bearer ' + token)
-        .expect(200);
+    const { body } = await request(app)
+      .delete('/api/users/' + fakeUser._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .expect(200);
 
-      expect(body).to.not.have.own.property('password');
-      expect(body).to.not.have.own.property('__v');
+    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.not.have.own.property('password');
+    expect(body).to.not.have.own.property('__v');
 
-      expect(body).to.have.own.property(
-        '_id',
-        body._id,
-        'created user does not have property _id'
-      );
-      expect(body).to.have.own.property(
-        true,
-        body.isAdmin,
-        'created user does not have property isAdmin'
-      );
-      expect(body).to.have.own.property(
-        'firstName',
-        body.firstName,
-        'created user does not have property firstName'
-      );
-      expect(body).to.have.own.property(
-        'lastName',
-        body.lastName,
-        'created user does not have property lastName'
-      );
-      expect(body).to.have.own.property(
-        'email',
-        body.email,
-        'new user does not have an email property'
-      );
-      expect(body).to.have.own.property(
+    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.have.own.property(
+      '_id',
+      fakeUser._id,
+      'created user does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
         'createdDate',
-        body.createdDate,
+        fakeUser.createdDate,
         'new user does not have a createdDate property'
-      );
-      expect(body).to.have.own.property(
-        'imageID',
-        body.imageID,
-        'new user does not have an imageID property'
-      );
-      expect(body).to.have.own.property(
-        'mediaURL',
-        body.mediaURL,
-        'new user does not have a mediaURL property'
-      );
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
 
-      delete form.password;
-      expect(body).to.include(form);
-    }
+    expect(body).to.have.own.property(
+      'imageID',
+      fakeUser.imageID,
+      'fake user does not have an imageID property'
+    ).that.is.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'mediaURL',
+      fakeUser.mediaURL,
+      'new user does not have a mediaURL property'
+    ).that.is.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'isAdmin',
+      fakeUser.isAdmin,
+      'created user does not have property isAdmin'
+    ).that.is.true;
+
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeUser.firstName,
+      'created user does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeUser.lastName,
+      'created user does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'email',
+      fakeUser.email,
+      'new user does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
   });
 
   after(() => {});
