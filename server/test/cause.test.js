@@ -33,6 +33,61 @@ describe('Test Causes API', () => {
 			.get('/api/causes');
 		expect(response.body).to.be.an('array').that.is.not.empty;
 	});
+
+	it('Insert a new cause', async () => {
+    const { body } = await request(app)
+      .post('/api/causes')
+      .set('Authorization', 'Bearer ' + user.token)
+			.field('name', fakeCause.name)
+			.field('location', fakeCause.location)
+			.field('deleteable', fakeCause.deleteable)
+			.field('description', fakeCause.description)
+			.expect(200);
+
+		expect(body).to.be.an('object').that.is.not.empty;
+		
+		fakeCause._id = body._id;
+		fakeCause.createdDate = body.createdDate;
+		fakeCause.defaultDesign = body.defaultDesign;
+		fakeCause.imageID = body.imageID;
+		fakeCause.mediaURL = body.mediaURL;
+		fakeCause.donors = body.donors;
+
+		console.log(body);
+
+		expect(body).to.have.own.property('_id',
+			fakeCause._id,
+			'id is incorrect');
+		expect(body).to.have.own.property('donors',
+			fakeCause.donors,
+			'donors is incorrect');
+		expect(body.donors).to.be.an('array').that.is.empty;
+		expect(body).to.have.own.property('name',
+			fakeCause.name,
+			'name is incorrect');
+		expect(body).to.have.own.property('location',
+			fakeCause.location,
+			'location is incorrect');
+		expect(body).to.have.own.property('deleteable',
+			fakeCause.deleteable,
+			'deleteable is incorrect');
+		expect(cause).to.have.own.property('description',
+			fakeCause.description,
+			'description is incorrect');
+		expect(body).to.have.own.property('createdDate',
+			fakeCause.createdDate,
+			'createdDate is incorrect');
+		expect(body).to.have.own.property('defaultDesign',
+			fakeCause.defaultDesign,
+			'defaultDesign is incorrect');
+		expect(body.defaultDesign).to.be.an('object').that.is.not.empty;
+		expect(body).to.have.own.property('imageID',
+			fakeCause.imageID,
+			'imageID is incorrect');
+		expect(cause).to.have.own.property('mediaURL',
+			fakeCause.mediaURL,
+			'mediaURL is incorrect');
+	});
 	
 	it('GET /api/causes/:causeID', async () => {
 		await require('../api/main/db');
@@ -42,7 +97,6 @@ describe('Test Causes API', () => {
 			.expect(200);
 
 		const cause = response.body;
-		// console.log(cause);
 
 		expect(cause).to.be.an('object').that.is.not.empty;
 		expect(cause).to.have.own.property('_id',
