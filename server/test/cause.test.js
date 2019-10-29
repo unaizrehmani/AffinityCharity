@@ -53,8 +53,6 @@ describe('Test Causes API', () => {
 		fakeCause.mediaURL = body.mediaURL;
 		fakeCause.donors = body.donors;
 
-		console.log(body);
-
 		expect(body).to.have.own.property('_id',
 			fakeCause._id,
 			'id is incorrect');
@@ -71,7 +69,7 @@ describe('Test Causes API', () => {
 		expect(body).to.have.own.property('deleteable',
 			fakeCause.deleteable,
 			'deleteable is incorrect');
-		expect(cause).to.have.own.property('description',
+		expect(body).to.have.own.property('description',
 			fakeCause.description,
 			'description is incorrect');
 		expect(body).to.have.own.property('createdDate',
@@ -84,45 +82,50 @@ describe('Test Causes API', () => {
 		expect(body).to.have.own.property('imageID',
 			fakeCause.imageID,
 			'imageID is incorrect');
-		expect(cause).to.have.own.property('mediaURL',
+		expect(body).to.have.own.property('mediaURL',
 			fakeCause.mediaURL,
 			'mediaURL is incorrect');
 	});
 	
-	it('GET /api/causes/:causeID', async () => {
+	it('GET the new cause by ID', async () => {
 		await require('../api/main/db');
-		const response = await request(app)
-			.get('/api/causes/5daa5d198a52ab254733f272')
+		const { body } = await request(app)
+			.get('/api/causes/'+fakeCause._id)
 			.set('Authorization', 'Bearer ' + user.token)
 			.expect(200);
 
-		const cause = response.body;
+		expect(body).to.be.an('object').that.is.not.empty;
 
-		expect(cause).to.be.an('object').that.is.not.empty;
-		expect(cause).to.have.own.property('_id',
-			'5daa5d198a52ab254733f272',
+		expect(body).to.have.own.property('_id',
+			fakeCause._id,
 			'id is incorrect');
-		expect(cause).to.have.own.property('name',
-			'Zakat',
+		expect(body).to.have.property('donors');
+		expect(body.donors).to.deep.equal(fakeCause.donors);
+		expect(body.donors).to.be.an('array').that.is.empty;
+		expect(body).to.have.own.property('name',
+			fakeCause.name,
 			'name is incorrect');
-		expect(cause).to.have.own.property('location',
-			'Global',
+		expect(body).to.have.own.property('location',
+			fakeCause.location,
 			'location is incorrect');
-		expect(cause).to.have.own.property('deleteable',
-			false,
+		expect(body).to.have.own.property('deleteable',
+			fakeCause.deleteable,
 			'deleteable is incorrect');
-		expect(cause).to.have.own.property('createdDate',
-			'2019-10-19T00:47:21.600Z',
-			'createdDate is incorrect');
-		expect(cause).to.have.own.property('imageID',
-			'dev/causes/pvr1zdoxkzoginlvisnv',
-			'imageID is incorrect');
-		expect(cause).to.have.own.property('mediaURL',
-			'http://res.cloudinary.com/dmkd2a8op/image/upload/v1571446041/dev/causes/pvr1zdoxkzoginlvisnv.jpg',
-			'mediaURL is incorrect');
-		expect(cause).to.have.own.property('description',
-			'General Zakat donations',
+		expect(body).to.have.own.property('description',
+			fakeCause.description,
 			'description is incorrect');
+		expect(body).to.have.own.property('createdDate',
+			fakeCause.createdDate,
+			'createdDate is incorrect');
+		expect(body).to.have.property('defaultDesign');
+		expect(body.defaultDesign).to.deep.equal(fakeCause.defaultDesign);
+		expect(body.defaultDesign).to.be.an('object').that.is.not.empty;
+		expect(body).to.have.own.property('imageID',
+			fakeCause.imageID,
+			'imageID is incorrect');
+		expect(body).to.have.own.property('mediaURL',
+			fakeCause.mediaURL,
+			'mediaURL is incorrect');
   });
 
   after(() => {});
