@@ -3,32 +3,48 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import colors from '../styles/colors';
 import Icon from '../components/Icon';
-
+import { Redirect } from 'react-router-dom';
 class CauseCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      redirect: false
+    };
   }
 
-  render() {
+  handleClick = () => {
+    this.setState({ redirect: true });
+  };
+
+  renderCauseCard = () => {
     return (
-      <CauseCardContainer>
-        <CauseImageContainer url={this.props.image} />
-        <CauseCardContent>
-          <CauseTitle>{this.props.title}</CauseTitle>
-          <CauseLocation>{this.props.location}</CauseLocation>
-          <CauseDescription>{this.props.description}</CauseDescription>
-          <CauseSubscriberCount>
-            <Icon
-              style={{ paddingRight: '0px' }}
-              name="user"
-              size="small"
-              color="red"
-            />
-            {this.props.subscribers}
-          </CauseSubscriberCount>
-        </CauseCardContent>
-      </CauseCardContainer>
+      <div onClick={this.handleClick}>
+        <CauseCardContainer>
+          <CauseImageContainer url={this.props.image} />
+          <CauseCardContent>
+            <CauseTitle>{this.props.title}</CauseTitle>
+            <CauseLocation>{this.props.location}</CauseLocation>
+            <CauseDescription>{this.props.description}</CauseDescription>
+            <CauseSubscriberCount>
+              <Icon
+                style={{ paddingRight: '0px' }}
+                name="user"
+                size="small"
+                color="red"
+              />
+              {this.props.subscribers}
+            </CauseSubscriberCount>
+          </CauseCardContent>
+        </CauseCardContainer>
+      </div>
+    );
+  };
+
+  render() {
+    return this.state.redirect ? (
+      <Redirect push to={'/editor/' + this.props.id} />
+    ) : (
+      this.renderCauseCard()
     );
   }
 }
