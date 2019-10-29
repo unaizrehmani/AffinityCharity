@@ -12,6 +12,7 @@ exports.authToken = async (req, res, next) => {
   try {
     const user = await User.authenticate(email, password);
     const userResult = {
+      id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

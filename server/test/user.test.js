@@ -1,39 +1,73 @@
 require('dotenv/config');
-const app = require('../api/util/app');
+const app = require('../api/main/app');
 const request = require('supertest');
 const { expect } = require('chai');
 
-describe('Test Users API', () => {
-  let token = '';
-  let userID = '';
-  const form = {
-    isAdmin: true,
+describe('Admin Users API', () => {
+  let user = {
+    id: '5daa663ad5a1a22fdb968a8a',
+    firstName: 'Unaiz',
+    lastName: 'Rehmani',
+    password: 'password',
+    email: 'unaizrehmani@gmail.com',
+    isAdmin: true
+  };
+  const fakeUser = {
     firstName: 'firstName',
     lastName: 'lastName',
-    email: 'test@email.com',
-    password: 'password'
+    email: 'email@email.com',
+    password: 'password',
+    isAdmin: true
   };
 
   before(async () => {
-    await require('../api/util/db');
+    await require('../api/main/db');
     const response = await request(app)
       .post('/api/auth/token')
       .send({
-        email: 'unaizrehmani@gmail.com',
-        password: 'password'
+        email: user.email,
+        password: user.password
       });
-    token = response.text;
-    expect(token).to.be.a('string', 'token is not a string');
+    user = response.body;
   });
 
-  it('POST /api/users without image', async () => {
+  it('Successful Sign-in:', async () => {
+    expect(user).to.be.an('object').that.is.not.empty;
+    expect(user).to.have.own.property('id', user.id, 'Auth user id is invalid');
+    expect(user).to.have.own.property(
+      'firstName',
+      user.firstName,
+      'Auth user firstname is invalid'
+    );
+    expect(user).to.have.own.property(
+      'lastName',
+      user.lastName,
+      'Auth user lastName is invalid'
+    );
+    expect(user).to.have.own.property(
+      'email',
+      user.email,
+      'Auth user email is invalid'
+    );
+    expect(user).to.have.own.property(
+      'isAdmin',
+      user.isAdmin,
+      'Auth user isAdmin is invalid'
+    );
+    expect(user).to.have.own.property('token').that.is.not.empty.that.is.a
+      .string;
+  });
+
+  it('Insert a New Agent Without Image', async () => {
+    console.log('user', user);
     const { body } = await request(app)
       .post('/api/users')
-      .field('isAdmin', form.isAdmin)
-      .field('firstName', form.firstName)
-      .field('lastName', form.lastName)
-      .field('email', form.email)
-      .field('password', form.password)
+      .set('Authorization', 'Bearer ' + user.token)
+      .field('firstName', fakeUser.firstName)
+      .field('lastName', fakeUser.lastName)
+      .field('email', fakeUser.email)
+      .field('password', fakeUser.password)
+      .field('isAdmin', fakeUser.isAdmin)
       .expect(200);
 
     expect(body).to.not.have.own.property('password');
@@ -44,15 +78,11 @@ describe('Test Users API', () => {
       body._id,
       'created user does not have property _id'
     );
-
-    userID = body._id;
-
     expect(body).to.have.own.property(
-      true,
+      'isAdmin',
       body.isAdmin,
       'created user does not have property isAdmin'
     );
-
     expect(body).to.have.own.property(
       'firstName',
       body.firstName,
@@ -77,15 +107,12 @@ describe('Test Users API', () => {
       'imageID',
       body.imageID,
       'new user does not have an imageID property'
-    );
+    ).that.is.empty.that.is.a.string;
     expect(body).to.have.own.property(
       'mediaURL',
       body.mediaURL,
       'new user does not have a mediaURL property'
-    );
-
-    delete form.password;
-    expect(body).to.include(form);
+    ).that.is.empty.that.is.a.string;
   });
 
   // TODO: implement GET /api/users test
