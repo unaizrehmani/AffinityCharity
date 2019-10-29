@@ -105,9 +105,11 @@ const CauseLocation = styled.h5`
 const CauseDescription = styled.h5`
   margin: 10px 0 0 0;
   font-weight: 100;
-  max-width: 250px;
-  max-height: 200px;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  width: 260px;
+  padding: 0 5px;
+  overflow: hidden
 `;
 
 const CauseSubscriberCount = styled.h5`
