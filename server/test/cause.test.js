@@ -34,7 +34,7 @@ describe('Test Causes API', () => {
 		expect(response.body).to.be.an('array').that.is.not.empty;
 	});
 
-	it('Insert a new cause', async () => {
+	it('POST a new cause', async () => {
     const { body } = await request(app)
       .post('/api/causes')
       .set('Authorization', 'Bearer ' + user.token)
@@ -55,36 +55,43 @@ describe('Test Causes API', () => {
 
 		expect(body).to.have.own.property('_id',
 			fakeCause._id,
-			'id is incorrect');
+			'id is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('donors',
 			fakeCause.donors,
-			'donors is incorrect');
-		expect(body.donors).to.be.an('array').that.is.empty;
+			'donors is incorrect'
+			).to.be.an('array').that.is.empty;
 		expect(body).to.have.own.property('name',
 			fakeCause.name,
-			'name is incorrect');
+			'name is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('location',
 			fakeCause.location,
-			'location is incorrect');
+			'location is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('deleteable',
 			fakeCause.deleteable,
 			'deleteable is incorrect');
 		expect(body).to.have.own.property('description',
 			fakeCause.description,
-			'description is incorrect');
+			'description is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('createdDate',
 			fakeCause.createdDate,
-			'createdDate is incorrect');
+			'createdDate is incorrect'
+			).that.is.not.empty.that.is.an.instanceof(Date);
 		expect(body).to.have.own.property('defaultDesign',
 			fakeCause.defaultDesign,
-			'defaultDesign is incorrect');
-		expect(body.defaultDesign).to.be.an('object').that.is.not.empty;
+			'defaultDesign is incorrect'
+			).to.be.an('object').that.is.not.empty;
 		expect(body).to.have.own.property('imageID',
 			fakeCause.imageID,
-			'imageID is incorrect');
+			'imageID is incorrect'
+			).that.is.empty.that.is.a.string;
 		expect(body).to.have.own.property('mediaURL',
 			fakeCause.mediaURL,
-			'mediaURL is incorrect');
+			'mediaURL is incorrect'
+			).that.is.empty.that.is.a.string;
 	});
 	
 	it('GET the new cause by ID', async () => {
@@ -98,35 +105,60 @@ describe('Test Causes API', () => {
 
 		expect(body).to.have.own.property('_id',
 			fakeCause._id,
-			'id is incorrect');
-		expect(body).to.have.property('donors');
-		expect(body.donors).to.deep.equal(fakeCause.donors);
-		expect(body.donors).to.be.an('array').that.is.empty;
+			'id is incorrect'
+			).that.is.not.empty.that.is.a.string;
+		expect(body).to.have.property(
+			'donors'
+			).to.deep.equal(fakeCause.donors
+			).to.be.an('array').that.is.empty;
 		expect(body).to.have.own.property('name',
 			fakeCause.name,
-			'name is incorrect');
+			'name is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('location',
 			fakeCause.location,
-			'location is incorrect');
+			'location is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('deleteable',
 			fakeCause.deleteable,
 			'deleteable is incorrect');
 		expect(body).to.have.own.property('description',
 			fakeCause.description,
-			'description is incorrect');
+			'description is incorrect'
+			).that.is.not.empty.that.is.a.string;
 		expect(body).to.have.own.property('createdDate',
 			fakeCause.createdDate,
-			'createdDate is incorrect');
-		expect(body).to.have.property('defaultDesign');
-		expect(body.defaultDesign).to.deep.equal(fakeCause.defaultDesign);
-		expect(body.defaultDesign).to.be.an('object').that.is.not.empty;
+			'createdDate is incorrect'
+			).that.is.not.empty.that.is.an.instanceof(Date);
+		expect(body).to.have.property(
+			'defaultDesign'
+			).to.deep.equal(fakeCause.defaultDesign
+			).to.be.an('object').that.is.not.empty;
 		expect(body).to.have.own.property('imageID',
 			fakeCause.imageID,
-			'imageID is incorrect');
+			'imageID is incorrect'
+			).that.is.empty.that.is.a.string;
 		expect(body).to.have.own.property('mediaURL',
 			fakeCause.mediaURL,
-			'mediaURL is incorrect');
-  });
+			'mediaURL is incorrect'
+			).that.is.empty.that.is.a.string;
+	});
+	
+	it('DELETE the new fake cause', async () => {
+    const { body } = await request(app)
+      .delete('/api/causes/' + fakeCause._id)
+      .set('Authorization', 'Bearer ' + user.token)
+			.expect(200);
+			
+		console.log(body);
+
+    expect(body).to.have.own.property(
+      '_id',
+      fakeCause._id,
+      'created cause does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+      });
 
   after(() => {});
 });
