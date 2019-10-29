@@ -27,21 +27,26 @@ class Emailer extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
-    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`
-    axios.get(URL, { headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-    }).then(result => {
-      const cause = result.data;
-      const emails = cause.donors.map(x => x.email);
-      this.setState({ cause, emails, subject: cause.name })
-    }).catch(err => {
-      console.log(err);
-    });
-  }
+    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`;
+    axios
+      .get(URL, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      })
+      .then(result => {
+        const cause = result.data;
+        const emails = cause.donors.map(x => x.email);
+        const subject = `${cause.name} - ${cause.location}`
+        this.setState({ cause, emails, subject });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   exportHtml = () => {
     window.unlayer.exportHtml(data => {
       const config = {
-        headers: {'Authorization': `Bearer ${this.props.session.userToken}`}
+        headers: { Authorization: `Bearer ${this.props.session.userToken}` }
       };
       const html = `${String(data.html)}`;
       const email = this.state.emails;
@@ -50,17 +55,20 @@ class Emailer extends Component {
         html,
         email,
         subject
-      }
-      
-      axios.post( 
-        'https://social-charity-server.herokuapp.com/api/causes/send-email',
-        bodyParameters,
-        config
-      ).then((response) => {
-        console.log(response)
-      }).catch((error) => {
-        console.log(error)
-      });
+      };
+
+      axios
+        .post(
+          'https://social-charity-server.herokuapp.com/api/causes/send-email',
+          bodyParameters,
+          config
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     });
   };
 
