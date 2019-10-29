@@ -101,8 +101,6 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const PageTitle = styled.h1``;
-
 const mapStateToProps = state => ({
   session: state.authentication
 });
