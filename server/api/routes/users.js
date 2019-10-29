@@ -7,7 +7,7 @@ const authorize = require('../middleware/auth/verifyToken');
 
 router.use(sanitizeBody);
 router.use(multiPartMiddleware);
-
+router.use(authorize);
 /*
  * POST /api/users/
  */
@@ -16,20 +16,20 @@ router.post('/', userController.insertUser);
 /*
  * GET /api/users/
  */
-router.get('/', authorize, userController.getAllUsers);
+router.get('/', userController.getAllUsers);
 /*
  * GET /api/users/:userID
  */
-router.get('/:userID', authorize, userController.getUserByID);
+router.get('/:userID', userController.getUserByID);
 
 /*
  * PATCH /api/users/
  */
-router.patch('/:userID', authorize, userController.patchUserByID);
+router.patch('/:userID', userController.patchUserByID);
 
 /*
  * DELETE /api/users/
  */
-router.delete('/:userID', authorize, userController.deleteUserByID);
+router.delete('/:userID', userController.deleteUserByID);
 
 module.exports = router;

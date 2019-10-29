@@ -8,7 +8,7 @@ install:
 
 script:
   - npm run lint
-  - npm run test:client
+  - npm run test
 
 notifications:
   email: false
