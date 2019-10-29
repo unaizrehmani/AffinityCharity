@@ -11,8 +11,7 @@ class Emailer extends Component {
     super(props);
     this.state = {
       emails: [],
-      subject: '',
-      design: undefined
+      subject: ''
     };
   }
   updateEmails = emails => {
@@ -80,24 +79,38 @@ class Emailer extends Component {
 
   saveDesign = () => {
     window.unlayer.saveDesign(design => {
-      console.log(design);
+      const { id } = this.props.match.params;
+      axios
+        .patch(
+          `https://social-charity-server.herokuapp.com/api/causes/${id}`,
+          {
+            defaultDesign: design
+          },
+          {
+            headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+          }
+        )
+        .catch(err => {
+          console.log(err);
+        });
     });
   };
 
-  // onLoad = () => {
-  //   axios
-  //     .get(
-  //       'https://social-charity-server.herokuapp.com/api/causes/defaultDesign'
-  //     )
-  //     .then(res => {
-  //       this.setState({ design: res.data }, () => {
-  //         window.unlayer.loadDesign(this.state.design);
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
+  onLoad = () => {
+    const { id } = this.props.match.params;
+    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`;
+    axios
+      .get(URL, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      })
+      .then(result => {
+        const { defaultDesign } = result.data;
+        window.unlayer.loadDesign(defaultDesign);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   render = () => {
     return (
@@ -124,13 +137,13 @@ class Emailer extends Component {
             appearance={{
               theme: 'light'
             }}
+            onLoad={this.onLoad}
           />
         </EmailEditorStyle>
 
         <ButtonStyle>
           <Button title="Send Email" primary handleClick={this.exportHtml} />
-        </ButtonStyle>
-        <ButtonStyle>
+          {/* TODO: add a confirmation to overwrite previous design*/}
           <Button title="Save Design" primary handleClick={this.saveDesign} />
         </ButtonStyle>
       </EmailerStyle>
