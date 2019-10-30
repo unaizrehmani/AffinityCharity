@@ -19,18 +19,18 @@ export class CreateCausePageContainer extends React.Component {
     };
   }
 
-  handleCreateCauseButton = () => {
-    if (
-      this.state.title !== '' &&
-      this.state.type !== '' &&
-      this.state.location !== '' &&
-      this.state.description !== ''
-    ) {
-      //Create cause
-    } else {
-      //display error indicated that fields need to be filled
-    }
-  };
+  // handleCreateCauseButton = () => {
+  //   if (
+  //     this.state.title !== '' &&
+  //     this.state.type !== '' &&
+  //     this.state.location !== '' &&
+  //     this.state.description !== ''
+  //   ) {
+  //     //Create cause
+  //   } else {
+  //     //display error indicated that fields need to be filled
+  //   }
+  // };
 
   handleUserInput = e => {
     const name = e.target.name;
@@ -136,7 +136,6 @@ export class CreateCausePageContainer extends React.Component {
             id="button-createCause"
             title="Create Cause"
             primary
-            handleClick={this.handleCreateCauseButton}
           />
         </FormContainer>
       </Container>
