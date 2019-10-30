@@ -75,6 +75,6 @@ describe('HomePage UI', () => {
     const wrap = shallow(
       <HomePageContainer store={mockStore({ session: session })} />
     ); // Input Bar
-    expect(wrap.find(Input).length).toBe(1);
+    expect(wrap.find(Input).prop('name')).toBe('searchBar');
   });
 });
