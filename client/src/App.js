@@ -10,7 +10,7 @@ import Emailer from './containers/emailEditor';
 import SidePanel from './containers/sidePanel';
 import MenuButton from './components/menuButton';
 import ManageAgentsPage from './containers/manageAgentsPage';
-import CreateCausePage from './containers/createCausePage';
+import { CreateCausePage }  from './containers/createCausePage';
 
 // To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {

@@ -6,7 +6,7 @@ import TextArea from '../components/textArea';
 import Button from '../components/button';
 import colors from '../styles/colors';
 
-class CreateCausePage extends React.Component {
+export class CreateCausePageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,11 @@ class CreateCausePage extends React.Component {
   }
 
   handleCreateCauseButton = () => {
-    console.log('create cause');
+    if(this.state.title !== '' && this.state.type !== '' && this.state.location !== '' && this.state.description !== ''){
+      //Create cause
+    } else {
+      //display error indicated that fields need to be filled
+    }
   };
 
   handleUserInput = e => {
@@ -34,7 +38,6 @@ class CreateCausePage extends React.Component {
 
     let reader = new FileReader();
     let image = e.target.files[0];
-    console.log(image);
     reader.onloadend = () => {
       this.setState({
         image: image,
@@ -64,7 +67,7 @@ class CreateCausePage extends React.Component {
     }
 
     return (
-      <CreateCausePageContainer>
+      <Container>
         <Header>
           <h1>Create a Cause</h1>
           <hr />
@@ -125,7 +128,7 @@ class CreateCausePage extends React.Component {
             handleClick={this.handleCreateCauseButton}
           />
         </FormContainer>
-      </CreateCausePageContainer>
+      </Container>
     );
   }
 }
@@ -134,9 +137,8 @@ const mapStateToProps = state => ({
   session: state.authentication
 });
 
-CreateCausePage.propTypes = {};
 
-const CreateCausePageContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -193,4 +195,4 @@ const ImagePreview = styled.img`
   width: 260px;
 `;
 
-export default connect(mapStateToProps)(CreateCausePage);
+export const CreateCausePage = connect(mapStateToProps)(CreateCausePageContainer);
