@@ -69,15 +69,15 @@ export class HomePageContainer extends React.Component {
         </Header>
         <SearchContainer>
           <Input
-            id='input-search'
-            name='searchBar'
-            icon='search'
-            placeholder='Search for a cause...'
+            id="input-search"
+            name="searchBar"
+            icon="search"
+            placeholder="Search for a cause..."
             type={'text'}
             onChange={this.onQueryChange}
           />
-          <Link to='/createcause'>
-            <Button id='button-createCause' title='Create Cause' primary />
+          <Link to="/createcause">
+            <Button id="button-createCause" title="Create Cause" primary />
           </Link>
         </SearchContainer>
         <PinnedCauses>
