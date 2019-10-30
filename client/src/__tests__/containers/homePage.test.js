@@ -77,4 +77,11 @@ describe('HomePage UI', () => {
     ); // Input Bar
     expect(wrap.find(Input).prop('name')).toBe('searchBar');
   });
+
+  it('renders the create cause button', () => {
+    const wrap = shallow(
+      <HomePageContainer store={mockStore({ session: session })} />
+    );
+    expect(wrap.find(Button).prop('title')).toBe('Create Cause');
+  });
 });
