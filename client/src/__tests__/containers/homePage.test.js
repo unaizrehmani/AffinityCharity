@@ -70,4 +70,11 @@ describe('HomePage UI', () => {
     wrap.update();
     expect(wrap.find(CauseCard).length).toBe(1);
   });
+
+  it('renders the search component', () => {
+    const wrap = shallow(
+      <HomePageContainer store={mockStore({ session: session })} />
+    ); // Input Bar
+    expect(wrap.find(Input).length).toBe(1);
+  });
 });
