@@ -267,6 +267,58 @@ describe('Donor Api', () => {
       .delete('/api/donors/' + donor._id)
       .set('Authorization', 'Bearer ' + user.token)
       .expect(200);
-    console.log('body', body);
+
+    // Response data should have '_id', 'createdDate', 'firstName', 'lastName', 'phone', 'address', 'causes' and 'email' properties
+    expect(body).to.have.own.property(
+      '_id',
+      donor._id,
+      'get donor does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'causes',
+        body.causes,
+        'get donor does not have property causes'
+      )
+      .that.is.an('array');
+
+    expect(body).to.have.own.property(
+      'address',
+      donor.address,
+      'get donor does not have property address'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'phone',
+      donor.phone,
+      'get donor does not have property phone'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        donor.createdDate,
+        'get donor does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
+
+    expect(body).to.have.own.property(
+      'firstName',
+      donor.firstName,
+      'get donor does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'lastName',
+      donor.lastName,
+      'get donor does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'email',
+      donor.email,
+      'get donor does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
   });
 });
