@@ -3,12 +3,9 @@ import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { HomePageContainer } from '../../containers/homePage.js';
 import CauseCard from '../../components/causeCard';
-import Input from '../../components/input';
-import Button from '../../components/button';
 
 const mockStore = configureStore();
 
-// Test Suite
 describe('HomePage UI', () => {
   //Fake user session
   const session = {
@@ -21,10 +18,10 @@ describe('HomePage UI', () => {
   };
 
   it('renders without crashing', () => {
-    const wrap = shallow(
+    const wrapper = shallow(
       <HomePageContainer store={mockStore({ session: session })} />
     );
-    expect(wrap.exists());
+    expect(wrapper.exists()).toBe(true);
   });
 
   it('renders the cause cards', () => {
@@ -74,14 +71,14 @@ describe('HomePage UI', () => {
   it('renders the search component', () => {
     const wrap = shallow(
       <HomePageContainer store={mockStore({ session: session })} />
-    ); // Input Bar
-    expect(wrap.find(Input).prop('name')).toBe('searchBar');
+    );
+    expect(wrap.find('#input-search').length).toBe(1);
   });
 
   it('renders the create cause button', () => {
     const wrap = shallow(
       <HomePageContainer store={mockStore({ session: session })} />
     );
-    expect(wrap.find(Button).prop('title')).toBe('Create Cause');
+    expect(wrap.find('#button-createCause').length).toBe(1);
   });
 });
