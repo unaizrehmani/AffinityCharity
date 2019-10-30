@@ -3,7 +3,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 
 describe('Donor Api', () => {
-  const donor = {
+  let donor = {
     firstName: 'donorFirst',
     lastName: 'donorLast',
     password: 'password',
@@ -139,38 +139,127 @@ describe('Donor Api', () => {
       .set('Authorization', 'Bearer ' + user.token)
       .expect(200);
 
-    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    // Response data should have '_id', 'createdDate', 'firstName', 'lastName', 'phone', 'address', 'causes' and 'email' properties
     expect(body).to.have.own.property(
       '_id',
       donor._id,
-      'created donor does not have property _id'
+      'get donor does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'causes',
+        body.causes,
+        'get donor does not have property causes'
+      )
+      .that.is.an('array');
+
+    expect(body).to.have.own.property(
+      'address',
+      donor.address,
+      'get donor does not have property address'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'phone',
+      donor.phone,
+      'get donor does not have property phone'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body)
       .to.have.own.property(
         'createdDate',
         donor.createdDate,
-        'new donor does not have a createdDate property'
+        'get donor does not have a createdDate property'
       )
       .that.is.not.empty.that.is.an.instanceof(Date);
 
     expect(body).to.have.own.property(
       'firstName',
       donor.firstName,
-      'created donor does not have property firstName'
+      'get donor does not have property firstName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'lastName',
       donor.lastName,
-      'created donor does not have property lastName'
+      'get donor does not have property lastName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'email',
       donor.email,
-      'new donor does not have an email property'
+      'get donor does not have an email property'
     ).that.is.not.empty.that.is.a.string;
+  });
+
+  it('Update Fake Donor', async () => {
+    const fakeDonorChanges = {
+      firstName: 'changedFirst',
+      lastName: 'changedLast',
+      email: 'changedEmail',
+      address: 'changedAddress',
+      phone: '123456789',
+      causes: []
+    };
+
+    const { body } = await request(app)
+      .patch('/api/donors/' + donor._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .send(fakeDonorChanges)
+      .expect(200);
+
+    // Response data should not have changed '_id' and 'createdDate'
+    expect(body).to.have.own.property(
+      '_id',
+      donor._id,
+      'changed donor does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        donor.createdDate,
+        'changed donor does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
+
+    // Response data should have 'firstName', 'lastName', 'phone', 'address', 'causes' and 'email' properties
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeDonorChanges.firstName,
+      'changed donor does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeDonorChanges.lastName,
+      'changed donor does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'email',
+      fakeDonorChanges.email,
+      'changed donor does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'address',
+      fakeDonorChanges.address,
+      'get donor does not have property address'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body).to.have.own.property(
+      'phone',
+      fakeDonorChanges.phone,
+      'get donor does not have property phone'
+    ).that.is.not.empty.that.is.a.string;
+
+    expect(body)
+      .to.have.own.property('causes')
+      .that.is.an('array');
+
+    donor = body;
   });
 
   it('Delete New Fake Donor', async () => {
