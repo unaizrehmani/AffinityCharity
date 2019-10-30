@@ -3,7 +3,7 @@ const app = require('../api/main/app');
 const request = require('supertest');
 const { expect } = require('chai');
 
-describe('Admin Users API', () => {
+describe('Agent Users API', () => {
   let user = {
     id: '5daa663ad5a1a22fdb968a8a',
     firstName: 'Unaiz',
@@ -84,20 +84,20 @@ describe('Admin Users API', () => {
       .to.have.own.property(
         'createdDate',
         body.createdDate,
-        'new user does not have a createdDate property'
+        'created user does not have a createdDate property'
       )
       .that.is.not.empty.that.is.an.instanceof(Date);
 
     expect(body).to.have.own.property(
       'imageID',
       body.imageID,
-      'new user does not have an imageID property'
+      'created user does not have an imageID property'
     ).that.is.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'mediaURL',
       body.mediaURL,
-      'new user does not have a mediaURL property'
+      'created user does not have a mediaURL property'
     ).that.is.empty.that.is.a.string;
 
     fakeUser._id = body._id;
@@ -110,25 +110,25 @@ describe('Admin Users API', () => {
       'isAdmin',
       fakeUser.isAdmin,
       'created user does not have property isAdmin'
-    );
+    ).that.is.true;
     expect(body).to.have.own.property(
       'firstName',
       fakeUser.firstName,
       'created user does not have property firstName'
-    );
+    ).that.is.not.empty.that.is.a.string;
     expect(body).to.have.own.property(
       'lastName',
       fakeUser.lastName,
       'created user does not have property lastName'
-    );
+    ).that.is.not.empty.that.is.a.string;
     expect(body).to.have.own.property(
       'email',
       fakeUser.email,
-      'new user does not have an email property'
-    );
+      'created user does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
   });
 
-  it('Get New Fake User Agent', async () => {
+  it('Get All User Agents', async () => {
     const { body } = await request(app)
       .get('/api/users')
       .set('Authorization', 'Bearer ' + user.token)
@@ -137,7 +137,7 @@ describe('Admin Users API', () => {
     expect(body).to.be.an('array');
   });
 
-  it('Read New Fake User Agent', async () => {
+  it('Get New Fake User Agent', async () => {
     const { body } = await request(app)
       .get('/api/users/' + fakeUser._id)
       .set('Authorization', 'Bearer ' + user.token)
@@ -147,51 +147,51 @@ describe('Admin Users API', () => {
     expect(body).to.have.own.property(
       '_id',
       fakeUser._id,
-      'created user does not have property _id'
+      'get user does not have property _id'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body)
       .to.have.own.property(
         'createdDate',
         fakeUser.createdDate,
-        'new user does not have a createdDate property'
+        'get user does not have a createdDate property'
       )
       .that.is.not.empty.that.is.an.instanceof(Date);
 
     expect(body).to.have.own.property(
       'imageID',
       fakeUser.imageID,
-      'fake user does not have an imageID property'
+      'get user does not have an imageID property'
     ).that.is.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'mediaURL',
       fakeUser.mediaURL,
-      'new user does not have a mediaURL property'
+      'get user does not have a mediaURL property'
     ).that.is.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'isAdmin',
       fakeUser.isAdmin,
-      'created user does not have property isAdmin'
+      'get user does not have property isAdmin'
     ).that.is.true;
 
     expect(body).to.have.own.property(
       'firstName',
       fakeUser.firstName,
-      'created user does not have property firstName'
+      'get user does not have property firstName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'lastName',
       fakeUser.lastName,
-      'created user does not have property lastName'
+      'get user does not have property lastName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'email',
       fakeUser.email,
-      'new user does not have an email property'
+      'get user does not have an email property'
     ).that.is.not.empty.that.is.a.string;
   });
 
@@ -214,18 +214,18 @@ describe('Admin Users API', () => {
     expect(body).to.not.have.own.property('password');
     expect(body).to.not.have.own.property('__v');
 
-    // Response data should have changed '_id' and 'createdDate'
+    // Response data should not have changed '_id' and 'createdDate'
     expect(body).to.have.own.property(
       '_id',
       fakeUser._id,
-      'created user does not have property _id'
+      'changed user does not have property _id'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body)
       .to.have.own.property(
         'createdDate',
         fakeUser.createdDate,
-        'new user does not have a createdDate property'
+        'changed user does not have a createdDate property'
       )
       .that.is.not.empty.that.is.an.instanceof(Date);
 
@@ -233,37 +233,37 @@ describe('Admin Users API', () => {
     expect(body).to.have.own.property(
       'imageID',
       fakeUserChanges.imageID,
-      'fake user does not have an imageID property'
+      'changed user does not have an imageID property'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'mediaURL',
       fakeUserChanges.mediaURL,
-      'new user does not have a mediaURL property'
+      'changed user does not have a mediaURL property'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'isAdmin',
       fakeUserChanges.isAdmin,
-      'created user does not have property isAdmin'
+      'changed user does not have property isAdmin'
     ).that.is.true;
 
     expect(body).to.have.own.property(
       'firstName',
       fakeUserChanges.firstName,
-      'created user does not have property firstName'
+      'changed user does not have property firstName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'lastName',
       fakeUserChanges.lastName,
-      'created user does not have property lastName'
+      'changed user does not have property lastName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'email',
       fakeUserChanges.email,
-      'new user does not have an email property'
+      'changed user does not have an email property'
     ).that.is.not.empty.that.is.a.string;
 
     fakeUser = body;
@@ -283,51 +283,51 @@ describe('Admin Users API', () => {
     expect(body).to.have.own.property(
       '_id',
       fakeUser._id,
-      'created user does not have property _id'
+      'deleted user does not have property _id'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body)
       .to.have.own.property(
         'createdDate',
         fakeUser.createdDate,
-        'new user does not have a createdDate property'
+        'deleted user does not have a createdDate property'
       )
       .that.is.not.empty.that.is.an.instanceof(Date);
 
     expect(body).to.have.own.property(
       'imageID',
       fakeUser.imageID,
-      'fake user does not have an imageID property'
+      'deleted user does not have an imageID property'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'mediaURL',
       fakeUser.mediaURL,
-      'new user does not have a mediaURL property'
+      'deleted user does not have a mediaURL property'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'isAdmin',
       fakeUser.isAdmin,
-      'created user does not have property isAdmin'
+      'deleted user does not have property isAdmin'
     ).that.is.true;
 
     expect(body).to.have.own.property(
       'firstName',
       fakeUser.firstName,
-      'created user does not have property firstName'
+      'deleted user does not have property firstName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'lastName',
       fakeUser.lastName,
-      'created user does not have property lastName'
+      'deleted user does not have property lastName'
     ).that.is.not.empty.that.is.a.string;
 
     expect(body).to.have.own.property(
       'email',
       fakeUser.email,
-      'new user does not have an email property'
+      'deleted user does not have an email property'
     ).that.is.not.empty.that.is.a.string;
   });
 
