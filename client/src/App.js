@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import Responsive from 'react-responsive';
 import Drawer from '@material-ui/core/Drawer';
 import NotFoundPage from './containers/notFoundPage';
-import HomePage from './containers/homePage';
+import { HomePage } from './containers/homePage';
 import CausePage from './containers/causePage';
 import Emailer from './containers/emailEditor';
 import SidePanel from './containers/sidePanel';
 import MenuButton from './components/menuButton';
 import ManageAgentsPage from './containers/manageAgentsPage';
-import CreateCausePage from './containers/createCausePage';
+import { CreateCausePage } from './containers/createCausePage';
 
 // To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {

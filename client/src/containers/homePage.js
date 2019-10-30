@@ -8,7 +8,7 @@ import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
 import axios from '../../node_modules/axios/index';
 
-class HomePage extends React.Component {
+export class HomePageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,20 +62,22 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <HomePageContainer>
+      <Container>
         <Header>
           <h1>Dashboard</h1>
           <hr />
         </Header>
         <SearchContainer>
           <Input
+            id="input-search"
+            name="searchBar"
             icon="search"
             placeholder="Search for a cause..."
             type={'text'}
             onChange={this.onQueryChange}
           />
           <Link to="/createcause">
-            <Button title="Create Cause" primary />
+            <Button id="button-createCause" title="Create Cause" primary />
           </Link>
         </SearchContainer>
         <PinnedCauses>
@@ -87,12 +89,12 @@ class HomePage extends React.Component {
             })}
           </CausesContainer>
         </PinnedCauses>
-      </HomePageContainer>
+      </Container>
     );
   }
 }
 
-const HomePageContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,4 +154,4 @@ const mapStateToProps = state => ({
   session: state.authentication
 });
 
-export default connect(mapStateToProps)(HomePage);
+export const HomePage = connect(mapStateToProps)(HomePageContainer);
