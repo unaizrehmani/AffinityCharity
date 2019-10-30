@@ -20,7 +20,12 @@ export class CreateCausePageContainer extends React.Component {
   }
 
   handleCreateCauseButton = () => {
-    if(this.state.title !== '' && this.state.type !== '' && this.state.location !== '' && this.state.description !== ''){
+    if (
+      this.state.title !== '' &&
+      this.state.type !== '' &&
+      this.state.location !== '' &&
+      this.state.description !== ''
+    ) {
       //Create cause
     } else {
       //display error indicated that fields need to be filled
@@ -143,7 +148,6 @@ const mapStateToProps = state => ({
   session: state.authentication
 });
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -201,4 +205,6 @@ const ImagePreview = styled.img`
   width: 260px;
 `;
 
-export const CreateCausePage = connect(mapStateToProps)(CreateCausePageContainer);
+export const CreateCausePage = connect(mapStateToProps)(
+  CreateCausePageContainer
+);

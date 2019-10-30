@@ -109,7 +109,7 @@ const CauseDescription = styled.h5`
   text-overflow: ellipsis;
   width: 260px;
   padding: 0 5px;
-  overflow: hidden
+  overflow: hidden;
 `;
 
 const CauseSubscriberCount = styled.h5`
