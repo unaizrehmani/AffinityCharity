@@ -76,6 +76,7 @@ export class CreateCausePageContainer extends React.Component {
           <InputContainer>
             <InputTitle>Title</InputTitle>
             <Input
+              id="input-title"
               name="title"
               value={this.state.title}
               onChange={this.handleUserInput}
@@ -86,6 +87,7 @@ export class CreateCausePageContainer extends React.Component {
           <InputContainer>
             <InputTitle>Type</InputTitle>
             <Input
+              id="input-type"
               name="type"
               value={this.state.type}
               onChange={this.handleUserInput}
@@ -96,6 +98,7 @@ export class CreateCausePageContainer extends React.Component {
           <InputContainer>
             <InputTitle>Location</InputTitle>
             <Input
+              id="input-location"
               value={this.state.location}
               onChange={this.handleUserInput}
               name="location"
@@ -106,6 +109,7 @@ export class CreateCausePageContainer extends React.Component {
           <InputContainer>
             <InputTitle>Description</InputTitle>
             <TextArea
+              id="input-description"
               name="description"
               value={this.state.description}
               onChange={this.handleUserInput}
@@ -115,6 +119,7 @@ export class CreateCausePageContainer extends React.Component {
           <InputContainer>
             <InputTitle>Upload Image</InputTitle>
             <input
+              id="input-image"
               type="file"
               name="image"
               onChange={e => this.handleImageChange(e)}
@@ -123,6 +128,7 @@ export class CreateCausePageContainer extends React.Component {
           </InputContainer>
           <div className="imgPreview">{$imagePreview}</div>
           <Button
+            id="button-createCause"
             title="Create Cause"
             primary
             handleClick={this.handleCreateCauseButton}
