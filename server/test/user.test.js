@@ -110,25 +110,25 @@ describe('Agent Users API', () => {
       'isAdmin',
       fakeUser.isAdmin,
       'created user does not have property isAdmin'
-    );
+    ).that.is.true;
     expect(body).to.have.own.property(
       'firstName',
       fakeUser.firstName,
       'created user does not have property firstName'
-    );
+    ).that.is.not.empty.that.is.a.string;
     expect(body).to.have.own.property(
       'lastName',
       fakeUser.lastName,
       'created user does not have property lastName'
-    );
+    ).that.is.not.empty.that.is.a.string;
     expect(body).to.have.own.property(
       'email',
       fakeUser.email,
       'new user does not have an email property'
-    );
+    ).that.is.not.empty.that.is.a.string;
   });
 
-  it('Get New Fake User Agent', async () => {
+  it('Get All User Agents', async () => {
     const { body } = await request(app)
       .get('/api/users')
       .set('Authorization', 'Bearer ' + user.token)
@@ -137,7 +137,7 @@ describe('Agent Users API', () => {
     expect(body).to.be.an('array');
   });
 
-  it('Read New Fake User Agent', async () => {
+  it('Get New Fake User Agent', async () => {
     const { body } = await request(app)
       .get('/api/users/' + fakeUser._id)
       .set('Authorization', 'Bearer ' + user.token)
