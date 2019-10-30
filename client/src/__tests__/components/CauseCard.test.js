@@ -8,7 +8,7 @@ describe('testing the cause card', () => {
   });
 
   it('updates state correctly on click', () => {
-    const wrapper = shallow(<CauseCard />)
+    const wrapper = shallow(<CauseCard />);
     wrapper.instance().handleClick();
     expect(wrapper.state('redirect')).toEqual(true);
   });
