@@ -84,7 +84,6 @@ const CauseImageContainer = styled.div`
 
 const CauseCardContent = styled.div`
   display: flex;
-  height: 80px;
   width: 100%;
   flex-direction: column;
   align-items: center;
@@ -106,6 +105,11 @@ const CauseLocation = styled.h5`
 const CauseDescription = styled.h5`
   margin: 10px 0 0 0;
   font-weight: 100;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 260px;
+  padding: 0 5px;
+  overflow: hidden;
 `;
 
 const CauseSubscriberCount = styled.h5`
