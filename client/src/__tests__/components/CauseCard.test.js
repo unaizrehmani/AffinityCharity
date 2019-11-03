@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CauseCard from '../../components/causeCard';
 
-describe('testing the cause card', () => {
+describe('Testing the CauseCard', () => {
   it('renders without crashing', () => {
     shallow(<CauseCard />);
   });

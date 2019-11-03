@@ -6,6 +6,7 @@ import MultipleEmail from '../components/multipleEmail';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import { connect } from 'react-redux';
+
 class Emailer extends Component {
   constructor(props) {
     super(props);

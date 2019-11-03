@@ -19,6 +19,7 @@ export default class Input extends Component {
           {...this.props}
           name={this.props.name}
           type={this.props.type}
+          size={this.props.width}
           placeholder={this.props.placeholder}
           onChange={event => this.props.onChange(event)}
         />
@@ -38,7 +39,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledInput = styled.input`
-  width: 400px;
+  width: ${props => (props.width ? `${props.width}` : '400px')};
   color: ${colors.primary};
   border-radius: 0 20px 20px 0;
   border-width: 1px;

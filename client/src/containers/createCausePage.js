@@ -132,11 +132,7 @@ export class CreateCausePageContainer extends React.Component {
             />
           </InputContainer>
           <div className="imgPreview">{$imagePreview}</div>
-          <Button
-            id="button-createCause"
-            title="Create Cause"
-            primary
-          />
+          <Button id="button-createCause" title="Create Cause" primary />
         </FormContainer>
       </Container>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
@@ -126,6 +127,7 @@ class LoginPage extends React.Component {
             <Button title="Forgot Password" primary={false} />
           </ButtonPrompts>
         </LoginForm>
+        <Link to="/register">Register Charity</Link>
       </StyledLoginPage>
     );
   }
