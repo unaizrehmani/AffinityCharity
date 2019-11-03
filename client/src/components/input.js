@@ -19,7 +19,7 @@ export default class Input extends Component {
           {...this.props}
           name={this.props.name}
           type={this.props.type}
-          size={this.props.width}
+          size={this.props.size}
           placeholder={this.props.placeholder}
           onChange={event => this.props.onChange(event)}
         />
@@ -33,13 +33,18 @@ const StyledContainer = styled.div`
   border-radius: 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.2s linear;
+  margin-right: 10px;
   &:hover {
     box-shadow: 0px 5px 10px 0px rgba(173, 173, 173, 1);
   }
 `;
 
 const StyledInput = styled.input`
-  width: ${props => (props.width ? `${props.width}` : '400px')};
+  width: ${props => {
+    if (props.size === 'small') return '100px';
+    else if (props.size === 'medium') return '220px';
+    else if (props.size === 'large') return '400px';
+  }};
   color: ${colors.primary};
   border-radius: 0 20px 20px 0;
   border-width: 1px;
