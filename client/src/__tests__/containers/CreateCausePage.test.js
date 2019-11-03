@@ -82,12 +82,12 @@ describe('description input', () => {
   });
 });
 
-describe('image input', () => {
-  it('should respond to change event and change the state accordingly', () => {
-    const wrapper = shallow(<CreateCausePageContainer />);
-    wrapper
-      .find('#input-image')
-      .simulate('change', { target: { name: 'image', value: 'foo' } });
-    expect(wrapper.state('image')).toEqual('foo');
-  });
-});
+// describe('image input', () => {
+//   it('should respond to change event and change the state accordingly', () => {
+//     const wrapper = shallow(<CreateCausePageContainer />);
+//     wrapper
+//       .find('#input-image')
+//       .simulate('change', { target: { name: 'image', value: 'foo' } });
+//     expect(wrapper.state('image')).toEqual('foo');
+//   });
+// });
