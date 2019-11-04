@@ -46,7 +46,7 @@ const StyledInput = styled.input`
     else if (props.size === 'large') return '400px';
   }};
   color: ${colors.primary};
-  border-radius: ${props => (props.noLabel ? `` : `0 20px 20px 0`)};
+  border-radius: ${props => (props.noLabel ? '' : '0 20px 20px 0')};
   border-width: 1px;
   border-style: solid;
   border-color: ${colors.secondary};

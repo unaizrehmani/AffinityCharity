@@ -84,19 +84,19 @@ export default class RegisterPageComponent extends Component {
           <InputContainer>
             <InputTitle>Your Email</InputTitle>
             <Input
-              id='input-email'
-              name='email'
-              size='large'
-              type='email'
-              placeholder='john.doe@email.com'
+              id="input-email"
+              name="email"
+              size="large"
+              type="email"
+              placeholder="john.doe@email.com"
               value={this.state.email}
               onChange={this.handleUserInput}
               noLabel={true}
             />
           </InputContainer>
           <Button
-            id='button-subscribe'
-            title='Subscribe'
+            id="button-subscribe"
+            title="Subscribe"
             primary
             handleClick={this.submitEmail}
           />
