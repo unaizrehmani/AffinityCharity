@@ -16,21 +16,18 @@ export class CreateCausePageContainer extends React.Component {
       location: '',
       description: '',
       image: '',
-      imagePreviewUrl: ''
+      imagePreviewUrl: '',
     };
   }
 
   handleCreateCauseButton = () => {
 
-  console.log(this.state.name)
-  console.log(this.state.type)
-  console.log(this.state.location)
-  console.log(this.state.description)
-
-  let isFormValid = this.state.name && this.state.type && this.state.location && this.state.description ? true : false;
-
-  console.log(isFormValid)
-
+  let isFormValid = 
+    this.state.name && 
+    this.state.type && 
+    this.state.location && 
+    this.state.description &&
+    this.state.image ? true : false;
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
@@ -39,13 +36,21 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   handleRequestToCreateNewCause = async () => {
+    let config = {
+      headers: { 'Authorization' : "bearer " + token}
+    }
+
+    let bodyParameters = {
+      name: this.state.name,
+      location: this.state.location,
+      description: this.state.description,
+    }
+
     try {
       await axios.post(
         'https://social-charity-server.herokuapp.com/api/causes', {
-          name: this.state.name,
-          location: this.state.location,
-          description: this.state.description,
-          image: this.state.image
+          bodyParameters,
+          config
         }
       ).then((response) => {
         console.log(response)
