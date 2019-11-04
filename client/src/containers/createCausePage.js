@@ -22,15 +22,19 @@ export class CreateCausePageContainer extends React.Component {
 
   handleCreateCauseButton = () => {
 
-  let isFormValid = this.state.name !== '' &&
-  this.state.type !== '' &&
-  this.state.location !== '' &&
-  this.state.description !== '';
+  console.log(this.state.name)
+  console.log(this.state.type)
+  console.log(this.state.location)
+  console.log(this.state.description)
+
+  let isFormValid = this.state.name && this.state.type && this.state.location && this.state.description ? true : false;
+
+  console.log(isFormValid)
 
     if (isFormValid) {
-      console.log(this.state.image)
+      this.handleRequestToCreateNewCause();
     } else {
-      console.err("Please fill out all required fields")
+      console.log("Please fill out all required fields")
     }
   };
 
@@ -41,9 +45,11 @@ export class CreateCausePageContainer extends React.Component {
           name: this.state.name,
           location: this.state.location,
           description: this.state.description,
-          image: ''
+          image: this.state.image
         }
-      );
+      ).then((response) => {
+        console.log(response)
+      })
     } catch (err) {
       console.log(err);
     }
@@ -121,9 +127,9 @@ export class CreateCausePageContainer extends React.Component {
             <InputTitle>Location</InputTitle>
             <Input
               id="input-location"
+              name="location"
               value={this.state.location}
               onChange={this.handleUserInput}
-              name="location"
               style={inputContainerStyleOverride}
               noLabel={true}
             />
@@ -154,6 +160,7 @@ export class CreateCausePageContainer extends React.Component {
             id="button-createCause"
             title="Create Cause"
             primary
+            handleClick={this.handleCreateCauseButton}
           />
         </FormContainer>
       </Container>
