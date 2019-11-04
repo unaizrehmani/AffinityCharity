@@ -19,11 +19,11 @@ router.post('/send-email', authorize, causeController.sendEmail);
 /*
  * GET /api/causes/
  */
-router.get('/', causeController.getAllCauses);
+router.get('/', authorize, causeController.getAllCauses);
 /*
  * GET /api/causes/:causeID
  */
-router.get('/:causeID', authorize, causeController.getCauseByID);
+router.get('/:causeID', causeController.getCauseByID);
 
 /*
  * PATCH /api/causes/:causeID
