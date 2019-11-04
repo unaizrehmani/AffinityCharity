@@ -1,27 +1,42 @@
-import { CREATE_CAUSE } from '../actions/cause';
+import { CREATE_CAUSE_BEGIN, CREATE_CAUSE_SUCCESS, CREATE_CAUSE_FAILURE } from '../actions/cause';
 
-const causeReducer = function(
-  state = {
+const initialState = {
+    isCreatingCause: false,
+    createCauseError: undefined,
     name: undefined,
     location: undefined,
     description: undefined
-  },
-  { type, payload }
-) 
-{
+}
+
+const causeReducer = function( state = initialState, { type, payload }) {
   switch (type) {
-    case CREATE_CAUSE:
-      return {
-        ...state,
-        ...{
-          isLoggedIn: payload.token ? true : false,
-          title: payload.title,
-          location: payload.location,
-          description: payload.description,
-          image: payload.image,
-          userToken: payload.token
+    case CREATE_CAUSE_BEGIN:
+        return { 
+            ...state, 
+            ...{ isCreatingCause: true, createCauseError: undefined,} 
         }
-      };
+      case CREATE_CAUSE_SUCCESS:
+        return {
+        ...state,
+            ...{
+              isCreatingCause: false,
+              createCauseError: undefined,
+              title: payload.title,
+              location: payload.location,
+              description: payload.description,
+              image: payload.image,
+              userToken: payload.token
+            }
+        }
+      case CREATE_CAUSE_FAILURE:
+        //set fetching to false, unload any past data and load error
+        return {
+          ...state,
+          ...{
+            isCreatingCause: false,
+            createCauseError: true,
+          }
+        }
     default:
       return state;
   }
