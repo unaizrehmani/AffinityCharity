@@ -13,6 +13,7 @@ export default class RegisterPageComponent extends Component {
       email: '',
       causeId: this.props.match.params.id,
       charity: 'HCI',
+      //  Template Cause Description
       causeDescription: `The people of Yemen are subject to the turbulent conditions in the region. Internal conflict and military actions have created a state of disorder and chaos. The Yemeni people suffer from a lack of basic items and necessary medical supplies.
 
       The current circumstances have made drought and famine inevitable in the near future, according to experts. Many relief camps are overcrowded and undersupplied.
