@@ -5,12 +5,13 @@ import Input from '../components/input';
 import TextArea from '../components/textArea';
 import Button from '../components/button';
 import colors from '../styles/colors';
+import axios from '../../node_modules/axios/index';
 
 export class CreateCausePageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      name: '',
       type: '',
       location: '',
       description: '',
@@ -19,18 +20,34 @@ export class CreateCausePageContainer extends React.Component {
     };
   }
 
-  // handleCreateCauseButton = () => {
-  //   if (
-  //     this.state.title !== '' &&
-  //     this.state.type !== '' &&
-  //     this.state.location !== '' &&
-  //     this.state.description !== ''
-  //   ) {
-  //     //Create cause
-  //   } else {
-  //     //display error indicated that fields need to be filled
-  //   }
-  // };
+  handleCreateCauseButton = () => {
+
+  let isFormValid = this.state.name !== '' &&
+  this.state.type !== '' &&
+  this.state.location !== '' &&
+  this.state.description !== '';
+
+    if (isFormValid) {
+      console.log(this.state.image)
+    } else {
+      console.err("Please fill out all required fields")
+    }
+  };
+
+  handleRequestToCreateNewCause = async () => {
+    try {
+      await axios.post(
+        'https://social-charity-server.herokuapp.com/api/causes', {
+          name: this.state.name,
+          location: this.state.location,
+          description: this.state.description,
+          image: ''
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   handleUserInput = e => {
     const name = e.target.name;
@@ -79,11 +96,11 @@ export class CreateCausePageContainer extends React.Component {
         </Header>
         <FormContainer>
           <InputContainer>
-            <InputTitle>Title</InputTitle>
+            <InputTitle>Name</InputTitle>
             <Input
-              id="input-title"
-              name="title"
-              value={this.state.title}
+              id="input-name"
+              name="name"
+              value={this.state.name}
               onChange={this.handleUserInput}
               style={inputContainerStyleOverride}
               noLabel={true}
@@ -127,6 +144,7 @@ export class CreateCausePageContainer extends React.Component {
               id="input-image"
               type="file"
               name="image"
+              accept="image/png, image/jpeg"
               onChange={e => this.handleImageChange(e)}
               style={inputContainerStyleOverride}
             />
