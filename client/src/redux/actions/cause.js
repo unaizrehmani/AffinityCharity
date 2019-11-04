@@ -8,6 +8,7 @@ export const CREATE_CAUSE_FAILURE = 'CREATE_CAUSE_FAILURE'
 
 // Action Creators
 export function createCause(cause, userToken) {
+    console.log(cause)
     console.log(userToken)
     var config = {
         headers: {

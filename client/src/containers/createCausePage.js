@@ -29,6 +29,7 @@ export class CreateCausePageContainer extends React.Component {
     this.state.description &&
     this.state.image ? true : false;
 
+    console.log(this.state.image)
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
