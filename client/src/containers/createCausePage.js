@@ -39,7 +39,7 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   handleImageChange = e => {
-    e.preventDefault();
+    // e.preventDefault();
 
     let reader = new FileReader();
     let image = e.target.files[0];
@@ -83,6 +83,7 @@ export class CreateCausePageContainer extends React.Component {
             <Input
               id="input-title"
               name="title"
+              size="medium"
               value={this.state.title}
               onChange={this.handleUserInput}
               style={inputContainerStyleOverride}
@@ -94,6 +95,7 @@ export class CreateCausePageContainer extends React.Component {
             <Input
               id="input-type"
               name="type"
+              size="medium"
               value={this.state.type}
               onChange={this.handleUserInput}
               style={inputContainerStyleOverride}
@@ -107,6 +109,7 @@ export class CreateCausePageContainer extends React.Component {
               value={this.state.location}
               onChange={this.handleUserInput}
               name="location"
+              size="medium"
               style={inputContainerStyleOverride}
               noLabel={true}
             />
@@ -132,11 +135,7 @@ export class CreateCausePageContainer extends React.Component {
             />
           </InputContainer>
           <div className="imgPreview">{$imagePreview}</div>
-          <Button
-            id="button-createCause"
-            title="Create Cause"
-            primary
-          />
+          <Button id="button-createCause" title="Create Cause" primary />
         </FormContainer>
       </Container>
     );
