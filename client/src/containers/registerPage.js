@@ -51,6 +51,10 @@ export default class RegisterPageComponent extends Component {
     this.setState({ [name]: value });
   };
 
+  submitEmail = () => {
+    alert('Added!');
+  };
+
   render() {
     return (
       <Container>
@@ -64,7 +68,7 @@ export default class RegisterPageComponent extends Component {
         </Banner>
         <Information>
           You have been invited by {this.state.CauseCharity} to follow this
-          cause. Please enter your email below to receive updates from Affinity
+          cause. Please enter your email below to receive emails from Affinity
           when this cause is updated.
         </Information>
         <CauseContainer>
@@ -84,12 +88,18 @@ export default class RegisterPageComponent extends Component {
               name='email'
               size='large'
               type='email'
+              placeholder='john.doe@email.com'
               value={this.state.email}
               onChange={this.handleUserInput}
               noLabel={true}
             />
           </InputContainer>
-          <Button id='button-subscribe' title='Subscribe' primary />
+          <Button
+            id='button-subscribe'
+            title='Subscribe'
+            primary
+            handleClick={this.submitEmail}
+          />
         </FormContainer>
       </Container>
     );
