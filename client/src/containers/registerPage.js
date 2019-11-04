@@ -76,7 +76,7 @@ export default class RegisterPageComponent extends Component {
             <InputTitle>Your Email</InputTitle>
             <Input
               id='input-email'
-              name='title'
+              name='email'
               size='large'
               type='email'
               value={this.state.email}
