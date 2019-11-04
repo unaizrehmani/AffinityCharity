@@ -10,9 +10,9 @@ export default class Authenticate extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <PrivateRoute path="/" component={<App />} />
+          <Route exact path='/login' component={LoginPage} />
+          <Route path='/register/:id' component={RegisterPage} />
+          <PrivateRoute path='/' component={<App />} />
         </Switch>
       </Router>
     );
