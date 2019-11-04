@@ -5,22 +5,16 @@ export const CREATE_CAUSE_SUCCESS = 'CREATE_CAUSE_SUCCESS'
 export const CREATE_CAUSE_FAILURE = 'CREATE_CAUSE_FAILURE'
 
 // Action Creators
-export function createCause(name, location, description, image, token) {
-  return {
-    type: CREATE_CAUSE,
-    payload: {
-      name,
-      location,
-      description,
-      image,
-      token,
-    }
-  };
-}
-
-export function createCause(cause) {
+export function createCause(cause, userToken) {
     let config = {
-        headers: { 'Authorization' : "bearer " + token}
+        headers: { 'Authorization' : "bearer " + userToken}
+    }
+
+    let bodyParameters = {
+        name: cause.name,
+        location: cause.location,
+        description: cause.description,
+        image: cause.image,
     }
 
     return async dispatch => {
@@ -28,7 +22,7 @@ export function createCause(cause) {
       try {
         await axios.post(
           'https://social-charity-server.herokuapp.com/api/causes', {
-            cause,
+            bodyParameters,
             config
           }
         ).then((response) => {

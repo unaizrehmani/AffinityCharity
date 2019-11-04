@@ -1,11 +1,13 @@
-import { CREATE_CAUSE_BEGIN, CREATE_CAUSE_SUCCESS, CREATE_CAUSE_FAILURE } from '../actions/cause';
+import { 
+    CREATE_CAUSE_BEGIN, 
+    CREATE_CAUSE_SUCCESS, 
+    CREATE_CAUSE_FAILURE 
+} from '../actions/cause';
 
 const initialState = {
     isCreatingCause: false,
     createCauseError: undefined,
-    name: undefined,
-    location: undefined,
-    description: undefined
+    cause: undefined
 }
 
 const causeReducer = function( state = initialState, { type, payload }) {
@@ -21,11 +23,7 @@ const causeReducer = function( state = initialState, { type, payload }) {
             ...{
               isCreatingCause: false,
               createCauseError: undefined,
-              title: payload.title,
-              location: payload.location,
-              description: payload.description,
-              image: payload.image,
-              userToken: payload.token
+              cause: undefined,
             }
         }
       case CREATE_CAUSE_FAILURE:

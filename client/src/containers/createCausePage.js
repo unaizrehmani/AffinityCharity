@@ -28,6 +28,7 @@ export class CreateCausePageContainer extends React.Component {
     this.state.location && 
     this.state.description &&
     this.state.image ? true : false;
+    
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
@@ -36,28 +37,13 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   handleRequestToCreateNewCause = async () => {
-    let config = {
-      headers: { 'Authorization' : "bearer " + token}
+    let cause = {
+        name: this.state.name,
+        location: this.state.location,
+        description: this.state.description,
+        image: this.state.image,
     }
-
-    let bodyParameters = {
-      name: this.state.name,
-      location: this.state.location,
-      description: this.state.description,
-    }
-
-    try {
-      await axios.post(
-        'https://social-charity-server.herokuapp.com/api/causes', {
-          bodyParameters,
-          config
-        }
-      ).then((response) => {
-        console.log(response)
-      })
-    } catch (err) {
-      console.log(err);
-    }
+    createCause(cause, this.props.session.userToken);
   }
 
   handleUserInput = e => {
@@ -173,6 +159,12 @@ export class CreateCausePageContainer extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    createCause: (cause) => dispatch(createCause(cause))
+  }
+}
+
 const mapStateToProps = state => ({
   session: state.authentication
 });
@@ -234,6 +226,6 @@ const ImagePreview = styled.img`
   width: 260px;
 `;
 
-export const CreateCausePage = connect(mapStateToProps)(
+export const CreateCausePage = connect(mapStateToProps, mapDispatchToProps)(
   CreateCausePageContainer
 );
