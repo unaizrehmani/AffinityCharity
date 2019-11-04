@@ -62,6 +62,11 @@ export default class RegisterPageComponent extends Component {
           />
           <h2>Affinity</h2>
         </Banner>
+        <Information>
+          You have been invited by {this.state.CauseCharity} to follow this
+          cause. Please enter your email below to receive updates from Affinity
+          when this cause is updated.
+        </Information>
         <CauseContainer>
           <CauseTitle>{this.state.causeName}</CauseTitle>
           <CauseCharity>Managed By {this.state.charity}</CauseCharity>
@@ -105,7 +110,14 @@ const Banner = styled.div`
   text-align: center;
   align-items: center;
   margin-top: 5vh;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
+`;
+
+const Information = styled.p`
+  text-align: center;
+  font-weight: bold !important;
+  width: 500px;
+  padding-bottom: 30px;
 `;
 
 const CauseContainer = styled.div`
