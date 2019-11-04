@@ -1,34 +1,33 @@
+import axios from '../../../node_modules/axios/index'
+
 // Types
-export const CREATE_CAUSE = 'CREATE_CAUSE';
+export const CREATE_CAUSE = 'CREATE_CAUSE'
 export const CREATE_CAUSE_BEGIN = 'CREATE_CAUSE_BEGIN'
 export const CREATE_CAUSE_SUCCESS = 'CREATE_CAUSE_SUCCESS'
 export const CREATE_CAUSE_FAILURE = 'CREATE_CAUSE_FAILURE'
 
 // Action Creators
 export function createCause(cause, userToken) {
-    let config = {
-        headers: { 'Authorization' : "bearer " + userToken}
-    }
-
-    let bodyParameters = {
-        name: cause.name,
-        location: cause.location,
-        description: cause.description,
-        image: cause.image,
+    console.log(userToken)
+    var config = {
+        headers: {
+            'Authorization' : "Bearer " + userToken,
+            'Content-Type' : 'application/json'
+        }
     }
 
     return async dispatch => {
       dispatch(createCauseBegin())
       try {
-        await axios.post(
-          'https://social-charity-server.herokuapp.com/api/causes', {
-            bodyParameters,
+        const request = await axios.post(
+          'https://social-charity-server.herokuapp.com/api/causes', 
+            cause,
             config
-          }
-        ).then((response) => {
-            dispatch(createCauseSuccess(response.data))
-            return response
-        })
+          )
+          dispatch(createCauseSuccess(request.data))
+          console.log(request)
+          console.log(request.data)
+          return request
       } catch (error) {
         dispatch(createCauseFailure(error))
         return error

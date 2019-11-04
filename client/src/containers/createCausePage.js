@@ -5,7 +5,7 @@ import Input from '../components/input';
 import TextArea from '../components/textArea';
 import Button from '../components/button';
 import colors from '../styles/colors';
-import axios from '../../node_modules/axios/index';
+import { createCause } from '../redux/actions/cause';
 
 export class CreateCausePageContainer extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export class CreateCausePageContainer extends React.Component {
     this.state.location && 
     this.state.description &&
     this.state.image ? true : false;
-    
+
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
@@ -43,7 +43,7 @@ export class CreateCausePageContainer extends React.Component {
         description: this.state.description,
         image: this.state.image,
     }
-    createCause(cause, this.props.session.userToken);
+    this.props.dispatch(createCause(cause, this.props.session.userToken));
   }
 
   handleUserInput = e => {
@@ -159,11 +159,11 @@ export class CreateCausePageContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createCause: (cause) => dispatch(createCause(cause))
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     createCause: (cause, userToken) => dispatch(createCause(cause, userToken))
+//   }
+// }
 
 const mapStateToProps = state => ({
   session: state.authentication
@@ -226,6 +226,6 @@ const ImagePreview = styled.img`
   width: 260px;
 `;
 
-export const CreateCausePage = connect(mapStateToProps, mapDispatchToProps)(
+export const CreateCausePage = connect(mapStateToProps)(
   CreateCausePageContainer
 );

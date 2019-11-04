@@ -1,8 +1,4 @@
-import { 
-    CREATE_CAUSE_BEGIN, 
-    CREATE_CAUSE_SUCCESS, 
-    CREATE_CAUSE_FAILURE 
-} from '../actions/cause';
+import { CREATE_CAUSE_BEGIN, CREATE_CAUSE_SUCCESS, CREATE_CAUSE_FAILURE } from '../actions/cause';
 
 const initialState = {
     isCreatingCause: false,
@@ -23,7 +19,7 @@ const causeReducer = function( state = initialState, { type, payload }) {
             ...{
               isCreatingCause: false,
               createCauseError: undefined,
-              cause: undefined,
+              cause: payload.data,
             }
         }
       case CREATE_CAUSE_FAILURE:
@@ -32,7 +28,7 @@ const causeReducer = function( state = initialState, { type, payload }) {
           ...state,
           ...{
             isCreatingCause: false,
-            createCauseError: true,
+            createCauseError: payload.error,
           }
         }
     default:
