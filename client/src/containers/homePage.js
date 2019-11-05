@@ -18,7 +18,7 @@ export class HomePageContainer extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.dispatch(getCauses)
+    this.props.dispatch(getCauses())
   };
 
   renderCauseCard = cause => {
