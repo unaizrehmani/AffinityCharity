@@ -3,7 +3,8 @@ import { CREATE_CAUSE_BEGIN, CREATE_CAUSE_SUCCESS, CREATE_CAUSE_FAILURE } from '
 const initialState = {
     isCreatingCause: false,
     createCauseError: undefined,
-    cause: undefined
+    cause: undefined,
+    causes: []
 }
 
 const causeReducer = function( state = initialState, { type, payload }) {
