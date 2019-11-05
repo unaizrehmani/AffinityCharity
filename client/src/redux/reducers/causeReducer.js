@@ -29,7 +29,8 @@ const causeReducer = function(state = initialState, { type, payload }) {
         ...{
           isCreatingCause: false,
           createCauseError: undefined,
-          cause: payload.data
+          cause: payload.data,
+          causes: state.cause.push(state.cause)
         }
       };
     case CREATE_CAUSE_FAILURE:

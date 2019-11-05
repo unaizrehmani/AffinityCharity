@@ -15,7 +15,7 @@ export const GET_CAUSES_FAILURE = 'GET_CAUSES_FAILURE';
 export function createCause(cause, userToken) {
   var config = {
     headers: {
-      Authorization: 'Bearer ' + userToken,
+      'Authorization': 'Bearer ' + userToken,
       'Content-Type': 'application/json'
     }
   };
@@ -28,8 +28,8 @@ export function createCause(cause, userToken) {
         cause,
         config
       );
+      console.log(request);
       dispatch(createCauseSuccess(request.data));
-      console.log(request.data);
       return request;
     } catch (error) {
       dispatch(createCauseFailure(error));

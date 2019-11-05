@@ -6,7 +6,6 @@ import Input from '../components/input';
 import Button from '../components/button';
 import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
-import axios from '../../node_modules/axios/index';
 import { getCauses } from '../redux/actions/cause';
 
 export class HomePageContainer extends React.Component {
@@ -83,7 +82,7 @@ export class HomePageContainer extends React.Component {
           <h3>Pinned Causes</h3>
           <CausesContainer>
             {/* TODO replace <div> with spinner  */}
-            { this.props.isGettingCauses ? <div></div> : renderCards} 
+            { this.props.isGettingCauses ? <div>Loading...</div> : renderCards} 
           </CausesContainer>
         </PinnedCauses>
       </Container>

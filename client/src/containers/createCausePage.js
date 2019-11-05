@@ -30,11 +30,10 @@ export class CreateCausePageContainer extends React.Component {
         ? true
         : false;
 
-    console.log(this.state.image);
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
-      console.log('Please fill out all required fields');
+      console.log('Please fill out all required fields'); //TODO add error toast here
     }
   };
 
@@ -161,12 +160,6 @@ export class CreateCausePageContainer extends React.Component {
     );
   }
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     createCause: (cause, userToken) => dispatch(createCause(cause, userToken))
-//   }
-// }
 
 const mapStateToProps = state => ({
   session: state.authentication
