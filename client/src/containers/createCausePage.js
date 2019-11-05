@@ -16,37 +16,38 @@ export class CreateCausePageContainer extends React.Component {
       location: '',
       description: '',
       image: '',
-      imagePreviewUrl: '',
+      imagePreviewUrl: ''
     };
   }
 
   handleCreateCauseButton = () => {
+    let isFormValid =
+      this.state.name &&
+      this.state.type &&
+      this.state.location &&
+      this.state.description &&
+      this.state.image
+        ? true
+        : false;
 
-  let isFormValid = 
-    this.state.name && 
-    this.state.type && 
-    this.state.location && 
-    this.state.description &&
-    this.state.image ? true : false;
-
-    console.log(this.state.image)
+    console.log(this.state.image);
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
-      console.log("Please fill out all required fields")
+      console.log('Please fill out all required fields');
     }
   };
 
   handleRequestToCreateNewCause = async () => {
     let cause = {
-        name: this.state.name,
-        location: this.state.location,
-        description: this.state.description,
-        image: this.state.image,
-        deletable: true
-    }
+      name: this.state.name,
+      location: this.state.location,
+      description: this.state.description,
+      image: this.state.image,
+      deletable: true
+    };
     this.props.dispatch(createCause(cause, this.props.session.userToken));
-  }
+  };
 
   handleUserInput = e => {
     const name = e.target.name;

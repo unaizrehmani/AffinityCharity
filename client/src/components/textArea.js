@@ -7,10 +7,11 @@ export default class TextArea extends Component {
   render() {
     return (
       <TextAreaContainer {...this.props}>
-        <StyledTextArea 
+        <StyledTextArea
           onChange={this.props.onChange}
           name={this.props.name}
-          type={this.props.type}/>
+          type={this.props.type}
+        />
       </TextAreaContainer>
     );
   }
