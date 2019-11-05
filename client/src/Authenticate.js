@@ -11,7 +11,7 @@ export default class Authenticate extends Component {
       <Router>
         <Switch>
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
+          <Route path="/register/:id" component={RegisterPage} />
           <PrivateRoute path="/" component={<App />} />
         </Switch>
       </Router>
