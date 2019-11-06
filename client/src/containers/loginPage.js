@@ -32,9 +32,17 @@ class LoginPage extends React.Component {
         { 'Content-Type': 'application/json' }
       )
       .then(response => {
-        const { firstName, lastName, isAdmin, email, token } = response.data;
+        console.log(response);
+        const {
+          firstName,
+          lastName,
+          isAdmin,
+          email,
+          token,
+          id
+        } = response.data;
         this.props.dispatch(
-          loginUser(firstName, lastName, isAdmin, email, token)
+          loginUser(firstName, lastName, isAdmin, email, token, id)
         );
         if (token) {
           this.props.history.push('/');
@@ -104,33 +112,33 @@ class LoginPage extends React.Component {
         <LoginForm>
           <Form>
             <Input
-              type="email"
+              type='email'
               required
-              size="medium"
-              name="email"
-              icon="user"
+              size='medium'
+              name='email'
+              icon='user'
               value={this.state.email}
               onChange={this.handleUserInput}
-              label="Email"
-              placeholder="john.doe@email.com"
+              label='Email'
+              placeholder='john.doe@email.com'
             />
             <Input
-              type="password"
-              size="medium"
-              icon="lock"
-              name="password"
-              placeholder="Password"
+              type='password'
+              size='medium'
+              icon='lock'
+              name='password'
+              placeholder='Password'
               value={this.state.password}
               onChange={this.handleUserInput}
-              label="Password"
+              label='Password'
             />
           </Form>
           <ButtonPrompts>
-            <Button title="Sign In" primary handleClick={this.onLoginSubmit} />
-            <Button title="Forgot Password" primary={false} />
+            <Button title='Sign In' primary handleClick={this.onLoginSubmit} />
+            <Button title='Forgot Password' primary={false} />
           </ButtonPrompts>
         </LoginForm>
-        <Link to="/register">Register Charity</Link>
+        <Link to='/register'>Register Charity</Link>
       </StyledLoginPage>
     );
   }
