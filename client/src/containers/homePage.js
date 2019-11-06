@@ -18,7 +18,7 @@ export class HomePageContainer extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.dispatch(getCauses())
+    this.props.dispatch(getCauses());
   };
 
   renderCauseCard = cause => {
@@ -54,10 +54,9 @@ export class HomePageContainer extends React.Component {
   };
 
   render() {
-    
     let renderCards = this.props.causes.map(cause => {
       return this.renderCauseCard(cause);
-    })
+    });
 
     return (
       <Container>
@@ -83,7 +82,7 @@ export class HomePageContainer extends React.Component {
           <h3>Pinned Causes</h3>
           <CausesContainer>
             {/* TODO replace <div> with spinner  */}
-            { this.props.isGettingCauses ? <div>Loading...</div> : renderCards} 
+            {this.props.isGettingCauses ? <div>Loading...</div> : renderCards}
           </CausesContainer>
         </PinnedCauses>
       </Container>
