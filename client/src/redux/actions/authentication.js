@@ -3,7 +3,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 // Action Creators
-export function loginUser(firstName, lastName, isAdmin, email, token) {
+export function loginUser(firstName, lastName, isAdmin, email, token, id) {
   return {
     type: LOGIN_USER,
     payload: {
@@ -11,7 +11,8 @@ export function loginUser(firstName, lastName, isAdmin, email, token) {
       lastName,
       isAdmin,
       email,
-      token
+      token,
+      id
     }
   };
 }

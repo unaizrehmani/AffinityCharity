@@ -32,9 +32,17 @@ class LoginPage extends React.Component {
         { 'Content-Type': 'application/json' }
       )
       .then(response => {
-        const { firstName, lastName, isAdmin, email, token } = response.data;
+        console.log(response);
+        const {
+          firstName,
+          lastName,
+          isAdmin,
+          email,
+          token,
+          id
+        } = response.data;
         this.props.dispatch(
-          loginUser(firstName, lastName, isAdmin, email, token)
+          loginUser(firstName, lastName, isAdmin, email, token, id)
         );
         if (token) {
           this.props.history.push('/');

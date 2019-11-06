@@ -7,7 +7,8 @@ const authenticationReducer = function(
     firstName: undefined,
     lastName: undefined,
     isAdmin: undefined,
-    userToken: undefined
+    userToken: undefined,
+    userID: undefined
   },
   { type, payload }
 ) {
@@ -21,7 +22,8 @@ const authenticationReducer = function(
           firstName: payload.firstName,
           lastName: payload.lastName,
           isAdmin: payload.isAdmin,
-          userToken: payload.token
+          userToken: payload.token,
+          userID: payload.id
         }
       };
     case LOGOUT_USER:
@@ -33,7 +35,8 @@ const authenticationReducer = function(
           firstName: undefined,
           lastName: undefined,
           isAdmin: undefined,
-          userToken: undefined
+          userToken: undefined,
+          userID: undefined
         }
       };
     default:
