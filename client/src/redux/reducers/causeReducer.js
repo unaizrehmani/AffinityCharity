@@ -12,7 +12,6 @@ const initialState = {
   isGettingCauses: false,
   getCausesError: undefined,
   createCauseError: undefined,
-  cause: undefined,
   causes: []
 };
 
@@ -29,8 +28,7 @@ const causeReducer = function(state = initialState, { type, payload }) {
         ...{
           isCreatingCause: false,
           createCauseError: undefined,
-          cause: payload.data,
-          causes: state.cause.push(state.cause)
+          causes: [...state.causes, payload.data]
         }
       };
     case CREATE_CAUSE_FAILURE:
