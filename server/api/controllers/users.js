@@ -122,7 +122,9 @@ exports.patchUserByID = async (req, res, next) => {
 
     if (body.newPassword) {
       const result = await User.authenticate(body.oldEmail, body.oldPassword);
-      if (result == null) throw 'Invalid credentials! Cannot change password';
+      if (result == null) {
+        throw new Error('Invalid credentials! Cannot change password');
+      }
       body.password = await bcrypt.hash(body.newPassword, SALTROUNDS);
       body.email = body.newEmail;
     } else {

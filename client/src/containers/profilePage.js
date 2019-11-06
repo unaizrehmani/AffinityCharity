@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Form, Header, Icon, Segment, Grid, Image } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import ProfileForm from '../components/profileForm';
 
