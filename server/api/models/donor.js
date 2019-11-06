@@ -5,29 +5,21 @@ const bcrypt = require('bcryptjs');
 
 const donorSchema = new Schema({
   firstName: {
-    type: String,
-    required: true
+    type: String
   },
   lastName: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
     required: true,
     unique: true
   },
-  password: {
-    type: String,
-    required: true
-  },
   address: {
-    type: String,
-    required: true
+    type: String
   },
   phone: {
-    type: String,
-    required: true
+    type: String
   },
   causes: [
     {
@@ -44,7 +36,7 @@ const donorSchema = new Schema({
 
 donorSchema.methods.toJSON = function () {
   var obj = this.toObject();
-  delete obj.password;
+  // delete obj.password;
   delete obj.__v;
   return obj;
 };
