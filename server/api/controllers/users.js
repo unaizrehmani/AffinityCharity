@@ -129,7 +129,6 @@ exports.patchUserByID = async (req, res, next) => {
       body.email = body.newEmail;
     } else {
       delete body.password;
-      delete body.email;
     }
 
     const result = await User.findByIdAndUpdate(req.params.userID, body, {
