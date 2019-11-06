@@ -23,7 +23,7 @@ router.get('/', causeController.getAllCauses);
 /*
  * GET /api/causes/:causeID
  */
-router.get('/:causeID', authorize, causeController.getCauseByID);
+router.get('/:causeID', causeController.getCauseByID);
 
 /*
  * PATCH /api/causes/:causeID

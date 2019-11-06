@@ -54,7 +54,7 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   handleImageChange = e => {
-    e.preventDefault();
+    // e.preventDefault();
 
     let reader = new FileReader();
     let image = e.target.files[0];
@@ -109,6 +109,7 @@ export class CreateCausePageContainer extends React.Component {
             <Input
               id="input-type"
               name="type"
+              size="medium"
               value={this.state.type}
               onChange={this.handleUserInput}
               style={inputContainerStyleOverride}

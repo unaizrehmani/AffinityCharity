@@ -6,7 +6,7 @@ import CauseCard from '../../components/causeCard';
 
 const mockStore = configureStore();
 
-describe('HomePage UI', () => {
+describe('Testing the HomePage', () => {
   //Fake user session
   const session = {
     isLoggedIn: true,

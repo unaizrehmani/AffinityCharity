@@ -70,6 +70,7 @@ export class HomePageContainer extends React.Component {
             id="input-search"
             name="searchBar"
             icon="search"
+            size="large"
             placeholder="Search for a cause..."
             type={'text'}
             onChange={this.onQueryChange}

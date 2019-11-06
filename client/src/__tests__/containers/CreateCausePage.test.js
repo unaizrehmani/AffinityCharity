@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { CreateCausePageContainer } from '../../containers/createCausePage';
 
-describe('testing the createCausePage', () => {
+describe('Testing the CreateCausePage', () => {
   it('renders without crashing', () => {
     shallow(<CreateCausePageContainer />);
   });
@@ -83,9 +83,11 @@ describe('description input', () => {
 });
 
 // describe('image input', () => {
-//     it('should respond to change event and change the state accordingly', () => {
-//         const wrapper = shallow(<CreateCausePageContainer />)
-//         wrapper.find('#input-image').simulate('change', {target: {name: 'image', value: 'foo'}});
-//         expect(wrapper.state('image')).toEqual('foo');
-//     })
+//   it('should respond to change event and change the state accordingly', () => {
+//     const wrapper = shallow(<CreateCausePageContainer />);
+//     wrapper
+//       .find('#input-image')
+//       .simulate('change', { target: { name: 'image', value: 'foo' } });
+//     expect(wrapper.state('image')).toEqual('foo');
+//   });
 // });

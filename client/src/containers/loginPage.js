@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Input } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
 import { loginUser } from '../redux/actions/authentication';
@@ -102,18 +103,21 @@ class LoginPage extends React.Component {
         </Banner>
         <LoginForm>
           <Form>
-            <FormInput
+            <Input
               type="email"
               required
+              size="medium"
               name="email"
+              icon="user"
               value={this.state.email}
               onChange={this.handleUserInput}
               label="Email"
               placeholder="john.doe@email.com"
             />
-            <FormInput
+            <Input
               type="password"
-              className="form-control"
+              size="medium"
+              icon="lock"
               name="password"
               placeholder="Password"
               value={this.state.password}
@@ -126,6 +130,7 @@ class LoginPage extends React.Component {
             <Button title="Forgot Password" primary={false} />
           </ButtonPrompts>
         </LoginForm>
+        <Link to="/register">Register Charity</Link>
       </StyledLoginPage>
     );
   }
@@ -147,7 +152,7 @@ const Banner = styled.div`
   margin-bottom: 20px;
 `;
 
-const LoginForm = styled.form`
+const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,16 +170,6 @@ const Form = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`;
-const FormInput = styled(Input)`
-  input {
-    width: 220px;
-  }
-  .label {
-    width: 100px;
-  }
-  margin: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
 export default connect()(LoginPage);
