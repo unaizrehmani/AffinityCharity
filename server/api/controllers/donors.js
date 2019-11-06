@@ -1,4 +1,5 @@
 const Donor = require('../models/donor');
+const Cause = require('../models/cause');
 const bcrypt = require('bcryptjs');
 const SALTROUNDS = 14;
 
@@ -15,15 +16,38 @@ const SALTROUNDS = 14;
  * @param {array} causes
  *
  */
-exports.insertDonor = async (req, res, next) => {
+exports.insertDonor = async (req, res) => {
+  const { email, causeId } = req.body;
+  // To-DO check to make sure causeId is a valid cause
   try {
-    const donor = await new Donor(req.body);
-    donor.createdDate = new Date();
-    donor.password = await bcrypt.hash(req.body.password, SALTROUNDS);
-    const result = await donor.save();
-    res.send(result);
+    // Donor already exists so add the cause to their subscription list
+    if (checkIfUserExists(email) == true) {
+      const donor = await Donor.findOne({ email: email });
+      donor.causes.push(causeId);
+      await donor.save();
+      res.status(200).json({ message: 'Donor subscribed successfully.' });
+    }
+    // Create a new donor and add cause to their subscription list
+    else {
+      const donor = new Donor({ email: email, causes: [] });
+      donor.causes.push(causeId);
+      donor.createdDate = new Date();
+      await donor.save();
+      res.status(200).json({ message: 'Donor created with subscription.' });
+    }
   } catch (error) {
     res.send(error);
+  }
+};
+
+const checkIfUserExists = async email => {
+  try {
+    const results = await Donor.find({ email: email });
+    if (results.length !== 0) return true;
+    else return false;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
 
@@ -49,6 +73,7 @@ exports.getDonorByID = async (req, res, next) => {
 exports.getAllDonors = async (req, res, next) => {
   try {
     const donors = await Donor.find({}).populate('causes', '-__v');
+    console.log(donors);
     res.send(donors);
   } catch (error) {
     res.send(error);
