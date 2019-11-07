@@ -1,7 +1,5 @@
 const Donor = require('../models/donor');
-const Cause = require('../models/cause');
-const bcrypt = require('bcryptjs');
-const SALTROUNDS = 14;
+const mongoose = require('mongoose');
 
 /*
  * POST /api/donors route to add a new donor.
@@ -17,24 +15,34 @@ const SALTROUNDS = 14;
  *
  */
 exports.insertDonor = async (req, res) => {
-  const { email, causeId } = req.body;
+  const { email, firstName, lastName, phone, address } = req.body;
+  const causeId = mongoose.Types.ObjectId(req.body.causeId);
   // To-DO check to make sure causeId is a valid cause
   try {
     // Donor already exists so add the cause to their subscription list
-    if (checkIfUserExists(email) == true) {
+    if ((await checkIfUserExists(email)) == true) {
       const donor = await Donor.findOne({ email: email });
       // Don't add duplicate causes to their subscription list
-      if (!donor.causes.includes(causeId)) donor.causes.push(causeId);
-      await donor.save();
-      res.status(200).json({ message: 'Donor subscribed successfully.' });
+      if (!donor.causes.includes(causeId)) {
+        donor.causes.push(causeId);
+      }
+      const result = await donor.save();
+      res.status(200).send(result);
     }
     // Create a new donor and add cause to their subscription list
     else {
-      const donor = new Donor({ email: email, causes: [] });
+      const donor = new Donor({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        address: address,
+        causes: []
+      });
       donor.causes.push(causeId);
       donor.createdDate = new Date();
-      await donor.save();
-      res.status(200).json({ message: 'Donor created with subscription.' });
+      const result = await donor.save();
+      res.status(200).send(result);
     }
   } catch (error) {
     res.send(error);
