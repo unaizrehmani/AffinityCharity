@@ -5,8 +5,8 @@ const { expect } = require('chai');
 
 describe('Test Causes API', () => {
   let user = {
-    email: 'unaizrehmani@gmail.com',
-    password: 'password'
+    password: 'admin',
+    email: 'test@affinity.com'
   };
 
   let fakeCause = {
