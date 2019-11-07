@@ -27,7 +27,7 @@ class ProfileForm extends Component {
   handleSubmit = async () => {
     const { password1, password2, firstName, lastName, email, oldPassword } = this.state;
     const URL = `https://social-charity-server.herokuapp.com/api/users/${this.props.session.userID}`;
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     if (password1 !== password2) {
       this.setState({
         error: true,
@@ -80,7 +80,7 @@ class ProfileForm extends Component {
         });
       }
     }
-    this.setState({ loading: false })
+    this.setState({ loading: false });
   };
 
   render() {
