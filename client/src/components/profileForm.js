@@ -37,13 +37,7 @@ class ProfileForm extends Component {
   };
 
   render() {
-    const {
-      firstName,
-      lastName,
-      email,
-      password1,
-      password2
-    } = this.state;
+    const { firstName, lastName, email, password1, password2 } = this.state;
     return (
       <div>
         <Form
