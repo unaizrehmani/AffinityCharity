@@ -20,7 +20,7 @@ exports.insertDonor = async (req, res) => {
   // To-DO check to make sure causeId is a valid cause
   try {
     // Donor already exists so add the cause to their subscription list
-    if ((await checkIfUserExists(email)) == true) {
+    if ((await checkIfUserExists(email)) === true) {
       const donor = await Donor.findOne({ email: email });
       // Don't add duplicate causes to their subscription list
       if (!donor.causes.includes(causeId)) {
@@ -28,9 +28,7 @@ exports.insertDonor = async (req, res) => {
       }
       const result = await donor.save();
       res.status(200).send(result);
-    }
-    // Create a new donor and add cause to their subscription list
-    else {
+    } else {
       const donor = new Donor({
         email: email,
         firstName: firstName,
