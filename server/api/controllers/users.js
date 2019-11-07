@@ -120,6 +120,17 @@ exports.patchUserByID = async (req, res, next) => {
       body.mediaURL = uploadResult.url;
     }
 
+    if (body.newPassword) {
+      const result = await User.authenticate(body.oldEmail, body.oldPassword);
+      if (result == null) {
+        throw new Error('Invalid credentials! Cannot change password');
+      }
+      body.password = await bcrypt.hash(body.newPassword, SALTROUNDS);
+      body.email = body.newEmail;
+    } else {
+      delete body.password;
+    }
+
     const result = await User.findByIdAndUpdate(req.params.userID, body, {
       new: true
     });
