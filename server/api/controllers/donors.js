@@ -80,7 +80,6 @@ exports.getDonorByID = async (req, res, next) => {
 exports.getAllDonors = async (req, res, next) => {
   try {
     const donors = await Donor.find({}).populate('causes', '-__v');
-    console.log(donors);
     res.send(donors);
   } catch (error) {
     res.send(error);
