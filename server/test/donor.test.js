@@ -6,10 +6,10 @@ describe('Donor Api', () => {
   let donor = {
     firstName: 'donorFirst',
     lastName: 'donorLast',
-    password: 'password',
     email: 'donor@donor.com',
     phone: '5555555555',
-    address: '366 Oaklawn Crescent'
+    address: '366 Oaklawn Crescent',
+    causeId: '5dc35b4c9dd1000c9ddc1068'
   };
 
   let user = {
@@ -66,12 +66,13 @@ describe('Donor Api', () => {
       .field('firstName', donor.firstName)
       .field('lastName', donor.lastName)
       .field('email', donor.email)
-      .field('password', donor.password)
       .field('address', donor.address)
       .field('phone', donor.phone)
+      .field('causeId', donor.causeId)
       .expect(200);
 
     // Response data should generate an '_id', 'causes', 'createdDate' properties
+
     expect(body).to.have.own.property(
       '_id',
       body._id,
