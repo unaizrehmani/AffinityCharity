@@ -96,9 +96,7 @@ exports.getAllUsers = async (req, res, next) => {
  * @param {file} image
  */
 exports.patchUserByID = async (req, res, next) => {
-  const body = {
-    ...req.body
-  };
+  const body = { ...req.body };
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const user = await User.findById(req.params.userID);
@@ -120,15 +118,18 @@ exports.patchUserByID = async (req, res, next) => {
       body.mediaURL = uploadResult.url;
     }
 
-    if (body.newPassword) {
-      const result = await User.authenticate(body.oldEmail, body.oldPassword);
-      if (result == null) {
-        throw new Error('Invalid credentials! Cannot change password');
+    const { oldEmail, oldPassword, newPassword } = body;
+    if (oldEmail && oldPassword && newPassword) {
+      const result = await User.authenticate(oldEmail, oldPassword);
+      if (result != null) {
+        body.password = await bcrypt.hash(newPassword, SALTROUNDS);
+      } else {
+        res.send({
+          errorHeader: 'Incorrect password',
+          errorContent:
+            'Please provide the current password before updating the password'
+        });
       }
-      body.password = await bcrypt.hash(body.newPassword, SALTROUNDS);
-      body.email = body.newEmail;
-    } else {
-      delete body.password;
     }
 
     const result = await User.findByIdAndUpdate(req.params.userID, body, {
