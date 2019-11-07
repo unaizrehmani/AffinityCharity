@@ -13,6 +13,7 @@ class ProfileForm extends Component {
       lastName: this.props.session.lastName || '',
       email: this.props.session.email || '',
       mediaURL: this.props.session.mediaURL || '',
+      oldPassword: '',
       password1: '',
       password2: '',
       success: false
@@ -24,9 +25,9 @@ class ProfileForm extends Component {
   };
 
   handleSubmit = async () => {
-    const { password1, password2, firstName, lastName, email } = this.state;
+    const { password1, password2, firstName, lastName, email, oldPassword } = this.state;
     const URL = `https://social-charity-server.herokuapp.com/api/users/${this.props.session.userID}`;
-
+    this.setState({ loading: true })
     if (password1 !== password2) {
       this.setState({
         error: true,
@@ -35,37 +36,55 @@ class ProfileForm extends Component {
       });
     } else {
       try {
+        const newEmail = email;
+        const oldEmail = this.props.session.email;
+        const newPassword = password1;
+
         const result = await axios.patch(URL,
           {
             firstName,
             lastName,
-            email
+            newEmail,
+            newPassword,
+            oldPassword,
+            oldEmail
           },
           {
             headers: { Authorization: 'Bearer ' + this.props.session.userToken }
           }
         );
-        console.log('result: ', result);
-        this.setState({ 
-          success: true, 
-          error: false, 
-          errorHeader: '', 
-          errorContent: '' 
-        });
+        console.log('result: ', result.data);
+        const { errorHeader, errorContent } = result.data;
+        if(errorHeader && errorContent) {
+          this.setState({ 
+            success: false, 
+            error: true, 
+            errorHeader, 
+            errorContent
+          });
+        } else {
+          this.setState({ 
+            success: true, 
+            error: false, 
+            errorHeader: '', 
+            errorContent: '' 
+          });
+          // Update Redux Store
+        }
       } catch (err) {
         console.log(err);
         this.setState({
           error: true,
           errorHeader: 'Server error',
-          errorContent: 'Please log out and try again'
+          errorContent: 'Please contact tech support'
         });
       }
     }
-    
+    this.setState({ loading: false })
   };
 
   render() {
-    const { firstName, lastName, email, password1, password2 } = this.state;
+    const { firstName, lastName, email, password1, password2, oldPassword } = this.state;
     return (
       <div>
         <Form
@@ -96,8 +115,16 @@ class ProfileForm extends Component {
             value={email}
           />
           <Form.Input
-            placeholder="Password"
-            label="Password"
+            placeholder="Current Password"
+            label="Current Password"
+            name="oldPassword"
+            type="password"
+            onChange={this.handleChange}
+            value={oldPassword}
+          />
+          <Form.Input
+            placeholder="New Password"
+            label="New Password"
             name="password1"
             type="password"
             onChange={this.handleChange}
