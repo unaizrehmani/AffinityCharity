@@ -99,6 +99,7 @@ exports.patchUserByID = async (req, res, next) => {
   const body = {
     ...req.body
   };
+  console.log('body: ', body);
   try {
     if (req.files && req.files.image && req.files.image.path) {
       const user = await User.findById(req.params.userID);
@@ -122,11 +123,10 @@ exports.patchUserByID = async (req, res, next) => {
 
     if (body.newPassword) {
       const result = await User.authenticate(body.oldEmail, body.oldPassword);
-      if (result == null) {
-        throw new Error('Invalid credentials! Cannot change password');
+      if (result != null) {
+        body.password = await bcrypt.hash(body.newPassword, SALTROUNDS);
+        body.email = body.newEmail;
       }
-      body.password = await bcrypt.hash(body.newPassword, SALTROUNDS);
-      body.email = body.newEmail;
     } else {
       delete body.password;
     }
