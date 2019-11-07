@@ -13,12 +13,8 @@ describe('Donor Api', () => {
   };
 
   let user = {
-    id: '5daa663ad5a1a22fdb968a8a',
-    firstName: 'Unaiz',
-    lastName: 'Rehmani',
-    password: 'password',
-    email: 'unaizrehmani@gmail.com',
-    isAdmin: true
+    password: 'admin',
+    email: 'test@affinity.com'
   };
 
   before(async () => {
