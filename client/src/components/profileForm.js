@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/actions/authentication';
 import axios from 'axios';
 class ProfileForm extends Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class ProfileForm extends Component {
     if (password1 !== password2) {
       this.setState({
         error: true,
+        success: false,
         errorHeader: 'Passwords do not match',
         errorContent: 'Please re-type your password'
       });
@@ -68,13 +71,22 @@ class ProfileForm extends Component {
             error: false, 
             errorHeader: '', 
             errorContent: '' 
+          }, () => {
+            const fn = result.data.firstName;
+            const ln = result.data.lastName;
+            const admin = result.data.isAdmin;
+            const mail = result.data.email;
+            const _id = result.data._id;
+            this.props.dispatch(
+              loginUser(fn, ln, admin, mail, this.props.session.userToken, _id)
+            );
           });
-          // Update Redux Store
         }
       } catch (err) {
         console.log(err);
         this.setState({
           error: true,
+          success: false,
           errorHeader: 'Server error',
           errorContent: 'Please contact tech support'
         });
@@ -154,4 +166,4 @@ class ProfileForm extends Component {
   }
 }
 
-export default ProfileForm;
+export default connect()(ProfileForm);
