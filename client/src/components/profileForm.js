@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Message } from 'semantic-ui-react';
-
+import axios from 'axios';
 class ProfileForm extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +23,10 @@ class ProfileForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = () => {
-    const { password1, password2 } = this.state;
+  handleSubmit = async () => {
+    const { password1, password2, firstName, lastName, email } = this.state;
+    const URL = `https://social-charity-server.herokuapp.com/api/users/${this.props.session.userID}`;
+
     if (password1 !== password2) {
       this.setState({
         error: true,
@@ -32,8 +34,34 @@ class ProfileForm extends Component {
         errorContent: 'Please re-type your password'
       });
     } else {
-      this.setState({ error: false, errorHeader: '', errorContent: '' });
+      try {
+        const result = await axios.patch(URL,
+          {
+            firstName,
+            lastName,
+            email
+          },
+          {
+            headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+          }
+        );
+        console.log('result: ', result);
+        this.setState({ 
+          success: true, 
+          error: false, 
+          errorHeader: '', 
+          errorContent: '' 
+        });
+      } catch (err) {
+        console.log(err);
+        this.setState({
+          error: true,
+          errorHeader: 'Server error',
+          errorContent: 'Please log out and try again'
+        });
+      }
     }
+    
   };
 
   render() {
@@ -56,7 +84,7 @@ class ProfileForm extends Component {
           <Form.Input
             placeholder="Last Name"
             label="Last Name"
-            name="lasttName"
+            name="lastName"
             onChange={this.handleChange}
             value={lastName}
           />
