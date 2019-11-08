@@ -53,7 +53,23 @@ export default class RegisterPageComponent extends Component {
   };
 
   submitEmail = () => {
-    alert('Added!');
+    const URL = 'https://social-charity-server.herokuapp.com/api/donors';
+    axios
+      .post(
+        URL,
+        {
+          email: this.state.email,
+          causeId: this.state.causeId
+        },
+        { 'Content-Type': 'application/json' }
+      )
+      .then(response => {
+        console.log(response.data);
+        alert('You\'ve been subscribed successfully!');
+      })
+      .catch(error => {
+        console.log('error ' + error);
+      });
   };
 
   render() {

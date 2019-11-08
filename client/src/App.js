@@ -11,6 +11,7 @@ import SidePanel from './containers/sidePanel';
 import MenuButton from './components/menuButton';
 import ManageAgentsPage from './containers/manageAgentsPage';
 import { CreateCausePage } from './containers/createCausePage';
+import ProfilePage from './containers/profilePage';
 
 // To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path="/editor/:id" component={Emailer} />
             <Route exact path="/cause" component={CausePage} />
             <Route exact path="/admin" component={ManageAgentsPage} />
+            <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/createcause" component={CreateCausePage} />
             <Route component={NotFoundPage} />
           </Switch>
