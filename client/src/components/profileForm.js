@@ -27,7 +27,14 @@ class ProfileForm extends Component {
   };
 
   handleSubmit = async () => {
-    const { password1, password2, firstName, lastName, email, oldPassword } = this.state;
+    const {
+      password1,
+      password2,
+      firstName,
+      lastName,
+      email,
+      oldPassword
+    } = this.state;
     const URL = `https://social-charity-server.herokuapp.com/api/users/${this.props.session.userID}`;
     this.setState({ loading: true });
     if (password1 !== password2) {
@@ -43,7 +50,8 @@ class ProfileForm extends Component {
         const oldEmail = this.props.session.email;
         const newPassword = password1;
 
-        const result = await axios.patch(URL,
+        const result = await axios.patch(
+          URL,
           {
             firstName,
             lastName,
@@ -58,29 +66,39 @@ class ProfileForm extends Component {
         );
         console.log('result: ', result.data);
         const { errorHeader, errorContent } = result.data;
-        if(errorHeader && errorContent) {
-          this.setState({ 
-            success: false, 
-            error: true, 
-            errorHeader, 
+        if (errorHeader && errorContent) {
+          this.setState({
+            success: false,
+            error: true,
+            errorHeader,
             errorContent
           });
         } else {
-          this.setState({ 
-            success: true, 
-            error: false, 
-            errorHeader: '', 
-            errorContent: '' 
-          }, () => {
-            const fn = result.data.firstName;
-            const ln = result.data.lastName;
-            const admin = result.data.isAdmin;
-            const mail = result.data.email;
-            const _id = result.data._id;
-            this.props.dispatch(
-              loginUser(fn, ln, admin, mail, this.props.session.userToken, _id)
-            );
-          });
+          this.setState(
+            {
+              success: true,
+              error: false,
+              errorHeader: '',
+              errorContent: ''
+            },
+            () => {
+              const fn = result.data.firstName;
+              const ln = result.data.lastName;
+              const admin = result.data.isAdmin;
+              const mail = result.data.email;
+              const _id = result.data._id;
+              this.props.dispatch(
+                loginUser(
+                  fn,
+                  ln,
+                  admin,
+                  mail,
+                  this.props.session.userToken,
+                  _id
+                )
+              );
+            }
+          );
         }
       } catch (err) {
         console.log(err);
@@ -96,7 +114,14 @@ class ProfileForm extends Component {
   };
 
   render() {
-    const { firstName, lastName, email, password1, password2, oldPassword } = this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      password1,
+      password2,
+      oldPassword
+    } = this.state;
     return (
       <div>
         <Form

@@ -15,7 +15,7 @@ export const GET_CAUSES_FAILURE = 'GET_CAUSES_FAILURE';
 export function createCause(cause, userToken) {
   var config = {
     headers: {
-      'Authorization': 'Bearer ' + userToken,
+      Authorization: 'Bearer ' + userToken,
       'Content-Type': 'application/json'
     }
   };
