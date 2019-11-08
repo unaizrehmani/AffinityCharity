@@ -7,7 +7,8 @@ const causeSchema = new Schema({
     required: true
   },
   location: {
-    type: String
+    type: String,
+    required: true
   },
   mediaURL: {
     type: String,
@@ -19,10 +20,6 @@ const causeSchema = new Schema({
   },
   description: {
     type: String,
-    required: true
-  },
-  deleteable: {
-    type: Boolean,
     required: true
   },
   defaultDesign: {
