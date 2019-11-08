@@ -5,7 +5,6 @@ const { expect } = require('chai');
 
 describe('Agent Users API', () => {
   let user = {
-    id: '5dc36e463d436e12c2c3b4cf',
     firstName: 'Test',
     lastName: 'Tester',
     password: 'admin',
@@ -13,10 +12,10 @@ describe('Agent Users API', () => {
     isAdmin: true
   };
   let fakeUser = {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email@email.com',
-    password: 'password',
+    firstName: 'fakeFirstName',
+    lastName: 'fakeLastName',
+    email: 'fake@email.com',
+    password: 'fakePassword',
     isAdmin: true
   };
 
@@ -269,67 +268,67 @@ describe('Agent Users API', () => {
     fakeUser = body;
   });
 
-  // it('Delete New Fake User Agent', async () => {
-  //   const { body } = await request(app)
-  //     .delete('/api/users/' + fakeUser._id)
-  //     .set('Authorization', 'Bearer ' + user.token)
-  //     .expect(200);
+  it('Delete New Fake User Agent', async () => {
+    const { body } = await request(app)
+      .delete('/api/users/' + fakeUser._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .expect(200);
 
-  //   // Response data should not have 'password' and '__v' properties
-  //   expect(body).to.not.have.own.property('password');
-  //   expect(body).to.not.have.own.property('__v');
+    // Response data should not have 'password' and '__v' properties
+    expect(body).to.not.have.own.property('password');
+    expect(body).to.not.have.own.property('__v');
 
-  //   // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
-  //   expect(body).to.have.own.property(
-  //     '_id',
-  //     fakeUser._id,
-  //     'deleted user does not have property _id'
-  //   ).that.is.not.empty.that.is.a.string;
+    // Response data should have '_id', 'createdDate', 'imageID', 'mediaURL', 'isAdmin', 'firstName', 'lastName', and 'email' properties
+    expect(body).to.have.own.property(
+      '_id',
+      fakeUser._id,
+      'deleted user does not have property _id'
+    ).that.is.not.empty.that.is.a.string;
 
-  //   expect(body)
-  //     .to.have.own.property(
-  //       'createdDate',
-  //       fakeUser.createdDate,
-  //       'deleted user does not have a createdDate property'
-  //     )
-  //     .that.is.not.empty.that.is.an.instanceof(Date);
+    expect(body)
+      .to.have.own.property(
+        'createdDate',
+        fakeUser.createdDate,
+        'deleted user does not have a createdDate property'
+      )
+      .that.is.not.empty.that.is.an.instanceof(Date);
 
-  //   expect(body).to.have.own.property(
-  //     'imageID',
-  //     fakeUser.imageID,
-  //     'deleted user does not have an imageID property'
-  //   ).that.is.not.empty.that.is.a.string;
+    expect(body).to.have.own.property(
+      'imageID',
+      fakeUser.imageID,
+      'deleted user does not have an imageID property'
+    ).that.is.not.empty.that.is.a.string;
 
-  //   expect(body).to.have.own.property(
-  //     'mediaURL',
-  //     fakeUser.mediaURL,
-  //     'deleted user does not have a mediaURL property'
-  //   ).that.is.not.empty.that.is.a.string;
+    expect(body).to.have.own.property(
+      'mediaURL',
+      fakeUser.mediaURL,
+      'deleted user does not have a mediaURL property'
+    ).that.is.not.empty.that.is.a.string;
 
-  //   expect(body).to.have.own.property(
-  //     'isAdmin',
-  //     fakeUser.isAdmin,
-  //     'deleted user does not have property isAdmin'
-  //   ).that.is.true;
+    expect(body).to.have.own.property(
+      'isAdmin',
+      fakeUser.isAdmin,
+      'deleted user does not have property isAdmin'
+    ).that.is.true;
 
-  //   expect(body).to.have.own.property(
-  //     'firstName',
-  //     fakeUser.firstName,
-  //     'deleted user does not have property firstName'
-  //   ).that.is.not.empty.that.is.a.string;
+    expect(body).to.have.own.property(
+      'firstName',
+      fakeUser.firstName,
+      'deleted user does not have property firstName'
+    ).that.is.not.empty.that.is.a.string;
 
-  //   expect(body).to.have.own.property(
-  //     'lastName',
-  //     fakeUser.lastName,
-  //     'deleted user does not have property lastName'
-  //   ).that.is.not.empty.that.is.a.string;
+    expect(body).to.have.own.property(
+      'lastName',
+      fakeUser.lastName,
+      'deleted user does not have property lastName'
+    ).that.is.not.empty.that.is.a.string;
 
-  //   expect(body).to.have.own.property(
-  //     'email',
-  //     fakeUser.email,
-  //     'deleted user does not have an email property'
-  //   ).that.is.not.empty.that.is.a.string;
-  // });
+    expect(body).to.have.own.property(
+      'email',
+      fakeUser.email,
+      'deleted user does not have an email property'
+    ).that.is.not.empty.that.is.a.string;
+  });
 
   after(() => {});
 });
