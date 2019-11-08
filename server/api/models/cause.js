@@ -22,6 +22,10 @@ const causeSchema = new Schema({
     type: String,
     required: true
   },
+  deletable: {
+    type: Boolean,
+    required: true
+  },
   defaultDesign: {
     type: Object,
     required: true
