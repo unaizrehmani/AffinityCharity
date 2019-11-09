@@ -42,7 +42,7 @@ export class CreateCausePageContainer extends React.Component {
       name: this.state.name,
       location: this.state.location,
       description: this.state.description,
-      deletable: true
+      deleteable: true
     };
     this.props.dispatch(createCause(cause, this.props.session.userToken));
   };

@@ -41,7 +41,7 @@ export class HomePageContainer extends React.Component {
         date={cause.createdDate}
         location={cause.location}
         description={cause.description}
-        subscribers={cause.donors.length}
+        subscribers={cause.donors ? cause.donors.length : 0}
       />
     );
   };
