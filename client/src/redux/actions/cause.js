@@ -25,11 +25,7 @@ export function createCause(cause, userToken) {
   return async dispatch => {
     dispatch(createCauseBegin());
     try {
-      const request = await axios.post(
-        `${URL}/api/causes`,
-        cause,
-        config
-      );
+      const request = await axios.post(`${URL}/api/causes`, cause, config);
       console.log(request);
       dispatch(createCauseSuccess(request.data));
       return request;
@@ -44,9 +40,7 @@ export function getCauses() {
   return async dispatch => {
     dispatch(getCausesBegin());
     try {
-      const request = await axios.get(
-        `${URL}/api/causes`
-      );
+      const request = await axios.get(`${URL}/api/causes`);
       dispatch(getCausesSuccess(request.data));
       console.log(request.data);
       return request;

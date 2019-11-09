@@ -30,9 +30,7 @@ export default class RegisterPageComponent extends Component {
 
   componentDidMount = async () => {
     axios
-      .get(
-        `${URL}/api/causes/${this.state.causeId}`
-      )
+      .get(`${URL}/api/causes/${this.state.causeId}`)
       .then(({ data }) => {
         console.log(data);
         this.setState({

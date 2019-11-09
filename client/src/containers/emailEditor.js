@@ -28,11 +28,9 @@ class Emailer extends Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
     axios
-      .get(
-        `${URL}/api/causes/${id}`, 
-        {
-          headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-        })
+      .get(`${URL}/api/causes/${id}`, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      })
       .then(result => {
         const cause = result.data;
         const emails = cause.donors.map(x => x.email);
@@ -62,11 +60,7 @@ class Emailer extends Component {
 
         // TODO: add a spinner or some indication of sending an email
         axios
-          .post(
-            `${URL}/api/causes/send-email`,
-            bodyParameters,
-            config
-          )
+          .post(`${URL}/api/causes/send-email`, bodyParameters, config)
           .then(response => {
             console.log(response);
           })
@@ -101,12 +95,10 @@ class Emailer extends Component {
   onLoad = () => {
     const { id } = this.props.match.params;
     axios
-      .get(
-        `${URL}/api/causes/${id}`, 
-        {
-          headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-        }
-      ).then(result => {
+      .get(`${URL}/api/causes/${id}`, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      })
+      .then(result => {
         const { defaultDesign } = result.data;
         window.unlayer.loadDesign(defaultDesign);
       })
