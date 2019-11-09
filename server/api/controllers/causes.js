@@ -19,9 +19,9 @@ exports.insertCause = async (req, res, next) => {
   try {
     const cause = new Cause(req.body);
     cause.createdDate = new Date();
-    cause.users = [];
+    if (!cause.donors) cause.donors = [];
     cause.defaultDesign = defaultJSON;
-    if (req.files.image && req.files.image.path) {
+    if (req.files && req.files.image && req.files.image.path) {
       await cloudinaryUtil.v2.uploader.upload(
         req.files.image.path,
         {
