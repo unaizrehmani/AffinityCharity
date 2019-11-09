@@ -6,26 +6,18 @@ import Input from '../components/input';
 import Button from '../components/button';
 import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
-import axios from '../../node_modules/axios/index';
+import { getCauses } from '../redux/actions/cause';
 
 export class HomePageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      causes: []
+      query: ''
     };
   }
 
   componentDidMount = async () => {
-    try {
-      const result = await axios.get(
-        'https://social-charity-server.herokuapp.com/api/causes'
-      );
-      this.setState({ causes: result.data });
-    } catch (err) {
-      console.log(err);
-    }
+    this.props.dispatch(getCauses());
   };
 
   renderCauseCard = cause => {
@@ -48,7 +40,7 @@ export class HomePageContainer extends React.Component {
         date={cause.createdDate}
         location={cause.location}
         description={cause.description}
-        subscribers={cause.donors.length}
+        subscribers={cause.donors ? cause.donors.length : 0}
       />
     );
   };
@@ -61,6 +53,10 @@ export class HomePageContainer extends React.Component {
   };
 
   render() {
+    let renderCards = this.props.causes.map(cause => {
+      return this.renderCauseCard(cause);
+    });
+
     return (
       <Container>
         <Header>
@@ -84,10 +80,8 @@ export class HomePageContainer extends React.Component {
         <PinnedCauses>
           <h3>Pinned Causes</h3>
           <CausesContainer>
-            {/* TODO: Add a spinner container while this.state.causes is empty */}
-            {this.state.causes.map(cause => {
-              return this.renderCauseCard(cause);
-            })}
+            {/* TODO replace <div> with spinner  */}
+            {this.props.isGettingCauses ? <div>Loading...</div> : renderCards}
           </CausesContainer>
         </PinnedCauses>
       </Container>
@@ -152,7 +146,9 @@ const PinnedCauses = styled.div`
 
 // export default HomePage;
 const mapStateToProps = state => ({
-  session: state.authentication
+  session: state.authentication,
+  isGettingCauses: state.cause.isGettingCauses,
+  causes: state.cause.causes
 });
 
 export const HomePage = connect(mapStateToProps)(HomePageContainer);

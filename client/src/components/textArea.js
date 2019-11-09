@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { TextArea as SemanticTextArea } from 'semantic-ui-react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 
@@ -8,7 +7,11 @@ export default class TextArea extends Component {
   render() {
     return (
       <TextAreaContainer {...this.props}>
-        <StyledTextArea />
+        <StyledTextArea
+          onChange={this.props.onChange}
+          name={this.props.name}
+          type={this.props.type}
+        />
       </TextAreaContainer>
     );
   }
@@ -23,7 +26,7 @@ const TextAreaContainer = styled.div`
   }
 `;
 
-const StyledTextArea = styled(SemanticTextArea)`
+const StyledTextArea = styled.textarea`
   width: 100%;
   color: ${colors.primary};
   border-width: 1px;
