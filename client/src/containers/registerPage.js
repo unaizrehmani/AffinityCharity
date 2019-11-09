@@ -5,7 +5,7 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
-
+const { URL } = require('../util/baseURL');
 export default class RegisterPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +29,10 @@ export default class RegisterPageComponent extends Component {
   }
 
   componentDidMount = async () => {
-    const URL = `https://social-charity-server.herokuapp.com/api/causes/${this.state.causeId}`;
     axios
-      .get(URL)
+      .get(
+        `${URL}/api/causes/${this.state.causeId}`
+      )
       .then(({ data }) => {
         console.log(data);
         this.setState({
@@ -53,10 +54,9 @@ export default class RegisterPageComponent extends Component {
   };
 
   submitEmail = () => {
-    const URL = 'https://social-charity-server.herokuapp.com/api/donors';
     axios
       .post(
-        URL,
+        `${URL}/api/donors`,
         {
           email: this.state.email,
           causeId: this.state.causeId

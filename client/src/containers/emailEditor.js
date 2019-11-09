@@ -6,7 +6,7 @@ import MultipleEmail from '../components/multipleEmail';
 import { Input } from 'semantic-ui-react';
 import Button from '../components/button';
 import { connect } from 'react-redux';
-
+const { URL } = require('../util/baseURL');
 class Emailer extends Component {
   constructor(props) {
     super(props);
@@ -27,11 +27,12 @@ class Emailer extends Component {
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
-    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`;
     axios
-      .get(URL, {
-        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-      })
+      .get(
+        `${URL}/api/causes/${id}`, 
+        {
+          headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+        })
       .then(result => {
         const cause = result.data;
         const emails = cause.donors.map(x => x.email);
@@ -62,7 +63,7 @@ class Emailer extends Component {
         // TODO: add a spinner or some indication of sending an email
         axios
           .post(
-            'https://social-charity-server.herokuapp.com/api/causes/send-email',
+            `${URL}/api/causes/send-email`,
             bodyParameters,
             config
           )
@@ -83,7 +84,7 @@ class Emailer extends Component {
       const { id } = this.props.match.params;
       axios
         .patch(
-          `https://social-charity-server.herokuapp.com/api/causes/${id}`,
+          `${URL}/api/causes/${id}`,
           {
             defaultDesign: design
           },
@@ -99,12 +100,13 @@ class Emailer extends Component {
 
   onLoad = () => {
     const { id } = this.props.match.params;
-    const URL = `https://social-charity-server.herokuapp.com/api/causes/${id}`;
     axios
-      .get(URL, {
-        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-      })
-      .then(result => {
+      .get(
+        `${URL}/api/causes/${id}`, 
+        {
+          headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+        }
+      ).then(result => {
         const { defaultDesign } = result.data;
         window.unlayer.loadDesign(defaultDesign);
       })

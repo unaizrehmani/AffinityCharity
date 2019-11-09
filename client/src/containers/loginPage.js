@@ -7,7 +7,7 @@ import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
 import { loginUser } from '../redux/actions/authentication';
-
+const { URL } = require('../util/baseURL');
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class LoginPage extends React.Component {
   onLoginSubmit = () => {
     axios
       .post(
-        'https://social-charity-server.herokuapp.com/api/auth/token',
+        `${URL}/api/auth/token`,
         {
           email: this.state.email,
           password: this.state.password
