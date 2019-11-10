@@ -11,7 +11,7 @@ describe('Agent Users API', () => {
     email: 'test@affinity.com',
     isAdmin: true
   };
-  let fakeUser = {
+  const fakeUser = {
     firstName: 'fakeFirstName',
     lastName: 'fakeLastName',
     email: 'fake@email.com',
@@ -265,7 +265,10 @@ describe('Agent Users API', () => {
       'changed user does not have an email property'
     ).that.is.not.empty.that.is.a.string;
 
-    fakeUser = body;
+    fakeUser._id = body._id;
+    fakeUser.createdDate = body.createdDate;
+    fakeUser.imageID = body.imageID;
+    fakeUser.mediaURL = body.mediaURL;
   });
 
   it('Delete New Fake User Agent', async () => {
