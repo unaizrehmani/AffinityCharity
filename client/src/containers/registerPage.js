@@ -6,7 +6,7 @@ import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
 
-export default class RegisterPageComponent extends Component {
+export default class RegisterPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ export default class RegisterPageComponent extends Component {
   }
 
   componentDidMount = async () => {
-    const URL = `https://social-charity-server.herokuapp.com/api/causes/${this.state.causeId}`;
+    const URL = `http://localhost:8000/api/causes/${this.state.causeId}`;
     axios
       .get(URL)
       .then(({ data }) => {
@@ -53,7 +53,7 @@ export default class RegisterPageComponent extends Component {
   };
 
   submitEmail = () => {
-    const URL = 'https://social-charity-server.herokuapp.com/api/donors';
+    const URL = 'http://localhost:8000/api/donors';
     axios
       .post(
         URL,
@@ -65,7 +65,7 @@ export default class RegisterPageComponent extends Component {
       )
       .then(response => {
         console.log(response.data);
-        alert('You\'ve been subscribed successfully!');
+        alert("You've been subscribed successfully!");
       })
       .catch(error => {
         console.log('error ' + error);
@@ -101,19 +101,19 @@ export default class RegisterPageComponent extends Component {
           <InputContainer>
             <InputTitle>Your Email</InputTitle>
             <Input
-              id="input-email"
-              name="email"
-              size="large"
-              type="email"
-              placeholder="john.doe@email.com"
+              id='input-email'
+              name='email'
+              size='large'
+              type='email'
+              placeholder='john.doe@email.com'
               value={this.state.email}
               onChange={this.handleUserInput}
               noLabel={true}
             />
           </InputContainer>
           <Button
-            id="button-subscribe"
-            title="Subscribe"
+            id='button-subscribe'
+            title='Subscribe'
             primary
             handleClick={this.submitEmail}
           />
