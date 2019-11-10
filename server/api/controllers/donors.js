@@ -1,4 +1,5 @@
 const Donor = require('../models/donor');
+const Causes = require('../models/causes');
 const mongoose = require('mongoose');
 
 /*
@@ -17,8 +18,8 @@ const mongoose = require('mongoose');
 exports.insertDonor = async (req, res) => {
   const { email, firstName, lastName, phone, address } = req.body;
   const causeId = mongoose.Types.ObjectId(req.body.causeId);
-  // To-DO check to make sure causeId is a valid cause
   try {
+    const cause = await Cause.findById(causeId);
     // Donor already exists so add the cause to their subscription list
     if ((await checkIfUserExists(email)) === true) {
       const donor = await Donor.findOne({ email: email });
@@ -26,6 +27,9 @@ exports.insertDonor = async (req, res) => {
       if (!donor.causes.includes(causeId)) {
         donor.causes.push(causeId);
       }
+      // Add to causes donor list if its not already there
+      cause.donors.push(donor._id);
+      await cause.save();
       const result = await donor.save();
       res.status(200).send(result);
     } else {
@@ -40,6 +44,8 @@ exports.insertDonor = async (req, res) => {
       donor.causes.push(causeId);
       donor.createdDate = new Date();
       const result = await donor.save();
+      cause.donor.push(result._id);
+      await cause.save();
       res.status(200).send(result);
     }
   } catch (error) {
@@ -55,6 +61,31 @@ const checkIfUserExists = async email => {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+};
+
+/*
+ * PATCH /api/donors/unsubscribe route to patch an donor by ID.
+
+ * REQ.BODY:
+ * @param {string} email
+ * @param {string} causeId
+ */
+exports.unsubscribeDonorByEmail = async (req, res, next) => {
+  const { email, causeId } = req.body;
+  causeId = mongoose.Types.ObjectId(causeId);
+  try {
+    const donor = await Donor.findOne({ email: email });
+    // Remove causeId from donors subscription list
+    donor.causes = donor.causes.filter(item => item !== causeId);
+    await donor.save();
+    const cause = await Cause.findById(causeId);
+    cause.donors = cause.donors.filter(item => item !== donor._id);
+    await cause.save();
+    return res.status(200).json({ message: 'Successfully unsubscribed user.' });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
   }
 };
 
