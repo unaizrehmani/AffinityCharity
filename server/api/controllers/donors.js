@@ -75,12 +75,12 @@ exports.unsubscribeDonorByEmail = async (req, res, next) => {
   const { email, causeId } = req.body;
   try {
     const donor = await Donor.findOne({ email: email });
-    if (!donor) throw { message: 'No user found.' };
+    if (!donor) throw new Error('No user found.');
     // Remove causeId (type ObjectID) from donors subscription list
     donor.causes = donor.causes.filter(item => item.toString() !== causeId);
     // Remove email from causes donor list
     const cause = await Cause.findById(causeId);
-    if (!cause) throw { message: 'No cause found.' };
+    if (!cause) throw new Error('No cause found.');
     cause.donors = cause.donors.filter(item => item.toString() !== donor.id);
     await donor.save();
     await cause.save();
