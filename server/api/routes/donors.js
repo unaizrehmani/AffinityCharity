@@ -33,7 +33,7 @@ router.patch('/:donorID', authorize, donorController.patchDonorByID);
  * @param {string} email
  * @param {string} causeId
  */
-router.patch('/unsubscribe', donorController.unsubscribeDonorByEmail);
+router.post('/unsubscribe', donorController.unsubscribeDonorByEmail);
 
 /*
  * DELETE /api/donors/:donorID
