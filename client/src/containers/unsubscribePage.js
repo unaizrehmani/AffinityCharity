@@ -53,7 +53,7 @@ export default class UnsubscribePageContainer extends Component {
       )
       .then(response => {
         console.log(response.data);
-        alert("You've been unsubscribed successfully!");
+        alert('You\'ve been unsubscribed successfully!');
       })
       .catch(error => {
         console.log('error ' + error);
@@ -89,19 +89,19 @@ export default class UnsubscribePageContainer extends Component {
           <InputContainer>
             <InputTitle>Your Email</InputTitle>
             <Input
-              id='input-email'
-              name='email'
-              size='large'
-              type='email'
-              placeholder='john.doe@email.com'
+              id="input-email"
+              name="email"
+              size="large"
+              type="email"
+              placeholder="john.doe@email.com"
               value={this.state.email}
               onChange={this.handleUserInput}
               noLabel={true}
             />
           </InputContainer>
           <Button
-            id='button-subscribe'
-            title='Unsubscribe'
+            id="button-subscribe"
+            title="Unsubscribe"
             primary
             handleClick={this.submitEmail}
           />
