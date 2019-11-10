@@ -1,5 +1,5 @@
 const Donor = require('../models/donor');
-const Causes = require('../models/causes');
+const Cause = require('../models/cause');
 const mongoose = require('mongoose');
 
 /*
