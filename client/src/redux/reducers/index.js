@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import authenticationReducer from './authenticationReducer';
+import causeReducer from './causeReducer';
 
 export default combineReducers({
-  authentication: authenticationReducer
+  authentication: authenticationReducer,
+  cause: causeReducer
 });

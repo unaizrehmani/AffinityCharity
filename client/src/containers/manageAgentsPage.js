@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import colors from '../styles/colors';
 import Table from '../components/table';
-
+const { URL } = require('../util/baseURL');
 class ManageAgentsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ class ManageAgentsPage extends React.Component {
   componentDidMount = async () => {
     const AuthStr = 'Bearer '.concat(this.props.session.userToken);
     axios
-      .get('https://social-charity-server.herokuapp.com/api/users', {
+      .get(`${URL}/api/users`, {
         params: {},
         headers: { Authorization: AuthStr }
       })

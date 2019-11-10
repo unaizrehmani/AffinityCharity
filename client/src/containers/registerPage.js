@@ -5,6 +5,7 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
+const { URL } = require('../util/baseURL');
 
 export default class RegisterPageContainer extends Component {
   constructor(props) {
@@ -29,9 +30,8 @@ export default class RegisterPageContainer extends Component {
   }
 
   componentDidMount = async () => {
-    const URL = `http://localhost:8000/api/causes/${this.state.causeId}`;
     axios
-      .get(URL)
+      .get(`${URL}/api/causes/${this.state.causeId}`)
       .then(({ data }) => {
         console.log(data);
         this.setState({
@@ -53,10 +53,9 @@ export default class RegisterPageContainer extends Component {
   };
 
   submitEmail = () => {
-    const URL = 'http://localhost:8000/api/donors';
     axios
       .post(
-        URL,
+        `${URL}/api/donors`,
         {
           email: this.state.email,
           causeId: this.state.causeId
