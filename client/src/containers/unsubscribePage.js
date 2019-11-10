@@ -5,6 +5,7 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
+import { URL } from '../util/baseURL';
 
 export default class UnsubscribePageContainer extends Component {
   constructor(props) {
@@ -17,9 +18,8 @@ export default class UnsubscribePageContainer extends Component {
   }
 
   componentDidMount = async () => {
-    const URL = `http://localhost:8000/api/causes/${this.state.causeId}`;
     axios
-      .get(URL)
+      .get(`${URL}/api/causes/${this.state.causeId}`)
       .then(({ data }) => {
         console.log(data);
         this.setState({
@@ -41,10 +41,9 @@ export default class UnsubscribePageContainer extends Component {
   };
 
   submitEmail = () => {
-    const URL = 'http://localhost:8000/api/donors';
     axios
       .post(
-        URL,
+        `${URL}/api/donors/unsubscribe/`,
         {
           email: this.state.email,
           causeId: this.state.causeId
@@ -53,10 +52,11 @@ export default class UnsubscribePageContainer extends Component {
       )
       .then(response => {
         console.log(response.data);
-        alert('You\'ve been unsubscribed successfully!');
+        alert("You've been unsubscribed successfully!");
       })
-      .catch(error => {
-        console.log('error ' + error);
+      .catch(({ response }) => {
+        console.log('Error from API:', response.data.message);
+        alert('There was a error trying to unsubscribe!');
       });
   };
 
@@ -89,19 +89,19 @@ export default class UnsubscribePageContainer extends Component {
           <InputContainer>
             <InputTitle>Your Email</InputTitle>
             <Input
-              id="input-email"
-              name="email"
-              size="large"
-              type="email"
-              placeholder="john.doe@email.com"
+              id='input-email'
+              name='email'
+              size='large'
+              type='email'
+              placeholder='john.doe@email.com'
               value={this.state.email}
               onChange={this.handleUserInput}
               noLabel={true}
             />
           </InputContainer>
           <Button
-            id="button-subscribe"
-            title="Unsubscribe"
+            id='button-subscribe'
+            title='Unsubscribe'
             primary
             handleClick={this.submitEmail}
           />
