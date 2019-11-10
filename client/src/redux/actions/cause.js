@@ -11,6 +11,8 @@ export const GET_CAUSES_BEGIN = 'GET_CAUSES_BEGIN';
 export const GET_CAUSES_SUCCESS = 'GET_CAUSES_SUCCESS';
 export const GET_CAUSES_FAILURE = 'GET_CAUSES_FAILURE';
 
+const { URL } = require('../../util/baseURL');
+
 // Action Creators
 export function createCause(cause, userToken) {
   var config = {
@@ -23,11 +25,7 @@ export function createCause(cause, userToken) {
   return async dispatch => {
     dispatch(createCauseBegin());
     try {
-      const request = await axios.post(
-        'https://social-charity-server.herokuapp.com/api/causes',
-        cause,
-        config
-      );
+      const request = await axios.post(`${URL}/api/causes`, cause, config);
       console.log(request);
       dispatch(createCauseSuccess(request.data));
       return request;
@@ -42,9 +40,7 @@ export function getCauses() {
   return async dispatch => {
     dispatch(getCausesBegin());
     try {
-      const request = await axios.get(
-        'https://social-charity-server.herokuapp.com/api/causes'
-      );
+      const request = await axios.get(`${URL}/api/causes`);
       dispatch(getCausesSuccess(request.data));
       console.log(request.data);
       return request;

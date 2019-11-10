@@ -3,6 +3,8 @@ import { Form, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/authentication';
 import axios from 'axios';
+
+const { URL } = require('../util/baseURL');
 class ProfileForm extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,6 @@ class ProfileForm extends Component {
       email,
       oldPassword
     } = this.state;
-    const URL = `https://social-charity-server.herokuapp.com/api/users/${this.props.session.userID}`;
     this.setState({ loading: true });
     if (password1 !== password2) {
       this.setState({
@@ -46,16 +47,15 @@ class ProfileForm extends Component {
       });
     } else {
       try {
-        const newEmail = email;
         const oldEmail = this.props.session.email;
         const newPassword = password1;
 
         const result = await axios.patch(
-          URL,
+          `${URL}/api/users/${this.props.session.userID}`,
           {
             firstName,
             lastName,
-            newEmail,
+            email,
             newPassword,
             oldPassword,
             oldEmail
