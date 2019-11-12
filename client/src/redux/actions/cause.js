@@ -26,7 +26,6 @@ export function createCause(formData, userToken) {
     dispatch(createCauseBegin());
     try {
       const request = await axios.post(`${URL}/api/causes`, formData, config);
-      console.log(request.data);
       dispatch(createCauseSuccess(request.data));
       return request;
     } catch (error) {
@@ -42,7 +41,6 @@ export function getCauses() {
     try {
       const request = await axios.get(`${URL}/api/causes`);
       dispatch(getCausesSuccess(request.data));
-      console.log(request.data);
       return request;
     } catch (error) {
       dispatch(getCausesFailure(error));
