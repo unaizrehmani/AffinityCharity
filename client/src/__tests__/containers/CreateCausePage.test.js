@@ -16,11 +16,6 @@ describe('Testing the CreateCausePage', () => {
     expect(wrapper.find('#input-name').length).toEqual(1);
   });
 
-  it('renders input for type', () => {
-    const wrapper = shallow(<CreateCausePageContainer />);
-    expect(wrapper.find('#input-type').length).toEqual(1);
-  });
-
   it('renders input for location', () => {
     const wrapper = shallow(<CreateCausePageContainer />);
     expect(wrapper.find('#input-location').length).toEqual(1);
@@ -49,16 +44,6 @@ describe('name input', () => {
       .find('#input-name')
       .simulate('change', { target: { name: 'name', value: 'foo' } });
     expect(wrapper.state('name')).toEqual('foo');
-  });
-});
-
-describe('type input', () => {
-  it('should respond to change event and change the state accordingly', () => {
-    const wrapper = shallow(<CreateCausePageContainer />);
-    wrapper
-      .find('#input-type')
-      .simulate('change', { target: { name: 'type', value: 'foo' } });
-    expect(wrapper.state('type')).toEqual('foo');
   });
 });
 
