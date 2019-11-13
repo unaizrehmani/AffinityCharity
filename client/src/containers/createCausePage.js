@@ -6,13 +6,13 @@ import TextArea from '../components/textArea';
 import Button from '../components/button';
 import colors from '../styles/colors';
 import { createCause } from '../redux/actions/cause';
+import FormData from '../../node_modules/form-data';
 
 export class CreateCausePageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      type: '',
       location: '',
       description: '',
       image: '',
@@ -23,7 +23,6 @@ export class CreateCausePageContainer extends React.Component {
   handleCreateCauseButton = () => {
     let isFormValid =
       this.state.name &&
-      this.state.type &&
       this.state.location &&
       this.state.description &&
       this.state.image
@@ -38,13 +37,24 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   handleRequestToCreateNewCause = async () => {
-    let cause = {
-      name: this.state.name,
-      location: this.state.location,
-      description: this.state.description,
-      deleteable: true
-    };
-    this.props.dispatch(createCause(cause, this.props.session.userToken));
+    let formData = new FormData();
+
+    formData.append('name', this.state.name);
+    formData.append('location', this.state.location);
+    formData.append('description', this.state.description);
+    formData.append('deleteable', true);
+    formData.append('image', this.state.image);
+
+    this.props
+      .dispatch(createCause(formData, this.props.session.userToken))
+      .then(() => {
+        if (
+          !this.props.isCreatingCause &&
+          this.props.creatingCauseError === undefined
+        ) {
+          this.props.history.push('/');
+        }
+      });
   };
 
   handleUserInput = e => {
@@ -105,18 +115,6 @@ export class CreateCausePageContainer extends React.Component {
             />
           </InputContainer>
           <InputContainer>
-            <InputTitle>Type</InputTitle>
-            <Input
-              id="input-type"
-              name="type"
-              size="medium"
-              value={this.state.type}
-              onChange={this.handleUserInput}
-              style={inputContainerStyleOverride}
-              noLabel={true}
-            />
-          </InputContainer>
-          <InputContainer>
             <InputTitle>Location</InputTitle>
             <Input
               id="input-location"
@@ -162,7 +160,9 @@ export class CreateCausePageContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  session: state.authentication
+  session: state.authentication,
+  isCreatingCause: state.cause.isCreatingCause,
+  creatingCauseError: state.cause.creatingCauseError
 });
 
 const Container = styled.div`
