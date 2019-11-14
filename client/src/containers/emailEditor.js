@@ -3,8 +3,7 @@ import EmailEditor from 'react-email-editor';
 import styled from 'styled-components';
 import axios from 'axios';
 import MultipleEmail from '../components/multipleEmail';
-import { Input } from 'semantic-ui-react';
-import Button from '../components/button';
+import { Icon, Button, Form, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 const { URL } = require('../util/baseURL');
 class Emailer extends Component {
@@ -12,7 +11,11 @@ class Emailer extends Component {
     super(props);
     this.state = {
       emails: [],
-      subject: ''
+      subject: '',
+      error: false,
+      success: false,
+      statusMessage: '',
+      loading: false
     };
   }
   updateEmails = emails => {
@@ -43,6 +46,7 @@ class Emailer extends Component {
   };
 
   exportHtml = () => {
+    this.setState({ loading: true });
     window.unlayer.exportHtml(data => {
       const config = {
         headers: { Authorization: `Bearer ${this.props.session.userToken}` }
@@ -58,22 +62,38 @@ class Emailer extends Component {
           subject
         };
 
-        // TODO: add a spinner or some indication of sending an email
         axios
           .post(`${URL}/api/causes/send-email`, bodyParameters, config)
-          .then(response => {
-            console.log(response);
+          .then(() => {
+            this.setState({
+              loading: false,
+              success: true,
+              error: false,
+              statusMessage: 'Email successfully sent!'
+            });
           })
           .catch(error => {
             console.log(error);
+            this.setState({
+              loading: false,
+              success: false,
+              error: true,
+              statusMessage: 'Server error: Please contact tech support'
+            });
           });
       } else {
-        // TODO: handle empty emails message
+        this.setState({
+          loading: false,
+          success: false,
+          error: true,
+          statusMessage: 'Please add some emails in "Bcc:" field'
+        });
       }
     });
   };
 
   saveDesign = () => {
+    this.setState({ loading: true });
     window.unlayer.saveDesign(design => {
       const { id } = this.props.match.params;
       axios
@@ -86,8 +106,22 @@ class Emailer extends Component {
             headers: { Authorization: 'Bearer ' + this.props.session.userToken }
           }
         )
+        .then(() => {
+          this.setState({
+            loading: false,
+            success: true,
+            error: false,
+            statusMessage: 'You have successfully saved the E-mail template'
+          });
+        })
         .catch(err => {
           console.log(err);
+          this.setState({
+            loading: false,
+            success: false,
+            error: true,
+            statusMessage: 'Server error: Please contact tech support'
+          });
         });
     });
   };
@@ -110,62 +144,66 @@ class Emailer extends Component {
   render = () => {
     return (
       <EmailerStyle>
-        <FormInputStyle
-          type="text"
-          name="subject"
-          value={this.state.subject}
-          onChange={this.handleUserInput}
-          label="Subject"
-          placeholder="Enter email subject"
-        />
-        <MultipleEmailStyle>
-          <MultipleEmail
-            label="Bcc:"
-            emails={this.state.emails}
-            updateEmails={this.updateEmails}
+        <Form
+          loading={this.state.loading}
+          error={this.state.error}
+          success={this.state.success}
+        >
+          <Form.Input
+            type="text"
+            name="subject"
+            value={this.state.subject}
+            onChange={this.handleUserInput}
+            label="Subject"
+            placeholder="Enter email subject"
           />
-        </MultipleEmailStyle>
+          <MultipleEmailStyle>
+            <MultipleEmail
+              label="Bcc:"
+              emails={this.state.emails}
+              updateEmails={this.updateEmails}
+            />
+          </MultipleEmailStyle>
 
-        <EmailEditorStyle>
           <EmailEditor
             minHeight={'600px'}
+            style={{
+              position: 'relative'
+            }}
             appearance={{
               theme: 'light'
             }}
             onLoad={this.onLoad}
           />
-        </EmailEditorStyle>
 
-        <ButtonStyle>
-          <Button title="Send Email" primary handleClick={this.exportHtml} />
-          {/* TODO: add a confirmation to overwrite previous design*/}
-          <Button title="Save Email" primary handleClick={this.saveDesign} />
-        </ButtonStyle>
+          <ButtonStyle>
+            <Button primary onClick={this.exportHtml}>
+              <Icon name="send"></Icon>
+              Send Email
+            </Button>
+            <Button primary onClick={this.saveDesign}>
+              <Icon name="save"></Icon>
+              Save Email
+            </Button>
+          </ButtonStyle>
+          <Message error header={this.state.statusMessage} />
+          <Message success header={this.state.statusMessage} />
+        </Form>
       </EmailerStyle>
     );
   };
 }
 const EmailerStyle = styled.div`
   width: 100%;
-  padding-right: 20px;
+  padding: 20px;
 `;
-const EmailEditorStyle = styled.div``;
+
 const MultipleEmailStyle = styled.div`
-  padding-left: 20px;
   padding-top: 5px;
-`;
-const FormInputStyle = styled(Input)`
-  padding-left: 20px;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  .label {
-    width: 100px;
-    text-align: center;
-  }
 `;
 
 const ButtonStyle = styled.div`
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
