@@ -1,648 +1,329 @@
 {
-    "body": {
-      "rows": [{
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "image",
-            "values": {
-              "maxWidth": "100%",
-              "src": {
-                "url": "https://a.mailmunch.co/user_data/landing_pages/1500310730675-logosample_03.png",
-                "width": 266,
-                "height": 62
-              },
-              "draggable": true,
-              "containerPadding": "10px 10px 20px",
-              "deletable": true,
-              "selectable": true,
-              "action": {
-                "url": "",
-                "target": ""
-              },
-              "altText": "Image",
-              "fullWidth": false,
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
+  "counters": {
+      "u_content_image": 9,
+      "u_content_text": 18,
+      "u_content_divider": 5,
+      "u_content_button": 7,
+      "u_column": 22,
+      "u_row": 16,
+      "u_content_html": 1
+  },
+  "body": {
+      "rows": [
+          {
+              "cells": [
+                  1
+              ],
+              "columns": [
+                  {
+                      "contents": [
+                          {
+                              "type": "image",
+                              "values": {
+                                  "containerPadding": "10px 10px 20px",
+                                  "_meta": {
+                                      "htmlID": "u_content_image_1",
+                                      "htmlClassNames": "u_content_image"
+                                  },
+                                  "selectable": false,
+                                  "draggable": false,
+                                  "deletable": true,
+                                  "src": {
+                                      "url": "https://unroll-images-production.s3.amazonaws.com/projects/0/1572469180456-logo.png",
+                                      "width": 431,
+                                      "height": 117
+                                  },
+                                  "fullWidth": false,
+                                  "textAlign": "center",
+                                  "maxWidth": "100%",
+                                  "altText": "Image",
+                                  "action": {
+                                      "url": "",
+                                      "target": ""
+                                  }
+                              }
+                          }
+                      ],
+                      "values": {
+                          "_meta": {
+                              "htmlID": "u_column_1",
+                              "htmlClassNames": "u_column"
+                          }
+                      }
+                  }
+              ],
+              "values": {
+                  "columns": false,
+                  "backgroundColor": "rgba(255,255,255,0)",
+                  "columnsBackgroundColor": "rgba(255,255,255,0)",
+                  "backgroundImage": {
+                      "url": "",
+                      "fullWidth": true,
+                      "repeat": false,
+                      "center": false,
+                      "cover": false
+                  },
+                  "padding": "10px",
+                  "hideDesktop": false,
+                  "hideMobile": false,
+                  "noStackMobile": false,
+                  "_meta": {
+                      "htmlID": "u_row_1",
+                      "htmlClassNames": "u_row"
+                  },
+                  "selectable": false,
+                  "draggable": false,
+                  "deletable": true
+              }
           },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 10px 5px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#000",
-              "textAlign": "center",
-              "lineHeight": "120%",
-              "text": "<div><span style=\"color: #f10693; font-family: Pacifico, cursive; font-size: 14px; line-height: 16.8px;\"><strong><span style=\"font-size: 80px; line-height: 96px;\">Relax &amp; Plan</span></strong></span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "10px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#000",
-              "textAlign": "center",
-              "lineHeight": "120%",
-              "text": "<div><span style=\"color: #6fbb7b; font-family: Pacifico, cursive; font-size: 58px; text-align: center; line-height: 69.6px;\">&nbsp;Your Summer Break</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "20px 10px 9px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#000",
-              "textAlign": "center",
-              "lineHeight": "140%",
-              "text": "<div><span style=\"font-size: 24px; color: #505050; line-height: 33.6px;\">Time to plan a vacation for your kids?</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "5px 10px 10px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#000",
-              "textAlign": "center",
-              "lineHeight": "160%",
-              "text": "<div><span style=\"font-size: 18px; line-height: 28.8px;\"><span style=\"color: #505050; font-size: 18px; line-height: 28.8px;\">Check-out our summer break offers for&nbsp;</span><span style=\"color: #505050; font-size: 18px; line-height: 28.8px;\">children who are creative, full of energy,&nbsp;</span><span style=\"color: #505050; font-size: 18px; line-height: 28.8px;\">and can&rsquo;t sit still for a minute.</span></span></div>"
-            }
-          }, {
-            "type": "divider",
-            "values": {
-              "containerPadding": "20px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "width": "100%",
-              "border": {
-                "borderTopWidth": "1px",
-                "borderTopStyle": "solid",
-                "borderTopColor": "#CCC"
-              },
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
+          {
+              "cells": [
+                  1
+              ],
+              "columns": [
+                  {
+                      "contents": [
+                          {
+                              "type": "image",
+                              "values": {
+                                  "containerPadding": "10px",
+                                  "_meta": {
+                                      "htmlID": "u_content_image_5",
+                                      "htmlClassNames": "u_content_image"
+                                  },
+                                  "selectable": true,
+                                  "draggable": true,
+                                  "deletable": true,
+                                  "src": {
+                                      "url": "https://unroll-images-production.s3.amazonaws.com/projects/0/1572472511142-zakat.jpg",
+                                      "width": 305,
+                                      "height": 165
+                                  },
+                                  "fullWidth": true,
+                                  "textAlign": "center",
+                                  "maxWidth": "100%",
+                                  "altText": "Image",
+                                  "action": {
+                                      "url": "",
+                                      "target": ""
+                                  }
+                              }
+                          },
+                          {
+                              "type": "text",
+                              "values": {
+                                  "containerPadding": "10px",
+                                  "_meta": {
+                                      "htmlID": "u_content_text_18",
+                                      "htmlClassNames": "u_content_text"
+                                  },
+                                  "selectable": true,
+                                  "draggable": true,
+                                  "deletable": true,
+                                  "color": "#000000",
+                                  "textAlign": "left",
+                                  "lineHeight": "140%",
+                                  "linkStyle": {
+                                      "inherit": true,
+                                      "linkColor": "#0000ee",
+                                      "linkHoverColor": "#0000ee",
+                                      "linkUnderline": true,
+                                      "linkHoverUnderline": true
+                                  },
+                                  "text": "<div style=\"color: #4f4f4f; text-align: center;\">Join HCI along with<strong>&nbsp;Imam Wisam Sharieff, Shaykh&nbsp;Alaa Elsayed and Sister Razia Sultan Hamidi</strong>&nbsp;next week on The Global Water Crisis Tour.</div>\n<div style=\"color: #4f4f4f; text-align: center;\">&nbsp;</div>\n<div style=\"color: #4f4f4f; text-align: center;\"><span style=\"text-decoration: underline; font-size: 14px; line-height: 19.6px;\">Water is essential to life, yet 844 million people lack access to it</span>. This is not the world we want to create.</div>\n<div style=\"color: #4f4f4f; text-align: center;\">&nbsp;</div>\n<div style=\"color: #4f4f4f; text-align: center;\">With the ongoing climate crisis, not only is it more important than ever to address this issue, but to consider our responsibility as Muslims and the role we must play in changing this fact.</div>\n<div style=\"color: #4f4f4f; text-align: center;\">&nbsp;</div>\n<div style=\"color: #4f4f4f; text-align: center;\">This inspiring dinner gala will be in support of HCI&rsquo;s global clean water projects.</div>"
+                              }
+                          },
+                          {
+                              "type": "divider",
+                              "values": {
+                                  "containerPadding": "10px",
+                                  "_meta": {
+                                      "htmlID": "u_content_divider_5",
+                                      "htmlClassNames": "u_content_divider"
+                                  },
+                                  "selectable": true,
+                                  "draggable": true,
+                                  "deletable": true,
+                                  "width": "100%",
+                                  "border": {
+                                      "borderTopWidth": "1px",
+                                      "borderTopStyle": "solid",
+                                      "borderTopColor": "#BBBBBB"
+                                  },
+                                  "textAlign": "center"
+                              }
+                          },
+                          {
+                              "type": "button",
+                              "values": {
+                                  "containerPadding": "10px",
+                                  "_meta": {
+                                      "htmlID": "u_content_button_7",
+                                      "htmlClassNames": "u_content_button"
+                                  },
+                                  "selectable": true,
+                                  "draggable": true,
+                                  "deletable": true,
+                                  "href": {
+                                      "url": "https://www.eventbrite.ca/e/global-water-crisis-tour-tickets-75007139373?bblinkid=184589996&bbemailid=16836218&bbejrid=1217217426",
+                                      "target": "_self"
+                                  },
+                                  "buttonColors": {
+                                      "color": "#FFFFFF",
+                                      "backgroundColor": "#e11919",
+                                      "hoverColor": "#FFFFFF",
+                                      "hoverBackgroundColor": "#3AAEE0"
+                                  },
+                                  "textAlign": "center",
+                                  "lineHeight": "120%",
+                                  "border": {
+                                      "borderTopWidth": "0px",
+                                      "borderTopStyle": "solid",
+                                      "borderTopColor": "#CCC",
+                                      "borderLeftWidth": "0px",
+                                      "borderLeftStyle": "solid",
+                                      "borderLeftColor": "#CCC",
+                                      "borderRightWidth": "0px",
+                                      "borderRightStyle": "solid",
+                                      "borderRightColor": "#CCC",
+                                      "borderBottomWidth": "0px",
+                                      "borderBottomStyle": "solid",
+                                      "borderBottomColor": "#CCC"
+                                  },
+                                  "borderRadius": "15px",
+                                  "padding": "10px 20px",
+                                  "text": "<span style=\"font-size: 14px; line-height: 16.8px;\"><span style=\"font-size: 14px; line-height: 16.8px;\">Purchase Tickets</span></span>",
+                                  "calculatedWidth": 158,
+                                  "calculatedHeight": 36
+                              }
+                          }
+                      ],
+                      "values": {
+                          "backgroundColor": "",
+                          "padding": "0px",
+                          "_meta": {
+                              "htmlID": "u_column_15",
+                              "htmlClassNames": "u_column"
+                          }
+                      }
+                  }
+              ],
+              "values": {
+                  "columns": false,
+                  "backgroundColor": "",
+                  "columnsBackgroundColor": "",
+                  "backgroundImage": {
+                      "url": "",
+                      "fullWidth": true,
+                      "repeat": false,
+                      "center": true,
+                      "cover": false
+                  },
+                  "padding": "0px",
+                  "hideDesktop": false,
+                  "hideMobile": false,
+                  "noStackMobile": false,
+                  "_meta": {
+                      "htmlID": "u_row_12",
+                      "htmlClassNames": "u_row"
+                  },
+                  "selectable": false,
+                  "draggable": false,
+                  "deletable": false
+              }
           },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "20px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#000",
-              "textAlign": "left",
-              "lineHeight": "120%",
-              "text": "<div><strong><span style=\"font-size: 30px; font-family: Montserrat, sans-serif; color: #2790d2; line-height: 36px;\">Upcoming Events:</span></strong></div>"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "0px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1, 2],
-        "columns": [{
-          "contents": [{
-            "type": "image",
-            "values": {
-              "maxWidth": "100%",
-              "src": {
-                "url": "https://a.mailmunch.co/user_data/landing_pages/1500313461528-1.png",
-                "width": 500,
-                "height": 500
-              },
-              "draggable": true,
-              "containerPadding": "0px",
-              "deletable": true,
-              "selectable": true,
-              "action": {
-                "url": "",
-                "target": ""
-              },
-              "altText": "Image",
-              "fullWidth": true,
-              "textAlign": "center"
-            }
-          }]
-        }, {
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px 8px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#6eba79",
-              "textAlign": "left",
-              "lineHeight": "160%",
-              "text": "<div><span style=\"font-size: 20px; line-height: 32px;\">JET SKI RIDE</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#4f4f4f",
-              "textAlign": "left",
-              "lineHeight": "150%",
-              "text": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>"
-            }
-          }, {
-            "type": "button",
-            "values": {
-              "buttonColors": {
-                "color": "#FFF",
-                "backgroundColor": "#fa9302",
-                "hoverColor": "#cf7a04"
-              },
-              "calculatedHeight": 36,
-              "calculatedWidth": 132,
-              "href": "",
-              "border": {},
-              "text": "ORDER NOW<br />",
-              "draggable": true,
-              "containerPadding": "5px 15px",
-              "padding": "10px 20px",
-              "deletable": true,
-              "selectable": true,
-              "textAlign": "left",
-              "lineHeight": "120%",
-              "borderRadius": "20px"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "divider",
-            "values": {
-              "containerPadding": "1px 20px 5px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "width": "100%",
-              "border": {
-                "borderTopWidth": "1px",
-                "borderTopStyle": "solid",
-                "borderTopColor": "#CCC"
-              },
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "0px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [2, 1],
-        "columns": [{
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px 8px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#6eba79",
-              "textAlign": "left",
-              "lineHeight": "160%",
-              "text": "<div><span style=\"font-size: 20px; line-height: 32px;\">BOAT RIDE</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#4f4f4f",
-              "textAlign": "left",
-              "lineHeight": "150%",
-              "text": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</div>"
-            }
-          }, {
-            "type": "button",
-            "values": {
-              "buttonColors": {
-                "color": "#FFF",
-                "backgroundColor": "#fa9302",
-                "hoverColor": "#cf7a04"
-              },
-              "calculatedHeight": 36,
-              "calculatedWidth": 132,
-              "href": "",
-              "border": {},
-              "text": "ORDER NOW<br />",
-              "draggable": true,
-              "containerPadding": "5px 15px",
-              "padding": "10px 20px",
-              "deletable": true,
-              "selectable": true,
-              "textAlign": "left",
-              "lineHeight": "120%",
-              "borderRadius": "20px"
-            }
-          }]
-        }, {
-          "contents": [{
-            "type": "image",
-            "values": {
-              "maxWidth": "100%",
-              "src": {
-                "url": "https://a.mailmunch.co/user_data/landing_pages/1500313783372-2.png",
-                "width": 500,
-                "height": 500
-              },
-              "draggable": true,
-              "containerPadding": "0px",
-              "deletable": true,
-              "selectable": true,
-              "action": {
-                "url": "",
-                "target": ""
-              },
-              "altText": "Image",
-              "fullWidth": true,
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "divider",
-            "values": {
-              "containerPadding": "1px 20px 5px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "width": "100%",
-              "border": {
-                "borderTopWidth": "1px",
-                "borderTopStyle": "solid",
-                "borderTopColor": "#CCC"
-              },
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "0px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1, 2],
-        "columns": [{
-          "contents": [{
-            "type": "image",
-            "values": {
-              "maxWidth": "100%",
-              "src": {
-                "url": "https://a.mailmunch.co/user_data/landing_pages/1500314095876-3.png",
-                "width": 500,
-                "height": 500
-              },
-              "draggable": true,
-              "containerPadding": "0px",
-              "deletable": true,
-              "selectable": true,
-              "action": {
-                "url": "",
-                "target": ""
-              },
-              "altText": "Image",
-              "fullWidth": true,
-              "textAlign": "center"
-            }
-          }]
-        }, {
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px 8px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#6eba79",
-              "textAlign": "left",
-              "lineHeight": "160%",
-              "text": "<div><span style=\"font-size: 20px; line-height: 32px;\">BEACH DAY</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "10px 15px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#4f4f4f",
-              "textAlign": "left",
-              "lineHeight": "150%",
-              "text": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</div>"
-            }
-          }, {
-            "type": "button",
-            "values": {
-              "buttonColors": {
-                "color": "#FFF",
-                "backgroundColor": "#fa9302",
-                "hoverColor": "#cf7a04"
-              },
-              "calculatedHeight": 36,
-              "calculatedWidth": 132,
-              "href": "",
-              "border": {},
-              "text": "ORDER NOW<br />",
-              "draggable": true,
-              "containerPadding": "5px 15px",
-              "padding": "10px 20px",
-              "deletable": true,
-              "selectable": true,
-              "textAlign": "left",
-              "lineHeight": "120%",
-              "borderRadius": "20px"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "divider",
-            "values": {
-              "containerPadding": "1px 20px 5px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "width": "100%",
-              "border": {
-                "borderTopWidth": "1px",
-                "borderTopStyle": "solid",
-                "borderTopColor": "#CCC"
-              },
-              "textAlign": "center"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "0px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "15px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#fa9302",
-              "textAlign": "center",
-              "lineHeight": "130%",
-              "text": "<div><span style=\"font-size: 36px; line-height: 46.8px;\">NEED MORE INFORMATION?</span></div>"
-            }
-          }, {
-            "type": "text",
-            "values": {
-              "containerPadding": "10px",
-              "selectable": true,
-              "draggable": true,
-              "deletable": true,
-              "color": "#4f4f4f",
-              "textAlign": "center",
-              "lineHeight": "120%",
-              "text": "<div><span style=\"font-size: 20px; line-height: 24px;\">Subscribe to get updates.</span></div>"
-            }
-          }, {
-            "type": "button",
-            "values": {
-              "buttonColors": {
-                "color": "#FFF",
-                "backgroundColor": "#6eba79",
-                "hoverColor": "#58a864"
-              },
-              "calculatedHeight": 52,
-              "calculatedWidth": 214,
-              "href": "",
-              "border": {},
-              "text": "<span style=\"font-size: 20px; line-height: 32px;\">SUBSCRIBE NOW</span>",
-              "draggable": true,
-              "containerPadding": "20px",
-              "padding": "10px 20px",
-              "deletable": true,
-              "selectable": true,
-              "textAlign": "center",
-              "lineHeight": "160%",
-              "borderRadius": "37px"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "rgba(255,255,255,0)",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "10px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": true,
-          "draggable": true,
-          "deletable": true
-        }
-      }, {
-        "cells": [1],
-        "columns": [{
-          "contents": [{
-            "type": "text",
-            "values": {
-              "containerPadding": "20px",
-              "selectable": false,
-              "draggable": false,
-              "deletable": false,
-              "color": "#000",
-              "textAlign": "left",
-              "lineHeight": "120%",
-              "text": "<div style=\"font-family: arial, helvetica, sans-serif;\"><span style=\"font-size: 12px; color: #999999; line-height: 14.4px;\">You received this email because you signed up for [[business_name]].</span></div>\n<div style=\"font-family: arial, helvetica, sans-serif;\">&nbsp;</div>\n<div style=\"font-family: arial, helvetica, sans-serif;\"><span style=\"font-size: 12px; color: #999999; line-height: 14.4px;\">[[{unsubscribe}]]</span></div>"
-            }
-          }]
-        }],
-        "values": {
-          "backgroundColor": "#f0f0f0",
-          "backgroundImage": {
-            "url": "",
-            "fullWidth": true,
-            "repeat": false,
-            "center": false,
-            "cover": false
-          },
-          "padding": "30px",
-          "columnsBackgroundColor": "rgba(255,255,255,0)",
-          "selectable": false,
-          "draggable": false,
-          "deletable": false
-        }
-      }],
+          {
+              "cells": [
+                  1
+              ],
+              "columns": [
+                  {
+                      "contents": [
+                          {
+                              "type": "text",
+                              "values": {
+                                  "containerPadding": "20px",
+                                  "_meta": {
+                                      "htmlID": "u_content_text_14",
+                                      "htmlClassNames": "u_content_text"
+                                  },
+                                  "selectable": false,
+                                  "draggable": false,
+                                  "deletable": false,
+                                  "color": "#000",
+                                  "textAlign": "left",
+                                  "lineHeight": "120%",
+                                  "linkStyle": {
+                                      "inherit": true,
+                                      "linkColor": "#0000ee",
+                                      "linkHoverColor": "#0000ee",
+                                      "linkUnderline": true,
+                                      "linkHoverUnderline": true
+                                  },
+                                  "text": "<div style=\"font-family: arial, helvetica, sans-serif; text-align: center;\"><span style=\"font-size: 12px; color: #999999; line-height: 14.4px;\">You received this email because you signed up for Human Concern International</span></div>\n<div style=\"font-family: arial, helvetica, sans-serif;\">&nbsp;</div>\n<div style=\"font-family: arial, helvetica, sans-serif; text-align: center;\"><span style=\"font-size: 12px; line-height: 14.4px;\"><a href=\"https://bbox.blackbaudhosting.com/webforms/service/page.aspx?pid=247&srctid=1&erid=1217217426&trid=d1e4aabc-16e5-4ad1-ab56-8ddd6aa4cd8d\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a>&nbsp;|&nbsp;<a href=\"http://www.google.com\" target=\"_blank\" rel=\"noopener\">Unsubscribe</a></span></div>"
+                              }
+                          }
+                      ],
+                      "values": {
+                          "_meta": {
+                              "htmlID": "u_column_14",
+                              "htmlClassNames": "u_column"
+                          }
+                      }
+                  }
+              ],
+              "values": {
+                  "columns": false,
+                  "backgroundColor": "#f0f0f0",
+                  "columnsBackgroundColor": "rgba(255,255,255,0)",
+                  "backgroundImage": {
+                      "url": "",
+                      "fullWidth": true,
+                      "repeat": false,
+                      "center": false,
+                      "cover": false
+                  },
+                  "padding": "30px",
+                  "hideDesktop": false,
+                  "hideMobile": false,
+                  "noStackMobile": false,
+                  "_meta": {
+                      "htmlID": "u_row_11",
+                      "htmlClassNames": "u_row"
+                  },
+                  "selectable": false,
+                  "draggable": false,
+                  "deletable": false
+              }
+          }
+      ],
       "values": {
-        "backgroundColor": "#ffffff",
-        "backgroundImage": {
-          "url": "",
-          "fullWidth": true,
-          "repeat": false,
-          "center": true,
-          "cover": false
-        },
-        "contentWidth": "600px",
-        "fontFamily": {
-          "label": "Montserrat",
-          "value": "'Montserrat',sans-serif",
-          "type": "google",
-          "weights": "400,700"
-        }
+          "backgroundColor": "#ffffff",
+          "backgroundImage": {
+              "url": "",
+              "fullWidth": true,
+              "repeat": false,
+              "center": true,
+              "cover": false
+          },
+          "contentWidth": "600px",
+          "fontFamily": {
+              "label": "Montserrat",
+              "value": "'Montserrat',sans-serif",
+              "type": "google",
+              "weights": "400,700"
+          },
+          "linkStyle": {
+              "body": true,
+              "linkColor": "#0000ee",
+              "linkHoverColor": "#0000ee",
+              "linkUnderline": true,
+              "linkHoverUnderline": true
+          },
+          "_meta": {
+              "htmlID": "u_body",
+              "htmlClassNames": "u_body"
+          }
       }
-    }
   }
+}

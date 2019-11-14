@@ -78,7 +78,7 @@ export class HomePageContainer extends React.Component {
           </Link>
         </SearchContainer>
         <PinnedCauses>
-          <h3>Pinned Causes</h3>
+          {/* <h3>Pinned Causes</h3> */}
           <CausesContainer>
             {/* TODO replace <div> with spinner  */}
             {this.props.isGettingCauses ? <div>Loading...</div> : renderCards}
