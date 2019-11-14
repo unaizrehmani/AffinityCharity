@@ -20,6 +20,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(cors());
+app.use('/api', require('../routes/api'));
 
 // ROUTES
 if (CLOUDINARY_PATH === 'production') {
@@ -45,7 +46,6 @@ if (CLOUDINARY_PATH === 'production') {
     res.sendFile(indexHtmlPath);
   });
 }
-app.use('/api', require('../routes/api'));
 app.listen(PORT, () => {
   console.log(`server listening on port: ${PORT}`);
 });
