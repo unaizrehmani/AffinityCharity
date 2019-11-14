@@ -10,6 +10,7 @@ export default class Button extends Component {
         onClick={this.props.handleClick}
       >
         <h4>{this.props.title}</h4>
+        {this.props.children}
       </StyledButton>
     );
   }

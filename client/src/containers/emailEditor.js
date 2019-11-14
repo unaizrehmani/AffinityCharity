@@ -3,7 +3,8 @@ import EmailEditor from 'react-email-editor';
 import styled from 'styled-components';
 import axios from 'axios';
 import MultipleEmail from '../components/multipleEmail';
-import { Icon, Button, Form, Message } from 'semantic-ui-react';
+import { Icon, Form, Message } from 'semantic-ui-react';
+import Button from '../components/button';
 import { connect } from 'react-redux';
 const { URL } = require('../util/baseURL');
 class Emailer extends Component {
@@ -177,11 +178,11 @@ class Emailer extends Component {
           />
 
           <ButtonStyle>
-            <Button primary onClick={this.exportHtml}>
+            <Button primary handleClick={this.exportHtml}>
               <Icon name="send"></Icon>
               Send Email
             </Button>
-            <Button primary onClick={this.saveDesign}>
+            <Button primary handleClick={this.saveDesign}>
               <Icon name="save"></Icon>
               Save Email
             </Button>
