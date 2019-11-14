@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const sanitizeMongo = require('express-mongo-sanitize');
 const cors = require('cors');
 
-const PORT = process.env.PORT;
+const { PORT, CLOUDINARY_PATH } = process.env;
 
 const app = express();
 
@@ -20,9 +20,32 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(cors());
+app.use('/api', require('../routes/api'));
 
 // ROUTES
-app.use('/api', require('../routes/api'));
+if (CLOUDINARY_PATH === 'production') {
+  const staticPath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'client',
+    'build'
+  );
+  const indexHtmlPath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'client',
+    'build',
+    'index.html'
+  );
+  app.use(express.static(staticPath));
+  app.get('*', (req, res) => {
+    res.sendFile(indexHtmlPath);
+  });
+}
 app.listen(PORT, () => {
   console.log(`server listening on port: ${PORT}`);
 });
