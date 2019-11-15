@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Message } from 'semantic-ui-react';
+import styled from 'styled-components';
+import { Form, Message, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import Button from './button';
 import { loginUser } from '../redux/actions/authentication';
 import axios from 'axios';
 
@@ -125,7 +127,6 @@ class ProfileForm extends Component {
     return (
       <div>
         <Form
-          onSubmit={this.handleSubmit}
           loading={this.state.loading}
           error={this.state.error}
           success={this.state.success}
@@ -184,11 +185,21 @@ class ProfileForm extends Component {
             success
             header={'You have successfully changed your settings!'}
           />
-          <Form.Button content="Update" color="green" />
+          <ButtonStyle>
+            <Button primary handleClick={this.handleSubmit}>
+              <Icon name="edit"></Icon>
+              Update
+            </Button>
+          </ButtonStyle>
         </Form>
       </div>
     );
   }
 }
+
+const ButtonStyle = styled.div`
+  margin-left: -10px;
+  margin-top: 20px;
+`;
 
 export default connect()(ProfileForm);
