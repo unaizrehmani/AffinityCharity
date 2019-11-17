@@ -22,7 +22,7 @@ export class CreateCausePageContainer extends React.Component {
   }
 
   handleCreateCauseButton = () => {
-    this.setState({ loading : true });
+    this.setState({ loading: true });
     let isFormValid =
       this.state.name &&
       this.state.location &&
@@ -34,7 +34,7 @@ export class CreateCausePageContainer extends React.Component {
     if (isFormValid) {
       this.handleRequestToCreateNewCause();
     } else {
-      this.setState({ loading : false });
+      this.setState({ loading: false });
       console.log('Please fill out all required fields'); //TODO add error toast here
     }
   };
@@ -51,7 +51,7 @@ export class CreateCausePageContainer extends React.Component {
     this.props
       .dispatch(createCause(formData, this.props.session.userToken))
       .then(() => {
-        this.setState({ loading : false });
+        this.setState({ loading: false });
         if (
           !this.props.isCreatingCause &&
           this.props.creatingCauseError === undefined
@@ -82,7 +82,7 @@ export class CreateCausePageContainer extends React.Component {
   };
 
   render() {
-    const {loading} = this.state;
+    const { loading } = this.state;
 
     const inputContainerStyleOverride = {
       marginBottom: '10px',
@@ -159,15 +159,8 @@ export class CreateCausePageContainer extends React.Component {
             handleClick={this.handleCreateCauseButton}
             disabled={loading}
           >
-            { loading && (
-                <i
-                  className="notched circle loading icon">
-                </i>
-              )}
-              { loading ?
-                <span>Creating Cause</span> :
-                <span>Create Cause</span>
-              }
+            {loading && <i className="notched circle loading icon"></i>}
+            {loading ? <span>Creating Cause</span> : <span>Create Cause</span>}
           </Button>
         </FormContainer>
       </Container>
