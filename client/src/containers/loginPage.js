@@ -17,11 +17,13 @@ class LoginPage extends React.Component {
       formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
-      formValid: false
+      formValid: false,
+      loading: false
     };
   }
 
   onLoginSubmit = () => {
+    this.setState({ loading: true });
     axios
       .post(
         `${URL}/api/auth/token`,
@@ -32,7 +34,6 @@ class LoginPage extends React.Component {
         { 'Content-Type': 'application/json' }
       )
       .then(response => {
-        console.log(response);
         const {
           firstName,
           lastName,
@@ -44,6 +45,7 @@ class LoginPage extends React.Component {
         this.props.dispatch(
           loginUser(firstName, lastName, isAdmin, email, token, id)
         );
+        this.setState({ loading: false });
         if (token) {
           this.props.history.push('/');
         }
@@ -99,6 +101,7 @@ class LoginPage extends React.Component {
   };
 
   render() {
+    const { loading } = this.state;
     return (
       <StyledLoginPage>
         <Banner>
@@ -134,8 +137,11 @@ class LoginPage extends React.Component {
             />
           </Form>
           <ButtonPrompts>
-            <Button title="Sign In" primary handleClick={this.onLoginSubmit} />
-            <Button title="Forgot Password" primary={false} />
+            <Button primary handleClick={this.onLoginSubmit} disabled={loading}>
+              {loading && <i className="notched circle loading icon"></i>}
+              {loading ? <span>Signing In</span> : <span>Sign In</span>}
+            </Button>
+            <Button primary={false}>Forgot Password</Button>
           </ButtonPrompts>
         </LoginForm>
         <Link to="/register">Register Charity</Link>
