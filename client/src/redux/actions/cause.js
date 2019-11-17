@@ -14,19 +14,18 @@ export const GET_CAUSES_FAILURE = 'GET_CAUSES_FAILURE';
 const { URL } = require('../../util/baseURL');
 
 // Action Creators
-export function createCause(cause, userToken) {
+export function createCause(formData, userToken) {
   var config = {
     headers: {
       Authorization: 'Bearer ' + userToken,
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     }
   };
 
   return async dispatch => {
     dispatch(createCauseBegin());
     try {
-      const request = await axios.post(`${URL}/api/causes`, cause, config);
-      console.log(request);
+      const request = await axios.post(`${URL}/api/causes`, formData, config);
       dispatch(createCauseSuccess(request.data));
       return request;
     } catch (error) {
@@ -42,7 +41,6 @@ export function getCauses() {
     try {
       const request = await axios.get(`${URL}/api/causes`);
       dispatch(getCausesSuccess(request.data));
-      console.log(request.data);
       return request;
     } catch (error) {
       dispatch(getCausesFailure(error));

@@ -58,7 +58,8 @@ const causeReducer = function(state = initialState, { type, payload }) {
         ...state,
         ...{
           isGettingCauses: false,
-          getCausesError: payload.error
+          getCausesError: payload.error,
+          causes: []
         }
       };
     default:
