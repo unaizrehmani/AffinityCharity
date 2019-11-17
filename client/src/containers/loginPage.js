@@ -23,7 +23,7 @@ class LoginPage extends React.Component {
   }
 
   onLoginSubmit = () => {
-    this.setState({ loading : true });
+    this.setState({ loading: true });
     axios
       .post(
         `${URL}/api/auth/token`,
@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
         this.props.dispatch(
           loginUser(firstName, lastName, isAdmin, email, token, id)
         );
-        this.setState({ loading : false });
+        this.setState({ loading: false });
         if (token) {
           this.props.history.push('/');
         }
@@ -101,7 +101,7 @@ class LoginPage extends React.Component {
   };
 
   render() {
-    const {loading} = this.state;
+    const { loading } = this.state;
     return (
       <StyledLoginPage>
         <Banner>
@@ -137,24 +137,11 @@ class LoginPage extends React.Component {
             />
           </Form>
           <ButtonPrompts>
-            <Button
-              primary
-              handleClick={this.onLoginSubmit}
-              disabled={loading}
-            >
-              { loading && (
-                <i
-                  className="notched circle loading icon">
-                </i>
-              )}
-              { loading ?
-                <span>Signing In</span> :
-                <span>Sign In</span>
-              }
+            <Button primary handleClick={this.onLoginSubmit} disabled={loading}>
+              {loading && <i className="notched circle loading icon"></i>}
+              {loading ? <span>Signing In</span> : <span>Sign In</span>}
             </Button>
-            <Button primary={false} >
-              Forgot Password
-            </Button>
+            <Button primary={false}>Forgot Password</Button>
           </ButtonPrompts>
         </LoginForm>
         <Link to="/register">Register Charity</Link>
