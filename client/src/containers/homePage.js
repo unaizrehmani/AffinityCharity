@@ -80,10 +80,11 @@ export class HomePageContainer extends React.Component {
         <PinnedCauses>
           {/* <h3>Pinned Causes</h3> */}
           <CausesContainer>
-            {this.props.isGettingCauses ?
-              <i className="red massive notched circle loading icon"></i> :
+            {this.props.isGettingCauses ? (
+              <i className="red massive notched circle loading icon"></i>
+            ) : (
               renderCards
-            }
+            )}
           </CausesContainer>
         </PinnedCauses>
       </Container>
