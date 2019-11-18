@@ -22,9 +22,8 @@ exports.insertDonor = async (req, res) => {
     const cause = await Cause.findById(causeId);
     if (cause === null || cause === undefined) {
       throw new Error('No cause with such ID.');
-    }
-    // Donor already exists so add the cause to their subscription list
-    else if ((await checkIfUserExists(email)) === true) {
+    } else if ((await checkIfUserExists(email)) === true) {
+      // Donor already exists so add the cause to their subscription list
       const donor = await Donor.findOne({ email: email });
       // Don't add duplicate causes to their subscription list
       if (!donor.causes.includes(causeId)) {
