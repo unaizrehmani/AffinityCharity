@@ -271,6 +271,8 @@ describe('Agent Users API', () => {
     fakeUser.mediaURL = body.mediaURL;
   });
 
+  // This test is flaky so it is commented for now
+
   // it('Delete New Fake User Agent', async () => {
   //   const { body } = await request(app)
   //     .delete('/api/users/' + fakeUser._id)
