@@ -1,4 +1,5 @@
 const Donor = require('../models/donor');
+const Cause = require('../models/cause');
 const mongoose = require('mongoose');
 
 /*
@@ -17,15 +18,20 @@ const mongoose = require('mongoose');
 exports.insertDonor = async (req, res) => {
   const { email, firstName, lastName, phone, address } = req.body;
   const causeId = mongoose.Types.ObjectId(req.body.causeId);
-  // To-DO check to make sure causeId is a valid cause
   try {
-    // Donor already exists so add the cause to their subscription list
-    if ((await checkIfUserExists(email)) === true) {
+    const cause = await Cause.findById(causeId);
+    if (cause === null || cause === undefined) {
+      throw new Error('No cause with such ID.');
+    } else if ((await checkIfUserExists(email)) === true) {
+      // Donor already exists so add the cause to their subscription list
       const donor = await Donor.findOne({ email: email });
       // Don't add duplicate causes to their subscription list
       if (!donor.causes.includes(causeId)) {
         donor.causes.push(causeId);
       }
+      // Add to causes donor list if its not already there
+      cause.donors.push(donor._id);
+      await cause.save();
       const result = await donor.save();
       res.status(200).send(result);
     } else {
@@ -40,10 +46,13 @@ exports.insertDonor = async (req, res) => {
       donor.causes.push(causeId);
       donor.createdDate = new Date();
       const result = await donor.save();
+      cause.donors.push(result._id);
+      await cause.save();
       res.status(200).send(result);
     }
-  } catch (error) {
-    res.send(error);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -59,6 +68,32 @@ const checkIfUserExists = async email => {
 };
 
 /*
+ * PATCH /api/donors/unsubscribe route to patch an donor by ID.
+
+ * REQ.BODY:
+ * @param {string} email
+ * @param {string} causeId
+ */
+exports.unsubscribeDonorByEmail = async (req, res, next) => {
+  const { email, causeId } = req.body;
+  try {
+    const donor = await Donor.findOne({ email: email });
+    if (!donor) throw new Error('No user found.');
+    // Remove causeId (type ObjectID) from donors subscription list
+    donor.causes = donor.causes.filter(item => item.toString() !== causeId);
+    // Remove email from causes donor list
+    const cause = await Cause.findById(causeId);
+    if (!cause) throw new Error('No cause found.');
+    cause.donors = cause.donors.filter(item => item.toString() !== donor.id);
+    await donor.save();
+    await cause.save();
+    return res.status(200).json({ message: 'Successfully unsubscribed user.' });
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
+
+/*
  * GET /api/donors/:donorID route to get an donor by ID.
  *
  * REQ.PARAMS:
@@ -68,9 +103,9 @@ exports.getDonorByID = async (req, res, next) => {
   try {
     const id = req.params.donorID;
     const donor = await Donor.findById(id).populate('causes', '-__v');
-    res.send(donor);
-  } catch (error) {
-    res.send(error);
+    res.status(200).send(donor);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
   }
 };
 
@@ -80,9 +115,9 @@ exports.getDonorByID = async (req, res, next) => {
 exports.getAllDonors = async (req, res, next) => {
   try {
     const donors = await Donor.find({}).populate('causes', '-__v');
-    res.send(donors);
-  } catch (error) {
-    res.send(error);
+    res.status(200).send(donors);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
   }
 };
 
@@ -110,8 +145,8 @@ exports.patchDonorByID = async (req, res, next) => {
       new: true
     });
     res.send(result);
-  } catch (error) {
-    res.send(error);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -126,6 +161,6 @@ exports.deleteDonorByID = async (req, res, next) => {
     const donor = await Donor.findByIdAndDelete(req.params.donorID);
     res.send(donor);
   } catch (err) {
-    res.send(err);
+    res.status(400).json({ message: err.message });
   }
 };

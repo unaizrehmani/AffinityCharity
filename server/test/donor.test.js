@@ -8,8 +8,14 @@ describe('Donor Api', () => {
     lastName: 'donorLast',
     email: 'donor@donor.com',
     phone: '5555555555',
-    address: '366 Oaklawn Crescent',
-    causeId: '5dc35b4c9dd1000c9ddc1068'
+    address: '366 Oaklawn Crescent'
+  };
+
+  const fakeCause = {
+    name: 'Rami Aid',
+    location: 'Ottawa',
+    deleteable: true,
+    description: 'Charity for Rami because he needs money.'
   };
 
   let user = {
@@ -55,6 +61,26 @@ describe('Donor Api', () => {
       .string;
   });
 
+  it('POST a new cause', async () => {
+    const { body } = await request(app)
+      .post('/api/causes')
+      .set('Authorization', 'Bearer ' + user.token)
+      .field('name', fakeCause.name)
+      .field('location', fakeCause.location)
+      .field('deleteable', fakeCause.deleteable)
+      .field('description', fakeCause.description)
+      .expect(200);
+
+    expect(body).to.be.an('object').that.is.not.empty;
+
+    fakeCause._id = body._id;
+    fakeCause.createdDate = body.createdDate;
+    fakeCause.defaultDesign = body.defaultDesign;
+    fakeCause.imageID = body.imageID;
+    fakeCause.mediaURL = body.mediaURL;
+    fakeCause.donors = body.donors;
+  });
+
   it('Create New Donor', async () => {
     const { body } = await request(app)
       .post('/api/donors')
@@ -64,7 +90,7 @@ describe('Donor Api', () => {
       .field('email', donor.email)
       .field('address', donor.address)
       .field('phone', donor.phone)
-      .field('causeId', donor.causeId)
+      .field('causeId', fakeCause._id.toString())
       .expect(200);
 
     // Response data should generate an '_id', 'causes', 'createdDate' properties
@@ -317,5 +343,12 @@ describe('Donor Api', () => {
       donor.email,
       'get donor does not have an email property'
     ).that.is.not.empty.that.is.a.string;
+  });
+
+  it('DELETE the new fake cause', async () => {
+    await request(app)
+      .delete('/api/causes/' + fakeCause._id)
+      .set('Authorization', 'Bearer ' + user.token)
+      .expect(200);
   });
 });

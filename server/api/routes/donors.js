@@ -28,6 +28,14 @@ router.get('/:donorID', authorize, donorController.getDonorByID);
 router.patch('/:donorID', authorize, donorController.patchDonorByID);
 
 /*
+ * PATCH /api/donors/unsubscribe
+ * REQ.BODY:
+ * @param {string} email
+ * @param {string} causeId
+ */
+router.post('/unsubscribe', donorController.unsubscribeDonorByEmail);
+
+/*
  * DELETE /api/donors/:donorID
  */
 router.delete('/:donorID', authorize, donorController.deleteDonorByID);
