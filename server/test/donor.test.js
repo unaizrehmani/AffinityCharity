@@ -82,7 +82,6 @@ describe('Donor Api', () => {
   });
 
   it('Create New Donor', async () => {
-    setTimeout(1000);
     const { body } = await request(app)
       .post('/api/donors')
       .set('Authorization', 'Bearer ' + user.token)
@@ -91,7 +90,7 @@ describe('Donor Api', () => {
       .field('email', donor.email)
       .field('address', donor.address)
       .field('phone', donor.phone)
-      .field('causeId', fakeCause._id)
+      .field('causeId', fakeCause._id.toString())
       .expect(200);
 
     // Response data should generate an '_id', 'causes', 'createdDate' properties
