@@ -20,7 +20,9 @@ exports.insertDonor = async (req, res) => {
   const causeId = mongoose.Types.ObjectId(req.body.causeId);
   try {
     const cause = await Cause.findById(causeId);
-    if (cause === null) throw new Error('No cause with such ID.');
+    if (cause === null || cause === undefined) {
+      throw new Error('No cause with such ID.');
+    }
     // Donor already exists so add the cause to their subscription list
     else if ((await checkIfUserExists(email)) === true) {
       const donor = await Donor.findOne({ email: email });
@@ -45,7 +47,7 @@ exports.insertDonor = async (req, res) => {
       donor.causes.push(causeId);
       donor.createdDate = new Date();
       const result = await donor.save();
-      cause.donor.push(result._id);
+      cause.donors.push(result._id);
       await cause.save();
       res.status(200).send(result);
     }
