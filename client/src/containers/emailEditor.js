@@ -168,8 +168,15 @@ class Emailer extends Component {
 
           <EmailEditor
             minHeight={'600px'}
-            style={{
-              position: 'relative'
+            projectId={1071}
+            options={{
+              customCSS: [
+                `
+                  .blockbuilder-tools-panel .blockbuilder-branding {
+                      display: none;
+                  }
+                `
+              ]
             }}
             appearance={{
               theme: 'light'
