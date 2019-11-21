@@ -23,9 +23,9 @@ class ManageAgentsPage extends React.Component {
           field: 'email'
         },
         {
-          title: 'Causes',
-          field: 'causes',
-          type: 'numeric'
+          title: 'Admin',
+          field: 'isAdmin',
+          type: 'boolean'
         }
       ],
       data: undefined
@@ -47,24 +47,32 @@ class ManageAgentsPage extends React.Component {
       });
   };
 
+  setTableData = data => {
+    this.setState({ data });
+  };
+
+  renderTable = () => {
+    return this.state.data === undefined ? (
+      ''
+    ) : (
+      <Table
+        title={'Admin'}
+        userToken={this.props.session.userToken}
+        columns={this.state.columns}
+        data={this.state.data}
+        setTableData={this.setTableData}
+      />
+    );
+  };
+
   render() {
-    const renderTable =
-      this.state.data === undefined ? (
-        ''
-      ) : (
-        <Table
-          title={'Admin'}
-          columns={this.state.columns}
-          data={this.state.data}
-        />
-      );
     return (
       <Container>
         <Header>
           <h1>Manage Agents</h1>
           <hr />
         </Header>
-        {renderTable}
+        {this.renderTable()}
       </Container>
     );
   }

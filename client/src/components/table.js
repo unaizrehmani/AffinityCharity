@@ -1,45 +1,69 @@
 import React, { Component } from 'react';
 import colors from '../styles/colors';
 import MaterialTable from 'material-table';
+import axios from 'axios';
+import FormData from 'form-data';
+
+const { URL } = require('../util/baseURL');
+var generator = require('generate-password');
 
 class Table extends Component {
-  constructor(props) {
-    super(props);
-    let data = this.props.data;
-    let columns = this.props.columns;
-    this.state = {
-      data: data,
-      columns: columns
-    };
-  }
+  updateData = newData => {
+    const newDataParent = [...this.props.data];
+    newDataParent.push(newData);
+    this.props.setTableData(newDataParent);
+  };
+
+  onRowAdd = async newData => {
+    console.log('newData: ', newData);
+    try {
+      const { firstName, lastName, email } = newData;
+      const isAdmin = newData.isAdmin ? true : false;
+      const password = generator.generate({
+        length: 8,
+        numbers: true
+      });
+
+      const userData = new FormData();
+      userData.append('firstName', firstName);
+      userData.append('lastName', lastName);
+      userData.append('email', email);
+      userData.append('password', password);
+      userData.append('isAdmin', isAdmin);
+
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + this.props.userToken,
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      await axios.post(`${URL}/api/users`, userData, config);
+
+      this.updateData(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
     return (
       <div style={{ width: '90%' }}>
         <MaterialTable
           title={this.props.title}
-          columns={this.state.columns}
-          data={this.state.data}
+          options={{
+            pageSize: 10
+          }}
+          columns={this.props.columns}
+          data={this.props.data}
           style={{ color: colors.primaryAccent }}
           editable={{
-            onRowAdd: newData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    console.log(reject);
-                    const data = this.state.data;
-                    data.push(newData);
-                    this.setState({ data }, () => resolve());
-                  }
-                  resolve();
-                }, 1000);
-              }),
+            onRowAdd: this.onRowAdd,
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   {
                     console.log(reject);
-                    const data = this.state.data;
+                    const data = this.props.data;
                     const index = data.indexOf(oldData);
                     data[index] = newData;
                     this.setState({ data }, () => resolve());
@@ -52,7 +76,7 @@ class Table extends Component {
                 setTimeout(() => {
                   {
                     console.log(reject);
-                    let data = this.state.data;
+                    let data = this.props.data;
                     const index = data.indexOf(oldData);
                     data.splice(index, 1);
                     this.setState({ data }, () => resolve());
