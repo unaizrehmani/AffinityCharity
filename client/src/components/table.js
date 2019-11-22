@@ -61,9 +61,8 @@ class Table extends Component {
           'Content-Type': 'multipart/form-data'
         }
       };
-      await axios.post(`${URL}/api/users`, userData, config);
-
-      this.updateAddData(newData);
+      const result = await axios.post(`${URL}/api/users`, userData, config);
+      this.updateAddData(result.data);
     } catch (err) {
       console.log(err);
     }
