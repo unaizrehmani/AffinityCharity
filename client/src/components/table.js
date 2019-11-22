@@ -8,18 +8,13 @@ const { URL } = require('../util/baseURL');
 var generator = require('generate-password');
 
 class Table extends Component {
-  updateEditData = newData => {
+  updateEditData = async newData => {
     const data = [...this.props.data];
-    const index = data.findIndex(x => x._id === newData._id);
+    const index = data.findIndex(x => x._id === newData._id && !x.isAdmin);
+    const userID = newData._id;
     if (index !== -1) {
       data[index] = newData;
       this.props.setTableData(data);
-    }
-  };
-
-  onRowUpdate = async newData => {
-    const userID = newData._id;
-    try {
       const config = {
         headers: {
           Authorization: 'Bearer ' + this.props.userToken,
@@ -27,6 +22,11 @@ class Table extends Component {
         }
       };
       await axios.patch(`${URL}/api/users/${userID}`, newData, config);
+    }
+  };
+
+  onRowUpdate = async newData => {
+    try {
       this.updateEditData(newData);
     } catch (err) {
       console.log(err);
