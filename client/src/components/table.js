@@ -8,12 +8,6 @@ const { URL } = require('../util/baseURL');
 var generator = require('generate-password');
 
 class Table extends Component {
-  updateAddData = newData => {
-    const data = [...this.props.data];
-    data.push(newData);
-    this.props.setTableData(data);
-  };
-
   updateEditData = newData => {
     const data = [...this.props.data];
     const index = data.findIndex(x => x._id === newData._id);
@@ -37,6 +31,12 @@ class Table extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  updateAddData = newData => {
+    const data = [...this.props.data];
+    data.push(newData);
+    this.props.setTableData(data);
   };
 
   onRowAdd = async newData => {
@@ -69,6 +69,30 @@ class Table extends Component {
     }
   };
 
+  updateDeleteData = async oldData => {
+    const data = [...this.props.data];
+    const index = data.findIndex(x => x._id === oldData._id && !x.isAdmin);
+    if (index !== -1 && data.length > 1) {
+      data.splice(index, 1);
+      this.props.setTableData(data);
+      const userID = oldData._id;
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + this.props.userToken
+        }
+      };
+      await axios.delete(`${URL}/api/users/${userID}`, config);
+    }
+  }
+
+  onRowDelete = async oldData => {
+    try {
+      this.updateDeleteData(oldData);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   render() {
     return (
       <div style={{ width: '90%' }}>
@@ -83,19 +107,7 @@ class Table extends Component {
           editable={{
             onRowAdd: this.onRowAdd,
             onRowUpdate: this.onRowUpdate,
-            onRowDelete: oldData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    console.log(reject);
-                    let data = this.props.data;
-                    const index = data.indexOf(oldData);
-                    data.splice(index, 1);
-                    this.setState({ data }, () => resolve());
-                  }
-                  resolve();
-                }, 1000);
-              })
+            onRowDelete: this.onRowDelete
           }}
         />
       </div>
