@@ -3,9 +3,9 @@ import colors from '../styles/colors';
 import MaterialTable from 'material-table';
 import axios from 'axios';
 import FormData from 'form-data';
+import generator from 'generate-password';
 
 const { URL } = require('../util/baseURL');
-var generator = require('generate-password');
 
 class Table extends Component {
   updateEditData = async newData => {
@@ -31,6 +31,29 @@ class Table extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  sendEmail = async (newData, password) => {
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + this.props.userToken,
+        'Content-Type': 'application/json'
+      }
+    };
+    const { email, firstName } = newData;
+    const bodyParameters = {
+      email: email,
+      html: `
+        <h1> Congratulations ${firstName}! </h1>
+        <p> You have been invited by HCI to collaborate with your team!</p>
+        <p>Your credentials are as follows:</p>
+        <p>Username: ${email}</p>
+        <p>Password: ${password}</p>
+        <p>You can login at: <a>${URL}</a></p>
+      `,
+      subject: 'Congratulations for joining Human Concern International!'
+    };
+    await axios.post(`${URL}/api/causes/send-email`, bodyParameters, config);
   };
 
   updateAddData = newData => {
@@ -63,6 +86,7 @@ class Table extends Component {
       };
       const result = await axios.post(`${URL}/api/users`, userData, config);
       this.updateAddData(result.data);
+      this.sendEmail(newData, password);
     } catch (err) {
       console.log(err);
     }
@@ -82,35 +106,43 @@ class Table extends Component {
       };
       await axios.delete(`${URL}/api/users/${userID}`, config);
     }
-  }
+  };
 
   onRowDelete = async oldData => {
     try {
       this.updateDeleteData(oldData);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  renderTable = () => {
+    if (this.props.isAdmin) {
+      return (
+        <div style={{ width: '90%' }}>
+          <MaterialTable
+            title={this.props.title}
+            options={{
+              pageSize: 10
+            }}
+            columns={this.props.columns}
+            data={this.props.data}
+            style={{ color: colors.primaryAccent }}
+            editable={{
+              onRowAdd: this.onRowAdd,
+              onRowUpdate: this.onRowUpdate,
+              onRowDelete: this.onRowDelete
+            }}
+          />
+        </div>
+      );
+    } else {
+      return <div>You are not authorized to use the admin tab</div>;
+    }
+  };
 
   render() {
-    return (
-      <div style={{ width: '90%' }}>
-        <MaterialTable
-          title={this.props.title}
-          options={{
-            pageSize: 10
-          }}
-          columns={this.props.columns}
-          data={this.props.data}
-          style={{ color: colors.primaryAccent }}
-          editable={{
-            onRowAdd: this.onRowAdd,
-            onRowUpdate: this.onRowUpdate,
-            onRowDelete: this.onRowDelete
-          }}
-        />
-      </div>
-    );
+    return this.renderTable();
   }
 }
 

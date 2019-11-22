@@ -59,6 +59,7 @@ class ManageAgentsPage extends React.Component {
         title={'Admin'}
         userToken={this.props.session.userToken}
         columns={this.state.columns}
+        isAdmin={this.props.session.isAdmin}
         data={this.state.data}
         setTableData={this.setTableData}
       />

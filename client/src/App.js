@@ -12,8 +12,6 @@ import MenuButton from './components/menuButton';
 import ManageAgentsPage from './containers/manageAgentsPage';
 import { CreateCausePage } from './containers/createCausePage';
 import ProfilePage from './containers/profilePage';
-
-// To-Do Force new users to visit Login Page before allowing them to come to this component
 class App extends Component {
   constructor(props) {
     super(props);
