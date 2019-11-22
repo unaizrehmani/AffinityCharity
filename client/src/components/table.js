@@ -8,14 +8,38 @@ const { URL } = require('../util/baseURL');
 var generator = require('generate-password');
 
 class Table extends Component {
-  updateData = newData => {
-    const newDataParent = [...this.props.data];
-    newDataParent.push(newData);
-    this.props.setTableData(newDataParent);
+  updateAddData = newData => {
+    const data = [...this.props.data];
+    data.push(newData);
+    this.props.setTableData(data);
+  };
+
+  updateEditData = newData => {
+    const data = [...this.props.data];
+    const index = data.findIndex(x => x._id === newData._id);
+    if (index !== -1) {
+      data[index] = newData;
+      this.props.setTableData(data);
+    }
+  };
+
+  onRowUpdate = async newData => {
+    const userID = newData._id;
+    try {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + this.props.userToken,
+          'Content-Type': 'application/json'
+        }
+      };
+      await axios.patch(`${URL}/api/users/${userID}`, newData, config);
+      this.updateEditData(newData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onRowAdd = async newData => {
-    console.log('newData: ', newData);
     try {
       const { firstName, lastName, email } = newData;
       const isAdmin = newData.isAdmin ? true : false;
@@ -39,7 +63,7 @@ class Table extends Component {
       };
       await axios.post(`${URL}/api/users`, userData, config);
 
-      this.updateData(newData);
+      this.updateAddData(newData);
     } catch (err) {
       console.log(err);
     }
@@ -58,19 +82,7 @@ class Table extends Component {
           style={{ color: colors.primaryAccent }}
           editable={{
             onRowAdd: this.onRowAdd,
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    console.log(reject);
-                    const data = this.props.data;
-                    const index = data.indexOf(oldData);
-                    data[index] = newData;
-                    this.setState({ data }, () => resolve());
-                  }
-                  resolve();
-                }, 1000);
-              }),
+            onRowUpdate: this.onRowUpdate,
             onRowDelete: oldData =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
