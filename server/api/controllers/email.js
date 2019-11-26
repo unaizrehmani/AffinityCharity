@@ -24,6 +24,24 @@ exports.getEmails = async (req, res, next) => {
   }
 };
 
+exports.getApprovedEmails = async (req, res, next) => {
+  try {
+    const result = await Email.find({ isApproved: true }).populate('user');
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+exports.getUnapprovedEmails = async (req, res, next) => {
+  try {
+    const result = await Email.find({ isApproved: false }).populate('user');
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
 exports.getEmailById = async (req, res, next) => {
   try {
     const id = req.params.emailID;
@@ -36,8 +54,6 @@ exports.getEmailById = async (req, res, next) => {
 
 exports.patchEmailById = async (req, res, next) => {
   try {
-    console.log('body:', req.body);
-    console.log('params:', req.params);
     const id = req.params.emailID;
     const result = await Email.findByIdAndUpdate(
       id,
@@ -46,7 +62,6 @@ exports.patchEmailById = async (req, res, next) => {
         new: true
       }
     );
-    console.log('result: ', result);
     res.status(200).send(result);
   } catch (err) {
     res.status(400).send(err);

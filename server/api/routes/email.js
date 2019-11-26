@@ -11,6 +11,8 @@ router.use(sanitizeBody);
 
 router.post('/', emailController.insertEmail);
 router.get('/', emailController.getEmails);
+router.get('/approved', emailController.getApprovedEmails);
+router.get('/unapproved', emailController.getUnapprovedEmails);
 router.get('/:emailID', emailController.getEmailById);
 router.patch('/:emailID', emailController.patchEmailById);
 router.delete('/:emailID', emailController.deleteEmailById);
