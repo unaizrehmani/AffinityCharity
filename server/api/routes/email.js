@@ -10,6 +10,7 @@ router.use(multiPartMiddleware);
 router.use(sanitizeBody);
 
 router.post('/', emailController.insertEmail);
+router.patch('/approved', emailController.approveAndSendEmail);
 router.get('/', emailController.getEmails);
 router.get('/approved', emailController.getApprovedEmails);
 router.get('/unapproved', emailController.getUnapprovedEmails);

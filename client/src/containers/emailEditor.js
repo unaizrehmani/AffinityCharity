@@ -103,13 +103,9 @@ class Emailer extends Component {
         donorEmails: this.state.emails
       };
       axios
-        .post(
-          `${URL}/api/email/`,
-          body,
-          {
-            headers: { Authorization: 'Bearer ' + this.props.session.userToken }
-          }
-        )
+        .post(`${URL}/api/email/`, body, {
+          headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+        })
         .then(() => {
           this.setState({
             loading: false,
@@ -188,13 +184,17 @@ class Emailer extends Component {
           />
 
           <ButtonStyle>
-            <Button primary handleClick={() => {
-                this.props.session.isAdmin ? this.exportHtml() : this.sendDesign();
-              }}>
+            <Button
+              primary
+              handleClick={() => {
+                this.props.session.isAdmin
+                  ? this.exportHtml()
+                  : this.sendDesign();
+              }}
+            >
               <Icon name="send"></Icon>
               Send Email
             </Button>
-            
           </ButtonStyle>
           <Message error header={this.state.statusMessage} />
           <Message success header={this.state.statusMessage} />

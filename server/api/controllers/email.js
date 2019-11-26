@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Email = require('../models/email');
+const nodemailer = require('nodemailer');
 
 exports.insertEmail = async (req, res, next) => {
   try {
@@ -72,6 +73,44 @@ exports.deleteEmailById = async (req, res, next) => {
   try {
     const id = req.params.emailID;
     const result = await Email.findByIdAndDelete(id);
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+exports.approveAndSendEmail = async (req, res, next) => {
+  const user = process.env.CLIENT_EMAIL;
+  const pass = process.env.CLIENT_PASSWORD;
+  const { email, subject, html } = req.body;
+  const transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+      user,
+      pass
+    }
+  });
+  const mailOptions = {
+    bcc: email,
+    subject: subject,
+    text: 'Trouble viewing this email?',
+    html: `${html}`
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(400).send('Email could not be sent');
+    }
+    res.status(200).send('Email sent');
+  });
+  try {
+    const result = await Email.findByIdAndUpdate(
+      req.body.emailID,
+      { isApproved: true },
+      {
+        new: true
+      }
+    );
     res.status(200).send(result);
   } catch (err) {
     res.status(400).send(err);
