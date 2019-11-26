@@ -12,6 +12,7 @@ import MenuButton from './components/menuButton';
 import ManageAgentsPage from './containers/manageAgentsPage';
 import { CreateCausePage } from './containers/createCausePage';
 import ProfilePage from './containers/profilePage';
+import PendingEmail from './containers/pendingEmail';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,7 @@ class App extends Component {
             <Route exact path="/admin" component={ManageAgentsPage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/createcause" component={CreateCausePage} />
+            <Route exact path="/pending" component={PendingEmail} />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentArea>

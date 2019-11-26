@@ -31,6 +31,12 @@ class SidePanel extends Component {
               <h3>Home</h3>
             </NavItem>
           </Link>
+          <Link to="/pending">
+            <NavItem>
+              <Icon name="envelope" />
+              <h3>Pending</h3>
+            </NavItem>
+          </Link>
           <Link to="/subscribers">
             <NavItem>
               <Icon name="users" />
