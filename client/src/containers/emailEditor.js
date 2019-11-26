@@ -93,16 +93,19 @@ class Emailer extends Component {
     });
   };
 
-  saveDesign = () => {
+  sendDesign = () => {
     this.setState({ loading: true });
     window.unlayer.saveDesign(design => {
-      const { id } = this.props.match.params;
+      const body = {
+        userID: this.props.session.userID,
+        editorJSON: design,
+        subject: this.state.subject,
+        donorEmails: this.state.emails
+      };
       axios
-        .patch(
-          `${URL}/api/causes/${id}`,
-          {
-            defaultDesign: design
-          },
+        .post(
+          `${URL}/api/email/`,
+          body,
           {
             headers: { Authorization: 'Bearer ' + this.props.session.userToken }
           }
@@ -112,7 +115,7 @@ class Emailer extends Component {
             loading: false,
             success: true,
             error: false,
-            statusMessage: 'You have successfully saved the E-mail template'
+            statusMessage: 'You have successfully sent the E-mail for approval'
           });
         })
         .catch(err => {
@@ -185,14 +188,13 @@ class Emailer extends Component {
           />
 
           <ButtonStyle>
-            <Button primary handleClick={this.exportHtml}>
+            <Button primary handleClick={() => {
+                this.props.session.isAdmin ? this.exportHtml() : this.sendDesign();
+              }}>
               <Icon name="send"></Icon>
               Send Email
             </Button>
-            <Button primary handleClick={this.saveDesign}>
-              <Icon name="save"></Icon>
-              Save Email
-            </Button>
+            
           </ButtonStyle>
           <Message error header={this.state.statusMessage} />
           <Message success header={this.state.statusMessage} />
