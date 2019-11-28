@@ -66,7 +66,7 @@ const ContentArea = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (min-width: 992px) {
-    margin-left: 250px;
+    margin-left: 200px;
   }
 `;
 

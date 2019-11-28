@@ -65,7 +65,7 @@ class SidePanel extends Component {
 }
 
 const StyledSidePanel = styled.div`
-  width: 250px;
+  width: 200px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

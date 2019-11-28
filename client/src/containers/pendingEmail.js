@@ -40,9 +40,6 @@ class PendingEmail extends Component {
               emails: currData.donorEmails,
               subject: currData.subject,
               design: currData.editorJSON
-            },
-            () => {
-              if (window.unlayer) window.unlayer.loadDesign(this.state.design);
             }
           );
           return true;
@@ -178,14 +175,14 @@ class PendingEmail extends Component {
             }
           }}
         />
+        <Message error header={this.state.statusMessage} />
+        <Message success header={this.state.statusMessage} />
         <ButtonStyle>
           <Button primary handleClick={this.exportHtml}>
             <Icon name="check"></Icon>
             Approve Email
           </Button>
         </ButtonStyle>
-        <Message error header={this.state.statusMessage} />
-        <Message success header={this.state.statusMessage} />
       </Form>
     );
   };
@@ -214,7 +211,7 @@ class PendingEmail extends Component {
 
   render = () => {
     return (
-      <div>
+      <div style={{ padding: '20px' }}>
         <Header>
           <h2 className="ui center aligned icon header">
             <i className="circular icon envelope"> </i>
