@@ -44,7 +44,6 @@ class PendingEmail extends Component {
             () => {
               if (window.unlayer && this.state.design) {
                 window.unlayer.loadDesign({...this.state.design});
-
               }
             }
           );
