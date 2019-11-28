@@ -40,12 +40,6 @@ class PendingEmail extends Component {
               emails: currData.donorEmails,
               subject: currData.subject,
               design: currData.editorJSON
-            },
-            () => {
-              if (window.unlayer && this.state.design) {
-                window.unlayer.loadDesign({...this.state.design});
-
-              }
             }
           );
           return true;
@@ -63,9 +57,7 @@ class PendingEmail extends Component {
   };
 
   componentDidMount = async () => {
-    if(this.props.session.isAdmin) {
-      this.checkForUnapprovedEmails();
-    }
+    this.checkForUnapprovedEmails();
   };
 
   onLoad = () => {
