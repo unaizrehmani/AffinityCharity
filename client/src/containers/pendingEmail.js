@@ -62,9 +62,7 @@ class PendingEmail extends Component {
   };
 
   componentDidMount = async () => {
-    if(this.props.session.isAdmin) {
-      this.checkForUnapprovedEmails();
-    }
+    if(this.props.session.isAdmin) this.checkForUnapprovedEmails();
   };
 
   onLoad = () => {
