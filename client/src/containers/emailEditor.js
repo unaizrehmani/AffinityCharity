@@ -182,7 +182,8 @@ class Emailer extends Component {
             }}
             onLoad={this.onLoad}
           />
-
+          <Message error header={this.state.statusMessage} />
+          <Message success header={this.state.statusMessage} />
           <ButtonStyle>
             <Button
               primary
@@ -196,8 +197,6 @@ class Emailer extends Component {
               Send Email
             </Button>
           </ButtonStyle>
-          <Message error header={this.state.statusMessage} />
-          <Message success header={this.state.statusMessage} />
         </Form>
       </EmailerStyle>
     );
