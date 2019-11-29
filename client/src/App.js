@@ -13,6 +13,10 @@ import ManageAgentsPage from './containers/manageAgentsPage';
 import { CreateCausePage } from './containers/createCausePage';
 import ProfilePage from './containers/profilePage';
 import PendingEmail from './containers/pendingEmail';
+import subscriberPage from './containers/subscriberPage';
+import RegisterPageContainer from './containers/registerPage';
+import UnsubscribePageContainer from './containers/unsubscribePage';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +54,17 @@ class App extends Component {
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/createcause" component={CreateCausePage} />
             <Route exact path="/pending" component={PendingEmail} />
+            <Route exact path="/subscribers" component={subscriberPage} />
+            <Route
+              exact
+              path="/register/:id"
+              component={RegisterPageContainer}
+            />
+            <Route
+              exact
+              path="/unsubscribe/:id"
+              component={UnsubscribePageContainer}
+            />
             <Route component={NotFoundPage} />
           </Switch>
         </ContentArea>
