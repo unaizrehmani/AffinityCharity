@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "REACT_APP_ENV=production react-scripts start",
+    "start": "REACT_APP_ENV=development react-scripts start",
     "build": "react-scripts build",
     "test": "CI=true react-scripts test",
     "eject": "react-scripts eject",
@@ -39,6 +39,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-email-editor": "^1.0.0",
+    "react-html-parser": "^2.0.2",
     "react-multi-email": "^0.5.1",
     "react-redux": "^7.1.1",
     "react-responsive": "^8.0.1",

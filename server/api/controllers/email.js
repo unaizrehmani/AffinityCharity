@@ -106,7 +106,7 @@ exports.approveAndSendEmail = async (req, res, next) => {
   try {
     const result = await Email.findByIdAndUpdate(
       req.body.emailID,
-      { isApproved: true },
+      { isApproved: true, html },
       {
         new: true
       }
