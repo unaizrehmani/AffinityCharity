@@ -110,7 +110,7 @@ class RegisterPageContainer extends Component {
     if (this.props.session.isAdmin) {
       return 'Please enter the subscribers email to follow this cause';
     } else {
-      return `You have been invited by ${this.state.CauseCharity} to follow this
+      return `You have been invited by ${this.state.charity} to follow this
       cause. Please enter your email below to receive emails from Affinity
       when this cause is updated.`;
     }
@@ -153,8 +153,12 @@ class RegisterPageContainer extends Component {
           <CauseInfo>{this.state.causeDescription}</CauseInfo>
           <CauseInfoTitle>Location</CauseInfoTitle>
           <CauseInfo>{this.state.causeLocation}</CauseInfo>
-          <CauseInfoTitle>Subscribers</CauseInfoTitle>
-          <CauseInfo>{this.currentSubscribers()}</CauseInfo>
+          {this.props.session.isAdmin && (
+            <div>
+              <CauseInfoTitle>Subscribers</CauseInfoTitle>
+              <CauseInfo>{this.currentSubscribers()}</CauseInfo>
+            </div>
+          )}
         </CauseContainer>
         <FormContainer>
           <InputContainer>

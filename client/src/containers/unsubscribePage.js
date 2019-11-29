@@ -150,8 +150,12 @@ class UnsubscribePageContainer extends Component {
           <CauseInfo>{this.state.causeDescription}</CauseInfo>
           <CauseInfoTitle>Location</CauseInfoTitle>
           <CauseInfo>{this.state.causeLocation}</CauseInfo>
-          <CauseInfoTitle>Subscribers</CauseInfoTitle>
-          <CauseInfo>{this.currentSubscribers()}</CauseInfo>
+          {this.props.session.isAdmin && (
+            <div>
+              <CauseInfoTitle>Subscribers</CauseInfoTitle>
+              <CauseInfo>{this.currentSubscribers()}</CauseInfo>
+            </div>
+          )}
         </CauseContainer>
         <FormContainer>
           <InputContainer>
