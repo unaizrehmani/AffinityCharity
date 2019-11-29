@@ -5,10 +5,11 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
-import { Message } from 'semantic-ui-react';
+import { Message, List } from 'semantic-ui-react';
 import { URL } from '../util/baseURL';
+import { connect } from 'react-redux';
 
-export default class UnsubscribePageContainer extends Component {
+class UnsubscribePageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,21 +19,30 @@ export default class UnsubscribePageContainer extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  validateEmail = email => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  setCause = async () => {
     axios
       .get(`${URL}/api/causes/${this.state.causeId}`)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           causeName: data.name,
           causeImage: data.mediaURL,
           causeLocation: data.location,
-          causeDescription: data.description
+          causeDescription: data.description,
+          donors: data.donors
         });
       })
       .catch(error => {
         console.log('error ' + error);
       });
+  };
+
+  componentDidMount = async () => {
+    await this.setCause();
   };
 
   handleUserInput = e => {
@@ -42,28 +52,39 @@ export default class UnsubscribePageContainer extends Component {
   };
 
   submitEmail = () => {
-    axios
-      .post(
-        `${URL}/api/donors/unsubscribe/`,
-        {
-          email: this.state.email,
-          causeId: this.state.causeId
-        },
-        { 'Content-Type': 'application/json' }
-      )
-      .then(() => {
-        this.setState({
-          error: false,
-          success: true,
-          callbackMessage: 'You\'ve been unsubscribed successfully!'
+    const email = this.state.email;
+    if (this.validateEmail(email)) {
+      axios
+        .post(
+          `${URL}/api/donors/unsubscribe/`,
+          {
+            email: this.state.email,
+            causeId: this.state.causeId
+          },
+          { 'Content-Type': 'application/json' }
+        )
+        .then(() => {
+          this.setState({
+            error: false,
+            success: true,
+            callbackMessage: 'You\'ve been unsubscribed successfully!'
+          });
+          this.setCause();
+        })
+        .catch(({ response }) => {
+          this.setState({
+            callbackMessage: `${response.data.message}`,
+            error: true,
+            success: false
+          });
         });
-      }).catch(({ response }) => {
-        this.setState({
-          callbackMessage: `${response.data.message}`,
-          error: true,
-          success: false
-        });
+    } else {
+      this.setState({
+        callbackMessage: 'Please provide a valid email',
+        error: true,
+        success: false
       });
+    }
   };
 
   callbackMessage = () => {
@@ -73,6 +94,39 @@ export default class UnsubscribePageContainer extends Component {
       return <Message success header={this.state.callbackMessage} />;
     } else {
       return '';
+    }
+  };
+
+  currentSubscribers = () => {
+    return (
+      <List divided verticalAlign="middle">
+        {this.state.donors &&
+          this.state.donors.map((donor, index) => {
+            return (
+              <List.Item key={index}>
+                <List.Content>{donor.email}</List.Content>
+              </List.Item>
+            );
+          })}
+      </List>
+    );
+  };
+
+  informationMessage = () => {
+    if (this.props.session.isAdmin) {
+      return 'Please add the email of the subscriber below to unsubscribe them from this cause';
+    } else {
+      return `You are currently subscribed to this cause by ${this.state.charity}. To
+      unsubscribe please enter your email below to confirm being removed
+      from this causes mailing list.`;
+    }
+  };
+
+  inputTitle = () => {
+    if (this.props.session.isAdmin) {
+      return 'Subscriber email:';
+    } else {
+      return 'Your email:';
     }
   };
 
@@ -87,11 +141,7 @@ export default class UnsubscribePageContainer extends Component {
           />
           <h2>Affinity</h2>
         </Banner>
-        <Information>
-          You are currently subscribed to this cause by {this.state.charity}. To
-          unsubscribe please enter your email below to confirm being removed
-          from this causes mailing list.
-        </Information>
+        <Information>{this.informationMessage()}</Information>
         <CauseContainer>
           <CauseTitle>{this.state.causeName}</CauseTitle>
           <CauseCharity>Managed By {this.state.charity}</CauseCharity>
@@ -100,10 +150,12 @@ export default class UnsubscribePageContainer extends Component {
           <CauseInfo>{this.state.causeDescription}</CauseInfo>
           <CauseInfoTitle>Location</CauseInfoTitle>
           <CauseInfo>{this.state.causeLocation}</CauseInfo>
+          <CauseInfoTitle>Subscribers</CauseInfoTitle>
+          <CauseInfo>{this.currentSubscribers()}</CauseInfo>
         </CauseContainer>
         <FormContainer>
           <InputContainer>
-            <InputTitle>Your Email</InputTitle>
+            <InputTitle>{this.inputTitle()}</InputTitle>
             <Input
               id="input-email"
               name="email"
@@ -214,3 +266,9 @@ const InputTitle = styled.h5`
   width: 100%;
   margin: 0px;
 `;
+
+const mapStateToProps = state => ({
+  session: state.authentication
+});
+
+export default connect(mapStateToProps)(UnsubscribePageContainer);
