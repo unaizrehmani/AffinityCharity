@@ -61,11 +61,9 @@ export default class RegisterPageContainer extends Component {
           success: true,
           error: false
         });
-      })
-      .catch(() => {
+      }).catch(({ response }) => {
         this.setState({
-          callbackMessage:
-            'There has been a server error, please try again in a few seconds',
+          callbackMessage: `${response.data.message}`,
           error: true,
           success: false
         });

@@ -28,6 +28,8 @@ exports.insertDonor = async (req, res) => {
       // Don't add duplicate causes to their subscription list
       if (!donor.causes.includes(causeId)) {
         donor.causes.push(causeId);
+      } else {
+        throw new Error('Donor already subscribed with this cause');
       }
       // Add to causes donor list if its not already there
       cause.donors.push(donor._id);
@@ -51,8 +53,8 @@ exports.insertDonor = async (req, res) => {
       res.status(200).send(result);
     }
   } catch (err) {
-    console.log(err);
-    res.status(400).json({ message: err.message });
+    console.log(err.message);
+    res.status(400).send({ message: err.message });
   }
 };
 
@@ -78,7 +80,7 @@ exports.unsubscribeDonorByEmail = async (req, res, next) => {
   const { email, causeId } = req.body;
   try {
     const donor = await Donor.findOne({ email: email });
-    if (!donor) throw new Error('No user found.');
+    if (!donor) throw new Error('This email is not subscribed to this cause');
     // Remove causeId (type ObjectID) from donors subscription list
     donor.causes = donor.causes.filter(item => item.toString() !== causeId);
     // Remove email from causes donor list

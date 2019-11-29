@@ -57,12 +57,11 @@ export default class UnsubscribePageContainer extends Component {
           success: true,
           callbackMessage: 'You\'ve been unsubscribed successfully!'
         });
-      })
-      .catch(() => {
+      }).catch(({ response }) => {
         this.setState({
+          callbackMessage: `${response.data.message}`,
           error: true,
-          success: false,
-          callbackMessage: 'There was an error trying to unsubscribe!'
+          success: false
         });
       });
   };
