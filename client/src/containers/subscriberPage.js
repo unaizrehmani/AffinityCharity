@@ -70,9 +70,15 @@ class SubscriberPage extends Component {
             Subscribers
           </h2>
         </Header>
-        <Form loading={this.state.loading}>
-          {this.state.data && this.listFloated()}
-        </Form>
+        {this.props.session.isAdmin ? (
+          <Form loading={this.state.loading}>
+            {this.state.data && this.listFloated()}
+          </Form>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            You are not authorized to edit subscribers
+          </div>
+        )}
       </SubscriberPageStyle>
     );
   };
