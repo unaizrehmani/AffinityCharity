@@ -5,6 +5,7 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
+import { Message } from 'semantic-ui-react';
 import { URL } from '../util/baseURL';
 
 export default class UnsubscribePageContainer extends Component {
@@ -50,14 +51,29 @@ export default class UnsubscribePageContainer extends Component {
         },
         { 'Content-Type': 'application/json' }
       )
-      .then(response => {
-        console.log(response.data);
-        alert('You\'ve been unsubscribed successfully!');
-      })
-      .catch(({ response }) => {
-        console.log('Error from API:', response.data.message);
-        alert('There was a error trying to unsubscribe!');
+      .then(() => {
+        this.setState({
+          error: false,
+          success: true,
+          callbackMessage: 'You\'ve been unsubscribed successfully!'
+        });
+      }).catch(({ response }) => {
+        this.setState({
+          callbackMessage: `${response.data.message}`,
+          error: true,
+          success: false
+        });
       });
+  };
+
+  callbackMessage = () => {
+    if (this.state.error) {
+      return <Message error header={this.state.callbackMessage} />;
+    } else if (this.state.success) {
+      return <Message success header={this.state.callbackMessage} />;
+    } else {
+      return '';
+    }
   };
 
   render() {
@@ -99,6 +115,7 @@ export default class UnsubscribePageContainer extends Component {
               noLabel={true}
             />
           </InputContainer>
+          {this.callbackMessage()}
           <Button
             id="button-subscribe"
             title="Unsubscribe"

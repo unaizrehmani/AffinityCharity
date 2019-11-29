@@ -5,6 +5,7 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
+import { Message } from 'semantic-ui-react';
 const { URL } = require('../util/baseURL');
 
 export default class RegisterPageContainer extends Component {
@@ -14,18 +15,10 @@ export default class RegisterPageContainer extends Component {
       email: '',
       causeId: this.props.match.params.id,
       charity: 'HCI',
-      //  Template Cause Description
-      causeDescription: `The people of Yemen are subject to the turbulent conditions in the region. Internal conflict and military actions have created a state of disorder and chaos. The Yemeni people suffer from a lack of basic items and necessary medical supplies.
-
-      The current circumstances have made drought and famine inevitable in the near future, according to experts. Many relief camps are overcrowded and undersupplied.
-      
-      The number of active schools and hospitals has dwindled due to conflict, disuse and lack of supplies. Many children do not have access to education and medical aid.
-      
-      Human Concern International is working hard to maintain a prominent presence in the region. Supplying the victims of the conflict with food security, medicinal needs and educational provisions. Offering a complete annual package to children in dire need of support.
-      
-      This is an urgent plea to contribute towards effectively supporting the people and help give relief where needed.
-      
-      Your help is a big part of making a big change in the world.`
+      causeDescription: '',
+      callbackMessage: '',
+      error: false,
+      success: false
     };
   }
 
@@ -37,8 +30,8 @@ export default class RegisterPageContainer extends Component {
         this.setState({
           causeName: data.name,
           causeImage: data.mediaURL,
-          causeLocation: data.location
-          // causeDescription: data.description
+          causeLocation: data.location,
+          causeDescription: data.description
         });
       })
       .catch(error => {
@@ -62,13 +55,28 @@ export default class RegisterPageContainer extends Component {
         },
         { 'Content-Type': 'application/json' }
       )
-      .then(response => {
-        console.log(response.data);
-        alert('You\'ve been subscribed successfully!');
-      })
-      .catch(error => {
-        console.log('error ' + error);
+      .then(() => {
+        this.setState({
+          callbackMessage: 'You\'ve been subscribed successfully!',
+          success: true,
+          error: false
+        });
+      }).catch(({ response }) => {
+        this.setState({
+          callbackMessage: `${response.data.message}`,
+          error: true,
+          success: false
+        });
       });
+  };
+
+  callbackMessage = () => {
+    if (this.state.error) {
+      return <Message error header={this.state.callbackMessage} />;
+    } else if (this.state.success) {
+      return <Message success header={this.state.callbackMessage} />;
+    }
+    return '';
   };
 
   render() {
@@ -110,6 +118,7 @@ export default class RegisterPageContainer extends Component {
               noLabel={true}
             />
           </InputContainer>
+          {this.callbackMessage()}
           <Button
             id="button-subscribe"
             title="Subscribe"
