@@ -11,6 +11,10 @@ const emailPostSchema = new Schema({
     type: String,
     required: false
   },
+  html: {
+    type: String,
+    required: false
+  },
   donorEmails: [
     {
       type: Schema.Types.String,

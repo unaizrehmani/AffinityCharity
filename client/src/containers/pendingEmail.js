@@ -43,7 +43,7 @@ class PendingEmail extends Component {
             },
             () => {
               if (window.unlayer && this.state.design) {
-                window.unlayer.loadDesign({...this.state.design});
+                window.unlayer.loadDesign({ ...this.state.design });
               }
             }
           );
@@ -62,7 +62,7 @@ class PendingEmail extends Component {
   };
 
   componentDidMount = async () => {
-    if(this.props.session.isAdmin) this.checkForUnapprovedEmails();
+    if (this.props.session.isAdmin) this.checkForUnapprovedEmails();
   };
 
   onLoad = () => {
@@ -99,13 +99,17 @@ class PendingEmail extends Component {
         axios
           .patch(`${URL}/api/email/approved`, bodyParameters, config)
           .then(() => {
-            this.setState({
-              loading: false,
-              success: true,
-              error: false,
-              statusMessage: 'Email successfully sent!'
-            });
-            this.checkForUnapprovedEmails();
+            this.setState(
+              {
+                loading: false,
+                success: true,
+                error: false,
+                statusMessage: 'Email successfully sent!'
+              },
+              () => {
+                this.checkForUnapprovedEmails();
+              }
+            );
           })
           .catch(error => {
             console.log(error);
