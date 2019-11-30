@@ -5,25 +5,43 @@ import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import PostCard from '../components/postCard';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 class CausePage extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      causeId: this.props.match.params.id,
+      cause: null,
+      redirect: false,
+    };
+  }
+
+  componentDidMount(){
+    const cause = this.props.causes.find( (cause) => cause._id === this.state.causeId)
+    this.setState({
+      cause: cause
+    })
+  }
+
+  handleClick = () => {
+    this.setState({ redirect: true });
+  };
+
+  renderCausePage = () => {
     return (
       <CausePageWrapper>
         <CauseBanner>
           <CircularImage
-            image={
-              'https://i1.wp.com/haitiorphanfoundation.com/wp-content/uploads/2018/02/Homepage-Cutout.png?zoom=2&fit=956%2C1038'
-            }
+            image={this.state.cause ? this.state.cause.mediaURL : ''}
             style={{
               border: '2px solid #E35268',
               height: '200px',
               width: '200px'
             }}
           />
-          <CauseTitle>Jane Doe</CauseTitle>
-          <CauseLocation>Dhaka, Bangladesh</CauseLocation>
+          <CauseTitle>{this.state.cause ? this.state.cause.name : ''}</CauseTitle>
+          <CauseLocation>{this.state.cause ? this.state.cause.location : ''}</CauseLocation>
           <CircularImage
             image={
               'https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png'
@@ -31,8 +49,8 @@ class CausePage extends React.Component {
             style={{ height: '50px', width: '50px' }}
           />
           <ButtonWrapper>
-            <Button title="Create Post" primary></Button>
-            <Button title="Reports" primary></Button>
+            <Button title="Create Post" primary handleClick={this.handleClick}></Button>
+            <Button title="Edit Cause" primary></Button>
           </ButtonWrapper>
         </CauseBanner>
         <CauseContent>
@@ -43,15 +61,15 @@ class CausePage extends React.Component {
       </CausePageWrapper>
     );
   }
+
+  render() {
+    return this.state.redirect ? (
+      <Redirect push to={'/editor/' + this.state.causeId} />
+    ) : (
+      this.renderCausePage()
+    );
+  }
 }
-
-const mapStateToProps = state => ({
-  session: state.authentication
-});
-
-CircularImage.propTypes = {
-  cause: PropTypes.object
-};
 
 const CausePageWrapper = styled.div`
   display: flex;
@@ -95,5 +113,10 @@ const Separator = styled.div`
   width: 3px;
   background-color: ${colors.primaryAccent};
 `;
+
+const mapStateToProps = state => ({
+  session: state.authentication,
+  causes: state.cause.causes
+});
 
 export default connect(mapStateToProps)(CausePage);

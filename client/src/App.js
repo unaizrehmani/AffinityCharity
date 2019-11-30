@@ -49,7 +49,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/editor/:id" component={Emailer} />
-            <Route exact path="/cause" component={CausePage} />
+            <Route exact path="/cause/:id" component={CausePage} />
             <Route exact path="/admin" component={ManageAgentsPage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/createcause" component={CreateCausePage} />
