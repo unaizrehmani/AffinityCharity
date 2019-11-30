@@ -5,10 +5,11 @@ import colors from '../styles/colors';
 import Input from '../components/input';
 import Button from '../components/button';
 import AffinityLogo from '../images/logo.svg';
-import { Message } from 'semantic-ui-react';
-const { URL } = require('../util/baseURL');
+import { Message, List } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { URL } from '../util/baseURL';
 
-export default class RegisterPageContainer extends Component {
+class RegisterPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,21 +23,45 @@ export default class RegisterPageContainer extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  currentSubscribers = () => {
+    return (
+      <List divided verticalAlign="middle">
+        {this.state.donors &&
+          this.state.donors.map((donor, index) => {
+            return (
+              <List.Item key={index}>
+                <List.Content>{donor.email}</List.Content>
+              </List.Item>
+            );
+          })}
+      </List>
+    );
+  };
+
+  validateEmail = email => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  setCause = async () => {
     axios
       .get(`${URL}/api/causes/${this.state.causeId}`)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           causeName: data.name,
           causeImage: data.mediaURL,
           causeLocation: data.location,
-          causeDescription: data.description
+          causeDescription: data.description,
+          donors: data.donors
         });
       })
       .catch(error => {
         console.log('error ' + error);
       });
+  };
+
+  componentDidMount = async () => {
+    await this.setCause();
   };
 
   handleUserInput = e => {
@@ -46,28 +71,49 @@ export default class RegisterPageContainer extends Component {
   };
 
   submitEmail = () => {
-    axios
-      .post(
-        `${URL}/api/donors`,
-        {
-          email: this.state.email,
-          causeId: this.state.causeId
-        },
-        { 'Content-Type': 'application/json' }
-      )
-      .then(() => {
-        this.setState({
-          callbackMessage: 'You\'ve been subscribed successfully!',
-          success: true,
-          error: false
+    const email = this.state.email;
+    if (this.validateEmail(email)) {
+      axios
+        .post(
+          `${URL}/api/donors`,
+          {
+            email: this.state.email,
+            causeId: this.state.causeId
+          },
+          { 'Content-Type': 'application/json' }
+        )
+        .then(() => {
+          this.setState({
+            callbackMessage: 'You\'ve been subscribed successfully!',
+            success: true,
+            error: false
+          });
+          this.setCause();
+        })
+        .catch(({ response }) => {
+          this.setState({
+            callbackMessage: `${response.data.message}`,
+            error: true,
+            success: false
+          });
         });
-      }).catch(({ response }) => {
-        this.setState({
-          callbackMessage: `${response.data.message}`,
-          error: true,
-          success: false
-        });
+    } else {
+      this.setState({
+        callbackMessage: 'Please provide a valid email',
+        error: true,
+        success: false
       });
+    }
+  };
+
+  informationMessage = () => {
+    if (this.props.session.isAdmin) {
+      return 'Please enter the subscribers email to follow this cause';
+    } else {
+      return `You have been invited by ${this.state.charity} to follow this
+      cause. Please enter your email below to receive emails from Affinity
+      when this cause is updated.`;
+    }
   };
 
   callbackMessage = () => {
@@ -77,6 +123,14 @@ export default class RegisterPageContainer extends Component {
       return <Message success header={this.state.callbackMessage} />;
     }
     return '';
+  };
+
+  inputTitle = () => {
+    if (this.props.session.isAdmin) {
+      return 'Subscriber email:';
+    } else {
+      return 'Your email:';
+    }
   };
 
   render() {
@@ -90,11 +144,7 @@ export default class RegisterPageContainer extends Component {
           />
           <h2>Affinity</h2>
         </Banner>
-        <Information>
-          You have been invited by {this.state.CauseCharity} to follow this
-          cause. Please enter your email below to receive emails from Affinity
-          when this cause is updated.
-        </Information>
+        <Information>{this.informationMessage()}</Information>
         <CauseContainer>
           <CauseTitle>{this.state.causeName}</CauseTitle>
           <CauseCharity>Managed By {this.state.charity}</CauseCharity>
@@ -103,10 +153,16 @@ export default class RegisterPageContainer extends Component {
           <CauseInfo>{this.state.causeDescription}</CauseInfo>
           <CauseInfoTitle>Location</CauseInfoTitle>
           <CauseInfo>{this.state.causeLocation}</CauseInfo>
+          {this.props.session.isAdmin && (
+            <div>
+              <CauseInfoTitle>Subscribers</CauseInfoTitle>
+              <CauseInfo>{this.currentSubscribers()}</CauseInfo>
+            </div>
+          )}
         </CauseContainer>
         <FormContainer>
           <InputContainer>
-            <InputTitle>Your Email</InputTitle>
+            <InputTitle>{this.inputTitle()}</InputTitle>
             <Input
               id="input-email"
               name="email"
@@ -217,3 +273,9 @@ const InputTitle = styled.h5`
   width: 100%;
   margin: 0px;
 `;
+
+const mapStateToProps = state => ({
+  session: state.authentication
+});
+
+export default connect(mapStateToProps)(RegisterPageContainer);
