@@ -29,28 +29,30 @@ class CausePage extends React.Component {
       });
       console.log('result: ', result);
       const { data } = result;
-      const approvedEmails = data.filter(x => {if(x.cause && x.cause._id === this.props.match.params.id) return x})
+      const approvedEmails = data.filter(x => {
+        if (x.cause && x.cause._id === this.props.match.params.id) return x;
+      });
       this.setState({
         approvedEmails
-      })
+      });
     } catch (err) {
       console.log(err);
     }
     this.setState({
       cause: cause
     });
-  }
+  };
 
   handleClick = () => {
     this.setState({ redirect: true });
   };
 
   renderCauseContent = () => {
-    if(this.state.approvedEmails.length > 0) {
-      return <RenderHTML htmlString={this.state.approvedEmails[0].html} />
+    if (this.state.approvedEmails.length > 0) {
+      return <RenderHTML htmlString={this.state.approvedEmails[0].html} />;
     }
-    return <div>No posts have ever been made</div>
-  }
+    return <div>No posts have ever been made</div>;
+  };
 
   renderCausePage = () => {
     return (
@@ -85,11 +87,7 @@ class CausePage extends React.Component {
             <Button title="Edit Cause" primary></Button>
           </ButtonWrapper>
         </CauseBanner>
-        <CauseContent>
-            {
-              this.renderCauseContent()
-            }
-        </CauseContent>
+        <CauseContent>{this.renderCauseContent()}</CauseContent>
       </CausePageWrapper>
     );
   };
