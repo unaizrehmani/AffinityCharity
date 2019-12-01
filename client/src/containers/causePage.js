@@ -4,9 +4,7 @@ import colors from '../styles/colors';
 import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
-import PostCard from '../components/postCard';
 import { Redirect } from 'react-router-dom';
-import { getEmails } from '../redux/actions/email';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -65,8 +63,7 @@ class CausePage extends React.Component {
           </ButtonWrapper>
         </CauseBanner>
         <CauseContent>
-          {/* <PostCard />
-          <Separator /> */}
+          {/* Email History Here*/}
         </CauseContent>
       </CausePageWrapper>
     );
@@ -117,12 +114,12 @@ const ButtonWrapper = styled.div`
   display: flex;
 `;
 
-const Separator = styled.div`
-  margin: 10px 0px;
-  height: 50px;
-  width: 3px;
-  background-color: ${colors.primaryAccent};
-`;
+// const Separator = styled.div`
+//   margin: 10px 0px;
+//   height: 50px;
+//   width: 3px;
+//   background-color: ${colors.primaryAccent};
+// `;
 
 const mapStateToProps = state => ({
   session: state.authentication,
