@@ -4,15 +4,21 @@ import {
   CREATE_CAUSE_FAILURE,
   GET_CAUSES_BEGIN,
   GET_CAUSES_SUCCESS,
-  GET_CAUSES_FAILURE
+  GET_CAUSES_FAILURE,
+  GET_USER_EMAIL_BEGIN,
+  GET_USER_EMAIL_SUCCESS,
+  GET_USER_EMAIL_FAILURE
 } from '../actions/cause';
 
 const initialState = {
   isCreatingCause: false,
+  createCauseError: undefined,
   isGettingCauses: false,
   getCausesError: undefined,
-  createCauseError: undefined,
-  causes: []
+  isGettingUserEmail: false,
+  getUserEmailError: undefined,
+  causes: [], 
+  email: undefined
 };
 
 const causeReducer = function(state = initialState, { type, payload }) {
@@ -62,6 +68,28 @@ const causeReducer = function(state = initialState, { type, payload }) {
           causes: []
         }
       };
+      case GET_USER_EMAIL_BEGIN:
+        return {
+          ...state,
+          ...{ isGettingUserEmail: true, getUserEmailError: undefined }
+        };
+      case GET_USER_EMAIL_SUCCESS:
+        return {
+          ...state,
+          ...{
+            isGettingUserEmail: false,
+            getUserEmailError: undefined,
+            email: payload.data.email
+          }
+        };
+      case GET_USER_EMAIL_FAILURE:
+        return {
+          ...state,
+          ...{
+            isGettingUserEmail: false,
+            getUserEmailError: payload.error
+          }
+        };
     default:
       return state;
   }

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
+// import Modal from 'react-modal';
+import { Modal } from 'semantic-ui-react';
+import { getUserEmail } from '../redux/actions/cause';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -12,22 +15,60 @@ class CausePage extends React.Component {
     this.state = {
       causeId: this.props.match.params.id,
       cause: null,
-      redirect: false
+      redirect: false,
+      showModal: false,
+      emails: [],
+      loadingEmails: false
     };
   }
 
   componentDidMount() {
+    // console.log(this.props);
+    // Modal.setAppElement('body');
+
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
+
     this.setState({
-      cause: cause
+      cause: cause,
+      showModal: false, 
+      emails: [],
+      loadingEmails: false
     });
+
+    // this.handleClickAgent();
   }
 
-  handleClick = () => {
+  handleClickEmail = () => {
     this.setState({ redirect: true });
   };
+
+  handleClickAgent = async () => {
+    this.setState({ loadingEmails: true });
+    this.setState({ showModal: true });
+
+    const userIDs = this.state.cause.users
+    console.log(userIDs);
+
+    var userEmails = [];
+    await userIDs.map(id => {
+      this.getUserEmail(id).then( res => {
+        this.setState({ emails: userEmails.push(res) });
+      });
+    });
+    console.log(userEmails);
+    this.setState({ loadingEmails: false });
+  };
+
+  getUserEmail = async (userID) => {
+    const result = await this.props.dispatch(getUserEmail(userID, this.props.session.userToken))
+    return result.data.email;
+  };
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
 
   renderCausePage = () => {
     return (
@@ -57,10 +98,27 @@ class CausePage extends React.Component {
             <Button
               title="Create Email"
               primary
-              handleClick={this.handleClick}
+              handleClick={this.handleClickEmail}
             ></Button>
             <Button title="Edit Cause" primary></Button>
+            <Button
+              title="Edit Agents"
+              primary
+              handleClick={this.handleClickAgent}
+              disabled={this.state.loadingEmails}
+            ></Button>
           </ButtonWrapper>
+          <Modal
+            open={this.state.showModal}
+            onClose={() => this.setState({ showModal: false })}
+            closeIcon={true}
+          >
+            <Modal.Content>
+              {this.state.loadingEmails ? 
+              <i className="red massive notched circle loading icon"></i> :
+              <span>{this.state.emails[0]}</span>}
+            </Modal.Content>
+          </Modal>
         </CauseBanner>
         <CauseContent>
           {/* Email History Here*/}

@@ -11,6 +11,11 @@ export const GET_CAUSES_BEGIN = 'GET_CAUSES_BEGIN';
 export const GET_CAUSES_SUCCESS = 'GET_CAUSES_SUCCESS';
 export const GET_CAUSES_FAILURE = 'GET_CAUSES_FAILURE';
 
+export const GET_USER_EMAIL = 'GET_USER_EMAIL';
+export const GET_USER_EMAIL_BEGIN = 'GET_USER_EMAIL_BEGIN';
+export const GET_USER_EMAIL_SUCCESS = 'GET_USER_EMAIL_SUCCESS';
+export const GET_USER_EMAIL_FAILURE = 'GET_USER_EMAIL_FAILURE';
+
 const { URL } = require('../../util/baseURL');
 
 // Action Creators
@@ -30,6 +35,27 @@ export function createCause(formData, userToken) {
       return request;
     } catch (error) {
       dispatch(createCauseFailure(error));
+      return error;
+    }
+  };
+}
+
+export function getUserEmail(userID, userToken) {
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + userToken,
+      'Content-Type': 'multipart/form-data'
+    }
+  };
+
+  return async dispatch => {
+    dispatch(getUserEmailBegin());
+    try {
+      const request = await axios.get(`${URL}/api/users/${userID}`, config);
+      dispatch(getUserEmailSuccess(request.data));
+      return request;
+    } catch (error) {
+      dispatch(getUserEmailFailure(error));
       return error;
     }
   };
@@ -75,5 +101,19 @@ const getCausesSuccess = data => ({
 
 const getCausesFailure = error => ({
   type: GET_CAUSES_FAILURE,
+  payload: { error }
+});
+
+const getUserEmailBegin = () => ({
+  type: GET_USER_EMAIL_BEGIN
+});
+
+const getUserEmailSuccess = data => ({
+  type: GET_USER_EMAIL_SUCCESS,
+  payload: { data }
+});
+
+const getUserEmailFailure = error => ({
+  type: GET_USER_EMAIL_FAILURE,
   payload: { error }
 });
