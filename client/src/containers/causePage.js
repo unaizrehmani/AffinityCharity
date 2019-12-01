@@ -32,7 +32,7 @@ class CausePage extends React.Component {
 
     this.setState({
       cause: cause,
-      showModal: false, 
+      showModal: false,
       emails: [],
       loadingEmails: false
     });
@@ -49,24 +49,29 @@ class CausePage extends React.Component {
     this.setState({ showModal: true });
 
     const userIDs = this.state.cause.users
-    console.log(userIDs);
-
-    var userEmails = [];
-    await userIDs.map(id => {
-      this.getUserEmail(id).then( res => {
-        this.setState({ emails: userEmails.push(res) });
-      });
-    });
+    console.log('USER IDS:', userIDs);
+    let userEmails = [];
+    console.log('BEGINNING LOOP')
+    await Promise.all(userIDs.map(async id => {
+      // await this.getUserEmail(id).then( res => {
+      //   console.log('Got a email!', res);
+      //   userEmails.push(res);
+      // });
+      let res = await this.getUserEmail(id)
+      console.log('Got a email!', res);
+      return userEmails.push(res);
+    }));
+    console.log('FINISHED LOOP')
     console.log(userEmails);
-    this.setState({ loadingEmails: false });
+    this.setState({ emails: userEmails, loadingEmails: false });
   };
 
   getUserEmail = async (userID) => {
     const result = await this.props.dispatch(getUserEmail(userID, this.props.session.userToken))
     return result.data.email;
   };
-  
-  handleCloseModal () {
+
+  handleCloseModal() {
     this.setState({ showModal: false });
   }
 
@@ -114,9 +119,9 @@ class CausePage extends React.Component {
             closeIcon={true}
           >
             <Modal.Content>
-              {this.state.loadingEmails ? 
-              <i className="red massive notched circle loading icon"></i> :
-              <span>{this.state.emails[0]}</span>}
+              {this.state.loadingEmails ?
+                <i className="red massive notched circle loading icon"></i> :
+                <span>{this.state.emails[0]}</span>}
             </Modal.Content>
           </Modal>
         </CauseBanner>
@@ -131,8 +136,8 @@ class CausePage extends React.Component {
     return this.state.redirect ? (
       <Redirect push to={'/editor/' + this.state.causeId} />
     ) : (
-      this.renderCausePage()
-    );
+        this.renderCausePage()
+      );
   }
 }
 
