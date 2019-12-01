@@ -50,13 +50,17 @@ export class CreateCausePageContainer extends React.Component {
 
     this.props
       .dispatch(createCause(formData, this.props.session.userToken))
-      .then(() => {
+      .then((result) => {
+        console.log(result.data._id);
+        let redirectUrl = '/cause/'.concat(result.data._id);
+        console.log(redirectUrl);
         this.setState({ loading: false });
         if (
           !this.props.isCreatingCause &&
           this.props.creatingCauseError === undefined
         ) {
-          this.props.history.push('/');
+          // redirect to new created cause
+          this.props.history.push(redirectUrl);
         }
       });
   };
