@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import colors from '../styles/colors';
+import { Header } from 'semantic-ui-react';
 import Table from '../components/table';
 const { URL } = require('../util/baseURL');
 class ManageAgentsPage extends React.Component {
@@ -69,37 +69,22 @@ class ManageAgentsPage extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
-          <h1>Manage Agents</h1>
-          <hr />
-        </Header>
+        <HeaderStyle>
+          <Header>
+            <h2 className="ui center aligned icon header">
+              <i className="circular icon chess king"> </i>
+              Admin
+            </h2>
+          </Header>
+        </HeaderStyle>
         {this.renderTable()}
       </Container>
     );
   }
 }
 
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: ${colors.primary};
-  margin-bottom: 20px;
-  margin-top: 50px;
-  h1 {
-    font-size: 40px !important;
-  }
-  hr {
-    height: 0.2rem;
-    width: 80%;
-    background: ${colors.primary};
-    border: none;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.2rem;
-  }
+const HeaderStyle = styled.div`
+  margin-top: 20px;
 `;
 
 const Container = styled.div`

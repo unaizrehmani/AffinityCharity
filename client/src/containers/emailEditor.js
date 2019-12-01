@@ -3,7 +3,7 @@ import EmailEditor from 'react-email-editor';
 import styled from 'styled-components';
 import axios from 'axios';
 import MultipleEmail from '../components/multipleEmail';
-import { Icon, Form, Message } from 'semantic-ui-react';
+import { Icon, Form, Message, Header } from 'semantic-ui-react';
 import Button from '../components/button';
 import { connect } from 'react-redux';
 const { URL } = require('../util/baseURL');
@@ -146,6 +146,12 @@ class Emailer extends Component {
   render = () => {
     return (
       <EmailerStyle>
+        <Header>
+          <h2 className="ui center aligned icon header">
+            <i className="circular icon envelope"> </i>
+            Email Editor
+          </h2>
+        </Header>
         <Form
           loading={this.state.loading}
           error={this.state.error}

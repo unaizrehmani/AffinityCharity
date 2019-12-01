@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Input from '../components/input';
 import Button from '../components/button';
-import colors from '../styles/colors';
 import CauseCard from '../components/causeCard';
 import { getCauses } from '../redux/actions/cause';
+import { Header } from 'semantic-ui-react';
 
 export class HomePageContainer extends React.Component {
   constructor(props) {
@@ -59,10 +59,14 @@ export class HomePageContainer extends React.Component {
 
     return (
       <Container>
-        <Header>
-          <h1>Dashboard</h1>
-          <hr />
-        </Header>
+        <HeaderStyle>
+          <Header>
+            <h2 className="ui center aligned icon header">
+              <i className="circular icon home"> </i>
+              Dashboard
+            </h2>
+          </Header>
+        </HeaderStyle>
         <SearchContainer>
           <Input
             id="input-search"
@@ -78,7 +82,6 @@ export class HomePageContainer extends React.Component {
           </Link>
         </SearchContainer>
         <PinnedCauses>
-          {/* <h3>Pinned Causes</h3> */}
           <CausesContainer>
             {this.props.isGettingCauses ? (
               <i className="red massive notched circle loading icon"></i>
@@ -91,6 +94,10 @@ export class HomePageContainer extends React.Component {
     );
   }
 }
+
+const HeaderStyle = styled.div`
+  margin-top: 20px;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -107,29 +114,6 @@ const CausesContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 10px;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: ${colors.primary};
-  margin-bottom: 20px;
-  margin-top: 50px;
-  h1 {
-    font-size: 40px !important;
-  }
-  hr {
-    height: 0.2rem;
-    width: 80%;
-    background: ${colors.primary};
-    border: none;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.2rem;
-  }
 `;
 
 const SearchContainer = styled.div`
