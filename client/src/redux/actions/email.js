@@ -29,12 +29,12 @@ const getEmailsBegin = () => ({
   type: GET_EMAILS_BEGIN
 });
 
-const getEmailsSuccess  = data => ({
+const getEmailsSuccess = data => ({
   type: GET_EMAILS_SUCCESS,
   payload: { data }
 });
 
-const getEmailsFailure  = error => ({
+const getEmailsFailure = error => ({
   type: GET_EMAILS_FAILURE,
   payload: { error }
 });

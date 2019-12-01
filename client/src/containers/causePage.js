@@ -14,15 +14,17 @@ class CausePage extends React.Component {
     this.state = {
       causeId: this.props.match.params.id,
       cause: null,
-      redirect: false,
+      redirect: false
     };
   }
 
-  componentDidMount(){
-    const cause = this.props.causes.find( (cause) => cause._id === this.state.causeId)
+  componentDidMount() {
+    const cause = this.props.causes.find(
+      cause => cause._id === this.state.causeId
+    );
     this.setState({
       cause: cause
-    })
+    });
   }
 
   handleClick = () => {
@@ -41,8 +43,12 @@ class CausePage extends React.Component {
               width: '200px'
             }}
           />
-          <CauseTitle>{this.state.cause ? this.state.cause.name : ''}</CauseTitle>
-          <CauseLocation>{this.state.cause ? this.state.cause.location : ''}</CauseLocation>
+          <CauseTitle>
+            {this.state.cause ? this.state.cause.name : ''}
+          </CauseTitle>
+          <CauseLocation>
+            {this.state.cause ? this.state.cause.location : ''}
+          </CauseLocation>
           <CircularImage
             image={
               'https://www.humanconcern.org/wp-content/uploads/2016/03/logo-body.png'
@@ -50,7 +56,11 @@ class CausePage extends React.Component {
             style={{ height: '50px', width: '50px' }}
           />
           <ButtonWrapper>
-            <Button title="Create Post" primary handleClick={this.handleClick}></Button>
+            <Button
+              title="Create Post"
+              primary
+              handleClick={this.handleClick}
+            ></Button>
             <Button title="Edit Cause" primary></Button>
           </ButtonWrapper>
         </CauseBanner>
@@ -60,7 +70,7 @@ class CausePage extends React.Component {
         </CauseContent>
       </CausePageWrapper>
     );
-  }
+  };
 
   render() {
     return this.state.redirect ? (
