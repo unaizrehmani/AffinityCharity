@@ -55,7 +55,7 @@ class CausePage extends React.Component {
           />
           <ButtonWrapper>
             <Button
-              title="Create Post"
+              title="Create Email"
               primary
               handleClick={this.handleClick}
             ></Button>
