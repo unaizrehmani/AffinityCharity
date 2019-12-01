@@ -6,6 +6,7 @@ import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import PostCard from '../components/postCard';
 import { Redirect } from 'react-router-dom';
+import { getEmails } from '../redux/actions/email';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -56,7 +57,6 @@ class CausePage extends React.Component {
         <CauseContent>
           <PostCard />
           <Separator />
-          <PostCard />
         </CauseContent>
       </CausePageWrapper>
     );
@@ -116,7 +116,9 @@ const Separator = styled.div`
 
 const mapStateToProps = state => ({
   session: state.authentication,
-  causes: state.cause.causes
+  causes: state.cause.causes,
+  isGettingEmails: state.email.isGettingEmails,
+  emails: state.email.emails
 });
 
 export default connect(mapStateToProps)(CausePage);
