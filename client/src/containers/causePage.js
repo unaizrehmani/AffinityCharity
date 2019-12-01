@@ -6,8 +6,9 @@ import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
 import { URL } from '../util/baseURL';
-import RenderHTML from '../components/renderHTML';
 import axios from 'axios';
+import CausePageTimeline from '../components/causePageTimeline';
+
 class CausePage extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,7 @@ class CausePage extends React.Component {
 
   renderCauseContent = () => {
     if (this.state.approvedEmails.length > 0) {
-      return <RenderHTML htmlString={this.state.approvedEmails[0].html} />;
+      return <CausePageTimeline />;
     }
     return <div>No posts have ever been made</div>;
   };
