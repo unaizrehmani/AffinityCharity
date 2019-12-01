@@ -65,8 +65,8 @@ class CausePage extends React.Component {
           </ButtonWrapper>
         </CauseBanner>
         <CauseContent>
-          <PostCard />
-          <Separator />
+          {/* <PostCard />
+          <Separator /> */}
         </CauseContent>
       </CausePageWrapper>
     );
