@@ -42,7 +42,7 @@ class CauseCard extends React.Component {
 
   render() {
     return this.state.redirect ? (
-      <Redirect push to={'/editor/' + this.props.id} />
+      <Redirect push to={'/cause/' + this.props.id} />
     ) : (
       this.renderCauseCard()
     );
