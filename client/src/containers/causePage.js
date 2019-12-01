@@ -28,14 +28,18 @@ class CausePage extends React.Component {
       const result = await axios.get(`${URL}/api/email/approved`, {
         headers: { Authorization: 'Bearer ' + this.props.session.userToken }
       });
-      console.log('result: ', result);
       const { data } = result;
       const approvedEmails = data.filter(x => {
         if (x.cause && x.cause._id === this.props.match.params.id) return x;
       });
-      this.setState({
-        approvedEmails
-      });
+      this.setState(
+        {
+          approvedEmails
+        },
+        () => {
+          console.log('approvedEmails: ', this.state.approvedEmails);
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +54,7 @@ class CausePage extends React.Component {
 
   renderCauseContent = () => {
     if (this.state.approvedEmails.length > 0) {
-      return <CausePageTimeline />;
+      return <CausePageTimeline approvedEmails={this.state.approvedEmails} />;
     }
     return <div>No posts have ever been made</div>;
   };
