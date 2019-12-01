@@ -5,21 +5,37 @@ import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
-
+import { URL } from '../util/baseURL';
+import RenderHTML from '../components/renderHTML';
+import axios from 'axios';
 class CausePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       causeId: this.props.match.params.id,
       cause: null,
-      redirect: false
+      redirect: false,
+      approvedEmails: []
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
+    try {
+      const result = await axios.get(`${URL}/api/email/approved`, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      });
+      console.log('result: ', result);
+      const { data } = result;
+      const approvedEmails = data.filter(x => {if(x.cause && x.cause._id === this.props.match.params.id) return x})
+      this.setState({
+        approvedEmails
+      })
+    } catch (err) {
+      console.log(err);
+    }
     this.setState({
       cause: cause
     });
@@ -28,6 +44,13 @@ class CausePage extends React.Component {
   handleClick = () => {
     this.setState({ redirect: true });
   };
+
+  renderCauseContent = () => {
+    if(this.state.approvedEmails.length > 0) {
+      return <RenderHTML htmlString={this.state.approvedEmails[0].html} />
+    }
+    return <div>No posts have ever been made</div>
+  }
 
   renderCausePage = () => {
     return (
@@ -63,7 +86,9 @@ class CausePage extends React.Component {
           </ButtonWrapper>
         </CauseBanner>
         <CauseContent>
-          {/* Email History Here*/}
+            {
+              this.renderCauseContent()
+            }
         </CauseContent>
       </CausePageWrapper>
     );

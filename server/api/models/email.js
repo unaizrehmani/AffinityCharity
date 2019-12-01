@@ -7,6 +7,11 @@ const emailPostSchema = new Schema({
     required: true,
     ref: 'User'
   },
+  cause: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Cause'
+  },
   subject: {
     type: String,
     required: false
