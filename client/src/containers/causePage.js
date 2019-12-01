@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
+import { URL } from '../util/baseURL';
+import axios from 'axios';
+import CausePageTimeline from '../components/causePageTimeline';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -12,21 +15,48 @@ class CausePage extends React.Component {
     this.state = {
       causeId: this.props.match.params.id,
       cause: null,
-      redirect: false
+      redirect: false,
+      approvedEmails: []
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
+    try {
+      const result = await axios.get(`${URL}/api/email/approved`, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      });
+      const { data } = result;
+      const approvedEmails = data.filter(x => {
+        if (x.cause && x.cause._id === this.props.match.params.id) return x;
+      });
+      this.setState(
+        {
+          approvedEmails
+        },
+        () => {
+          console.log('approvedEmails: ', this.state.approvedEmails);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
     this.setState({
       cause: cause
     });
-  }
+  };
 
   handleClick = () => {
     this.setState({ redirect: true });
+  };
+
+  renderCauseContent = () => {
+    if (this.state.approvedEmails.length > 0) {
+      return <CausePageTimeline approvedEmails={this.state.approvedEmails} />;
+    }
+    return <div>No posts have ever been made</div>;
   };
 
   renderCausePage = () => {
@@ -62,9 +92,7 @@ class CausePage extends React.Component {
             <Button title="Edit Cause" primary></Button>
           </ButtonWrapper>
         </CauseBanner>
-        <CauseContent>
-          {/* Email History Here*/}
-        </CauseContent>
+        <CauseContent>{this.renderCauseContent()}</CauseContent>
       </CausePageWrapper>
     );
   };

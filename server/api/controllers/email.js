@@ -1,13 +1,16 @@
 const User = require('../models/user');
+const Cause = require('../models/cause');
 const Email = require('../models/email');
 const nodemailer = require('nodemailer');
 
 exports.insertEmail = async (req, res, next) => {
   try {
     const user = await User.findById(req.body.userID);
+    const cause = await Cause.findById(req.body.causeID);
     const emailPost = new Email(req.body);
     emailPost.createdDate = new Date();
     emailPost.user = user._id;
+    emailPost.cause = cause._id;
     emailPost.isApproved = false;
     const result = await emailPost.save();
     res.status(200).send(result);
@@ -27,7 +30,9 @@ exports.getEmails = async (req, res, next) => {
 
 exports.getApprovedEmails = async (req, res, next) => {
   try {
-    const result = await Email.find({ isApproved: true }).populate('user');
+    const result = await Email.find({ isApproved: true })
+      .populate('user')
+      .populate('cause');
     res.status(200).send(result);
   } catch (err) {
     res.status(400).send(err);

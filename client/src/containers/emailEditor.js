@@ -96,11 +96,13 @@ class Emailer extends Component {
   sendDesign = () => {
     this.setState({ loading: true });
     window.unlayer.saveDesign(design => {
+      const { id } = this.props.match.params;
       const body = {
         userID: this.props.session.userID,
         editorJSON: design,
         subject: this.state.subject,
-        donorEmails: this.state.emails
+        donorEmails: this.state.emails,
+        causeID: id
       };
       axios
         .post(`${URL}/api/email/`, body, {
