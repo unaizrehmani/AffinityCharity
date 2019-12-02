@@ -50,8 +50,6 @@ class CausePage extends React.Component {
         return userEmails.push(res);
       })
     );
-    console.log('FINISHED LOOP');
-    console.log(userEmails);
     this.setState({
       emails: userEmails,
       loadingAgents: false
