@@ -18,7 +18,7 @@ class CausePage extends React.Component {
       redirect: false,
       showModal: false,
       emails: [],
-      loadingEmails: false
+      loadingAgents: false
     };
   }
 
@@ -34,7 +34,7 @@ class CausePage extends React.Component {
       cause: cause,
       showModal: false,
       emails: [],
-      loadingEmails: false
+      loadingAgents: false
     });
 
     // this.handleClickAgent();
@@ -45,7 +45,7 @@ class CausePage extends React.Component {
   };
 
   handleClickAgent = async () => {
-    this.setState({ loadingEmails: true });
+    this.setState({ loadingAgents: true });
     this.setState({ showModal: true });
 
     const userIDs = this.state.cause.users
@@ -63,7 +63,10 @@ class CausePage extends React.Component {
     }));
     console.log('FINISHED LOOP')
     console.log(userEmails);
-    this.setState({ emails: userEmails, loadingEmails: false });
+    this.setState({ 
+      emails: userEmails, 
+      loadingAgents: false 
+    });
   };
 
   getUserEmail = async (userID) => {
@@ -71,11 +74,23 @@ class CausePage extends React.Component {
     return result.data.email;
   };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
   }
 
+  renderAgents = (email) => {
+      return (
+        <span key={email}>
+          <br></br>
+          {email}
+        </span>
+      );
+  }
+
   renderCausePage = () => {
+    let renderAgents = this.state.emails.map(email => {
+      return this.renderAgents(email);
+    });
     return (
       <CausePageWrapper>
         <CauseBanner>
@@ -107,10 +122,10 @@ class CausePage extends React.Component {
             ></Button>
             <Button title="Edit Cause" primary></Button>
             <Button
-              title="Edit Agents"
+              title="View Agents"
               primary
               handleClick={this.handleClickAgent}
-              disabled={this.state.loadingEmails}
+              disabled={this.state.loadingAgents}
             ></Button>
           </ButtonWrapper>
           <Modal
@@ -119,9 +134,10 @@ class CausePage extends React.Component {
             closeIcon={true}
           >
             <Modal.Content>
-              {this.state.loadingEmails ?
+              <h1>Agents</h1>
+              {this.state.loadingAgents ?
                 <i className="red massive notched circle loading icon"></i> :
-                <span>{this.state.emails[0]}</span>}
+                renderAgents}
             </Modal.Content>
           </Modal>
         </CauseBanner>
