@@ -17,7 +17,7 @@ const initialState = {
   getCausesError: undefined,
   isGettingUserEmail: false,
   getUserEmailError: undefined,
-  causes: [], 
+  causes: [],
   email: undefined
 };
 
@@ -68,28 +68,28 @@ const causeReducer = function(state = initialState, { type, payload }) {
           causes: []
         }
       };
-      case GET_USER_EMAIL_BEGIN:
-        return {
-          ...state,
-          ...{ isGettingUserEmail: true, getUserEmailError: undefined }
-        };
-      case GET_USER_EMAIL_SUCCESS:
-        return {
-          ...state,
-          ...{
-            isGettingUserEmail: false,
-            getUserEmailError: undefined,
-            email: payload.data.email
-          }
-        };
-      case GET_USER_EMAIL_FAILURE:
-        return {
-          ...state,
-          ...{
-            isGettingUserEmail: false,
-            getUserEmailError: payload.error
-          }
-        };
+    case GET_USER_EMAIL_BEGIN:
+      return {
+        ...state,
+        ...{ isGettingUserEmail: true, getUserEmailError: undefined }
+      };
+    case GET_USER_EMAIL_SUCCESS:
+      return {
+        ...state,
+        ...{
+          isGettingUserEmail: false,
+          getUserEmailError: undefined,
+          email: payload.data.email
+        }
+      };
+    case GET_USER_EMAIL_FAILURE:
+      return {
+        ...state,
+        ...{
+          isGettingUserEmail: false,
+          getUserEmailError: payload.error
+        }
+      };
     default:
       return state;
   }
