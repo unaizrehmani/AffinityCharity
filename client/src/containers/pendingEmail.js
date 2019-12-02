@@ -4,9 +4,8 @@ import axios from 'axios';
 import EmailEditor from 'react-email-editor';
 import { connect } from 'react-redux';
 import Button from '../components/button';
-import { Icon, Form, Message } from 'semantic-ui-react';
+import { Icon, Form, Message, Header } from 'semantic-ui-react';
 import MultipleEmail from '../components/multipleEmail';
-
 const { URL } = require('../util/baseURL');
 
 class PendingEmail extends Component {
@@ -233,14 +232,8 @@ class PendingEmail extends Component {
   };
 }
 
-const Header = styled.div`
-  margin-top: 50px;
-  margin-bottom: 20px;
-`;
-
 const EmailerStyle = styled.div`
   width: 100%;
-  padding: 20px;
 `;
 
 const ButtonStyle = styled.div`

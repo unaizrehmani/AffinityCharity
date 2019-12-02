@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Header, Icon } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import ProfileForm from '../components/profileForm';
 
@@ -9,12 +9,11 @@ class ProfilePage extends Component {
     return (
       <Container>
         <HeaderContainer>
-          <Header as="h2" textAlign="center">
-            <Icon name="settings" />
-            <Header.Content>
-              Profile Settings
-              <Header.Subheader>Manage your preferences</Header.Subheader>
-            </Header.Content>
+          <Header>
+            <h2 className="ui center aligned icon header">
+              <i className="circular icon settings"> </i>
+              Profile
+            </h2>
           </Header>
         </HeaderContainer>
         <ProfileForm session={this.props.session} />

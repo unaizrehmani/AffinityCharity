@@ -89,7 +89,7 @@ const SubscriberPageStyle = styled.div`
 `;
 
 const Header = styled.div`
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 50px;
 `;
 

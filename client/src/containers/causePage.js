@@ -2,11 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import colors from '../styles/colors';
 import { connect } from 'react-redux';
+import { Icon, Modal } from 'semantic-ui-react';
 import CircularImage from '../components/circularImage';
+import RenderHTML from '../components/renderHTML';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
-import { Modal } from 'semantic-ui-react';
 import { getUserEmail } from '../redux/actions/cause';
+import { URL } from '../util/baseURL';
+import axios from 'axios';
 
 class CausePage extends React.Component {
   constructor(props) {
@@ -15,24 +18,47 @@ class CausePage extends React.Component {
       causeId: this.props.match.params.id,
       cause: null,
       redirect: false,
-      showModal: false,
+      showAgentModal: false,
       emails: [],
-      loadingAgents: false
+      loadingAgents: false,
+      approvedEmails: [],
+      currentHTML: '',
+      showEmailModal: false
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
 
+    // TODO: move this to redux
+    try {
+      const result = await axios.get(`${URL}/api/email/approved`, {
+        headers: { Authorization: 'Bearer ' + this.props.session.userToken }
+      });
+      const { data } = result;
+      const approvedEmails = data.filter(x => {
+        if (x.cause && x.cause._id === this.props.match.params.id) return x;
+      });
+      this.setState(
+        {
+          approvedEmails
+        },
+        () => {
+          console.log('approvedEmails: ', this.state.approvedEmails);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
     this.setState({
       cause: cause,
-      showModal: false,
+      showAgentModal: false,
       emails: [],
       loadingAgents: false
     });
-  }
+  };
 
   handleClickEmail = () => {
     this.setState({ redirect: true });
@@ -40,7 +66,7 @@ class CausePage extends React.Component {
 
   handleClickAgent = async () => {
     this.setState({ loadingAgents: true });
-    this.setState({ showModal: true });
+    this.setState({ showAgentModal: true });
 
     const userIDs = this.state.cause.users;
     let userEmails = [];
@@ -64,7 +90,7 @@ class CausePage extends React.Component {
   };
 
   handleCloseModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showAgentModal: false });
   };
 
   renderAgents = email => {
@@ -73,6 +99,40 @@ class CausePage extends React.Component {
         <br></br>
         {email}
       </span>
+    )
+  };
+
+  formatDate = date => {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  };
+
+  handleEmailClick = email => {
+    this.setState({ currentHTML: email.html, showEmailModal: true });
+  };
+
+  renderEmails = email => {
+    console.log(email);
+    const audience = email.donorEmails.length;
+    const date = this.formatDate(email.createdDate);
+    return (
+      <EmailCard key={email._id} onClick={() => this.handleEmailClick(email)}>
+        <EmailDate>{date}</EmailDate>
+        <p>Subject</p>
+        <EmailSubject>{email.subject}</EmailSubject>
+        <p>Sent To</p>
+        <p>
+          <Icon name="user" />
+          {audience}
+        </p>
+      </EmailCard>
     );
   };
 
@@ -80,6 +140,21 @@ class CausePage extends React.Component {
     let renderAgents = this.state.emails.map(email => {
       return this.renderAgents(email);
     });
+    let renderContent = this.state.approvedEmails.map(email => {
+      return this.renderEmails(email);
+    });
+    let modalContent = <RenderHTML htmlString={this.state.currentHTML} />;
+    let renderModal = this.state.showEmailModal ? (
+      <Modal
+        open={this.state.showEmailModal}
+        onClose={() => this.setState({ showEmailModal: false })}
+        closeIcon={true}
+      >
+        <Modal.Content scrolling>{modalContent}</Modal.Content>
+      </Modal>
+    ) : (
+      ''
+    );
     return (
       <CausePageWrapper>
         <CauseBanner>
@@ -118,8 +193,8 @@ class CausePage extends React.Component {
             ></Button>
           </ButtonWrapper>
           <Modal
-            open={this.state.showModal}
-            onClose={() => this.setState({ showModal: false })}
+            open={this.state.showAgentModal}
+            onClose={() => this.setState({ showAgentModal: false })}
             closeIcon={true}
           >
             <Modal.Content>
@@ -132,7 +207,15 @@ class CausePage extends React.Component {
             </Modal.Content>
           </Modal>
         </CauseBanner>
-        <CauseContent>{/* Email History Here*/}</CauseContent>
+        <EmailHeader>Email History</EmailHeader>
+        <EmailContainer>
+          {this.state.approvedEmails.length > 0 ? (
+            renderContent
+          ) : (
+            <div>No posts have ever been made</div>
+          )}
+        </EmailContainer>
+        {renderModal}
       </CausePageWrapper>
     );
   };
@@ -170,24 +253,49 @@ const CauseLocation = styled.h5`
   font-weight: 100;
 `;
 
-const CauseContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 30px;
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
 `;
 
-// const Separator = styled.div`
-//   margin: 10px 0px;
-//   height: 50px;
-//   width: 3px;
-//   background-color: ${colors.primaryAccent};
-// `;
+const EmailHeader = styled.h2`
+  margin-top: 20px !important;
+  text-align: center;
+`;
+
+const EmailContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+`;
+
+const EmailCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 140px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  color: ${colors.primary};
+  background-color: ${colors.secondary};
+  cursor: pointer;
+  box-shadow: 0px 0px 3px 0px rgba(173, 173, 173, 1);
+  transition: box-shadow 0.2s linear;
+  &:hover {
+    box-shadow: 0px 5px 25px 0px rgba(173, 173, 173, 1);
+  }
+`;
+
+const EmailDate = styled.p`
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
+`;
+
+const EmailSubject = styled.h3`
+  font-size: 18px !important;
+  margin-bottom: 5px !important;
+`;
 
 const mapStateToProps = state => ({
   session: state.authentication,
