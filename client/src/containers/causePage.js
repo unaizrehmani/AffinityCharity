@@ -48,10 +48,6 @@ class CausePage extends React.Component {
     console.log('BEGINNING LOOP');
     await Promise.all(
       userIDs.map(async id => {
-        // await this.getUserEmail(id).then( res => {
-        //   console.log('Got a email!', res);
-        //   userEmails.push(res);
-        // });
         let res = await this.getUserEmail(id);
         console.log('Got a email!', res);
         return userEmails.push(res);
