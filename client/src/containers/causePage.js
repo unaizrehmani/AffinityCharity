@@ -32,8 +32,6 @@ class CausePage extends React.Component {
       emails: [],
       loadingAgents: false
     });
-
-    // this.handleClickAgent();
   }
 
   handleClickEmail = () => {
