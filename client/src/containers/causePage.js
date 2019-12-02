@@ -43,7 +43,6 @@ class CausePage extends React.Component {
     this.setState({ showModal: true });
 
     const userIDs = this.state.cause.users;
-    console.log('USER IDS:', userIDs);
     let userEmails = [];
     console.log('BEGINNING LOOP');
     await Promise.all(
