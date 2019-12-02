@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import CircularImage from '../components/circularImage';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
-// import Modal from 'react-modal';
 import { Modal } from 'semantic-ui-react';
 import { getUserEmail } from '../redux/actions/cause';
 
