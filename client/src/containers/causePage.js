@@ -22,9 +22,6 @@ class CausePage extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props);
-    // Modal.setAppElement('body');
-
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
