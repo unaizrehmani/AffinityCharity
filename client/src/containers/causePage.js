@@ -48,44 +48,48 @@ class CausePage extends React.Component {
     this.setState({ loadingAgents: true });
     this.setState({ showModal: true });
 
-    const userIDs = this.state.cause.users
+    const userIDs = this.state.cause.users;
     console.log('USER IDS:', userIDs);
     let userEmails = [];
-    console.log('BEGINNING LOOP')
-    await Promise.all(userIDs.map(async id => {
-      // await this.getUserEmail(id).then( res => {
-      //   console.log('Got a email!', res);
-      //   userEmails.push(res);
-      // });
-      let res = await this.getUserEmail(id)
-      console.log('Got a email!', res);
-      return userEmails.push(res);
-    }));
-    console.log('FINISHED LOOP')
+    console.log('BEGINNING LOOP');
+    await Promise.all(
+      userIDs.map(async id => {
+        // await this.getUserEmail(id).then( res => {
+        //   console.log('Got a email!', res);
+        //   userEmails.push(res);
+        // });
+        let res = await this.getUserEmail(id);
+        console.log('Got a email!', res);
+        return userEmails.push(res);
+      })
+    );
+    console.log('FINISHED LOOP');
     console.log(userEmails);
-    this.setState({ 
-      emails: userEmails, 
-      loadingAgents: false 
+    this.setState({
+      emails: userEmails,
+      loadingAgents: false
     });
   };
 
-  getUserEmail = async (userID) => {
-    const result = await this.props.dispatch(getUserEmail(userID, this.props.session.userToken))
+  getUserEmail = async userID => {
+    const result = await this.props.dispatch(
+      getUserEmail(userID, this.props.session.userToken)
+    );
     return result.data.email;
   };
 
   handleCloseModal = () => {
     this.setState({ showModal: false });
-  }
+  };
 
-  renderAgents = (email) => {
-      return (
-        <span key={email}>
-          <br></br>
-          {email}
-        </span>
-      );
-  }
+  renderAgents = email => {
+    return (
+      <span key={email}>
+        <br></br>
+        {email}
+      </span>
+    );
+  };
 
   renderCausePage = () => {
     let renderAgents = this.state.emails.map(email => {
@@ -135,15 +139,15 @@ class CausePage extends React.Component {
           >
             <Modal.Content>
               <h1>Agents</h1>
-              {this.state.loadingAgents ?
-                <i className="red massive notched circle loading icon"></i> :
-                renderAgents}
+              {this.state.loadingAgents ? (
+                <i className="red massive notched circle loading icon"></i>
+              ) : (
+                renderAgents
+              )}
             </Modal.Content>
           </Modal>
         </CauseBanner>
-        <CauseContent>
-          {/* Email History Here*/}
-        </CauseContent>
+        <CauseContent>{/* Email History Here*/}</CauseContent>
       </CausePageWrapper>
     );
   };
@@ -152,8 +156,8 @@ class CausePage extends React.Component {
     return this.state.redirect ? (
       <Redirect push to={'/editor/' + this.state.causeId} />
     ) : (
-        this.renderCausePage()
-      );
+      this.renderCausePage()
+    );
   }
 }
 
