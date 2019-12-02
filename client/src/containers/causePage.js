@@ -44,7 +44,6 @@ class CausePage extends React.Component {
 
     const userIDs = this.state.cause.users;
     let userEmails = [];
-    console.log('BEGINNING LOOP');
     await Promise.all(
       userIDs.map(async id => {
         let res = await this.getUserEmail(id);
