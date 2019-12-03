@@ -36,6 +36,13 @@ const causeSchema = new Schema({
       required: false
     }
   ],
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
+  ],
   createdDate: {
     type: Date,
     required: true

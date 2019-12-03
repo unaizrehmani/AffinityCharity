@@ -7,6 +7,7 @@ import CircularImage from '../components/circularImage';
 import RenderHTML from '../components/renderHTML';
 import Button from '../components/button';
 import { Redirect } from 'react-router-dom';
+import { getUserEmail } from '../redux/actions/cause';
 import { URL } from '../util/baseURL';
 import axios from 'axios';
 
@@ -17,9 +18,12 @@ class CausePage extends React.Component {
       causeId: this.props.match.params.id,
       cause: null,
       redirect: false,
+      showAgentModal: false,
+      emails: [],
+      loadingAgents: false,
       approvedEmails: [],
       currentHTML: '',
-      modalVisible: false
+      showEmailModal: false
     };
   }
 
@@ -27,6 +31,8 @@ class CausePage extends React.Component {
     const cause = this.props.causes.find(
       cause => cause._id === this.state.causeId
     );
+
+    // TODO: move this to redux
     try {
       const result = await axios.get(`${URL}/api/email/approved`, {
         headers: { Authorization: 'Bearer ' + this.props.session.userToken }
@@ -47,12 +53,53 @@ class CausePage extends React.Component {
       console.log(err);
     }
     this.setState({
-      cause: cause
+      cause: cause,
+      showAgentModal: false,
+      emails: [],
+      loadingAgents: false
     });
   };
 
-  handleClick = () => {
+  handleClickEmail = () => {
     this.setState({ redirect: true });
+  };
+
+  handleClickAgent = async () => {
+    this.setState({ loadingAgents: true });
+    this.setState({ showAgentModal: true });
+
+    const userIDs = this.state.cause.users;
+    let userEmails = [];
+    await Promise.all(
+      userIDs.map(async id => {
+        let res = await this.getUserEmail(id);
+        return userEmails.push(res);
+      })
+    );
+    this.setState({
+      emails: userEmails,
+      loadingAgents: false
+    });
+  };
+
+  getUserEmail = async userID => {
+    const result = await this.props.dispatch(
+      getUserEmail(userID, this.props.session.userToken)
+    );
+    return result.data.email;
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showAgentModal: false });
+  };
+
+  renderAgents = email => {
+    return (
+      <span key={email}>
+        <br></br>
+        {email}
+      </span>
+    );
   };
 
   formatDate = date => {
@@ -68,7 +115,7 @@ class CausePage extends React.Component {
   };
 
   handleEmailClick = email => {
-    this.setState({ currentHTML: email.html, modalVisible: true });
+    this.setState({ currentHTML: email.html, showEmailModal: true });
   };
 
   renderEmails = email => {
@@ -90,14 +137,17 @@ class CausePage extends React.Component {
   };
 
   renderCausePage = () => {
+    let renderAgents = this.state.emails.map(email => {
+      return this.renderAgents(email);
+    });
     let renderContent = this.state.approvedEmails.map(email => {
       return this.renderEmails(email);
     });
     let modalContent = <RenderHTML htmlString={this.state.currentHTML} />;
-    let renderModal = this.state.modalVisible ? (
+    let renderModal = this.state.showEmailModal ? (
       <Modal
-        open={this.state.modalVisible}
-        onClose={() => this.setState({ modalVisible: false })}
+        open={this.state.showEmailModal}
+        onClose={() => this.setState({ showEmailModal: false })}
         closeIcon={true}
       >
         <Modal.Content scrolling>{modalContent}</Modal.Content>
@@ -132,10 +182,30 @@ class CausePage extends React.Component {
             <Button
               title="Create Email"
               primary
-              handleClick={this.handleClick}
+              handleClick={this.handleClickEmail}
             ></Button>
             <Button title="Edit Cause" primary></Button>
+            <Button
+              title="View Agents"
+              primary
+              handleClick={this.handleClickAgent}
+              disabled={this.state.loadingAgents}
+            ></Button>
           </ButtonWrapper>
+          <Modal
+            open={this.state.showAgentModal}
+            onClose={() => this.setState({ showAgentModal: false })}
+            closeIcon={true}
+          >
+            <Modal.Content>
+              <h1>Agents</h1>
+              {this.state.loadingAgents ? (
+                <i className="red massive notched circle loading icon"></i>
+              ) : (
+                renderAgents
+              )}
+            </Modal.Content>
+          </Modal>
         </CauseBanner>
         <EmailHeader>Email History</EmailHeader>
         <EmailContainer>
