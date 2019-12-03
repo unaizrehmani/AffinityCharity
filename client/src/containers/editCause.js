@@ -47,7 +47,7 @@ class EditCause extends Component {
     this.setState({ loading: true });
     if (Object.keys(body).length) {
       try {
-        const result = await axios.patch(`${URL}/api/causes/${id}`, body, {
+        await axios.patch(`${URL}/api/causes/${id}`, body, {
           headers: { Authorization: 'Bearer ' + this.props.session.userToken }
         });
         this.setState({
@@ -81,7 +81,7 @@ class EditCause extends Component {
     });
     try {
       const { id } = this.props.match.params;
-      const result = await axios.delete(`${URL}/api/causes/${id}`, {
+      await axios.delete(`${URL}/api/causes/${id}`, {
         headers: { Authorization: 'Bearer ' + this.props.session.userToken }
       });
       this.setState({
