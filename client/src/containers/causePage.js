@@ -19,7 +19,8 @@ class CausePage extends React.Component {
       redirect: false,
       approvedEmails: [],
       currentHTML: '',
-      modalVisible: false
+      modalVisible: false,
+      redirectEditCause: false
     };
   }
 
@@ -134,7 +135,13 @@ class CausePage extends React.Component {
               primary
               handleClick={this.handleClick}
             ></Button>
-            <Button title="Edit Cause" primary></Button>
+            <Button
+              title="Edit Cause"
+              primary
+              handleClick={() => {
+                this.setState({ redirectEditCause: true });
+              }}
+            />
           </ButtonWrapper>
         </CauseBanner>
         <EmailHeader>Email History</EmailHeader>
@@ -150,12 +157,27 @@ class CausePage extends React.Component {
     );
   };
 
+  renderRedirect = () => {
+    const { cause } = this.state;
+    console.log('cause', cause);
+    if (this.state.redirect)
+      return <Redirect push to={'/editor/' + this.state.causeId} />;
+    else
+      return (
+        <Redirect
+          push
+          to={{
+            pathname: `/editCause/${this.state.causeId}`,
+            state: { cause }
+          }}
+        />
+      );
+  };
+
   render() {
-    return this.state.redirect ? (
-      <Redirect push to={'/editor/' + this.state.causeId} />
-    ) : (
-      this.renderCausePage()
-    );
+    return this.state.redirect || this.state.redirectEditCause
+      ? this.renderRedirect()
+      : this.renderCausePage();
   }
 }
 
