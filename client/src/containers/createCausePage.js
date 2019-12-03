@@ -42,21 +42,27 @@ export class CreateCausePageContainer extends React.Component {
   handleRequestToCreateNewCause = async () => {
     let formData = new FormData();
 
+    console.log(this.props.session);
     formData.append('name', this.state.name);
     formData.append('location', this.state.location);
     formData.append('description', this.state.description);
     formData.append('deleteable', true);
     formData.append('image', this.state.image);
+    formData.append('users', this.props.session.userID);
 
     this.props
       .dispatch(createCause(formData, this.props.session.userToken))
-      .then(() => {
+      .then(result => {
+        console.log(result.data._id);
+        let redirectUrl = '/cause/'.concat(result.data._id);
+        console.log(redirectUrl);
         this.setState({ loading: false });
         if (
           !this.props.isCreatingCause &&
           this.props.creatingCauseError === undefined
         ) {
-          this.props.history.push('/');
+          // redirect to new created cause
+          this.props.history.push(redirectUrl);
         }
       });
   };

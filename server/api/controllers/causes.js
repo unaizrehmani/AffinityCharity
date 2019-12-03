@@ -11,6 +11,7 @@ const nodemailer = require('nodemailer');
  * @param {string} name
  * @param {string} location
  * @param {string} charityID
+ * @param {string} userID
  *
  * REQ.FILES
  * @param {file} image
