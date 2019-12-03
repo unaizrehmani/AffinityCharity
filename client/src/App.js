@@ -16,7 +16,7 @@ import PendingEmail from './containers/pendingEmail';
 import subscriberPage from './containers/subscriberPage';
 import RegisterPageContainer from './containers/registerPage';
 import UnsubscribePageContainer from './containers/unsubscribePage';
-
+import EditCause from './containers/editCause';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +50,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/editor/:id" component={Emailer} />
             <Route exact path="/cause/:id" component={CausePage} />
+            <Route exact path="/editCause/:id" component={EditCause} />
             <Route exact path="/admin" component={ManageAgentsPage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/createcause" component={CreateCausePage} />
