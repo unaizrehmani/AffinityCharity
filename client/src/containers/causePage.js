@@ -99,7 +99,7 @@ class CausePage extends React.Component {
         <br></br>
         {email}
       </span>
-    )
+    );
   };
 
   formatDate = date => {
