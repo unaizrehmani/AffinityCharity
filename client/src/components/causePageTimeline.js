@@ -9,7 +9,7 @@ import '../styles/timeline/VerticalTimeline.css';
 import '../styles/timeline/VerticalTimelineElement.css';
 class CausePageTimeline extends Component {
   onClick = () => {
-    console.log('clicked');
+    // TODO: Implement modal creation functionality
   };
 
   formatDate = date => {

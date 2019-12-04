@@ -46,7 +46,6 @@ class CausePage extends React.Component {
           approvedEmails
         },
         () => {
-          console.log('approvedEmails: ', this.state.approvedEmails);
         }
       );
     } catch (err) {
@@ -119,7 +118,6 @@ class CausePage extends React.Component {
   };
 
   renderEmails = email => {
-    console.log(email);
     const audience = email.donorEmails.length;
     const date = this.formatDate(email.createdDate);
     return (
@@ -228,7 +226,6 @@ class CausePage extends React.Component {
 
   renderRedirect = () => {
     const { cause } = this.state;
-    console.log('cause', cause);
     if (this.state.redirect)
       return <Redirect push to={'/editor/' + this.state.causeId} />;
     else

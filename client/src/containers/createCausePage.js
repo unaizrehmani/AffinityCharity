@@ -35,14 +35,12 @@ export class CreateCausePageContainer extends React.Component {
       this.handleRequestToCreateNewCause();
     } else {
       this.setState({ loading: false });
-      console.log('Please fill out all required fields'); //TODO add error toast here
+      // TODO: add error toast here
     }
   };
 
   handleRequestToCreateNewCause = async () => {
     let formData = new FormData();
-
-    console.log(this.props.session);
     formData.append('name', this.state.name);
     formData.append('location', this.state.location);
     formData.append('description', this.state.description);
@@ -53,9 +51,7 @@ export class CreateCausePageContainer extends React.Component {
     this.props
       .dispatch(createCause(formData, this.props.session.userToken))
       .then(result => {
-        console.log(result.data._id);
         let redirectUrl = '/cause/'.concat(result.data._id);
-        console.log(redirectUrl);
         this.setState({ loading: false });
         if (
           !this.props.isCreatingCause &&

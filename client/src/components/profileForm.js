@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Form, Message, Icon } from 'semantic-ui-react';
+import { Form, Message, Icon, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Button from './button';
 import { loginUser } from '../redux/actions/authentication';
@@ -66,7 +66,6 @@ class ProfileForm extends Component {
             headers: { Authorization: 'Bearer ' + this.props.session.userToken }
           }
         );
-        console.log('result: ', result.data);
         const { errorHeader, errorContent } = result.data;
         if (errorHeader && errorContent) {
           this.setState({
@@ -103,7 +102,6 @@ class ProfileForm extends Component {
           );
         }
       } catch (err) {
-        console.log(err);
         this.setState({
           error: true,
           success: false,
@@ -125,7 +123,7 @@ class ProfileForm extends Component {
       oldPassword
     } = this.state;
     return (
-      <div>
+      <Container>
         <Form
           loading={this.state.loading}
           error={this.state.error}
@@ -192,14 +190,17 @@ class ProfileForm extends Component {
             </Button>
           </ButtonStyle>
         </Form>
-      </div>
+      </Container>
     );
   }
 }
 
 const ButtonStyle = styled.div`
-  margin-left: -10px;
-  margin-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default connect()(ProfileForm);
